@@ -1,12 +1,12 @@
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import Header from './components/Header'
 import MediaDetail from './components/MediaDetail'
 import MediaRow from './components/MediaRow'
+import AddMediaModal from './components/AddMediaModal'
 import {
   gameGenres,
-  media,
+  media as sampleMedia,
   movieGenres,
-  recentlyAdded,
   type MediaItem,
 } from './data/sampleMedia'
 import './App.css'
@@ -21,19 +21,42 @@ function App() {
   const [activeView, setActiveView] =
     useState<View>('collection')
 
+  const [collection, setCollection] =
+    useState<MediaItem[]>(sampleMedia)
+
   const [selectedMedia, setSelectedMedia] =
     useState<MediaItem | null>(null)
 
-  const movies = media.filter(
-    (item) => item.type === 'movie',
+  const [isAddMediaOpen, setIsAddMediaOpen] =
+    useState(false)
+
+  const movies = useMemo(
+    () =>
+      collection.filter(
+        (item) => item.type === 'movie',
+      ),
+    [collection],
   )
 
-  const games = media.filter(
-    (item) => item.type === 'game',
+  const games = useMemo(
+    () =>
+      collection.filter(
+        (item) => item.type === 'game',
+      ),
+    [collection],
   )
 
-  const favorites = media.filter(
-    (item) => item.favorite,
+  const favorites = useMemo(
+    () =>
+      collection.filter(
+        (item) => item.favorite,
+      ),
+    [collection],
+  )
+
+  const recentlyAdded = useMemo(
+    () => [...collection].slice(-8).reverse(),
+    [collection],
   )
 
   const movieGenreRows = movieGenres
@@ -43,7 +66,9 @@ function App() {
         (item) => item.genre === genre,
       ),
     }))
-    .filter((row) => row.items.length > 0)
+    .filter(
+      (row) => row.items.length > 0,
+    )
 
   const gameGenreRows = gameGenres
     .map((genre) => ({
@@ -52,10 +77,23 @@ function App() {
         (item) => item.genre === genre,
       ),
     }))
-    .filter((row) => row.items.length > 0)
+    .filter(
+      (row) => row.items.length > 0,
+    )
 
-  const handleSelect = (item: MediaItem) => {
+  const handleSelect = (
+    item: MediaItem,
+  ) => {
     setSelectedMedia(item)
+  }
+
+  const handleAddMedia = (
+    newMedia: MediaItem,
+  ) => {
+    setCollection((current) => [
+      ...current,
+      newMedia,
+    ])
   }
 
   const renderRows = () => {
@@ -66,19 +104,24 @@ function App() {
             <MediaRow
               title="Recently Added"
               items={recentlyAdded.filter(
-                (item) => item.type === 'movie',
+                (item) =>
+                  item.type === 'movie',
               )}
               onSelect={handleSelect}
             />
 
-            {movieGenreRows.map((row) => (
-              <MediaRow
-                key={row.title}
-                title={row.title}
-                items={row.items}
-                onSelect={handleSelect}
-              />
-            ))}
+            {movieGenreRows.map(
+              (row) => (
+                <MediaRow
+                  key={row.title}
+                  title={row.title}
+                  items={row.items}
+                  onSelect={
+                    handleSelect
+                  }
+                />
+              ),
+            )}
           </>
         )
 
@@ -88,19 +131,24 @@ function App() {
             <MediaRow
               title="Recently Added"
               items={recentlyAdded.filter(
-                (item) => item.type === 'game',
+                (item) =>
+                  item.type === 'game',
               )}
               onSelect={handleSelect}
             />
 
-            {gameGenreRows.map((row) => (
-              <MediaRow
-                key={row.title}
-                title={row.title}
-                items={row.items}
-                onSelect={handleSelect}
-              />
-            ))}
+            {gameGenreRows.map(
+              (row) => (
+                <MediaRow
+                  key={row.title}
+                  title={row.title}
+                  items={row.items}
+                  onSelect={
+                    handleSelect
+                  }
+                />
+              ),
+            )}
           </>
         )
 
@@ -116,7 +164,9 @@ function App() {
             <MediaRow
               title="Favorite Movies"
               items={favorites.filter(
-                (item) => item.type === 'movie',
+                (item) =>
+                  item.type ===
+                  'movie',
               )}
               onSelect={handleSelect}
             />
@@ -124,7 +174,8 @@ function App() {
             <MediaRow
               title="Favorite Games"
               items={favorites.filter(
-                (item) => item.type === 'game',
+                (item) =>
+                  item.type === 'game',
               )}
               onSelect={handleSelect}
             />
@@ -147,14 +198,18 @@ function App() {
               onSelect={handleSelect}
             />
 
-            {movieGenreRows.slice(0, 4).map((row) => (
-              <MediaRow
-                key={row.title}
-                title={row.title}
-                items={row.items}
-                onSelect={handleSelect}
-              />
-            ))}
+            {movieGenreRows
+              .slice(0, 4)
+              .map((row) => (
+                <MediaRow
+                  key={row.title}
+                  title={row.title}
+                  items={row.items}
+                  onSelect={
+                    handleSelect
+                  }
+                />
+              ))}
 
             <MediaRow
               title="Games"
@@ -162,14 +217,18 @@ function App() {
               onSelect={handleSelect}
             />
 
-            {gameGenreRows.slice(0, 4).map((row) => (
-              <MediaRow
-                key={row.title}
-                title={row.title}
-                items={row.items}
-                onSelect={handleSelect}
-              />
-            ))}
+            {gameGenreRows
+              .slice(0, 4)
+              .map((row) => (
+                <MediaRow
+                  key={row.title}
+                  title={row.title}
+                  items={row.items}
+                  onSelect={
+                    handleSelect
+                  }
+                />
+              ))}
           </>
         )
     }
@@ -187,6 +246,18 @@ function App() {
         <div className="room-glow room-glow-right" />
 
         <div className="library">
+          <div className="library-controls">
+  <button
+    type="button"
+    className="add-button"
+    onClick={() =>
+      setIsAddMediaOpen(true)
+    }
+  >
+    <span>+</span>
+    Add Media
+  </button>
+</div>
           <div className="bookcase">
             <div className="bookcase-top" />
 
@@ -206,7 +277,18 @@ function App() {
       {selectedMedia && (
         <MediaDetail
           media={selectedMedia}
-          onClose={() => setSelectedMedia(null)}
+          onClose={() =>
+            setSelectedMedia(null)
+          }
+        />
+      )}
+
+      {isAddMediaOpen && (
+        <AddMediaModal
+          onClose={() =>
+            setIsAddMediaOpen(false)
+          }
+          onAdd={handleAddMedia}
         />
       )}
     </div>
