@@ -1,121 +1,215 @@
 import { useState } from 'react'
-import heroImg from './assets/hero.png'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
+import Header from './components/Header'
+import MediaDetail from './components/MediaDetail'
+import MediaRow from './components/MediaRow'
+import {
+  gameGenres,
+  media,
+  movieGenres,
+  recentlyAdded,
+  type MediaItem,
+} from './data/sampleMedia'
 import './App.css'
 
+type View =
+  | 'collection'
+  | 'movies'
+  | 'games'
+  | 'favorites'
+
 function App() {
-  const [count, setCount] = useState(0)
+  const [activeView, setActiveView] =
+    useState<View>('collection')
+
+  const [selectedMedia, setSelectedMedia] =
+    useState<MediaItem | null>(null)
+
+  const movies = media.filter(
+    (item) => item.type === 'movie',
+  )
+
+  const games = media.filter(
+    (item) => item.type === 'game',
+  )
+
+  const favorites = media.filter(
+    (item) => item.favorite,
+  )
+
+  const movieGenreRows = movieGenres
+    .map((genre) => ({
+      title: genre,
+      items: movies.filter(
+        (item) => item.genre === genre,
+      ),
+    }))
+    .filter((row) => row.items.length > 0)
+
+  const gameGenreRows = gameGenres
+    .map((genre) => ({
+      title: genre,
+      items: games.filter(
+        (item) => item.genre === genre,
+      ),
+    }))
+    .filter((row) => row.items.length > 0)
+
+  const handleSelect = (item: MediaItem) => {
+    setSelectedMedia(item)
+  }
+
+  const renderRows = () => {
+    switch (activeView) {
+      case 'movies':
+        return (
+          <>
+            <MediaRow
+              title="Recently Added"
+              items={recentlyAdded.filter(
+                (item) => item.type === 'movie',
+              )}
+              onSelect={handleSelect}
+            />
+
+            {movieGenreRows.map((row) => (
+              <MediaRow
+                key={row.title}
+                title={row.title}
+                items={row.items}
+                onSelect={handleSelect}
+              />
+            ))}
+          </>
+        )
+
+      case 'games':
+        return (
+          <>
+            <MediaRow
+              title="Recently Added"
+              items={recentlyAdded.filter(
+                (item) => item.type === 'game',
+              )}
+              onSelect={handleSelect}
+            />
+
+            {gameGenreRows.map((row) => (
+              <MediaRow
+                key={row.title}
+                title={row.title}
+                items={row.items}
+                onSelect={handleSelect}
+              />
+            ))}
+          </>
+        )
+
+      case 'favorites':
+        return (
+          <>
+            <MediaRow
+              title="Favorites"
+              items={favorites}
+              onSelect={handleSelect}
+            />
+
+            <MediaRow
+              title="Favorite Movies"
+              items={favorites.filter(
+                (item) => item.type === 'movie',
+              )}
+              onSelect={handleSelect}
+            />
+
+            <MediaRow
+              title="Favorite Games"
+              items={favorites.filter(
+                (item) => item.type === 'game',
+              )}
+              onSelect={handleSelect}
+            />
+          </>
+        )
+
+      case 'collection':
+      default:
+        return (
+          <>
+            <MediaRow
+              title="Recently Added"
+              items={recentlyAdded}
+              onSelect={handleSelect}
+            />
+
+            <MediaRow
+              title="Movies"
+              items={movies}
+              onSelect={handleSelect}
+            />
+
+            {movieGenreRows.slice(0, 4).map((row) => (
+              <MediaRow
+                key={row.title}
+                title={row.title}
+                items={row.items}
+                onSelect={handleSelect}
+              />
+            ))}
+
+            <MediaRow
+              title="Games"
+              items={games}
+              onSelect={handleSelect}
+            />
+
+            {gameGenreRows.slice(0, 4).map((row) => (
+              <MediaRow
+                key={row.title}
+                title={row.title}
+                items={row.items}
+                onSelect={handleSelect}
+              />
+            ))}
+          </>
+        )
+    }
+  }
 
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.tsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
+    <div className="room">
+      <Header
+        activeView={activeView}
+        onViewChange={setActiveView}
+      />
 
-      <div className="ticks"></div>
+      <main className="room-content">
+        <div className="room-glow room-glow-left" />
+        <div className="room-glow room-glow-right" />
 
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
+        <div className="library">
+          <div className="bookcase">
+            <div className="bookcase-top" />
 
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
+            <div className="bookcase-content">
+              <div className="bookcase-back" />
+
+              <div className="rows">
+                {renderRows()}
+              </div>
+            </div>
+
+            <div className="bookcase-base" />
+          </div>
+        </div>
+      </main>
+
+      {selectedMedia && (
+        <MediaDetail
+          media={selectedMedia}
+          onClose={() => setSelectedMedia(null)}
+        />
+      )}
+    </div>
   )
 }
 
