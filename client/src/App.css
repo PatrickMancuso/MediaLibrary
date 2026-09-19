@@ -2617,7 +2617,7 @@
     grid-template-columns:
       1fr;
   }
-}
+
 
 @media (max-width: 470px) {
   .brand-console {
