@@ -99,8 +99,10 @@
    ========================================================= */
 
 .site-header {
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
   z-index: 100;
 
   width: 100%;
@@ -1972,6 +1974,459 @@
 }
 
 /* =========================================================
+   LARGE DESKTOP SCALE
+   ========================================================= */
+
+@media (min-width: 1051px) {
+
+  /* -------------------------------------------------------
+     PAGE / BOOKCASE
+     ------------------------------------------------------- */
+
+  .room-content {
+    padding:
+      48px
+      0
+      140px;
+  }
+
+  .library {
+    width:
+      min(1550px, calc(100% - 60px));
+  }
+
+  .bookcase-top {
+    height: 32px;
+  }
+
+  .bookcase-content {
+    padding:
+      30px 32px 43px;
+
+    border-left-width: 21px;
+    border-right-width: 21px;
+  }
+
+  .bookcase-content::before,
+  .bookcase-content::after {
+    width: 21px;
+  }
+
+  .bookcase-base {
+    height: 32px;
+  }
+
+  .rows {
+    gap: 52px;
+  }
+
+  /* -------------------------------------------------------
+     ROW HEADINGS
+     ------------------------------------------------------- */
+
+  .row-header {
+    margin-bottom: 13px;
+  }
+
+  .row-title-group {
+    gap: 10px;
+  }
+
+  .row-title-group h2 {
+    font-size: 17px;
+  }
+
+  .row-title-group > span {
+    font-size: 11px;
+  }
+
+  /* -------------------------------------------------------
+     SHELF CONTROLS
+     ------------------------------------------------------- */
+
+  .row-controls {
+    gap: 6px;
+  }
+
+  .shelf-control {
+    width: 35px;
+    height: 32px;
+
+    font-size: 22px;
+
+    border-radius: 5px;
+  }
+
+  /* -------------------------------------------------------
+     SHELF
+     ------------------------------------------------------- */
+
+  .shelf-interior {
+    min-height: 325px;
+
+    padding:
+      18px
+      18px
+      27px;
+  }
+
+  .shelf-scroll {
+    padding:
+      14px
+      6px
+      17px;
+  }
+
+  .media-line {
+    gap: 6px;
+
+    padding:
+      12px
+      10px
+      0;
+  }
+
+  .shelf-board {
+    height: 23px;
+  }
+
+  /* -------------------------------------------------------
+     DEFAULT MEDIA
+     ------------------------------------------------------- */
+
+  .orientation-spine {
+    --object-width: 80px;
+    --object-height: 258px;
+  }
+
+  .orientation-cover {
+    width: 205px;
+    height: 156px;
+
+    margin-bottom: 5px;
+  }
+
+  /* -------------------------------------------------------
+     VHS
+     ------------------------------------------------------- */
+
+  .format-vhs {
+    --object-width: 86px;
+    --object-height: 260px;
+  }
+
+  .format-vhs .media-title {
+    font-size: 16px;
+  }
+
+  .format-vhs .media-surface::before {
+    left: 9px;
+    right: 9px;
+
+    height: 18px;
+  }
+
+  /* -------------------------------------------------------
+     DVD
+     ------------------------------------------------------- */
+
+  .format-dvd {
+    --object-width: 74px;
+    --object-height: 252px;
+  }
+
+  .format-dvd .media-title {
+    font-size: 14px;
+  }
+
+  /* -------------------------------------------------------
+     BLU-RAY
+     ------------------------------------------------------- */
+
+  .format-bluray {
+    --object-width: 69px;
+    --object-height: 255px;
+  }
+
+  .format-bluray .media-title {
+    font-size: 12px;
+  }
+
+  .format-bluray .media-surface::before {
+    top: 23px;
+  }
+
+  /* -------------------------------------------------------
+     LASERDISC
+     ------------------------------------------------------- */
+
+  .format-laserdisc {
+    --object-width: 101px;
+    --object-height: 257px;
+  }
+
+  .format-laserdisc .media-title {
+    font-size: 15px;
+  }
+
+  /* -------------------------------------------------------
+     NES
+     ------------------------------------------------------- */
+
+  .format-nes {
+    --object-width: 90px;
+    --object-height: 238px;
+  }
+
+  .format-nes .media-title {
+    font-size: 15px;
+  }
+
+  /* -------------------------------------------------------
+     PS1
+     ------------------------------------------------------- */
+
+  .format-ps1 {
+    --object-width: 81px;
+    --object-height: 243px;
+  }
+
+  .format-ps1 .media-title {
+    font-size: 14px;
+  }
+
+  /* -------------------------------------------------------
+     XBOX 360
+     ------------------------------------------------------- */
+
+  .format-xbox360 {
+    --object-width: 84px;
+    --object-height: 247px;
+  }
+
+  .format-xbox360 .media-title {
+    font-size: 14px;
+  }
+
+  /* -------------------------------------------------------
+     MEDIA LABELS
+     ------------------------------------------------------- */
+
+  .media-surface {
+    padding:
+      16px
+      10px
+      11px;
+  }
+
+  .media-logo {
+    font-size: 7px;
+    letter-spacing: 1.2px;
+  }
+
+  .media-bottom {
+    font-size: 7px;
+  }
+
+  /* -------------------------------------------------------
+     FRONT-FACING COVERS
+     ------------------------------------------------------- */
+
+  .orientation-cover .media-surface {
+    padding: 17px;
+  }
+
+  .orientation-cover .media-title {
+    font-size: 21px;
+    line-height: 0.95;
+  }
+
+  .orientation-cover .media-logo {
+    top: 13px;
+    left: 14px;
+  }
+
+  .orientation-cover .media-bottom {
+    margin-top: 9px;
+  }
+
+  /* -------------------------------------------------------
+     HOVER
+     ------------------------------------------------------- */
+
+  .media-object:hover {
+    transform:
+      translateY(-21px)
+      rotate(-0.8deg);
+  }
+
+  .media-object:nth-child(7n):hover {
+    transform:
+      translateY(-21px)
+      rotate(0.45deg);
+  }
+
+  .media-object:nth-child(9n):hover {
+    transform:
+      translateY(-21px)
+      rotate(-0.35deg);
+  }
+
+  /* -------------------------------------------------------
+     HEADER
+     ------------------------------------------------------- */
+
+  .site-header {
+    height: 94px;
+  }
+
+  .header-inner {
+    padding:
+      0 42px;
+  }
+
+  .brand-console {
+    height: 56px;
+
+    gap: 15px;
+
+    padding:
+      0 20px
+      0 15px;
+  }
+
+  .brand-light {
+    width: 8px;
+    height: 8px;
+  }
+
+  .brand-mark {
+    font-size: 21px;
+  }
+
+  .brand-caption {
+    font-size: 9px;
+
+    padding-left: 14px;
+  }
+
+  .main-nav {
+    gap: 9px;
+  }
+
+  .nav-item {
+    min-width: 100px;
+    height: 53px;
+
+    padding:
+      0 20px;
+
+    font-size: 14px;
+  }
+
+  .nav-item.active .nav-indicator {
+    width: 25px;
+  }
+
+  .header-status {
+    font-size: 9px;
+  }
+
+  .status-light {
+    width: 7px;
+    height: 7px;
+  }
+
+  /* -------------------------------------------------------
+     DETAIL VIEW
+     ------------------------------------------------------- */
+
+  .media-detail {
+    width:
+      min(1080px, calc(100% - 60px));
+
+    grid-template-columns:
+      420px minmax(0, 1fr);
+  }
+
+  .detail-cover {
+    min-height: 620px;
+
+    padding: 33px;
+  }
+
+  .cover-type {
+    padding:
+      6px
+      10px;
+
+    font-size: 10px;
+  }
+
+  .cover-title {
+    max-width: 340px;
+
+    font-size: 57px;
+  }
+
+  .cover-year {
+    font-size: 13px;
+  }
+
+  .detail-info {
+    padding:
+      62px
+      54px
+      50px;
+  }
+
+  .detail-eyebrow {
+    font-size: 10px;
+  }
+
+  .detail-info h2 {
+    font-size: 48px;
+  }
+
+  .detail-meta {
+    gap: 9px;
+
+    margin-top: 19px;
+  }
+
+  .detail-meta span {
+    padding:
+      6px
+      10px;
+
+    font-size: 10px;
+  }
+
+  .detail-info p {
+    font-size: 15px;
+    line-height: 1.75;
+  }
+
+  .detail-facts {
+    gap: 10px;
+
+    margin-top: 38px;
+  }
+
+  .detail-facts div {
+    padding: 14px;
+  }
+
+  .detail-facts span {
+    font-size: 9px;
+  }
+
+  .detail-facts strong {
+    font-size: 11px;
+  }
+}
+
+/* =========================================================
    RESPONSIVE
    ========================================================= */
 
@@ -2008,9 +2463,11 @@
 }
 
 @media (max-width: 760px) {
-  .site-header {
-    height: 64px;
+  .room-content {
+    min-height: 100vh;
+    padding: 94px 0 80px;
   }
+}
 
   .header-inner {
     padding:
@@ -2054,15 +2511,13 @@
     bottom: 3px;
   }
 
-  .room-content {
-    min-height:
-      calc(100vh - 64px);
-
-    padding:
-      30px
-      0
-      80px;
-  }
+.room-content {
+  min-height: 100vh;
+  padding: 142px 0 140px;
+   box-shadow:
+    0 8px 25px rgba(18, 7, 3, 0.38),
+    0 2px 8px rgba(18, 7, 3, 0.18);
+}
 
   .library {
     width:
