@@ -1974,55 +1974,78 @@
 }
 
 /* =========================================================
-   LARGE DESKTOP SCALE
+   LARGE DESKTOP COMPOSITION
    ========================================================= */
 
 @media (min-width: 1051px) {
 
-  /* -------------------------------------------------------
-     PAGE / BOOKCASE
-     ------------------------------------------------------- */
+  /* =======================================================
+     ROOM / BOOKCASE
+     ======================================================= */
 
   .room-content {
+    min-height: 100vh;
+
     padding:
-      48px
+      148px
       0
       140px;
   }
 
+  /*
+   * Intentionally narrower than the previous 1550px version.
+   * This keeps the bookshelf substantial while leaving
+   * visible room/wall space around it.
+   */
   .library {
     width:
-      min(1550px, calc(100% - 60px));
+      min(1375px, calc(100% - 120px));
   }
 
+  .bookcase {
+    width: 100%;
+
+    filter:
+      drop-shadow(
+        0 25px 27px
+        rgba(24, 7, 2, 0.27)
+      );
+  }
+
+  /* =======================================================
+     BOOKCASE
+     ======================================================= */
+
   .bookcase-top {
-    height: 32px;
+    height: 31px;
   }
 
   .bookcase-content {
     padding:
-      30px 32px 43px;
+      30px
+      30px
+      40px;
 
-    border-left-width: 21px;
-    border-right-width: 21px;
+    border-left-width: 20px;
+    border-right-width: 20px;
   }
 
   .bookcase-content::before,
   .bookcase-content::after {
-    width: 21px;
+    width: 20px;
   }
 
   .bookcase-base {
-    height: 32px;
+    height: 31px;
   }
+
+  /* =======================================================
+     ROWS
+     ======================================================= */
 
   .rows {
-    gap: 52px;
+    gap: 48px;
   }
-
-  /* -------------------------------------------------------
-     ROW HEADINGS
-     ------------------------------------------------------- */
 
   .row-header {
     margin-bottom: 13px;
@@ -2033,46 +2056,29 @@
   }
 
   .row-title-group h2 {
-    font-size: 17px;
+    font-size: 16px;
   }
 
   .row-title-group > span {
-    font-size: 11px;
+    font-size: 10px;
   }
 
-  /* -------------------------------------------------------
-     SHELF CONTROLS
-     ------------------------------------------------------- */
-
-  .row-controls {
-    gap: 6px;
-  }
-
-  .shelf-control {
-    width: 35px;
-    height: 32px;
-
-    font-size: 22px;
-
-    border-radius: 5px;
-  }
-
-  /* -------------------------------------------------------
+  /* =======================================================
      SHELF
-     ------------------------------------------------------- */
+     ======================================================= */
 
   .shelf-interior {
-    min-height: 325px;
+    min-height: 320px;
 
     padding:
       18px
       18px
-      27px;
+      26px;
   }
 
   .shelf-scroll {
     padding:
-      14px
+      13px
       6px
       17px;
   }
@@ -2087,130 +2093,71 @@
   }
 
   .shelf-board {
-    height: 23px;
+    height: 22px;
   }
 
-  /* -------------------------------------------------------
-     DEFAULT MEDIA
-     ------------------------------------------------------- */
+  /* =======================================================
+     SHELF CONTROLS
+     ======================================================= */
+
+  .row-controls {
+    gap: 6px;
+  }
+
+  .shelf-control {
+    width: 34px;
+    height: 31px;
+
+    font-size: 21px;
+  }
+
+  /* =======================================================
+     MEDIA
+     ======================================================= */
 
   .orientation-spine {
-    --object-width: 80px;
-    --object-height: 258px;
-  }
-
-  .orientation-cover {
-    width: 205px;
-    height: 156px;
-
-    margin-bottom: 5px;
-  }
-
-  /* -------------------------------------------------------
-     VHS
-     ------------------------------------------------------- */
-
-  .format-vhs {
-    --object-width: 86px;
-    --object-height: 260px;
-  }
-
-  .format-vhs .media-title {
-    font-size: 16px;
-  }
-
-  .format-vhs .media-surface::before {
-    left: 9px;
-    right: 9px;
-
-    height: 18px;
-  }
-
-  /* -------------------------------------------------------
-     DVD
-     ------------------------------------------------------- */
-
-  .format-dvd {
-    --object-width: 74px;
+    --object-width: 78px;
     --object-height: 252px;
   }
 
-  .format-dvd .media-title {
-    font-size: 14px;
-  }
-
-  /* -------------------------------------------------------
-     BLU-RAY
-     ------------------------------------------------------- */
-
-  .format-bluray {
-    --object-width: 69px;
+  .format-vhs {
+    --object-width: 84px;
     --object-height: 255px;
   }
 
-  .format-bluray .media-title {
-    font-size: 12px;
+  .format-dvd {
+    --object-width: 72px;
+    --object-height: 248px;
   }
 
-  .format-bluray .media-surface::before {
-    top: 23px;
+  .format-bluray {
+    --object-width: 67px;
+    --object-height: 251px;
   }
-
-  /* -------------------------------------------------------
-     LASERDISC
-     ------------------------------------------------------- */
 
   .format-laserdisc {
-    --object-width: 101px;
-    --object-height: 257px;
+    --object-width: 98px;
+    --object-height: 253px;
   }
-
-  .format-laserdisc .media-title {
-    font-size: 15px;
-  }
-
-  /* -------------------------------------------------------
-     NES
-     ------------------------------------------------------- */
 
   .format-nes {
-    --object-width: 90px;
+    --object-width: 87px;
+    --object-height: 233px;
+  }
+
+  .format-ps1 {
+    --object-width: 79px;
     --object-height: 238px;
   }
 
-  .format-nes .media-title {
-    font-size: 15px;
-  }
-
-  /* -------------------------------------------------------
-     PS1
-     ------------------------------------------------------- */
-
-  .format-ps1 {
-    --object-width: 81px;
-    --object-height: 243px;
-  }
-
-  .format-ps1 .media-title {
-    font-size: 14px;
-  }
-
-  /* -------------------------------------------------------
-     XBOX 360
-     ------------------------------------------------------- */
-
   .format-xbox360 {
-    --object-width: 84px;
-    --object-height: 247px;
+    --object-width: 82px;
+    --object-height: 242px;
   }
 
-  .format-xbox360 .media-title {
-    font-size: 14px;
-  }
-
-  /* -------------------------------------------------------
-     MEDIA LABELS
-     ------------------------------------------------------- */
+  /* =======================================================
+     MEDIA TYPOGRAPHY
+     ======================================================= */
 
   .media-surface {
     padding:
@@ -2228,125 +2175,164 @@
     font-size: 7px;
   }
 
-  /* -------------------------------------------------------
-     FRONT-FACING COVERS
-     ------------------------------------------------------- */
+  .format-vhs .media-title {
+    font-size: 15px;
+  }
+
+  .format-dvd .media-title {
+    font-size: 13px;
+  }
+
+  .format-bluray .media-title {
+    font-size: 11px;
+  }
+
+  .format-laserdisc .media-title {
+    font-size: 14px;
+  }
+
+  .format-nes .media-title {
+    font-size: 14px;
+  }
+
+  .format-ps1 .media-title {
+    font-size: 13px;
+  }
+
+  .format-xbox360 .media-title {
+    font-size: 13px;
+  }
+
+  /* =======================================================
+     HORIZONTAL MEDIA
+     ======================================================= */
+
+  .orientation-cover {
+    width: 198px;
+    height: 151px;
+
+    margin-bottom: 5px;
+  }
 
   .orientation-cover .media-surface {
-    padding: 17px;
+    padding: 16px;
   }
 
   .orientation-cover .media-title {
-    font-size: 21px;
-    line-height: 0.95;
+    font-size: 20px;
   }
 
   .orientation-cover .media-logo {
     top: 13px;
-    left: 14px;
+    left: 13px;
   }
 
-  .orientation-cover .media-bottom {
-    margin-top: 9px;
-  }
-
-  /* -------------------------------------------------------
-     HOVER
-     ------------------------------------------------------- */
+  /* =======================================================
+     MEDIA HOVER
+     ======================================================= */
 
   .media-object:hover {
     transform:
-      translateY(-21px)
+      translateY(-20px)
       rotate(-0.8deg);
   }
 
   .media-object:nth-child(7n):hover {
     transform:
-      translateY(-21px)
+      translateY(-20px)
       rotate(0.45deg);
   }
 
   .media-object:nth-child(9n):hover {
     transform:
-      translateY(-21px)
+      translateY(-20px)
       rotate(-0.35deg);
   }
 
-  /* -------------------------------------------------------
+  /* =======================================================
      HEADER
-     ------------------------------------------------------- */
+     ======================================================= */
 
   .site-header {
-    height: 94px;
+    height: 100px;
   }
 
   .header-inner {
     padding:
-      0 42px;
+      0 38px;
   }
 
   .brand-console {
-    height: 56px;
+    height: 62px;
 
-    gap: 15px;
+    gap: 16px;
 
     padding:
-      0 20px
-      0 15px;
+      0 22px
+      0 16px;
   }
 
   .brand-light {
+    width: 9px;
+    height: 9px;
+  }
+
+  .brand-mark {
+    font-size: 23px;
+
+    letter-spacing:
+      -1px;
+  }
+
+  .brand-caption {
+    padding-left: 16px;
+
+    font-size: 10px;
+    letter-spacing: 1.3px;
+  }
+
+  .main-nav {
+    gap: 10px;
+  }
+
+  .nav-item {
+    min-width: 108px;
+    height: 58px;
+
+    padding:
+      0 21px;
+
+    font-size: 15px;
+  }
+
+  .nav-indicator {
+    bottom: 6px;
+  }
+
+  .nav-item.active .nav-indicator {
+    width: 27px;
+  }
+
+  .header-status {
+    font-size: 10px;
+  }
+
+  .status-light {
     width: 8px;
     height: 8px;
   }
 
-  .brand-mark {
-    font-size: 21px;
-  }
-
-  .brand-caption {
-    font-size: 9px;
-
-    padding-left: 14px;
-  }
-
-  .main-nav {
-    gap: 9px;
-  }
-
-  .nav-item {
-    min-width: 100px;
-    height: 53px;
-
-    padding:
-      0 20px;
-
-    font-size: 14px;
-  }
-
-  .nav-item.active .nav-indicator {
-    width: 25px;
-  }
-
-  .header-status {
-    font-size: 9px;
-  }
-
-  .status-light {
-    width: 7px;
-    height: 7px;
-  }
-
-  /* -------------------------------------------------------
+  /* =======================================================
      DETAIL VIEW
-     ------------------------------------------------------- */
+     ======================================================= */
 
   .media-detail {
     width:
       min(1080px, calc(100% - 60px));
 
     grid-template-columns:
-      420px minmax(0, 1fr);
+      420px
+      minmax(0, 1fr);
   }
 
   .detail-cover {
@@ -2426,52 +2412,159 @@
   }
 }
 
+
 /* =========================================================
-   RESPONSIVE
+   MEDIUM DESKTOP / TABLET
    ========================================================= */
 
-@media (max-width: 1380px) {
+@media (min-width: 761px) and (max-width: 1380px) {
+
+  .room-content {
+    min-height: 100vh;
+
+    padding:
+      132px
+      0
+      110px;
+  }
+
   .library {
     width:
-      min(1190px, calc(100% - 60px));
+      min(1190px, calc(100% - 54px));
   }
-}
 
-@media (max-width: 1050px) {
+  .site-header {
+    height: 90px;
+  }
+
   .header-inner {
     padding:
-      0 20px;
+      0 24px;
   }
 
-  .header-status {
-    display: none;
+  .brand-console {
+    height: 54px;
   }
 
-  .header-inner {
-    grid-template-columns:
-      1fr auto;
+  .brand-mark {
+    font-size: 19px;
   }
 
   .brand-caption {
     display: none;
   }
 
-  .library {
-    width:
-      calc(100% - 42px);
+  .main-nav {
+    gap: 5px;
   }
-}
 
-@media (max-width: 760px) {
-  .room-content {
-    min-height: 100vh;
-    padding: 94px 0 80px;
-  }
-}
+  .nav-item {
+    min-width: 80px;
+    height: 48px;
 
-  .header-inner {
     padding:
       0 12px;
+
+    font-size: 12px;
+  }
+
+  .header-status {
+    display: none;
+  }
+
+  .bookcase-top,
+  .bookcase-base {
+    height: 24px;
+  }
+
+  .bookcase-content {
+    padding:
+      22px
+      22px
+      30px;
+
+    border-left-width: 14px;
+    border-right-width: 14px;
+  }
+
+  .bookcase-content::before,
+  .bookcase-content::after {
+    width: 14px;
+  }
+
+  .rows {
+    gap: 38px;
+  }
+
+  .shelf-interior {
+    min-height: 280px;
+  }
+
+  .orientation-spine {
+    --object-width: 70px;
+    --object-height: 225px;
+  }
+
+  .format-vhs {
+    --object-width: 76px;
+    --object-height: 228px;
+  }
+
+  .format-dvd {
+    --object-width: 65px;
+    --object-height: 223px;
+  }
+
+  .format-bluray {
+    --object-width: 61px;
+    --object-height: 226px;
+  }
+
+  .format-laserdisc {
+    --object-width: 87px;
+    --object-height: 226px;
+  }
+
+  .format-nes {
+    --object-width: 78px;
+    --object-height: 210px;
+  }
+
+  .format-ps1 {
+    --object-width: 71px;
+    --object-height: 215px;
+  }
+
+  .format-xbox360 {
+    --object-width: 73px;
+    --object-height: 219px;
+  }
+
+  .orientation-cover {
+    width: 175px;
+    height: 133px;
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 760px) {
+
+  .site-header {
+    height: 64px;
+  }
+
+  .header-inner {
+    width: 100%;
+
+    padding:
+      0 12px;
+
+    grid-template-columns:
+      1fr auto;
   }
 
   .brand-console {
@@ -2490,6 +2583,14 @@
 
   .brand-mark {
     font-size: 13px;
+  }
+
+  .brand-caption {
+    display: none;
+  }
+
+  .header-status {
+    display: none;
   }
 
   .main-nav {
@@ -2511,13 +2612,14 @@
     bottom: 3px;
   }
 
-.room-content {
-  min-height: 100vh;
-  padding: 142px 0 140px;
-   box-shadow:
-    0 8px 25px rgba(18, 7, 3, 0.38),
-    0 2px 8px rgba(18, 7, 3, 0.18);
-}
+  .room-content {
+    min-height: 100vh;
+
+    padding:
+      94px
+      0
+      80px;
+  }
 
   .library {
     width:
@@ -2526,13 +2628,17 @@
 
   .bookcase-content {
     padding:
-      16px 11px 25px;
+      16px
+      11px
+      25px;
 
-    border-left-width:
-      8px;
+    border-left-width: 8px;
+    border-right-width: 8px;
+  }
 
-    border-right-width:
-      8px;
+  .bookcase-content::before,
+  .bookcase-content::after {
+    width: 8px;
   }
 
   .bookcase-top,
@@ -2544,7 +2650,9 @@
     min-height: 225px;
 
     padding:
-      11px 8px 20px;
+      11px
+      8px
+      20px;
   }
 
   .rows {
@@ -2591,9 +2699,16 @@
     height: 108px;
   }
 
+  .shelf-control {
+    width: 26px;
+    height: 24px;
+
+    font-size: 17px;
+  }
+
   .media-detail {
     width:
-      min(860px, 100%);
+      min(860px, calc(100% - 20px));
 
     grid-template-columns:
       1fr;
@@ -2610,16 +2725,29 @@
 
   .detail-info {
     padding:
-      31px 25px 30px;
+      31px
+      25px
+      30px;
   }
 
   .detail-facts {
     grid-template-columns:
       1fr;
   }
+}
 
+
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
 
 @media (max-width: 470px) {
+
+  .header-inner {
+    padding:
+      0 9px;
+  }
+
   .brand-console {
     border: 0;
 
@@ -2629,6 +2757,7 @@
     box-shadow: none;
 
     padding-left: 2px;
+    padding-right: 2px;
   }
 
   .brand-console:hover {
@@ -2656,7 +2785,9 @@
 
   .bookcase-content {
     padding:
-      11px 6px 20px;
+      11px
+      6px
+      20px;
   }
 
   .shelf-interior {
@@ -2685,17 +2816,25 @@
   }
 }
 
+
 /* =========================================================
    REDUCED MOTION
    ========================================================= */
 
 @media (prefers-reduced-motion: reduce) {
+
   *,
   *::before,
   *::after {
     scroll-behavior: auto !important;
-    transition-duration: 0.01ms !important;
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
+
+    transition-duration:
+      0.01ms !important;
+
+    animation-duration:
+      0.01ms !important;
+
+    animation-iteration-count:
+      1 !important;
   }
 }
