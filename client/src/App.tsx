@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import Header from './components/Header'
 import MediaDetail from './components/MediaDetail'
 import MediaRow from './components/MediaRow'
@@ -17,6 +17,44 @@ type View =
   | 'games'
   | 'favorites'
 
+interface CustomOption {
+  id: string
+  label: string
+}
+
+const STORAGE_KEYS = {
+  movieGenres: 'medialibrary.customMovieGenres',
+  gameGenres: 'medialibrary.customGameGenres',
+  movieFormats: 'medialibrary.customMovieFormats',
+  gameFormats: 'medialibrary.customGameFormats',
+}
+
+function loadStoredOptions(
+  key: string,
+): CustomOption[] {
+  try {
+    const saved = localStorage.getItem(key)
+
+    if (!saved) {
+      return []
+    }
+
+    const parsed = JSON.parse(saved)
+
+    if (!Array.isArray(parsed)) {
+      return []
+    }
+
+    return parsed.filter(
+      (item): item is CustomOption =>
+        typeof item?.id === 'string' &&
+        typeof item?.label === 'string',
+    )
+  } catch {
+    return []
+  }
+}
+
 function App() {
   const [activeView, setActiveView] =
     useState<View>('collection')
@@ -29,6 +67,74 @@ function App() {
 
   const [isAddMediaOpen, setIsAddMediaOpen] =
     useState(false)
+
+  /*
+   * Persistent user-created genres/formats.
+   *
+   * These are loaded once when the application starts.
+   */
+  const [customMovieGenres, setCustomMovieGenres] =
+    useState<CustomOption[]>(() =>
+      loadStoredOptions(
+        STORAGE_KEYS.movieGenres,
+      ),
+    )
+
+  const [customGameGenres, setCustomGameGenres] =
+    useState<CustomOption[]>(() =>
+      loadStoredOptions(
+        STORAGE_KEYS.gameGenres,
+      ),
+    )
+
+  const [customMovieFormats, setCustomMovieFormats] =
+    useState<CustomOption[]>(() =>
+      loadStoredOptions(
+        STORAGE_KEYS.movieFormats,
+      ),
+    )
+
+  const [customGameFormats, setCustomGameFormats] =
+    useState<CustomOption[]>(() =>
+      loadStoredOptions(
+        STORAGE_KEYS.gameFormats,
+      ),
+    )
+
+  /*
+   * Keep localStorage synchronized with state.
+   */
+  useEffect(() => {
+    localStorage.setItem(
+      STORAGE_KEYS.movieGenres,
+      JSON.stringify(customMovieGenres),
+    )
+  }, [customMovieGenres])
+
+  useEffect(() => {
+    localStorage.setItem(
+      STORAGE_KEYS.gameGenres,
+      JSON.stringify(customGameGenres),
+    )
+  }, [customGameGenres])
+
+  useEffect(() => {
+    localStorage.setItem(
+      STORAGE_KEYS.movieFormats,
+      JSON.stringify(customMovieFormats),
+    )
+  }, [customMovieFormats])
+
+  useEffect(() => {
+    localStorage.setItem(
+      STORAGE_KEYS.gameFormats,
+      JSON.stringify(customGameFormats),
+    )
+  }, [customGameFormats])
+
+  /* =========================================================
+     COLLECTION FILTERS
+     ========================================================= */
 
   const movies = useMemo(
     () =>
@@ -54,12 +160,70 @@ function App() {
     [collection],
   )
 
+  /*
+   * Most recently added items are simply the newest
+   * entries in the current collection.
+   */
   const recentlyAdded = useMemo(
-    () => [...collection].slice(-8).reverse(),
+    () =>
+      [...collection]
+        .slice(-8)
+        .reverse(),
     [collection],
   )
 
-  const movieGenreRows = movieGenres
+  /* =========================================================
+     GENRE CATALOGS
+     ========================================================= */
+
+  /*
+   * A genre can come from:
+   *
+   * 1. Built-in genres
+   * 2. User-created genres
+   * 3. A media item that already contains a genre
+   *
+   * The Set prevents duplicates.
+   */
+  const allMovieGenres = useMemo(() => {
+    const values = new Set([
+      ...movieGenres,
+      ...customMovieGenres.map(
+        (item) => item.label,
+      ),
+      ...movies.map(
+        (item) => item.genre,
+      ),
+    ])
+
+    return Array.from(values)
+  }, [
+    movies,
+    customMovieGenres,
+  ])
+
+  const allGameGenres = useMemo(() => {
+    const values = new Set([
+      ...gameGenres,
+      ...customGameGenres.map(
+        (item) => item.label,
+      ),
+      ...games.map(
+        (item) => item.genre,
+      ),
+    ])
+
+    return Array.from(values)
+  }, [
+    games,
+    customGameGenres,
+  ])
+
+  /* =========================================================
+     GENRE ROWS
+     ========================================================= */
+
+  const movieGenreRows = allMovieGenres
     .map((genre) => ({
       title: genre,
       items: movies.filter(
@@ -70,7 +234,7 @@ function App() {
       (row) => row.items.length > 0,
     )
 
-  const gameGenreRows = gameGenres
+  const gameGenreRows = allGameGenres
     .map((genre) => ({
       title: genre,
       items: games.filter(
@@ -80,6 +244,10 @@ function App() {
     .filter(
       (row) => row.items.length > 0,
     )
+
+  /* =========================================================
+     HANDLERS
+     ========================================================= */
 
   const handleSelect = (
     item: MediaItem,
@@ -95,6 +263,49 @@ function App() {
       newMedia,
     ])
   }
+
+  /*
+   * These are passed to AddMediaModal so that the
+   * parent remains the source of truth for custom
+   * genres and formats.
+   */
+const handleAddCustomGenre = (
+  type: 'movie' | 'game',
+  option: CustomOption,
+) => {
+  if (type === 'movie') {
+    setCustomMovieGenres((current) => [
+      ...current,
+      option,
+    ])
+  } else {
+    setCustomGameGenres((current) => [
+      ...current,
+      option,
+    ])
+  }
+}
+
+  const handleAddCustomFormat = (
+    type: 'movie' | 'game',
+    option: CustomOption,
+  ) => {
+    if (type === 'movie') {
+      setCustomMovieFormats((current) => [
+        ...current,
+        option,
+      ])
+    } else {
+      setCustomGameFormats((current) => [
+        ...current,
+        option,
+      ])
+    }
+  }
+
+  /* =========================================================
+     RENDER ROWS
+     ========================================================= */
 
   const renderRows = () => {
     switch (activeView) {
@@ -116,9 +327,7 @@ function App() {
                   key={row.title}
                   title={row.title}
                   items={row.items}
-                  onSelect={
-                    handleSelect
-                  }
+                  onSelect={handleSelect}
                 />
               ),
             )}
@@ -143,9 +352,7 @@ function App() {
                   key={row.title}
                   title={row.title}
                   items={row.items}
-                  onSelect={
-                    handleSelect
-                  }
+                  onSelect={handleSelect}
                 />
               ),
             )}
@@ -165,8 +372,7 @@ function App() {
               title="Favorite Movies"
               items={favorites.filter(
                 (item) =>
-                  item.type ===
-                  'movie',
+                  item.type === 'movie',
               )}
               onSelect={handleSelect}
             />
@@ -205,9 +411,7 @@ function App() {
                   key={row.title}
                   title={row.title}
                   items={row.items}
-                  onSelect={
-                    handleSelect
-                  }
+                  onSelect={handleSelect}
                 />
               ))}
 
@@ -224,9 +428,7 @@ function App() {
                   key={row.title}
                   title={row.title}
                   items={row.items}
-                  onSelect={
-                    handleSelect
-                  }
+                  onSelect={handleSelect}
                 />
               ))}
           </>
@@ -237,18 +439,18 @@ function App() {
   return (
     <div className="room">
       <Header
-  activeView={activeView}
-  onViewChange={setActiveView}
-  onAddMedia={() =>
-    setIsAddMediaOpen(true)
-  }
-/>
+        activeView={activeView}
+        onViewChange={setActiveView}
+        onAddMedia={() =>
+          setIsAddMediaOpen(true)
+        }
+      />
+
       <main className="room-content">
         <div className="room-glow room-glow-left" />
         <div className="room-glow room-glow-right" />
 
         <div className="library">
-      
           <div className="bookcase">
             <div className="bookcase-top" />
 
@@ -265,6 +467,10 @@ function App() {
         </div>
       </main>
 
+      {/* =======================================================
+          MEDIA DETAIL
+          ======================================================= */}
+
       {selectedMedia && (
         <MediaDetail
           media={selectedMedia}
@@ -274,12 +480,34 @@ function App() {
         />
       )}
 
+      {/* =======================================================
+          ADD MEDIA
+          ======================================================= */}
+
       {isAddMediaOpen && (
         <AddMediaModal
           onClose={() =>
             setIsAddMediaOpen(false)
           }
           onAdd={handleAddMedia}
+          customMovieGenres={
+            customMovieGenres
+          }
+          customGameGenres={
+            customGameGenres
+          }
+          customMovieFormats={
+            customMovieFormats
+          }
+          customGameFormats={
+            customGameFormats
+          }
+          onAddCustomGenre={
+            handleAddCustomGenre
+          }
+          onAddCustomFormat={
+            handleAddCustomFormat
+          }
         />
       )}
     </div>

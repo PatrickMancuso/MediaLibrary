@@ -1,6 +1,6 @@
 export type MediaType = 'movie' | 'game'
 
-export type MediaFormat =
+export type BuiltInMediaFormat =
   | 'vhs'
   | 'dvd'
   | 'bluray'
@@ -8,6 +8,10 @@ export type MediaFormat =
   | 'nes'
   | 'ps1'
   | 'xbox360'
+
+export type MediaFormat =
+  | BuiltInMediaFormat
+  | (string & {})
 
 export type MediaOrientation = 'spine' | 'cover'
 
@@ -26,6 +30,9 @@ export interface MediaItem {
    * cover = title displayed horizontally with cover facing forward
    */
   orientation: MediaOrientation
+
+    spineImage?: string
+  coverImage?: string
 }
 
 export const media: MediaItem[] = [
