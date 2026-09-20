@@ -5,7 +5,7 @@ interface MediaDetailProps {
   onClose: () => void
 }
 
-const formatLabels = {
+const formatLabels: Record<string, string> = {
   vhs: 'VHS',
   dvd: 'DVD',
   bluray: 'Blu-ray',
@@ -47,7 +47,8 @@ function MediaDetail({
         <div className="detail-cover">
           <span className="cover-type">
             {mediaTypeLabels[media.type]} ·{' '}
-            {formatLabels[media.format]}
+{formatLabels[media.format] ??
+  media.format}
           </span>
 
           <span className="cover-title">
@@ -68,7 +69,10 @@ function MediaDetail({
 
           <div className="detail-meta">
             <span>{media.year}</span>
-            <span>{formatLabels[media.format]}</span>
+<span>
+  {formatLabels[media.format] ??
+    media.format}
+</span>
             <span>{media.genre}</span>
           </div>
 
@@ -80,8 +84,9 @@ function MediaDetail({
             <div>
               <span>Format</span>
               <strong>
-                {formatLabels[media.format]}
-              </strong>
+  {formatLabels[media.format] ??
+    media.format}
+</strong>
             </div>
 
             <div>
