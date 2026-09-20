@@ -5,7 +5,10 @@ interface MediaDetailProps {
   onClose: () => void
 }
 
-const formatLabels: Record<string, string> = {
+const formatLabels: Record<
+  string,
+  string
+> = {
   vhs: 'VHS',
   dvd: 'DVD',
   bluray: 'Blu-ray',
@@ -15,7 +18,10 @@ const formatLabels: Record<string, string> = {
   xbox360: 'Xbox 360',
 }
 
-const mediaTypeLabels = {
+const mediaTypeLabels: Record<
+  string,
+  string
+> = {
   movie: 'MOVIE',
   game: 'VIDEO GAME',
 }
@@ -24,6 +30,14 @@ function MediaDetail({
   media,
   onClose,
 }: MediaDetailProps) {
+  const formatLabel =
+    formatLabels[media.format] ??
+    media.format
+
+  const mediaTypeLabel =
+    mediaTypeLabels[media.type] ??
+    media.type
+
   return (
     <div
       className="detail-backdrop"
@@ -46,9 +60,7 @@ function MediaDetail({
 
         <div className="detail-cover">
           <span className="cover-type">
-            {mediaTypeLabels[media.type]} ·{' '}
-{formatLabels[media.format] ??
-  media.format}
+            {mediaTypeLabel} · {formatLabel}
           </span>
 
           <span className="cover-title">
@@ -62,41 +74,52 @@ function MediaDetail({
 
         <div className="detail-info">
           <div className="detail-eyebrow">
-            {mediaTypeLabels[media.type]}
+            {mediaTypeLabel}
           </div>
 
           <h2>{media.title}</h2>
 
           <div className="detail-meta">
             <span>{media.year}</span>
-<span>
-  {formatLabels[media.format] ??
-    media.format}
-</span>
-            <span>{media.genre}</span>
+
+            <span>
+              {formatLabel}
+            </span>
+
+            <span>
+              {media.genre}
+            </span>
           </div>
 
           <div className="detail-divider" />
 
-          <p>{media.description}</p>
+          <p>
+            {media.description}
+          </p>
 
           <div className="detail-facts">
             <div>
               <span>Format</span>
+
               <strong>
-  {formatLabels[media.format] ??
-    media.format}
-</strong>
+                {formatLabel}
+              </strong>
             </div>
 
             <div>
               <span>Release</span>
-              <strong>{media.year}</strong>
+
+              <strong>
+                {media.year}
+              </strong>
             </div>
 
             <div>
               <span>Genre</span>
-              <strong>{media.genre}</strong>
+
+              <strong>
+                {media.genre}
+              </strong>
             </div>
           </div>
         </div>
