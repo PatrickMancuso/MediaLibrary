@@ -12,11 +12,14 @@ interface HeaderProps {
       | 'games'
       | 'favorites',
   ) => void
+
+  onAddMedia: () => void
 }
 
 function Header({
   activeView,
   onViewChange,
+  onAddMedia,
 }: HeaderProps) {
   const navigation = [
     {
@@ -85,10 +88,17 @@ function Header({
           ))}
         </nav>
 
-        <div className="header-status">
-          <span className="status-light" />
-          <span>READY</span>
-        </div>
+        <button
+          type="button"
+          className="header-add-media"
+          onClick={onAddMedia}
+        >
+          <span className="header-add-icon">
+            +
+          </span>
+
+          <span>Add Media</span>
+        </button>
       </div>
     </header>
   )

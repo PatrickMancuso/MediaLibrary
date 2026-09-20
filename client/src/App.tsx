@@ -237,27 +237,18 @@ function App() {
   return (
     <div className="room">
       <Header
-        activeView={activeView}
-        onViewChange={setActiveView}
-      />
-
+  activeView={activeView}
+  onViewChange={setActiveView}
+  onAddMedia={() =>
+    setIsAddMediaOpen(true)
+  }
+/>
       <main className="room-content">
         <div className="room-glow room-glow-left" />
         <div className="room-glow room-glow-right" />
 
         <div className="library">
-          <div className="library-controls">
-  <button
-    type="button"
-    className="add-button"
-    onClick={() =>
-      setIsAddMediaOpen(true)
-    }
-  >
-    <span>+</span>
-    Add Media
-  </button>
-</div>
+      
           <div className="bookcase">
             <div className="bookcase-top" />
 
