@@ -5,14 +5,14 @@ interface MediaSpineProps {
   onClick: (media: MediaItem) => void
 }
 
-const formatLabels = {
-  vhs: 'VHS',
-  dvd: 'DVD',
-  bluray: 'BLU-RAY',
-  laserdisc: 'LASERDISC',
-  nes: 'NES',
-  ps1: 'PS1',
-  xbox360: 'XBOX 360',
+const formatLabels: Record<string, string> = {
+  vhs: 'format-vhs',
+  dvd: 'format-dvd',
+  bluray: 'format-bluray',
+  laserdisc: 'format-laserdisc',
+  nes: 'format-nes',
+  ps1: 'format-ps1',
+  xbox360: 'format-xbox360',
 }
 
 function MediaSpine({ media, onClick }: MediaSpineProps) {
