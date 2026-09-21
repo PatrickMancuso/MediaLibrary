@@ -58,9 +58,6 @@ function CollectionDashboard({
 
       <section className="dashboard-intro">
         <div>
-          <span className="dashboard-kicker">
-            PERSONAL MEDIA COLLECTION
-          </span>
 
           <h1>Your Collection</h1>
 
@@ -88,7 +85,6 @@ function CollectionDashboard({
       <section className="dashboard-section">
         <div className="dashboard-section-header">
           <div>
-            <span>THE LATEST ADDITIONS</span>
             <h2>Recently Added</h2>
           </div>
 
@@ -182,7 +178,6 @@ function CollectionDashboard({
       <section className="dashboard-section">
         <div className="dashboard-section-header">
           <div>
-            <span>YOUR LIBRARY</span>
             <h2>Browse Collection</h2>
           </div>
         </div>
@@ -228,7 +223,6 @@ function CollectionDashboard({
             <div className="category-overlay" />
 
             <div className="category-content">
-              <span>FILM COLLECTION</span>
 
               <strong>Movies</strong>
 
@@ -282,7 +276,6 @@ function CollectionDashboard({
             <div className="category-overlay" />
 
             <div className="category-content">
-              <span>GAME COLLECTION</span>
 
               <strong>Games</strong>
 
@@ -306,7 +299,6 @@ function CollectionDashboard({
         <section className="dashboard-section">
           <div className="dashboard-section-header">
             <div>
-              <span>PERSONAL PICKS</span>
               <h2>Favorites</h2>
             </div>
 
@@ -381,7 +373,6 @@ function CollectionDashboard({
 
       <section className="dashboard-overview">
         <div className="overview-heading">
-          <span>THE COLLECTION</span>
           <h2>Overview</h2>
         </div>
 
