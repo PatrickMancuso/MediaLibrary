@@ -1,10 +1,18 @@
 /* =========================================================
+   MEDIA LIBRARY
+   APP STYLES
+   ========================================================= */
+
+
+/* =========================================================
    ROOM
    ========================================================= */
 
 .room {
-  min-height: 100vh;
   position: relative;
+
+  min-height: 100vh;
+
   overflow-x: hidden;
 
   color: #f5e9dc;
@@ -12,9 +20,11 @@
   background:
     linear-gradient(
       90deg,
-      rgba(73, 35, 24, 0.77),
-      rgba(111, 57, 34, 0.51) 44%,
-      rgba(74, 34, 25, 0.78)
+      rgba(52, 25, 16, 0.58) 0%,
+      rgba(96, 43, 24, 0.28) 20%,
+      rgba(42, 18, 10, 0.54) 50%,
+      rgba(96, 43, 24, 0.28) 80%,
+      rgba(52, 25, 16, 0.58) 100%
     ),
     url("https://img.magnific.com/free-vector/abstract-background-with-retro-styled-swirl-pattern_1048-19600.jpg?semt=ais_hybrid&w=740&q=80");
 
@@ -35,6 +45,7 @@
     fixed;
 }
 
+
 /* =========================================================
    ROOM ATMOSPHERE
    ========================================================= */
@@ -46,25 +57,32 @@
   inset: 0;
 
   z-index: 0;
+
   pointer-events: none;
 
   background:
     radial-gradient(
       ellipse at 50% 18%,
-      rgba(255, 181, 105, 0.14),
+      rgba(255, 181, 105, 0.1),
+      transparent 38%
+    ),
+    radial-gradient(
+      ellipse at 50% 58%,
+      rgba(122, 55, 29, 0.08),
       transparent 42%
     ),
     linear-gradient(
       180deg,
-      rgba(37, 16, 10, 0.18),
-      rgba(63, 25, 13, 0.03) 45%,
-      rgba(29, 12, 8, 0.3)
+      rgba(32, 13, 8, 0.18),
+      rgba(48, 19, 10, 0.04) 45%,
+      rgba(25, 9, 6, 0.34)
     );
 
   box-shadow:
-    inset 0 0 180px
-      rgba(27, 9, 4, 0.44);
+    inset 0 0 190px
+      rgba(22, 7, 3, 0.46);
 }
+
 
 .room::after {
   content: "";
@@ -73,26 +91,28 @@
   inset: 0;
 
   z-index: 0;
+
   pointer-events: none;
 
-  opacity: 0.13;
+  opacity: 0.1;
 
   background:
     repeating-linear-gradient(
       0deg,
-      rgba(255, 255, 255, 0.02) 0,
-      rgba(255, 255, 255, 0.02) 1px,
+      rgba(255, 255, 255, 0.018) 0,
+      rgba(255, 255, 255, 0.018) 1px,
       transparent 1px,
-      transparent 4px
+      transparent 5px
     ),
     repeating-linear-gradient(
       90deg,
-      rgba(255, 255, 255, 0.012) 0,
-      rgba(255, 255, 255, 0.012) 1px,
+      rgba(255, 255, 255, 0.01) 0,
+      rgba(255, 255, 255, 0.01) 1px,
       transparent 1px,
-      transparent 7px
+      transparent 8px
     );
 }
+
 
 /* =========================================================
    HEADER
@@ -100,13 +120,15 @@
 
 .site-header {
   position: fixed;
+
   top: 0;
   left: 0;
   right: 0;
+
   z-index: 100;
 
   width: 100%;
-  height: 84px;
+  height: 100px;
 
   background:
     linear-gradient(
@@ -120,13 +142,15 @@
     rgba(255, 214, 176, 0.12);
 
   box-shadow:
-    0 10px 28px
-      rgba(21, 8, 4, 0.36),
+    0 10px 30px
+      rgba(21, 8, 4, 0.38),
     inset 0 -1px 0
       rgba(255, 221, 194, 0.045);
 
-  backdrop-filter: blur(10px);
+  backdrop-filter:
+    blur(10px);
 }
+
 
 .site-header::before {
   content: "";
@@ -136,7 +160,7 @@
 
   pointer-events: none;
 
-  opacity: 0.18;
+  opacity: 0.16;
 
   background:
     repeating-linear-gradient(
@@ -147,6 +171,7 @@
       transparent 6px
     );
 }
+
 
 .site-header::after {
   content: "";
@@ -162,20 +187,21 @@
   background:
     linear-gradient(
       90deg,
-      #5a281a 0%,
-      #a9562d 20%,
-      #d17b43 40%,
-      #e0a15f 50%,
+      #572619 0%,
+      #9d4e29 20%,
+      #cf7640 39%,
+      #e4a062 50%,
       #ad5b31 67%,
-      #672b1c 100%
+      #632a1b 100%
     );
 
-  opacity: 0.82;
+  opacity: 0.85;
 
   box-shadow:
-    0 -1px 3px
-      rgba(203, 115, 58, 0.15);
+    0 -1px 4px
+      rgba(203, 115, 58, 0.18);
 }
+
 
 .header-inner {
   position: relative;
@@ -184,7 +210,10 @@
   width: 100%;
   height: 100%;
 
-  padding: 0 34px;
+  box-sizing: border-box;
+
+  padding:
+    0 34px;
 
   display: grid;
 
@@ -194,6 +223,7 @@
   align-items: center;
 }
 
+
 /* =========================================================
    HEADER BRAND
    ========================================================= */
@@ -201,16 +231,16 @@
 .brand-console {
   justify-self: start;
 
-  height: 49px;
+  height: 62px;
 
   display: flex;
   align-items: center;
 
-  gap: 13px;
+  gap: 16px;
 
   padding:
-    0 17px
-    0 13px;
+    0 22px
+    0 16px;
 
   border:
     1px solid
@@ -243,8 +273,10 @@
     border-color 160ms ease;
 }
 
+
 .brand-console:hover {
-  transform: translateY(-1px);
+  transform:
+    translateY(-1px);
 
   border-color:
     rgba(245, 213, 184, 0.23);
@@ -257,15 +289,17 @@
     );
 }
 
+
 .brand-light {
-  width: 7px;
-  height: 7px;
+  width: 9px;
+  height: 9px;
 
   flex-shrink: 0;
 
   border-radius: 50%;
 
-  background: #d78b4e;
+  background:
+    #d78b4e;
 
   box-shadow:
     0 0 5px
@@ -274,20 +308,26 @@
       rgba(215, 139, 78, 0.32);
 }
 
+
 .brand-mark {
-  font-size: 18px;
+  font-size: 23px;
   line-height: 1;
 
   font-weight: 750;
-  letter-spacing: -0.8px;
+
+  letter-spacing:
+    -1px;
 }
+
 
 .brand-mark span {
-  color: #c2794e;
+  color:
+    #c2794e;
 }
 
+
 .brand-caption {
-  padding-left: 12px;
+  padding-left: 16px;
 
   border-left:
     1px solid
@@ -296,11 +336,14 @@
   color:
     rgba(247, 225, 207, 0.36);
 
-  font-size: 8px;
+  font-size: 10px;
+
   font-weight: 700;
 
-  letter-spacing: 1.2px;
+  letter-spacing:
+    1.3px;
 }
+
 
 /* =========================================================
    HEADER NAVIGATION
@@ -312,18 +355,20 @@
   display: flex;
   align-items: center;
 
-  gap: 7px;
+  gap: 10px;
 }
+
 
 .nav-item {
   position: relative;
 
   appearance: none;
 
-  min-width: 82px;
-  height: 46px;
+  min-width: 108px;
+  height: 58px;
 
-  padding: 0 17px;
+  padding:
+    0 21px;
 
   border:
     1px solid transparent;
@@ -336,7 +381,8 @@
   background:
     transparent;
 
-  font-size: 12px;
+  font-size: 15px;
+
   font-weight: 600;
 
   cursor: pointer;
@@ -348,8 +394,10 @@
     transform 160ms ease;
 }
 
+
 .nav-item:hover {
-  color: #fff0e2;
+  color:
+    #fff0e2;
 
   background:
     rgba(255, 225, 198, 0.055);
@@ -358,12 +406,16 @@
     rgba(255, 224, 196, 0.07);
 }
 
+
 .nav-item:active {
-  transform: translateY(1px);
+  transform:
+    translateY(1px);
 }
 
+
 .nav-item.active {
-  color: #fff3e7;
+  color:
+    #fff3e7;
 
   border-color:
     rgba(241, 202, 169, 0.13);
@@ -384,11 +436,12 @@
       rgba(26, 8, 3, 0.2);
 }
 
+
 .nav-indicator {
   position: absolute;
 
   left: 50%;
-  bottom: 5px;
+  bottom: 6px;
 
   width: 0;
   height: 2px;
@@ -396,7 +449,8 @@
   transform:
     translateX(-50%);
 
-  border-radius: 10px;
+  border-radius:
+    10px;
 
   background:
     #d98a4a;
@@ -409,1913 +463,13 @@
     width 160ms ease;
 }
 
+
 .nav-item.active .nav-indicator {
-  width: 20px;
+  width: 27px;
 }
+
 
 /* =========================================================
-   HEADER STATUS
-   ========================================================= */
-
-.header-status {
-  justify-self: end;
-
-  display: flex;
-  align-items: center;
-
-  gap: 8px;
-
-  color:
-    rgba(239, 218, 199, 0.33);
-
-  font-size: 8px;
-  font-weight: 700;
-
-  letter-spacing: 1.4px;
-}
-
-.status-light {
-  width: 6px;
-  height: 6px;
-
-  border-radius: 50%;
-
-  background: #719260;
-
-  box-shadow:
-    0 0 5px
-      rgba(113, 146, 96, 0.75);
-}
-
-/* =========================================================
-   ROOM CONTENT
-   ========================================================= */
-
-.room-content {
-  position: relative;
-  z-index: 1;
-
-  min-height:
-    calc(100vh - 84px);
-
-  padding:
-    62px
-    0
-    130px;
-}
-
-.library {
-  position: relative;
-  z-index: 3;
-
-  width:
-    min(1240px, calc(100% - 100px));
-
-  margin: 0 auto;
-}
-
-/* =========================================================
-   BOOKCASE
-   ========================================================= */
-
-.bookcase {
-  position: relative;
-
-  width: 100%;
-
-  filter:
-    drop-shadow(
-      0 25px 25px
-      rgba(24, 7, 2, 0.25)
-    );
-}
-
-/* ---------------------------------------------------------
-   TOP BOARD
-   --------------------------------------------------------- */
-
-.bookcase-top {
-  position: relative;
-  z-index: 5;
-
-  height: 27px;
-
-  border:
-    1px solid
-    rgba(30, 12, 5, 0.7);
-
-  border-radius:
-    5px 5px 1px 1px;
-
-  background:
-    linear-gradient(
-      180deg,
-      rgba(140, 88, 52, 0.45),
-      rgba(66, 38, 23, 0.48)
-    ),
-    url("https://www.textures4photoshop.com/tex/thumbs/dark-wood-texture-seamless-free-thumb31.jpg");
-
-  background-size:
-    cover,
-    520px auto;
-
-  background-position:
-    center,
-    center;
-
-  box-shadow:
-    inset 0 2px 0
-      rgba(255, 228, 199, 0.13),
-    inset 0 -2px 0
-      rgba(23, 8, 3, 0.24),
-    0 6px 12px
-      rgba(27, 8, 3, 0.24);
-}
-
-.bookcase-top::after {
-  content: "";
-
-  position: absolute;
-
-  left: 16px;
-  right: 16px;
-  bottom: 4px;
-
-  height: 1px;
-
-  background:
-    rgba(255, 219, 184, 0.12);
-}
-
-/* ---------------------------------------------------------
-   MAIN CASE
-   --------------------------------------------------------- */
-
-.bookcase-content {
-  position: relative;
-
-  padding:
-    25px 27px 36px;
-
-  border-left:
-    17px solid #4d2d1e;
-
-  border-right:
-    17px solid #4d2d1e;
-
-  background:
-    linear-gradient(
-      90deg,
-      rgba(46, 23, 14, 0.9),
-      rgba(28, 14, 9, 0.82) 10%,
-      rgba(31, 15, 9, 0.82) 90%,
-      rgba(49, 25, 15, 0.9)
-    ),
-    url("https://www.textures4photoshop.com/tex/thumbs/dark-wood-texture-seamless-free-thumb31.jpg");
-
-  background-size:
-    cover,
-    760px auto;
-
-  background-position:
-    center,
-    center;
-
-  box-shadow:
-    inset 13px 0 24px
-      rgba(14, 5, 2, 0.3),
-    inset -13px 0 24px
-      rgba(14, 5, 2, 0.3),
-    inset 0 0 35px
-      rgba(24, 8, 3, 0.22);
-}
-
-/* vertical side depth */
-.bookcase-content::before {
-  content: "";
-
-  position: absolute;
-
-  left: 0;
-  top: 0;
-  bottom: 0;
-
-  width: 17px;
-
-  pointer-events: none;
-
-  background:
-    linear-gradient(
-      90deg,
-      #372015,
-      #5a3523 45%,
-      #3d2418
-    );
-
-  box-shadow:
-    inset -2px 0 3px
-      rgba(15, 5, 2, 0.28);
-}
-
-.bookcase-content::after {
-  content: "";
-
-  position: absolute;
-
-  right: 0;
-  top: 0;
-  bottom: 0;
-
-  width: 17px;
-
-  pointer-events: none;
-
-  background:
-    linear-gradient(
-      270deg,
-      #372015,
-      #5a3523 45%,
-      #3d2418
-    );
-
-  box-shadow:
-    inset 2px 0 3px
-      rgba(15, 5, 2, 0.28);
-}
-
-/* ---------------------------------------------------------
-   BACK PANEL
-   --------------------------------------------------------- */
-
-.bookcase-back {
-  position: absolute;
-  inset: 0;
-
-  pointer-events: none;
-
-  background:
-    linear-gradient(
-      180deg,
-      rgba(19, 8, 4, 0.12),
-      rgba(17, 7, 4, 0.03) 20%,
-      rgba(18, 7, 3, 0.16) 100%
-    ),
-    repeating-linear-gradient(
-      90deg,
-      rgba(255, 198, 149, 0.022) 0,
-      rgba(255, 198, 149, 0.022) 1px,
-      transparent 1px,
-      transparent 8px
-    );
-}
-
-/* ---------------------------------------------------------
-   ROWS
-   --------------------------------------------------------- */
-
-.rows {
-  position: relative;
-  z-index: 2;
-
-  display: flex;
-  flex-direction: column;
-
-  gap: 44px;
-}
-
-/* ---------------------------------------------------------
-   BASE
-   --------------------------------------------------------- */
-
-.bookcase-base {
-  position: relative;
-  z-index: 5;
-
-  height: 27px;
-
-  border:
-    1px solid
-    rgba(26, 9, 4, 0.7);
-
-  border-radius:
-    0 0 5px 5px;
-
-  background:
-    linear-gradient(
-      180deg,
-      rgba(117, 70, 40, 0.56),
-      rgba(55, 30, 17, 0.72) 60%,
-      rgba(37, 17, 10, 0.88) 100%
-    ),
-    url("https://www.textures4photoshop.com/tex/thumbs/dark-wood-texture-seamless-free-thumb31.jpg");
-
-  background-size:
-    cover,
-    520px auto;
-
-  box-shadow:
-    inset 0 1px 0
-      rgba(255, 220, 185, 0.1),
-    inset 0 -4px 5px
-      rgba(16, 5, 2, 0.22),
-    0 19px 27px
-      rgba(26, 8, 3, 0.31);
-}
-
-/* =========================================================
-   MEDIA ROW
-   ========================================================= */
-
-.media-row {
-  min-width: 0;
-}
-
-.row-header {
-  display: flex;
-
-  justify-content: space-between;
-  align-items: center;
-
-  margin-bottom: 10px;
-}
-
-.row-title-group {
-  display: flex;
-  align-items: baseline;
-
-  gap: 8px;
-}
-
-.row-title-group h2 {
-  margin: 0;
-
-  color:
-    rgba(255, 238, 221, 0.85);
-
-  font-size: 14px;
-  line-height: 1;
-
-  font-weight: 650;
-
-  letter-spacing:
-    -0.2px;
-}
-
-.row-title-group > span {
-  color:
-    rgba(246, 220, 197, 0.3);
-
-  font-size: 9px;
-}
-
-/* ---------------------------------------------------------
-   ROW CONTROLS
-   --------------------------------------------------------- */
-
-.row-controls {
-  display: flex;
-  gap: 5px;
-}
-
-.shelf-control {
-  width: 29px;
-  height: 26px;
-
-  display: grid;
-  place-items: center;
-
-  padding: 0;
-
-  border:
-    1px solid
-    rgba(255, 226, 198, 0.1);
-
-  border-radius: 4px;
-
-  color:
-    rgba(255, 231, 211, 0.65);
-
-  background:
-    rgba(25, 11, 7, 0.3);
-
-  font-size: 18px;
-  line-height: 1;
-
-  cursor: pointer;
-
-  transition:
-    background 150ms ease,
-    border-color 150ms ease,
-    color 150ms ease,
-    transform 150ms ease;
-}
-
-.shelf-control:hover {
-  color: #fff2e7;
-
-  background:
-    rgba(42, 18, 10, 0.55);
-
-  border-color:
-    rgba(255, 224, 197, 0.17);
-}
-
-.shelf-control:active {
-  transform: scale(0.93);
-}
-
-/* =========================================================
-   PHYSICAL SHELF
-   ========================================================= */
-
-.shelf {
-  position: relative;
-}
-
-.shelf-interior {
-  position: relative;
-
-  overflow: hidden;
-
-  min-height: 270px;
-
-  padding:
-    14px 14px 22px;
-
-  background:
-    linear-gradient(
-      180deg,
-      rgba(25, 11, 7, 0.97),
-      rgba(45, 19, 11, 0.94) 42%,
-      rgba(24, 10, 7, 0.98) 100%
-    );
-
-  border-left:
-    1px solid
-    rgba(255, 221, 190, 0.06);
-
-  border-right:
-    1px solid
-    rgba(255, 221, 190, 0.06);
-
-  box-shadow:
-    inset 0 14px 24px
-      rgba(6, 2, 1, 0.27),
-    inset 0 -18px 27px
-      rgba(7, 2, 1, 0.3);
-}
-
-.shelf-interior::before {
-  content: "";
-
-  position: absolute;
-  inset: 0;
-
-  pointer-events: none;
-
-  background:
-    radial-gradient(
-      ellipse at 50% 7%,
-      rgba(195, 92, 43, 0.08),
-      transparent 30%
-    ),
-    repeating-linear-gradient(
-      90deg,
-      rgba(255, 183, 132, 0.018) 0,
-      rgba(255, 183, 132, 0.018) 1px,
-      transparent 1px,
-      transparent 9px
-    );
-}
-
-.shelf-scroll {
-  position: relative;
-  z-index: 2;
-
-  overflow-x: auto;
-  overflow-y: visible;
-
-  padding:
-    11px 5px 15px;
-
-  scrollbar-width: thin;
-
-  scrollbar-color:
-    rgba(255, 219, 188, 0.19)
-    transparent;
-
-  scroll-behavior: smooth;
-}
-
-.shelf-scroll::-webkit-scrollbar {
-  height: 6px;
-}
-
-.shelf-scroll::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-.shelf-scroll::-webkit-scrollbar-thumb {
-  border-radius: 999px;
-
-  background:
-    rgba(255, 219, 188, 0.15);
-}
-
-.shelf-scroll::-webkit-scrollbar-thumb:hover {
-  background:
-    rgba(255, 219, 188, 0.26);
-}
-
-/* ---------------------------------------------------------
-   MEDIA LINE
-   --------------------------------------------------------- */
-
-.media-line {
-  display: flex;
-  align-items: flex-end;
-
-  width: max-content;
-  min-width: 100%;
-
-  gap: 5px;
-
-  padding:
-    10px 8px 0;
-}
-
-/* =========================================================
-   NATURAL MEDIA VARIATION
-   ========================================================= */
-
-.media-object:nth-child(3n) {
-  margin-bottom: 1px;
-}
-
-.media-object:nth-child(5n) {
-  margin-bottom: 3px;
-}
-
-.media-object:nth-child(7n) {
-  transform: rotate(0.45deg);
-}
-
-.media-object:nth-child(9n) {
-  transform: rotate(-0.35deg);
-}
-
-.media-object:nth-child(11n) {
-  margin-bottom: 2px;
-}
-
-/* =========================================================
-   SHELF BOARD
-   ========================================================= */
-
-.shelf-board {
-  position: relative;
-  z-index: 5;
-
-  height: 19px;
-
-  background:
-    linear-gradient(
-      180deg,
-      rgba(137, 83, 48, 0.5),
-      rgba(65, 35, 20, 0.64) 52%,
-      rgba(42, 21, 12, 0.78) 100%
-    ),
-    url("https://www.textures4photoshop.com/tex/thumbs/dark-wood-texture-seamless-free-thumb31.jpg");
-
-  background-size:
-    cover,
-    520px auto;
-
-  border:
-    1px solid
-    rgba(26, 10, 4, 0.72);
-
-  border-radius:
-    0 0 3px 3px;
-
-  box-shadow:
-    inset 0 1px 0
-      rgba(255, 225, 191, 0.13),
-    inset 0 -2px 3px
-      rgba(17, 5, 2, 0.26),
-    0 8px 13px
-      rgba(19, 6, 2, 0.36);
-}
-
-/* =========================================================
-   MEDIA OBJECT
-   ========================================================= */
-
-.media-object {
-  appearance: none;
-
-  position: relative;
-
-  flex: 0 0 auto;
-
-  display: block;
-
-  padding: 0;
-
-  border: 0;
-
-  background: transparent;
-
-  cursor: pointer;
-
-  transform-origin: bottom center;
-
-  transition:
-    transform 180ms cubic-bezier(
-      0.2,
-      0.8,
-      0.2,
-      1
-    ),
-    filter 180ms ease;
-}
-
-/* ---------------------------------------------------------
-   UPRIGHT OBJECT
-   --------------------------------------------------------- */
-
-.orientation-spine {
-  width: var(--object-width);
-  height: var(--object-height);
-
-  --object-width: 66px;
-  --object-height: 212px;
-}
-
-/* ---------------------------------------------------------
-   HORIZONTAL OBJECT
-   --------------------------------------------------------- */
-
-.orientation-cover {
-  width: 164px;
-  height: 125px;
-
-  margin-bottom: 4px;
-}
-
-/* ---------------------------------------------------------
-   HOVER
-   --------------------------------------------------------- */
-
-.media-object:hover {
-  z-index: 20;
-
-  transform:
-    translateY(-18px)
-    rotate(-0.8deg);
-
-  filter:
-    brightness(1.08)
-    saturate(1.08);
-}
-
-/* Preserve intentionally crooked cases */
-.media-object:nth-child(7n):hover {
-  transform:
-    translateY(-18px)
-    rotate(0.45deg);
-}
-
-.media-object:nth-child(9n):hover {
-  transform:
-    translateY(-18px)
-    rotate(-0.35deg);
-}
-
-.media-object:active {
-  transform:
-    translateY(-10px)
-    scale(0.99);
-}
-
-/* =========================================================
-   MEDIA SURFACE
-   ========================================================= */
-
-.media-surface {
-  position: absolute;
-  inset: 0;
-
-  overflow: hidden;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-
-  padding:
-    13px 8px 9px;
-
-  border:
-    1px solid
-    rgba(0, 0, 0, 0.36);
-
-  border-radius: 2px;
-
-  background:
-    linear-gradient(
-      180deg,
-      #946747,
-      #583423 48%,
-      #2c170f 100%
-    );
-
-  box-shadow:
-    3px 5px 10px
-      rgba(12, 5, 2, 0.36),
-    inset 1px 0 0
-      rgba(255, 255, 255, 0.09),
-    inset -2px 0 0
-      rgba(0, 0, 0, 0.17);
-
-  transition:
-    box-shadow 180ms ease,
-    border-color 180ms ease;
-}
-
-.media-object:hover .media-surface {
-  border-color:
-    rgba(255, 222, 193, 0.25);
-
-  box-shadow:
-    5px 10px 16px
-      rgba(12, 5, 2, 0.45),
-    inset 1px 0 0
-      rgba(255, 255, 255, 0.14),
-    inset -2px 0 0
-      rgba(0, 0, 0, 0.12);
-}
-
-/* subtle case texture */
-.media-surface::after {
-  content: "";
-
-  position: absolute;
-  inset: 0;
-
-  pointer-events: none;
-
-  opacity: 0.23;
-
-  background:
-    repeating-linear-gradient(
-      90deg,
-      rgba(255, 255, 255, 0.018) 0,
-      rgba(255, 255, 255, 0.018) 1px,
-      transparent 1px,
-      transparent 6px
-    );
-}
-
-/* =========================================================
-   MEDIA CONTENT
-   ========================================================= */
-
-.media-logo {
-  align-self: flex-start;
-
-  position: relative;
-  z-index: 2;
-
-  color:
-    rgba(255, 245, 233, 0.52);
-
-  font-size: 6px;
-  font-weight: 800;
-
-  letter-spacing: 1px;
-}
-
-.media-title {
-  position: relative;
-  z-index: 2;
-
-  max-width: 95%;
-
-  color:
-    rgba(255, 246, 237, 0.96);
-
-  font-size: 12px;
-  line-height: 1.02;
-
-  font-weight: 700;
-
-  letter-spacing:
-    -0.15px;
-
-  writing-mode:
-    vertical-rl;
-
-  transform:
-    rotate(180deg);
-
-  text-align: left;
-
-  text-shadow:
-    0 1px 4px
-      rgba(0, 0, 0, 0.31);
-}
-
-.media-bottom {
-  position: relative;
-  z-index: 2;
-
-  width: 100%;
-
-  display: flex;
-  justify-content: space-between;
-
-  color:
-    rgba(255, 239, 223, 0.48);
-
-  font-size: 6px;
-  font-weight: 600;
-
-  letter-spacing:
-    0.4px;
-}
-
-/* =========================================================
-   VHS
-   ========================================================= */
-
-.format-vhs {
-  --object-width: 71px;
-  --object-height: 214px;
-}
-
-.format-vhs .media-surface {
-  border-radius:
-    2px;
-
-  background:
-    linear-gradient(
-      165deg,
-      #bd6840 0%,
-      #733823 46%,
-      #25130e 100%
-    );
-}
-
-.format-vhs .media-surface::before {
-  content: "";
-
-  position: absolute;
-
-  top: 0;
-  left: 7px;
-  right: 7px;
-
-  height: 15px;
-
-  border-bottom:
-    1px solid
-    rgba(255, 255, 255, 0.1);
-
-  background:
-    linear-gradient(
-      180deg,
-      rgba(255, 255, 255, 0.11),
-      transparent
-    );
-}
-
-.format-vhs .media-title {
-  font-size: 13px;
-}
-
-/* =========================================================
-   DVD
-   ========================================================= */
-
-.format-dvd {
-  --object-width: 61px;
-  --object-height: 207px;
-}
-
-.format-dvd .media-surface {
-  background:
-    linear-gradient(
-      165deg,
-      #95704a 0%,
-      #5b3929 50%,
-      #281713 100%
-    );
-}
-
-.format-dvd .media-title {
-  font-size: 11px;
-}
-
-/* =========================================================
-   BLU-RAY
-   ========================================================= */
-
-.format-bluray {
-  --object-width: 57px;
-  --object-height: 210px;
-}
-
-.format-bluray .media-surface {
-  background:
-    linear-gradient(
-      165deg,
-      #5d819b 0%,
-      #304d65 48%,
-      #111e29 100%
-    );
-}
-
-.format-bluray .media-title {
-  font-size: 10px;
-}
-
-.format-bluray .media-surface::before {
-  content: "";
-
-  position: absolute;
-
-  top: 19px;
-  left: 0;
-  right: 0;
-
-  height: 1px;
-
-  background:
-    rgba(255, 255, 255, 0.08);
-}
-
-/* =========================================================
-   LASERDISC
-   ========================================================= */
-
-.format-laserdisc {
-  --object-width: 83px;
-  --object-height: 211px;
-}
-
-.format-laserdisc .media-surface {
-  background:
-    linear-gradient(
-      165deg,
-      #9a6654 0%,
-      #5b3930 45%,
-      #261715 100%
-    );
-}
-
-.format-laserdisc .media-title {
-  font-size: 12px;
-}
-
-/* =========================================================
-   NES
-   ========================================================= */
-
-.format-nes {
-  --object-width: 74px;
-  --object-height: 196px;
-}
-
-.format-nes .media-surface {
-  border-radius:
-    5px 5px 2px 2px;
-
-  background:
-    linear-gradient(
-      165deg,
-      #c4bcae 0%,
-      #938b7d 48%,
-      #504b44 100%
-    );
-}
-
-.format-nes .media-title {
-  color: #2c2925;
-
-  text-shadow: none;
-}
-
-.format-nes .media-logo,
-.format-nes .media-bottom {
-  color:
-    rgba(35, 30, 26, 0.62);
-}
-
-/* =========================================================
-   PS1
-   ========================================================= */
-
-.format-ps1 {
-  --object-width: 67px;
-  --object-height: 200px;
-}
-
-.format-ps1 .media-surface {
-  background:
-    linear-gradient(
-      165deg,
-      #908a9b 0%,
-      #514e60 48%,
-      #22242b 100%
-    );
-}
-
-.format-ps1 .media-title {
-  font-size: 11px;
-}
-
-/* =========================================================
-   XBOX 360
-   ========================================================= */
-
-.format-xbox360 {
-  --object-width: 69px;
-  --object-height: 203px;
-}
-
-.format-xbox360 .media-surface {
-  background:
-    linear-gradient(
-      165deg,
-      #748e68 0%,
-      #40543b 48%,
-      #1a2418 100%
-    );
-}
-
-/* =========================================================
-   HORIZONTAL COVERS
-   ========================================================= */
-
-.orientation-cover {
-  perspective: 900px;
-}
-
-.orientation-cover .media-surface {
-  padding: 14px;
-
-  align-items: flex-start;
-
-  justify-content: flex-end;
-
-  border-radius: 3px;
-
-  background:
-    linear-gradient(
-      145deg,
-      #a66c49,
-      #593126 62%,
-      #28130d
-    );
-
-  box-shadow:
-    5px 8px 13px
-      rgba(12, 5, 2, 0.33),
-    inset 1px 0 0
-      rgba(255, 255, 255, 0.1);
-}
-
-.orientation-cover:hover .media-surface {
-  box-shadow:
-    8px 12px 18px
-      rgba(12, 5, 2, 0.43),
-    inset 1px 0 0
-      rgba(255, 255, 255, 0.14);
-}
-
-.orientation-cover .media-title {
-  writing-mode:
-    initial;
-
-  transform: none;
-
-  max-width: 100%;
-
-  font-size: 17px;
-  line-height: 0.95;
-
-  letter-spacing:
-    -0.6px;
-}
-
-.orientation-cover .media-logo {
-  position: absolute;
-
-  top: 10px;
-  left: 11px;
-}
-
-.orientation-cover .media-bottom {
-  margin-top: 7px;
-}
-
-.cover-glare {
-  position: absolute;
-  inset: 1px;
-
-  pointer-events: none;
-
-  border-radius: 2px;
-
-  background:
-    linear-gradient(
-      130deg,
-      rgba(255, 255, 255, 0.12),
-      transparent 35%
-    );
-
-  opacity: 0.4;
-}
-
-/* =========================================================
-   ROOM LIGHTING
-   ========================================================= */
-
-.room-glow {
-  position: absolute;
-  z-index: 1;
-
-  width: 430px;
-  height: 430px;
-
-  border-radius: 50%;
-
-  pointer-events: none;
-
-  filter:
-    blur(82px);
-
-  opacity: 0.13;
-}
-
-.room-glow-left {
-  left: -190px;
-  top: 290px;
-
-  background:
-    #ed8b40;
-}
-
-.room-glow-right {
-  right: -170px;
-  top: 560px;
-
-  background:
-    #617ba8;
-}
-
-/* =========================================================
-   DETAIL VIEW
-   ========================================================= */
-
-.detail-backdrop {
-  position: fixed;
-  inset: 0;
-
-  z-index: 300;
-
-  display: grid;
-  place-items: center;
-
-  padding: 30px;
-
-  background:
-    rgba(13, 6, 3, 0.74);
-
-  backdrop-filter:
-    blur(10px);
-
-  animation:
-    detailFade 180ms ease;
-}
-
-.media-detail {
-  position: relative;
-
-  width:
-    min(900px, 100%);
-
-  display: grid;
-
-  grid-template-columns:
-    345px minmax(0, 1fr);
-
-  overflow: hidden;
-
-  border:
-    1px solid
-    rgba(255, 226, 200, 0.13);
-
-  border-radius: 8px;
-
-  background:
-    linear-gradient(
-      135deg,
-      #4f2a1d,
-      #26140e
-    );
-
-  box-shadow:
-    0 40px 90px
-      rgba(0, 0, 0, 0.52);
-}
-
-/* =========================================================
-   DETAIL CLOSE
-   ========================================================= */
-
-.detail-close {
-  position: absolute;
-
-  z-index: 5;
-
-  top: 14px;
-  right: 14px;
-
-  width: 31px;
-  height: 31px;
-
-  display: grid;
-  place-items: center;
-
-  border:
-    1px solid
-    rgba(255, 236, 220, 0.13);
-
-  border-radius: 50%;
-
-  color:
-    rgba(255, 239, 225, 0.78);
-
-  background:
-    rgba(20, 9, 5, 0.45);
-
-  font-size: 19px;
-  line-height: 1;
-
-  cursor: pointer;
-
-  transition:
-    color 150ms ease,
-    background 150ms ease,
-    transform 150ms ease;
-}
-
-.detail-close:hover {
-  color: white;
-
-  background:
-    rgba(20, 9, 5, 0.7);
-
-  transform:
-    rotate(4deg);
-}
-
-/* =========================================================
-   DETAIL COVER
-   ========================================================= */
-
-.detail-cover {
-  min-height: 510px;
-
-  position: relative;
-
-  display: flex;
-  flex-direction: column;
-
-  justify-content: space-between;
-
-  padding: 27px;
-
-  overflow: hidden;
-
-  background:
-    linear-gradient(
-      145deg,
-      #a66a45,
-      #643524 52%,
-      #25130c
-    );
-}
-
-.detail-cover::before {
-  content: "";
-
-  position: absolute;
-  inset: 0;
-
-  pointer-events: none;
-
-  background:
-    radial-gradient(
-      circle at 25% 18%,
-      rgba(255, 255, 255, 0.12),
-      transparent 26%
-    ),
-    radial-gradient(
-      circle at 82% 78%,
-      rgba(0, 0, 0, 0.24),
-      transparent 35%
-    );
-}
-
-.detail-cover::after {
-  content: "";
-
-  position: absolute;
-  inset: 0;
-
-  pointer-events: none;
-
-  opacity: 0.35;
-
-  background:
-    repeating-linear-gradient(
-      90deg,
-      rgba(255, 255, 255, 0.022) 0,
-      rgba(255, 255, 255, 0.022) 1px,
-      transparent 1px,
-      transparent 7px
-    );
-}
-
-.cover-type,
-.cover-title,
-.cover-year {
-  position: relative;
-  z-index: 2;
-}
-
-.cover-type {
-  align-self: flex-start;
-
-  padding:
-    5px 8px;
-
-  border:
-    1px solid
-    rgba(255, 246, 236, 0.18);
-
-  border-radius: 3px;
-
-  color:
-    rgba(255, 243, 231, 0.73);
-
-  font-size: 8px;
-  font-weight: 700;
-
-  letter-spacing: 1px;
-}
-
-.cover-title {
-  max-width: 280px;
-
-  color:
-    rgba(255, 249, 242, 0.95);
-
-  font-size: 47px;
-  line-height: 0.92;
-
-  font-weight: 700;
-
-  letter-spacing:
-    -2px;
-
-  text-shadow:
-    0 3px 14px
-      rgba(0, 0, 0, 0.3);
-}
-
-.cover-year {
-  color:
-    rgba(255, 239, 224, 0.53);
-
-  font-size: 11px;
-}
-
-/* =========================================================
-   DETAIL INFO
-   ========================================================= */
-
-.detail-info {
-  padding:
-    51px 44px 42px;
-}
-
-.detail-eyebrow {
-  margin-bottom: 11px;
-
-  color:
-    rgba(255, 209, 176, 0.45);
-
-  font-size: 8px;
-  font-weight: 700;
-
-  letter-spacing:
-    1.5px;
-}
-
-.detail-info h2 {
-  margin: 0;
-
-  color: #f4e9df;
-
-  font-size: 39px;
-  line-height: 1;
-
-  letter-spacing:
-    -1.5px;
-}
-
-.detail-meta {
-  display: flex;
-  flex-wrap: wrap;
-
-  gap: 7px;
-
-  margin-top: 16px;
-}
-
-.detail-meta span {
-  padding:
-    5px 8px;
-
-  border:
-    1px solid
-    rgba(255, 224, 199, 0.08);
-
-  border-radius: 4px;
-
-  color:
-    rgba(255, 231, 212, 0.58);
-
-  background:
-    rgba(255, 225, 200, 0.025);
-
-  font-size: 8px;
-}
-
-.detail-divider {
-  height: 1px;
-
-  margin:
-    28px 0 23px;
-
-  background:
-    linear-gradient(
-      90deg,
-      rgba(255, 222, 193, 0.13),
-      transparent
-    );
-}
-
-.detail-info p {
-  margin: 0;
-
-  color:
-    rgba(246, 226, 210, 0.63);
-
-  font-size: 12px;
-  line-height: 1.8;
-}
-
-.detail-facts {
-  display: grid;
-
-  grid-template-columns:
-    repeat(3, 1fr);
-
-  gap: 8px;
-
-  margin-top: 31px;
-}
-
-.detail-facts div {
-  display: flex;
-  flex-direction: column;
-
-  gap: 5px;
-
-  padding: 11px;
-
-  border:
-    1px solid
-    rgba(255, 224, 198, 0.07);
-
-  border-radius: 4px;
-
-  background:
-    rgba(255, 220, 192, 0.02);
-}
-
-.detail-facts span {
-  color:
-    rgba(255, 219, 191, 0.36);
-
-  font-size: 7px;
-  font-weight: 700;
-
-  letter-spacing:
-    0.9px;
-
-  text-transform:
-    uppercase;
-}
-
-.detail-facts strong {
-  color:
-    rgba(255, 239, 225, 0.73);
-
-  font-size: 9px;
-  font-weight: 500;
-}
-
-/* =========================================================
-   ANIMATIONS
-   ========================================================= */
-
-@keyframes detailFade {
-  from {
-    opacity: 0;
-  }
-
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes detailOpen {
-  from {
-    opacity: 0;
-
-    transform:
-      translateY(14px)
-      scale(0.98);
-  }
-
-  to {
-    opacity: 1;
-
-    transform:
-      translateY(0)
-      scale(1);
-  }
-}
-
-/* =========================================================
-   LARGE DESKTOP COMPOSITION
-   ========================================================= */
-
-@media (min-width: 1051px) {
-
-  /* =======================================================
-     ROOM / BOOKCASE
-     ======================================================= */
-
-  .room-content {
-    min-height: 100vh;
-
-    padding:
-      148px
-      0
-      140px;
-  }
-
-  /*
-   * Intentionally narrower than the previous 1550px version.
-   * This keeps the bookshelf substantial while leaving
-   * visible room/wall space around it.
-   */
-  .library {
-    width:
-      min(1375px, calc(100% - 120px));
-  }
-
-  .bookcase {
-    width: 100%;
-
-    filter:
-      drop-shadow(
-        0 25px 27px
-        rgba(24, 7, 2, 0.27)
-      );
-  }
-
-  /* =======================================================
-     BOOKCASE
-     ======================================================= */
-
-  .bookcase-top {
-    height: 31px;
-  }
-
-  .bookcase-content {
-    padding:
-      30px
-      30px
-      40px;
-
-    border-left-width: 20px;
-    border-right-width: 20px;
-  }
-
-  .bookcase-content::before,
-  .bookcase-content::after {
-    width: 20px;
-  }
-
-  .bookcase-base {
-    height: 31px;
-  }
-
-  /* =======================================================
-     ROWS
-     ======================================================= */
-
-  .rows {
-    gap: 48px;
-  }
-
-  .row-header {
-    margin-bottom: 13px;
-  }
-
-  .row-title-group {
-    gap: 10px;
-  }
-
-  .row-title-group h2 {
-    font-size: 16px;
-  }
-
-  .row-title-group > span {
-    font-size: 10px;
-  }
-
-  /* =======================================================
-     SHELF
-     ======================================================= */
-
-  .shelf-interior {
-    min-height: 320px;
-
-    padding:
-      18px
-      18px
-      26px;
-  }
-
-  .shelf-scroll {
-    padding:
-      13px
-      6px
-      17px;
-  }
-
-  .media-line {
-    gap: 6px;
-
-    padding:
-      12px
-      10px
-      0;
-  }
-
-  .shelf-board {
-    height: 22px;
-  }
-
-  /* =======================================================
-     SHELF CONTROLS
-     ======================================================= */
-
-  .row-controls {
-    gap: 6px;
-  }
-
-  .shelf-control {
-    width: 34px;
-    height: 31px;
-
-    font-size: 21px;
-  }
-
-  /* =======================================================
-     MEDIA
-     ======================================================= */
-
-  .orientation-spine {
-    --object-width: 78px;
-    --object-height: 252px;
-  }
-
-  .format-vhs {
-    --object-width: 84px;
-    --object-height: 255px;
-  }
-
-  .format-dvd {
-    --object-width: 72px;
-    --object-height: 248px;
-  }
-
-  .format-bluray {
-    --object-width: 67px;
-    --object-height: 251px;
-  }
-
-  .format-laserdisc {
-    --object-width: 98px;
-    --object-height: 253px;
-  }
-
-  .format-nes {
-    --object-width: 87px;
-    --object-height: 233px;
-  }
-
-  .format-ps1 {
-    --object-width: 79px;
-    --object-height: 238px;
-  }
-
-  .format-xbox360 {
-    --object-width: 82px;
-    --object-height: 242px;
-  }
-
-  /* =======================================================
-     MEDIA TYPOGRAPHY
-     ======================================================= */
-
-  .media-surface {
-    padding:
-      16px
-      10px
-      11px;
-  }
-
-  .media-logo {
-    font-size: 7px;
-    letter-spacing: 1.2px;
-  }
-
-  .media-bottom {
-    font-size: 7px;
-  }
-
-  .format-vhs .media-title {
-    font-size: 15px;
-  }
-
-  .format-dvd .media-title {
-    font-size: 13px;
-  }
-
-  .format-bluray .media-title {
-    font-size: 11px;
-  }
-
-  .format-laserdisc .media-title {
-    font-size: 14px;
-  }
-
-  .format-nes .media-title {
-    font-size: 14px;
-  }
-
-  .format-ps1 .media-title {
-    font-size: 13px;
-  }
-
-  .format-xbox360 .media-title {
-    font-size: 13px;
-  }
-
-  /* =======================================================
-     HORIZONTAL MEDIA
-     ======================================================= */
-
-  .orientation-cover {
-    width: 198px;
-    height: 151px;
-
-    margin-bottom: 5px;
-  }
-
-  .orientation-cover .media-surface {
-    padding: 16px;
-  }
-
-  .orientation-cover .media-title {
-    font-size: 20px;
-  }
-
-  .orientation-cover .media-logo {
-    top: 13px;
-    left: 13px;
-  }
-
-  /* =======================================================
-     MEDIA HOVER
-     ======================================================= */
-
-  .media-object:hover {
-    transform:
-      translateY(-20px)
-      rotate(-0.8deg);
-  }
-
-  .media-object:nth-child(7n):hover {
-    transform:
-      translateY(-20px)
-      rotate(0.45deg);
-  }
-
-  .media-object:nth-child(9n):hover {
-    transform:
-      translateY(-20px)
-      rotate(-0.35deg);
-  }
-
-  /* =======================================================
-     HEADER
-     ======================================================= */
-
-  .site-header {
-    height: 100px;
-  }
-
-  .header-inner {
-    padding:
-      0 38px;
-  }
-
-  .brand-console {
-    height: 62px;
-
-    gap: 16px;
-
-    padding:
-      0 22px
-      0 16px;
-  }
-
-  .brand-light {
-    width: 9px;
-    height: 9px;
-  }
-
-  .brand-mark {
-    font-size: 23px;
-
-    letter-spacing:
-      -1px;
-  }
-
-  .brand-caption {
-    padding-left: 16px;
-
-    font-size: 10px;
-    letter-spacing: 1.3px;
-  }
-
-  .main-nav {
-    gap: 10px;
-  }
-
-  .nav-item {
-    min-width: 108px;
-    height: 58px;
-
-    padding:
-      0 21px;
-
-    font-size: 15px;
-  }
-
-  .nav-indicator {
-    bottom: 6px;
-  }
-
-  .nav-item.active .nav-indicator {
-    width: 27px;
-  }
-
-
-
-  /* =========================================================
    HEADER ADD MEDIA
    ========================================================= */
 
@@ -2331,7 +485,8 @@
 
   gap: 8px;
 
-  padding: 0 18px;
+  padding:
+    0 18px;
 
   border:
     1px solid
@@ -2358,6 +513,7 @@
       rgba(26, 8, 3, 0.16);
 
   font-size: 14px;
+
   font-weight: 600;
 
   cursor: pointer;
@@ -2369,8 +525,10 @@
     transform 160ms ease;
 }
 
+
 .header-add-media:hover {
-  color: #fff4e9;
+  color:
+    #fff4e9;
 
   border-color:
     rgba(245, 211, 181, 0.23);
@@ -2386,10 +544,12 @@
     translateY(-1px);
 }
 
+
 .header-add-media:active {
   transform:
     translateY(1px);
 }
+
 
 .header-add-icon {
   display: inline-flex;
@@ -2407,626 +567,2225 @@
   line-height: 1;
 }
 
-  /* =======================================================
-     DETAIL VIEW
-     ======================================================= */
 
-  .media-detail {
-    width:
-      min(1080px, calc(100% - 60px));
+/* =========================================================
+   ROOM CONTENT
+   ========================================================= */
 
-    grid-template-columns:
-      420px
-      minmax(0, 1fr);
-  }
+.room-content {
+  position: relative;
+  z-index: 1;
 
-  .detail-cover {
-    min-height: 620px;
+  min-height:
+    100vh;
 
-    padding: 33px;
-  }
+  padding:
+    148px
+    0
+    140px;
+}
 
-  .cover-type {
-    padding:
-      6px
-      10px;
 
-    font-size: 10px;
-  }
+.library {
+  position: relative;
+  z-index: 3;
 
-  .cover-title {
-    max-width: 340px;
+  width:
+    80vw;
 
-    font-size: 57px;
-  }
+  max-width:
+    none;
 
-  .cover-year {
-    font-size: 13px;
-  }
-
-  .detail-info {
-    padding:
-      62px
-      54px
-      50px;
-  }
-
-  .detail-eyebrow {
-    font-size: 10px;
-  }
-
-  .detail-info h2 {
-    font-size: 48px;
-  }
-
-  .detail-meta {
-    gap: 9px;
-
-    margin-top: 19px;
-  }
-
-  .detail-meta span {
-    padding:
-      6px
-      10px;
-
-    font-size: 10px;
-  }
-
-  .detail-info p {
-    font-size: 15px;
-    line-height: 1.75;
-  }
-
-  .detail-facts {
-    gap: 10px;
-
-    margin-top: 38px;
-  }
-
-  .detail-facts div {
-    padding: 14px;
-  }
-
-  .detail-facts span {
-    font-size: 9px;
-  }
-
-  .detail-facts strong {
-    font-size: 11px;
-  }
+  margin:
+    0 auto;
 }
 
 
 /* =========================================================
-   MEDIUM DESKTOP / TABLET
+   BOOKCASE
    ========================================================= */
 
-@media (min-width: 761px) and (max-width: 1380px) {
+.bookcase {
+  position: relative;
 
-  .room-content {
-    min-height: 100vh;
+  width: 100%;
 
-    padding:
-      132px
-      0
-      110px;
-  }
-
-  .library {
-    width:
-      min(1190px, calc(100% - 54px));
-  }
-
-  .site-header {
-    height: 90px;
-  }
-
-  .header-inner {
-    padding:
-      0 24px;
-  }
-
-  .brand-console {
-    height: 54px;
-  }
-
-  .brand-mark {
-    font-size: 19px;
-  }
-
-  .brand-caption {
-    display: none;
-  }
-
-  .main-nav {
-    gap: 5px;
-  }
-
-  .nav-item {
-    min-width: 80px;
-    height: 48px;
-
-    padding:
-      0 12px;
-
-    font-size: 12px;
-  }
-
-  .header-status {
-    display: none;
-  }
-
-  .bookcase-top,
-  .bookcase-base {
-    height: 24px;
-  }
-
-  .bookcase-content {
-    padding:
-      22px
-      22px
-      30px;
-
-    border-left-width: 14px;
-    border-right-width: 14px;
-  }
-
-  .bookcase-content::before,
-  .bookcase-content::after {
-    width: 14px;
-  }
-
-  .rows {
-    gap: 38px;
-  }
-
-  .shelf-interior {
-    min-height: 280px;
-  }
-
-  .orientation-spine {
-    --object-width: 70px;
-    --object-height: 225px;
-  }
-
-  .format-vhs {
-    --object-width: 76px;
-    --object-height: 228px;
-  }
-
-  .format-dvd {
-    --object-width: 65px;
-    --object-height: 223px;
-  }
-
-  .format-bluray {
-    --object-width: 61px;
-    --object-height: 226px;
-  }
-
-  .format-laserdisc {
-    --object-width: 87px;
-    --object-height: 226px;
-  }
-
-  .format-nes {
-    --object-width: 78px;
-    --object-height: 210px;
-  }
-
-  .format-ps1 {
-    --object-width: 71px;
-    --object-height: 215px;
-  }
-
-  .format-xbox360 {
-    --object-width: 73px;
-    --object-height: 219px;
-  }
-
-  .orientation-cover {
-    width: 175px;
-    height: 133px;
-  }
+  filter:
+    drop-shadow(
+      0 30px 40px
+      rgba(12, 3, 1, 0.46)
+    );
 }
 
 
 /* =========================================================
-   MOBILE
+   BOOKCASE TOP
    ========================================================= */
 
-@media (max-width: 760px) {
+.bookcase-top {
+  position: relative;
+  z-index: 5;
 
-  .site-header {
-    height: 64px;
-  }
+  height: 38px;
 
-  .header-inner {
-    width: 100%;
+  border:
+    1px solid
+    rgba(30, 12, 5, 0.78);
 
-    padding:
-      0 12px;
-
-    grid-template-columns:
-      1fr auto;
-  }
-
-  .brand-console {
-    height: 40px;
-
-    gap: 8px;
-
-    padding:
-      0 10px;
-  }
-
-  .brand-light {
-    width: 5px;
-    height: 5px;
-  }
-
-  .brand-mark {
-    font-size: 13px;
-  }
-
-  .brand-caption {
-    display: none;
-  }
-
-  .header-status {
-    display: none;
-  }
-
-  .main-nav {
-    gap: 1px;
-  }
-
-  .nav-item {
-    min-width: 0;
-
-    height: 37px;
-
-    padding:
-      0 7px;
-
-    font-size: 9px;
-  }
-
-  .nav-indicator {
-    bottom: 3px;
-  }
-
-  .room-content {
-    min-height: 100vh;
-
-    padding:
-      94px
-      0
-      80px;
-  }
-
-  .library {
-    width:
-      calc(100% - 24px);
-  }
-
-  .bookcase-content {
-    padding:
-      16px
-      11px
-      25px;
-
-    border-left-width: 8px;
-    border-right-width: 8px;
-  }
-
-  .bookcase-content::before,
-  .bookcase-content::after {
-    width: 8px;
-  }
-
-  .bookcase-top,
-  .bookcase-base {
-    height: 18px;
-  }
-
-  .shelf-interior {
-    min-height: 225px;
-
-    padding:
-      11px
-      8px
-      20px;
-  }
-
-  .rows {
-    gap: 30px;
-  }
-
-  .format-vhs {
-    --object-width: 64px;
-    --object-height: 187px;
-  }
-
-  .format-dvd {
-    --object-width: 56px;
-    --object-height: 181px;
-  }
-
-  .format-bluray {
-    --object-width: 52px;
-    --object-height: 184px;
-  }
-
-  .format-laserdisc {
-    --object-width: 72px;
-    --object-height: 186px;
-  }
-
-  .format-nes {
-    --object-width: 65px;
-    --object-height: 174px;
-  }
-
-  .format-ps1 {
-    --object-width: 59px;
-    --object-height: 178px;
-  }
-
-  .format-xbox360 {
-    --object-width: 61px;
-    --object-height: 181px;
-  }
-
-  .orientation-cover {
-    width: 145px;
-    height: 108px;
-  }
-
-  .shelf-control {
-    width: 26px;
-    height: 24px;
-
-    font-size: 17px;
-  }
-
-  .media-detail {
-    width:
-      min(860px, calc(100% - 20px));
-
-    grid-template-columns:
-      1fr;
-
-    max-height:
-      calc(100vh - 20px);
-
-    overflow-y: auto;
-  }
-
-  .detail-cover {
-    min-height: 320px;
-  }
-
-  .detail-info {
-    padding:
-      31px
-      25px
-      30px;
-  }
-
-  .detail-facts {
-    grid-template-columns:
-      1fr;
-  }
-
-  .header-add-media {
-  min-width: 0;
-
-  width: 42px;
-  height: 37px;
-
-  padding: 0;
-
-  gap: 0;
-}
-
-.header-add-media > span:last-child {
-  display: none;
-}
-
-.header-add-icon {
-  font-size: 18px;
-}
-}
-
-
-/* =========================================================
-   SMALL MOBILE
-   ========================================================= */
-
-@media (max-width: 470px) {
-
-  .header-inner {
-    padding:
-      0 9px;
-  }
-
-  .brand-console {
-    border: 0;
-
-    background:
-      transparent;
-
-    box-shadow: none;
-
-    padding-left: 2px;
-    padding-right: 2px;
-  }
-
-  .brand-console:hover {
-    background:
-      transparent;
-
-    transform: none;
-  }
-
-  .brand-mark {
-    font-size: 12px;
-  }
-
-  .nav-item {
-    padding-inline:
-      5px;
-
-    font-size: 8px;
-  }
-
-  .library {
-    width:
-      calc(100% - 14px);
-  }
-
-  .bookcase-content {
-    padding:
-      11px
-      6px
-      20px;
-  }
-
-  .shelf-interior {
-    padding-inline: 4px;
-  }
-
-  .shelf-control {
-    width: 23px;
-    height: 22px;
-  }
-
-  .media-line {
-    gap: 4px;
-  }
-
-  .detail-backdrop {
-    padding: 10px;
-  }
-
-  .detail-info h2 {
-    font-size: 30px;
-  }
-
-  .cover-title {
-    font-size: 36px;
-  }
-}
-
-
-/* =========================================================
-   REDUCED MOTION
-   ========================================================= */
-
-@media (prefers-reduced-motion: reduce) {
-
-  *,
-  *::before,
-  *::after {
-    scroll-behavior: auto !important;
-
-    transition-duration:
-      0.01ms !important;
-
-    animation-duration:
-      0.01ms !important;
-
-    animation-iteration-count:
-      1 !important;
-  }
-}
-
-/* =========================================================
-   LIBRARY CONTROLS
-   ========================================================= */
-
-.library-controls {
-  display: flex;
-  justify-content: flex-end;
-
-  margin-bottom: 14px;
-}
-
-.add-button {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-
-  padding: 11px 16px;
-
-  border: 1px solid
-    rgba(255, 226, 198, 0.16);
-
-  border-radius: 5px;
-
-  color:
-    rgba(255, 238, 222, 0.86);
+  border-radius:
+    5px 5px 2px 2px;
 
   background:
     linear-gradient(
       180deg,
-      rgba(163, 96, 53, 0.4),
-      rgba(73, 38, 24, 0.43)
-    );
+      rgba(153, 92, 53, 0.66),
+      rgba(96, 49, 27, 0.78) 45%,
+      rgba(48, 22, 12, 0.94) 100%
+    ),
+    url("https://www.textures4photoshop.com/tex/thumbs/dark-wood-texture-seamless-free-thumb31.jpg");
+
+  background-size:
+    cover,
+    520px auto;
+
+  background-position:
+    center,
+    center;
 
   box-shadow:
-    inset 0 1px 0
-      rgba(255, 234, 216, 0.07),
-    0 5px 14px
-      rgba(38, 10, 3, 0.17);
+    inset 0 2px 0
+      rgba(255, 232, 205, 0.18),
+    inset 0 -4px 5px
+      rgba(20, 5, 2, 0.32),
+    0 10px 20px
+      rgba(18, 5, 2, 0.38);
+}
 
-  font-size: 11px;
-  font-weight: 600;
+
+.bookcase-top::before {
+  content: "";
+
+  position: absolute;
+
+  left: 12px;
+  right: 12px;
+  top: 5px;
+
+  height: 5px;
+
+  border-radius: 2px;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 235, 210, 0.13),
+      rgba(255, 235, 210, 0)
+    );
+
+  pointer-events: none;
+}
+
+
+.bookcase-top::after {
+  content: "";
+
+  position: absolute;
+
+  left: 14px;
+  right: 14px;
+  bottom: 4px;
+
+  height: 1px;
+
+  background:
+    rgba(255, 219, 184, 0.13);
+}
+
+
+/* =========================================================
+   MAIN CABINET BODY
+   ========================================================= */
+
+.bookcase-content {
+  position: relative;
+
+  padding:
+    28px
+    32px
+    42px;
+
+  border-left:
+    28px solid
+    #442419;
+
+  border-right:
+    28px solid
+    #442419;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(73, 37, 22, 0.96),
+      rgba(43, 20, 11, 0.82) 9%,
+      rgba(34, 15, 8, 0.77) 50%,
+      rgba(43, 20, 11, 0.82) 91%,
+      rgba(73, 37, 22, 0.96)
+    ),
+    url("https://www.textures4photoshop.com/tex/thumbs/dark-wood-texture-seamless-free-thumb31.jpg");
+
+  background-size:
+    cover,
+    700px auto;
+
+  background-position:
+    center,
+    center;
+
+  box-shadow:
+    inset 17px 0 30px
+      rgba(10, 3, 1, 0.4),
+    inset -17px 0 30px
+      rgba(10, 3, 1, 0.4),
+    inset 0 24px 40px
+      rgba(12, 3, 1, 0.2),
+    inset 0 -22px 32px
+      rgba(12, 3, 1, 0.18);
+}
+
+
+/* =========================================================
+   SIDE POSTS
+   ========================================================= */
+
+.bookcase-content::before,
+.bookcase-content::after {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  bottom: 0;
+
+  width: 28px;
+
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      90deg,
+      #32190f 0%,
+      #5a3420 30%,
+      #70432a 50%,
+      #5a3420 70%,
+      #32190f 100%
+    ),
+    url("https://www.textures4photoshop.com/tex/thumbs/dark-wood-texture-seamless-free-thumb31.jpg");
+
+  background-size:
+    cover,
+    240px auto;
+
+  background-position:
+    center,
+    center;
+}
+
+
+.bookcase-content::before {
+  left: 0;
+
+  box-shadow:
+    inset -5px 0 8px
+      rgba(12, 3, 1, 0.42),
+    4px 0 8px
+      rgba(10, 3, 1, 0.14);
+}
+
+
+.bookcase-content::after {
+  right: 0;
+
+  box-shadow:
+    inset 5px 0 8px
+      rgba(12, 3, 1, 0.42),
+    -4px 0 8px
+      rgba(10, 3, 1, 0.14);
+}
+
+
+/* =========================================================
+   BACK PANEL
+   ========================================================= */
+
+.bookcase-back {
+  position: absolute;
+  inset: 0;
+
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(59, 29, 17, 0.16),
+      rgba(34, 15, 8, 0.09) 42%,
+      rgba(20, 7, 4, 0.3) 100%
+    ),
+    repeating-linear-gradient(
+      90deg,
+      rgba(255, 198, 149, 0.02) 0,
+      rgba(255, 198, 149, 0.02) 1px,
+      transparent 1px,
+      transparent 9px
+    );
+}
+
+
+/* =========================================================
+   ROWS
+   ========================================================= */
+
+.rows {
+  position: relative;
+  z-index: 2;
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 62px;
+}
+
+
+/* =========================================================
+   BOOKCASE BASE
+   ========================================================= */
+
+.bookcase-base {
+  position: relative;
+  z-index: 5;
+
+  height: 38px;
+
+  border:
+    1px solid
+    rgba(26, 9, 4, 0.78);
+
+  border-radius:
+    0 0 5px 5px;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(143, 85, 47, 0.68),
+      rgba(78, 38, 21, 0.8) 52%,
+      rgba(37, 16, 9, 0.96) 100%
+    ),
+    url("https://www.textures4photoshop.com/tex/thumbs/dark-wood-texture-seamless-free-thumb31.jpg");
+
+  background-size:
+    cover,
+    520px auto;
+
+  background-position:
+    center,
+    center;
+
+  box-shadow:
+    inset 0 2px 0
+      rgba(255, 227, 195, 0.15),
+    inset 0 -5px 7px
+      rgba(12, 3, 1, 0.34),
+    0 24px 34px
+      rgba(16, 4, 1, 0.42);
+}
+
+
+/* =========================================================
+   MEDIA ROW
+   ========================================================= */
+
+.media-row {
+  min-width: 0;
+}
+
+
+.row-header {
+  display: flex;
+
+  justify-content: space-between;
+  align-items: center;
+
+  margin-bottom:
+    13px;
+}
+
+
+.row-title-group {
+  display: flex;
+
+  align-items: baseline;
+
+  gap:
+    10px;
+}
+
+
+.row-title-group h2 {
+  margin: 0;
+
+  color:
+    rgba(255, 238, 221, 0.88);
+
+  font-size: 16px;
+
+  line-height: 1;
+
+  font-weight: 650;
+
+  letter-spacing:
+    -0.2px;
+}
+
+
+.row-title-group > span {
+  color:
+    rgba(246, 220, 197, 0.3);
+
+  font-size: 10px;
+}
+
+
+.row-controls {
+  display: flex;
+
+  gap:
+    6px;
+}
+
+
+.shelf-control {
+  width: 34px;
+  height: 31px;
+
+  display: grid;
+
+  place-items: center;
+
+  padding: 0;
+
+  border:
+    1px solid
+    rgba(255, 226, 198, 0.1);
+
+  border-radius:
+    4px;
+
+  color:
+    rgba(255, 231, 211, 0.65);
+
+  background:
+    rgba(25, 11, 7, 0.3);
+
+  font-size: 21px;
+
+  line-height: 1;
 
   cursor: pointer;
 
   transition:
-    transform 150ms ease,
+    background 150ms ease,
     border-color 150ms ease,
-    background 150ms ease;
+    color 150ms ease,
+    transform 150ms ease;
 }
 
-.add-button span {
-  font-size: 16px;
-  line-height: 1;
-}
 
-.add-button:hover {
-  transform: translateY(-1px);
+.shelf-control:hover {
+  color:
+    #fff2e7;
+
+  background:
+    rgba(42, 18, 10, 0.55);
 
   border-color:
-    rgba(255, 224, 194, 0.25);
+    rgba(255, 224, 197, 0.17);
+}
+
+
+.shelf-control:active {
+  transform:
+    scale(0.93);
+}
+
+
+/* =========================================================
+   PHYSICAL SHELF
+   ========================================================= */
+
+.shelf {
+  position: relative;
+}
+
+
+.shelf-interior {
+  position: relative;
+
+  overflow: hidden;
+
+  min-height: 325px;
+
+  padding:
+    14px
+    16px
+    18px;
+
+  border-left: 0;
+  border-right: 0;
 
   background:
     linear-gradient(
       180deg,
-      rgba(188, 112, 63, 0.47),
-      rgba(85, 43, 26, 0.48)
+      rgba(63, 28, 15, 0.28),
+      rgba(34, 13, 7, 0.16) 45%,
+      rgba(12, 4, 2, 0.34) 100%
+    );
+
+  box-shadow:
+    inset 0 28px 38px
+      rgba(8, 2, 1, 0.31),
+    inset 0 -24px 32px
+      rgba(6, 2, 1, 0.34),
+    inset 0 0 40px
+      rgba(6, 2, 1, 0.12);
+}
+
+
+.shelf-interior::before {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  pointer-events: none;
+
+  background:
+    radial-gradient(
+      ellipse at 50% 0%,
+      rgba(220, 112, 56, 0.06),
+      transparent 35%
+    ),
+    repeating-linear-gradient(
+      90deg,
+      rgba(255, 194, 141, 0.014) 0,
+      rgba(255, 194, 141, 0.014) 1px,
+      transparent 1px,
+      transparent 10px
+    );
+
+  opacity: 0.85;
+}
+
+
+.shelf-interior::after {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 184, 108, 0.025),
+      transparent 25%,
+      transparent 77%,
+      rgba(7, 2, 1, 0.08)
     );
 }
 
 
 /* =========================================================
-   ADD MEDIA MODAL
+   SHELF SCROLL
+   ========================================================= */
+
+.shelf-scroll {
+  position: relative;
+  z-index: 2;
+
+  overflow-x: auto;
+  overflow-y: visible;
+
+  padding:
+    16px
+    5px
+    3px;
+
+  scrollbar-width:
+    thin;
+
+  scrollbar-color:
+    rgba(255, 219, 188, 0.19)
+    transparent;
+
+  scroll-behavior:
+    smooth;
+}
+
+
+.shelf-scroll::-webkit-scrollbar {
+  height: 6px;
+}
+
+
+.shelf-scroll::-webkit-scrollbar-track {
+  background:
+    transparent;
+}
+
+
+.shelf-scroll::-webkit-scrollbar-thumb {
+  border-radius:
+    999px;
+
+  background:
+    rgba(255, 219, 188, 0.15);
+}
+
+
+.shelf-scroll::-webkit-scrollbar-thumb:hover {
+  background:
+    rgba(255, 219, 188, 0.26);
+}
+
+
+/* =========================================================
+   MEDIA LINE
+   ========================================================= */
+
+.media-line {
+  display: flex;
+
+  align-items: flex-end;
+
+  width: max-content;
+
+  min-width: 100%;
+
+  gap: 7px;
+
+  padding:
+    16px
+    10px
+    0;
+}
+
+
+/* =========================================================
+   NATURAL MEDIA VARIATION
+   ========================================================= */
+
+.media-object:nth-child(3n) {
+  margin-bottom:
+    1px;
+}
+
+
+.media-object:nth-child(5n) {
+  margin-bottom:
+    3px;
+}
+
+
+.media-object:nth-child(7n) {
+  transform:
+    rotate(0.45deg);
+}
+
+
+.media-object:nth-child(9n) {
+  transform:
+    rotate(-0.35deg);
+}
+
+
+.media-object:nth-child(11n) {
+  margin-bottom:
+    2px;
+}
+
+
+/* =========================================================
+   SHELF BOARD
+   ========================================================= */
+
+.shelf-board {
+  position: relative;
+  z-index: 5;
+
+  height: 31px;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(159, 96, 53, 0.72),
+      rgba(104, 53, 29, 0.8) 43%,
+      rgba(45, 20, 11, 0.95) 100%
+    ),
+    url("https://www.textures4photoshop.com/tex/thumbs/dark-wood-texture-seamless-free-thumb31.jpg");
+
+  background-size:
+    cover,
+    520px auto;
+
+  background-position:
+    center,
+    center;
+
+  border:
+    1px solid
+    rgba(30, 10, 4, 0.8);
+
+  border-radius:
+    0 0 3px 3px;
+
+  box-shadow:
+    inset 0 2px 0
+      rgba(255, 232, 205, 0.2),
+    inset 0 -4px 5px
+      rgba(15, 4, 1, 0.38),
+    0 10px 16px
+      rgba(11, 3, 1, 0.5);
+}
+
+
+.shelf-board::before {
+  content: "";
+
+  position: absolute;
+
+  left: 9px;
+  right: 9px;
+  top: 4px;
+
+  height: 3px;
+
+  border-radius:
+    2px;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 236, 211, 0.13),
+      transparent
+    );
+
+  pointer-events: none;
+}
+
+
+.shelf-board::after {
+  content: "";
+
+  position: absolute;
+
+  left: 0;
+  right: 0;
+  bottom: -7px;
+
+  height: 8px;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(18, 4, 1, 0.42),
+      transparent
+    );
+
+  pointer-events: none;
+}
+
+
+/* =========================================================
+   MEDIA OBJECT
+   ========================================================= */
+
+.media-object {
+  appearance: none;
+
+  position: relative;
+
+  flex: 0 0 auto;
+
+  display: block;
+
+  padding: 0;
+
+  border: 0;
+
+  background:
+    transparent;
+
+  cursor: pointer;
+
+  transform-origin:
+    bottom center;
+
+  transition:
+    transform 180ms cubic-bezier(
+      0.2,
+      0.8,
+      0.2,
+      1
+    ),
+    filter 180ms ease;
+}
+
+
+.orientation-spine {
+  width:
+    var(--object-width);
+
+  height:
+    var(--object-height);
+
+  --object-width:
+    78px;
+
+  --object-height:
+    252px;
+}
+
+
+.orientation-cover {
+  width:
+    198px;
+
+  height:
+    151px;
+
+  margin-bottom:
+    5px;
+
+  perspective:
+    900px;
+}
+
+
+/* =========================================================
+   MEDIA HOVER
+   ========================================================= */
+
+.media-object:hover {
+  z-index:
+    20;
+
+  transform:
+    translateY(-20px)
+    rotate(-0.8deg);
+
+  filter:
+    brightness(1.08)
+    saturate(1.08);
+}
+
+
+.media-object:nth-child(7n):hover {
+  transform:
+    translateY(-20px)
+    rotate(0.45deg);
+}
+
+
+.media-object:nth-child(9n):hover {
+  transform:
+    translateY(-20px)
+    rotate(-0.35deg);
+}
+
+
+.media-object:active {
+  transform:
+    translateY(-10px)
+    scale(0.99);
+}
+
+
+/* =========================================================
+   MEDIA CONTACT SHADOW
+   ========================================================= */
+
+.media-object::after {
+  content: "";
+
+  position: absolute;
+
+  left: 7%;
+  right: 7%;
+
+  bottom: -4px;
+
+  height: 8px;
+
+  border-radius:
+    50%;
+
+  background:
+    rgba(5, 1, 0, 0.52);
+
+  filter:
+    blur(4px);
+
+  opacity:
+    0.68;
+
+  pointer-events:
+    none;
+
+  transition:
+    opacity 180ms ease,
+    transform 180ms ease;
+}
+
+
+.media-object:hover::after {
+  opacity:
+    0.84;
+
+  transform:
+    scaleX(1.05);
+}
+
+
+/* =========================================================
+   MEDIA SURFACE
+   ========================================================= */
+
+.media-surface {
+  position: absolute;
+  inset: 0;
+
+  overflow: hidden;
+
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  padding:
+    16px
+    10px
+    11px;
+
+  border:
+    1px solid
+    rgba(0, 0, 0, 0.36);
+
+  border-radius:
+    2px;
+
+  background:
+    linear-gradient(
+      180deg,
+      #946747,
+      #583423 48%,
+      #2c170f 100%
+    );
+
+  box-shadow:
+    3px 5px 10px
+      rgba(12, 5, 2, 0.36),
+    inset 1px 0 0
+      rgba(255, 255, 255, 0.09),
+    inset -2px 0 0
+      rgba(0, 0, 0, 0.17);
+
+  transition:
+    box-shadow 180ms ease,
+    border-color 180ms ease;
+}
+
+
+.media-object:hover .media-surface {
+  border-color:
+    rgba(255, 222, 193, 0.25);
+
+  box-shadow:
+    5px 10px 16px
+      rgba(12, 5, 2, 0.45),
+    inset 1px 0 0
+      rgba(255, 255, 255, 0.14),
+    inset -2px 0 0
+      rgba(0, 0, 0, 0.12);
+}
+
+
+/* Subtle plastic/paper texture */
+
+.media-surface::after {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  pointer-events: none;
+
+  opacity:
+    0.23;
+
+  background:
+    repeating-linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.018) 0,
+      rgba(255, 255, 255, 0.018) 1px,
+      transparent 1px,
+      transparent 6px
+    );
+}
+
+
+/* =========================================================
+   MEDIA CONTENT
+   ========================================================= */
+
+.media-logo {
+  align-self:
+    flex-start;
+
+  position:
+    relative;
+
+  z-index:
+    2;
+
+  color:
+    rgba(255, 245, 233, 0.52);
+
+  font-size:
+    7px;
+
+  font-weight:
+    800;
+
+  letter-spacing:
+    1.2px;
+}
+
+
+.media-title {
+  position:
+    relative;
+
+  z-index:
+    2;
+
+  max-width:
+    95%;
+
+  color:
+    rgba(255, 246, 237, 0.96);
+
+  font-size:
+    12px;
+
+  line-height:
+    1.02;
+
+  font-weight:
+    700;
+
+  letter-spacing:
+    -0.15px;
+
+  writing-mode:
+    vertical-rl;
+
+  transform:
+    rotate(180deg);
+
+  text-align:
+    left;
+
+  text-shadow:
+    0 1px 4px
+      rgba(0, 0, 0, 0.31);
+}
+
+
+.media-bottom {
+  position:
+    relative;
+
+  z-index:
+    2;
+
+  width:
+    100%;
+
+  display:
+    flex;
+
+  justify-content:
+    space-between;
+
+  color:
+    rgba(255, 239, 223, 0.48);
+
+  font-size:
+    7px;
+
+  font-weight:
+    600;
+
+  letter-spacing:
+    0.4px;
+}
+
+
+/* =========================================================
+   VHS
+   ========================================================= */
+
+.format-vhs {
+  --object-width:
+    84px;
+
+  --object-height:
+    255px;
+}
+
+
+.format-vhs .media-surface {
+  background:
+    linear-gradient(
+      165deg,
+      #bd6840 0%,
+      #733823 46%,
+      #25130e 100%
+    );
+}
+
+
+.format-vhs .media-surface::before {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  left: 7px;
+  right: 7px;
+
+  height:
+    15px;
+
+  border-bottom:
+    1px solid
+    rgba(255, 255, 255, 0.1);
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.11),
+      transparent
+    );
+}
+
+
+.format-vhs .media-title {
+  font-size:
+    15px;
+}
+
+
+/* =========================================================
+   DVD
+   ========================================================= */
+
+.format-dvd {
+  --object-width:
+    72px;
+
+  --object-height:
+    248px;
+}
+
+
+.format-dvd .media-surface {
+  background:
+    linear-gradient(
+      165deg,
+      #95704a 0%,
+      #5b3929 50%,
+      #281713 100%
+    );
+}
+
+
+.format-dvd .media-title {
+  font-size:
+    13px;
+}
+
+
+/* =========================================================
+   BLU-RAY
+   ========================================================= */
+
+.format-bluray {
+  --object-width:
+    67px;
+
+  --object-height:
+    251px;
+}
+
+
+.format-bluray .media-surface {
+  background:
+    linear-gradient(
+      165deg,
+      #5d819b 0%,
+      #304d65 48%,
+      #111e29 100%
+    );
+}
+
+
+.format-bluray .media-title {
+  font-size:
+    11px;
+}
+
+
+.format-bluray .media-surface::before {
+  content: "";
+
+  position:
+    absolute;
+
+  left:
+    0;
+
+  right:
+    0;
+
+  top:
+    19px;
+
+  height:
+    1px;
+
+  background:
+    rgba(255, 255, 255, 0.08);
+}
+
+
+/* =========================================================
+   LASERDISC
+   ========================================================= */
+
+.format-laserdisc {
+  --object-width:
+    98px;
+
+  --object-height:
+    253px;
+}
+
+
+.format-laserdisc .media-surface {
+  background:
+    linear-gradient(
+      165deg,
+      #9a6654 0%,
+      #5b3930 45%,
+      #261715 100%
+    );
+}
+
+
+.format-laserdisc .media-title {
+  font-size:
+    14px;
+}
+
+
+/* =========================================================
+   NES
+   ========================================================= */
+
+.format-nes {
+  --object-width:
+    87px;
+
+  --object-height:
+    233px;
+}
+
+
+.format-nes .media-surface {
+  border-radius:
+    5px 5px 2px 2px;
+
+  background:
+    linear-gradient(
+      165deg,
+      #c4bcae 0%,
+      #938b7d 48%,
+      #504b44 100%
+    );
+}
+
+
+.format-nes .media-title {
+  color:
+    #2c2925;
+
+  text-shadow:
+    none;
+
+  font-size:
+    14px;
+}
+
+
+.format-nes .media-logo,
+.format-nes .media-bottom {
+  color:
+    rgba(35, 30, 26, 0.62);
+}
+
+
+/* =========================================================
+   PS1
+   ========================================================= */
+
+.format-ps1 {
+  --object-width:
+    79px;
+
+  --object-height:
+    238px;
+}
+
+
+.format-ps1 .media-surface {
+  background:
+    linear-gradient(
+      165deg,
+      #908a9b 0%,
+      #514e60 48%,
+      #22242b 100%
+    );
+}
+
+
+.format-ps1 .media-title {
+  font-size:
+    13px;
+}
+
+
+/* =========================================================
+   XBOX 360
+   ========================================================= */
+
+.format-xbox360 {
+  --object-width:
+    82px;
+
+  --object-height:
+    242px;
+}
+
+
+.format-xbox360 .media-surface {
+  background:
+    linear-gradient(
+      165deg,
+      #748e68 0%,
+      #40543b 48%,
+      #1a2418 100%
+    );
+}
+
+
+.format-xbox360 .media-title {
+  font-size:
+    13px;
+}
+
+
+/* =========================================================
+   CUSTOM FORMAT
+   ========================================================= */
+
+.format-custom {
+  --object-width:
+    76px;
+
+  --object-height:
+    235px;
+}
+
+
+.format-custom .media-surface {
+  background:
+    linear-gradient(
+      165deg,
+      #8c684f,
+      #503126 52%,
+      #24140e
+    );
+}
+
+
+/* =========================================================
+   HORIZONTAL COVERS
+   ========================================================= */
+
+.orientation-cover .media-surface {
+  padding:
+    16px;
+
+  align-items:
+    flex-start;
+
+  justify-content:
+    flex-end;
+
+  border-radius:
+    3px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #a66c49,
+      #593126 62%,
+      #28130d
+    );
+
+  box-shadow:
+    5px 8px 13px
+      rgba(12, 5, 2, 0.33),
+    inset 1px 0 0
+      rgba(255, 255, 255, 0.1);
+}
+
+
+.orientation-cover:hover .media-surface {
+  box-shadow:
+    8px 12px 18px
+      rgba(12, 5, 2, 0.43),
+    inset 1px 0 0
+      rgba(255, 255, 255, 0.14);
+}
+
+
+.orientation-cover .media-title {
+  writing-mode:
+    initial;
+
+  transform:
+    none;
+
+  max-width:
+    100%;
+
+  font-size:
+    20px;
+
+  line-height:
+    0.95;
+
+  letter-spacing:
+    -0.6px;
+}
+
+
+.orientation-cover .media-logo {
+  position:
+    absolute;
+
+  top:
+    13px;
+
+  left:
+    13px;
+}
+
+
+.orientation-cover .media-bottom {
+  margin-top:
+    7px;
+}
+
+
+.cover-glare {
+  position:
+    absolute;
+
+  inset:
+    1px;
+
+  pointer-events:
+    none;
+
+  border-radius:
+    2px;
+
+  background:
+    linear-gradient(
+      130deg,
+      rgba(255, 255, 255, 0.12),
+      transparent 35%
+    );
+
+  opacity:
+    0.4;
+}
+
+
+/* =========================================================
+   CUSTOM MEDIA ARTWORK
+   ========================================================= */
+
+.media-artwork-overlay {
+  position:
+    absolute;
+
+  inset:
+    0;
+
+  z-index:
+    3;
+
+  display:
+    flex;
+
+  align-items:
+    flex-end;
+
+  padding:
+    10px 8px;
+
+  background:
+    linear-gradient(
+      180deg,
+      transparent 55%,
+      rgba(8, 3, 2, 0.72)
+    );
+}
+
+
+.media-artwork-overlay .media-title {
+  width:
+    100%;
+
+  max-width:
+    100%;
+
+  color:
+    rgba(255, 248, 239, 0.94);
+
+  text-shadow:
+    0 2px 5px
+      rgba(0, 0, 0, 0.65);
+}
+
+
+.orientation-cover
+.media-artwork-overlay {
+  padding:
+    12px;
+}
+
+
+.orientation-cover
+.media-artwork-overlay
+.media-title {
+  writing-mode:
+    initial;
+
+  transform:
+    none;
+
+  font-size:
+    16px;
+
+  line-height:
+    0.95;
+}
+
+
+/* =========================================================
+   ROOM LIGHTING
+   ========================================================= */
+
+.room-glow {
+  position:
+    absolute;
+
+  z-index:
+    1;
+
+  width:
+    500px;
+
+  height:
+    500px;
+
+  border-radius:
+    50%;
+
+  pointer-events:
+    none;
+
+  filter:
+    blur(95px);
+}
+
+
+.room-glow-left {
+  left:
+    -210px;
+
+  top:
+    260px;
+
+  opacity:
+    0.11;
+
+  background:
+    #ef8b42;
+}
+
+
+.room-glow-right {
+  right:
+    -210px;
+
+  top:
+    520px;
+
+  opacity:
+    0.055;
+
+  background:
+    #61769e;
+}
+
+
+/* =========================================================
+   DETAIL VIEW
+   ========================================================= */
+
+.detail-backdrop {
+  position:
+    fixed;
+
+  inset:
+    0;
+
+  z-index:
+    300;
+
+  display:
+    grid;
+
+  place-items:
+    center;
+
+  padding:
+    30px;
+
+  background:
+    rgba(13, 6, 3, 0.74);
+
+  backdrop-filter:
+    blur(10px);
+
+  animation:
+    detailFade 180ms ease;
+}
+
+
+.media-detail {
+  position:
+    relative;
+
+  width:
+    min(1080px, calc(100% - 60px));
+
+  display:
+    grid;
+
+  grid-template-columns:
+    420px minmax(0, 1fr);
+
+  overflow:
+    hidden;
+
+  border:
+    1px solid
+    rgba(255, 226, 200, 0.13);
+
+  border-radius:
+    8px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #4f2a1d,
+      #26140e
+    );
+
+  box-shadow:
+    0 40px 90px
+      rgba(0, 0, 0, 0.52);
+}
+
+
+/* =========================================================
+   DETAIL CLOSE
+   ========================================================= */
+
+.detail-close {
+  position:
+    absolute;
+
+  z-index:
+    5;
+
+  top:
+    14px;
+
+  right:
+    14px;
+
+  width:
+    31px;
+
+  height:
+    31px;
+
+  display:
+    grid;
+
+  place-items:
+    center;
+
+  border:
+    1px solid
+    rgba(255, 236, 220, 0.13);
+
+  border-radius:
+    50%;
+
+  color:
+    rgba(255, 239, 225, 0.78);
+
+  background:
+    rgba(20, 9, 5, 0.45);
+
+  font-size:
+    19px;
+
+  line-height:
+    1;
+
+  cursor:
+    pointer;
+
+  transition:
+    color 150ms ease,
+    background 150ms ease,
+    transform 150ms ease;
+}
+
+
+.detail-close:hover {
+  color:
+    white;
+
+  background:
+    rgba(20, 9, 5, 0.7);
+
+  transform:
+    rotate(4deg);
+}
+
+
+/* =========================================================
+   DETAIL COVER
+   ========================================================= */
+
+.detail-cover {
+  min-height:
+    620px;
+
+  position:
+    relative;
+
+  display:
+    flex;
+
+  flex-direction:
+    column;
+
+  justify-content:
+    space-between;
+
+  padding:
+    33px;
+
+  overflow:
+    hidden;
+
+  background:
+    linear-gradient(
+      145deg,
+      #a66a45,
+      #643524 52%,
+      #25130c
+    );
+}
+
+
+.detail-cover::before {
+  content:
+    "";
+
+  position:
+    absolute;
+
+  inset:
+    0;
+
+  pointer-events:
+    none;
+
+  background:
+    radial-gradient(
+      circle at 25% 18%,
+      rgba(255, 255, 255, 0.12),
+      transparent 26%
+    ),
+    radial-gradient(
+      circle at 82% 78%,
+      rgba(0, 0, 0, 0.24),
+      transparent 35%
+    );
+}
+
+
+.detail-cover::after {
+  content:
+    "";
+
+  position:
+    absolute;
+
+  inset:
+    0;
+
+  pointer-events:
+    none;
+
+  opacity:
+    0.35;
+
+  background:
+    repeating-linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.022) 0,
+      rgba(255, 255, 255, 0.022) 1px,
+      transparent 1px,
+      transparent 7px
+    );
+}
+
+
+.cover-type,
+.cover-title,
+.cover-year {
+  position:
+    relative;
+
+  z-index:
+    2;
+}
+
+
+.cover-type {
+  align-self:
+    flex-start;
+
+  padding:
+    6px 10px;
+
+  border:
+    1px solid
+    rgba(255, 246, 236, 0.18);
+
+  border-radius:
+    3px;
+
+  color:
+    rgba(255, 243, 231, 0.73);
+
+  font-size:
+    10px;
+
+  font-weight:
+    700;
+
+  letter-spacing:
+    1px;
+}
+
+
+.cover-title {
+  max-width:
+    340px;
+
+  color:
+    rgba(255, 249, 242, 0.95);
+
+  font-size:
+    57px;
+
+  line-height:
+    0.92;
+
+  font-weight:
+    700;
+
+  letter-spacing:
+    -2px;
+
+  text-shadow:
+    0 3px 14px
+      rgba(0, 0, 0, 0.3);
+}
+
+
+.cover-year {
+  color:
+    rgba(255, 239, 224, 0.53);
+
+  font-size:
+    13px;
+}
+
+
+/* =========================================================
+   DETAIL INFO
+   ========================================================= */
+
+.detail-info {
+  padding:
+    62px
+    54px
+    50px;
+}
+
+
+.detail-eyebrow {
+  margin-bottom:
+    11px;
+
+  color:
+    rgba(255, 209, 176, 0.45);
+
+  font-size:
+    10px;
+
+  font-weight:
+    700;
+
+  letter-spacing:
+    1.5px;
+}
+
+
+.detail-info h2 {
+  margin:
+    0;
+
+  color:
+    #f4e9df;
+
+  font-size:
+    48px;
+
+  line-height:
+    1;
+
+  letter-spacing:
+    -1.5px;
+}
+
+
+.detail-meta {
+  display:
+    flex;
+
+  flex-wrap:
+    wrap;
+
+  gap:
+    9px;
+
+  margin-top:
+    19px;
+}
+
+
+.detail-meta span {
+  padding:
+    6px 10px;
+
+  border:
+    1px solid
+    rgba(255, 224, 199, 0.08);
+
+  border-radius:
+    4px;
+
+  color:
+    rgba(255, 231, 212, 0.58);
+
+  background:
+    rgba(255, 225, 200, 0.025);
+
+  font-size:
+    10px;
+}
+
+
+.detail-divider {
+  height:
+    1px;
+
+  margin:
+    28px 0 23px;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(255, 222, 193, 0.13),
+      transparent
+    );
+}
+
+
+.detail-info p {
+  margin:
+    0;
+
+  color:
+    rgba(246, 226, 210, 0.63);
+
+  font-size:
+    15px;
+
+  line-height:
+    1.75;
+}
+
+
+.detail-facts {
+  display:
+    grid;
+
+  grid-template-columns:
+    repeat(3, 1fr);
+
+  gap:
+    10px;
+
+  margin-top:
+    38px;
+}
+
+
+.detail-facts div {
+  display:
+    flex;
+
+  flex-direction:
+    column;
+
+  gap:
+    5px;
+
+  padding:
+    14px;
+
+  border:
+    1px solid
+    rgba(255, 224, 198, 0.07);
+
+  border-radius:
+    4px;
+
+  background:
+    rgba(255, 220, 192, 0.02);
+}
+
+
+.detail-facts span {
+  color:
+    rgba(255, 219, 191, 0.36);
+
+  font-size:
+    9px;
+
+  font-weight:
+    700;
+
+  letter-spacing:
+    0.9px;
+
+  text-transform:
+    uppercase;
+}
+
+
+.detail-facts strong {
+  color:
+    rgba(255, 239, 225, 0.73);
+
+  font-size:
+    11px;
+
+  font-weight:
+    500;
+}
+
+
+/* =========================================================
+   DETAIL ACTIONS
+   ========================================================= */
+
+.detail-actions {
+  display:
+    flex;
+
+  gap:
+    8px;
+
+  margin-top:
+    32px;
+}
+
+
+.detail-actions button {
+  height:
+    38px;
+
+  padding:
+    0 14px;
+
+  border-radius:
+    4px;
+
+  font-size:
+    9px;
+
+  font-weight:
+    650;
+
+  cursor:
+    pointer;
+
+  transition:
+    background 150ms ease,
+    border-color 150ms ease,
+    transform 150ms ease;
+}
+
+
+.detail-edit-button {
+  border:
+    1px solid
+    rgba(230, 140, 75, 0.26);
+
+  color:
+    rgba(255, 236, 222, 0.83);
+
+  background:
+    rgba(173, 91, 42, 0.22);
+}
+
+
+.detail-edit-button:hover {
+  border-color:
+    rgba(230, 140, 75, 0.4);
+
+  background:
+    rgba(191, 103, 50, 0.31);
+
+  transform:
+    translateY(-1px);
+}
+
+
+.detail-remove-button {
+  border:
+    1px solid
+    rgba(200, 112, 91, 0.18);
+
+  color:
+    rgba(255, 214, 201, 0.58);
+
+  background:
+    rgba(104, 39, 27, 0.13);
+}
+
+
+.detail-remove-button:hover {
+  border-color:
+    rgba(211, 112, 91, 0.32);
+
+  color:
+    rgba(255, 226, 214, 0.8);
+
+  background:
+    rgba(122, 43, 28, 0.25);
+
+  transform:
+    translateY(-1px);
+}
+
+
+/* =========================================================
+   ADD MEDIA
    ========================================================= */
 
 .add-media-backdrop {
-  position: fixed;
-  inset: 0;
+  position:
+    fixed;
 
-  z-index: 500;
+  inset:
+    0;
 
-  display: grid;
-  place-items: center;
+  z-index:
+    500;
 
-  padding: 25px;
+  display:
+    grid;
+
+  place-items:
+    center;
+
+  padding:
+    25px;
 
   background:
     rgba(11, 5, 3, 0.76);
@@ -3038,6 +2797,7 @@
     addMediaFade 180ms ease;
 }
 
+
 .add-media-modal {
   width:
     min(780px, 100%);
@@ -3045,26 +2805,29 @@
   max-height:
     min(900px, calc(100vh - 40px));
 
-  overflow-y: auto;
+  overflow-y:
+    auto;
 
   border:
     1px solid
     rgba(255, 225, 200, 0.13);
 
-  border-radius: 8px;
+  border-radius:
+    8px;
 
   background:
     linear-gradient(
       135deg,
-      rgba(58, 30, 20, 0.98),
-      rgba(27, 14, 9, 0.99)
+      #5f301d,
+      #32170e 68%,
+      #24100a
     );
 
   box-shadow:
     0 45px 100px
-      rgba(0, 0, 0, 0.55),
+      rgba(0, 0, 0, 0.56),
     inset 0 1px 0
-      rgba(255, 231, 210, 0.04);
+      rgba(255, 231, 210, 0.06);
 
   animation:
     addMediaOpen 230ms
@@ -3082,13 +2845,23 @@
    ========================================================= */
 
 .add-media-header {
-  position: sticky;
-  top: 0;
-  z-index: 5;
+  position:
+    sticky;
 
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
+  top:
+    0;
+
+  z-index:
+    5;
+
+  display:
+    flex;
+
+  justify-content:
+    space-between;
+
+  align-items:
+    flex-start;
 
   padding:
     25px
@@ -3102,65 +2875,88 @@
   background:
     linear-gradient(
       180deg,
-      rgba(53, 27, 18, 0.98),
-      rgba(43, 22, 14, 0.96)
+      rgba(111, 55, 29, 0.98),
+      rgba(69, 32, 18, 0.98)
     );
 
   backdrop-filter:
     blur(8px);
 }
 
+
 .add-media-eyebrow {
-  margin: 0 0 6px;
+  margin:
+    0 0 6px;
 
   color:
-    rgba(255, 209, 176, 0.4);
+    rgba(255, 209, 176, 0.42);
 
-  font-size: 8px;
-  font-weight: 700;
+  font-size:
+    8px;
+
+  font-weight:
+    700;
 
   letter-spacing:
     1.5px;
 }
 
+
 .add-media-header h2 {
-  margin: 0;
+  margin:
+    0;
 
   color:
     #f7ebe1;
 
-  font-size: 28px;
-  line-height: 1;
+  font-size:
+    28px;
 
-  font-weight: 650;
+  line-height:
+    1;
+
+  font-weight:
+    650;
 
   letter-spacing:
     -1px;
 }
 
+
 .add-media-header p:last-child {
-  margin-top: 8px;
+  margin-top:
+    8px;
 
   color:
-    rgba(245, 224, 207, 0.49);
+    rgba(245, 224, 207, 0.5);
 
-  font-size: 11px;
+  font-size:
+    11px;
 }
 
+
 .add-media-close {
-  width: 32px;
-  height: 32px;
+  width:
+    32px;
 
-  display: grid;
-  place-items: center;
+  height:
+    32px;
 
-  flex-shrink: 0;
+  display:
+    grid;
+
+  place-items:
+    center;
+
+  flex-shrink:
+    0;
 
   border:
     1px solid
     rgba(255, 226, 201, 0.11);
 
-  border-radius: 50%;
+  border-radius:
+    50%;
 
   color:
     rgba(255, 238, 224, 0.72);
@@ -3168,10 +2964,14 @@
   background:
     rgba(20, 9, 5, 0.34);
 
-  font-size: 21px;
-  line-height: 1;
+  font-size:
+    21px;
 
-  cursor: pointer;
+  line-height:
+    1;
+
+  cursor:
+    pointer;
 
   transition:
     background 150ms ease,
@@ -3179,13 +2979,16 @@
     transform 150ms ease;
 }
 
+
 .add-media-close:hover {
-  color: white;
+  color:
+    white;
 
   background:
     rgba(20, 9, 5, 0.62);
 
-  transform: rotate(3deg);
+  transform:
+    rotate(3deg);
 }
 
 
@@ -3200,42 +3003,58 @@
     30px;
 }
 
+
 .add-media-section {
-  margin-bottom: 28px;
+  margin-bottom:
+    28px;
 }
+
 
 .add-media-section:last-child {
-  margin-bottom: 0;
+  margin-bottom:
+    0;
 }
+
 
 .add-media-section-heading {
-  display: flex;
-  align-items: baseline;
+  display:
+    flex;
 
-  gap: 10px;
+  align-items:
+    baseline;
 
-  margin-bottom: 11px;
+  gap:
+    10px;
+
+  margin-bottom:
+    11px;
 }
+
 
 .add-media-section-heading span {
   color:
-    rgba(215, 135, 76, 0.63);
+    #e08a49;
 
-  font-size: 8px;
+  font-size:
+    8px;
 
-  font-weight: 700;
+  font-weight:
+    700;
 
   letter-spacing:
     1px;
 }
 
+
 .add-media-section-heading strong {
   color:
-    rgba(255, 237, 222, 0.8);
+    rgba(255, 239, 224, 0.9);
 
-  font-size: 12px;
+  font-size:
+    12px;
 
-  font-weight: 600;
+  font-weight:
+    600;
 }
 
 
@@ -3244,18 +3063,26 @@
    ========================================================= */
 
 .media-type-switch {
-  display: grid;
+  display:
+    grid;
 
   grid-template-columns:
     1fr 1fr;
 
-  gap: 8px;
+  gap:
+    8px;
 }
 
+
 .media-type-switch button {
-  display: flex;
-  align-items: center;
-  gap: 11px;
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  gap:
+    11px;
 
   padding:
     12px;
@@ -3264,7 +3091,8 @@
     1px solid
     rgba(255, 224, 200, 0.08);
 
-  border-radius: 5px;
+  border-radius:
+    5px;
 
   color:
     rgba(247, 228, 212, 0.53);
@@ -3272,11 +3100,14 @@
   background:
     rgba(255, 224, 197, 0.025);
 
-  font-size: 11px;
+  font-size:
+    11px;
 
-  cursor: pointer;
+  cursor:
+    pointer;
 
-  text-align: left;
+  text-align:
+    left;
 
   transition:
     background 150ms ease,
@@ -3284,23 +3115,32 @@
     color 150ms ease;
 }
 
+
+.media-type-switch button:hover {
+  border-color:
+    rgba(230, 137, 72, 0.25);
+}
+
+
 .media-type-switch button.active {
   color:
     rgba(255, 242, 228, 0.92);
 
   border-color:
-    rgba(220, 139, 77, 0.3);
+    rgba(231, 137, 72, 0.4);
 
   background:
     linear-gradient(
       135deg,
-      rgba(160, 92, 48, 0.27),
-      rgba(100, 48, 27, 0.2)
+      rgba(190, 101, 47, 0.34),
+      rgba(112, 48, 24, 0.24)
     );
 }
 
+
 .type-icon {
-  min-width: 39px;
+  min-width:
+    39px;
 
   padding:
     6px;
@@ -3309,37 +3149,51 @@
     1px solid
     rgba(255, 220, 191, 0.08);
 
-  border-radius: 3px;
+  border-radius:
+    3px;
 
   color:
     rgba(255, 230, 210, 0.4);
 
-  font-size: 6px;
-  font-weight: 800;
+  font-size:
+    6px;
 
-  text-align: center;
-  letter-spacing: 0.7px;
+  font-weight:
+    800;
+
+  text-align:
+    center;
+
+  letter-spacing:
+    0.7px;
 }
 
 
 /* =========================================================
-   MODE SWITCH
+   ADD MODE SWITCH
    ========================================================= */
 
 .add-mode-switch {
-  display: grid;
+  display:
+    grid;
 
   grid-template-columns:
     1fr 1fr;
 
-  gap: 8px;
+  gap:
+    8px;
 }
 
-.add-mode-switch button {
-  display: flex;
-  flex-direction: column;
 
-  gap: 4px;
+.add-mode-switch button {
+  display:
+    flex;
+
+  flex-direction:
+    column;
+
+  gap:
+    4px;
 
   padding:
     13px;
@@ -3348,7 +3202,8 @@
     1px solid
     rgba(255, 224, 198, 0.08);
 
-  border-radius: 5px;
+  border-radius:
+    5px;
 
   color:
     rgba(246, 226, 209, 0.5);
@@ -3356,718 +3211,45 @@
   background:
     rgba(255, 221, 195, 0.02);
 
-  cursor: pointer;
+  cursor:
+    pointer;
 
-  text-align: left;
+  text-align:
+    left;
 
   transition:
     background 150ms ease,
     border-color 150ms ease;
 }
+
+
+.add-mode-switch button:hover {
+  border-color:
+    rgba(230, 137, 72, 0.25);
+}
+
 
 .add-mode-switch button strong {
   color:
     rgba(255, 238, 224, 0.78);
 
-  font-size: 11px;
+  font-size:
+    11px;
 }
+
 
 .add-mode-switch button span {
   color:
     rgba(243, 221, 202, 0.4);
 
-  font-size: 9px;
-  line-height: 1.45;
-}
+  font-size:
+    9px;
 
-.add-mode-switch button.active {
-  border-color:
-    rgba(214, 132, 73, 0.3);
-
-  background:
-    linear-gradient(
-      135deg,
-      rgba(154, 88, 46, 0.25),
-      rgba(80, 39, 23, 0.22)
-    );
+  line-height:
+    1.45;
 }
 
 
-/* =========================================================
-   AUTOMATIC SEARCH
-   ========================================================= */
-
-.automatic-search {
-  position: relative;
-
-  margin-bottom: 9px;
-}
-
-.automatic-search input {
-  width: 100%;
-
-  height: 44px;
-
-  padding:
-    0 112px
-    0 13px;
-
-  border:
-    1px solid
-    rgba(255, 225, 199, 0.1);
-
-  border-radius: 5px;
-
-  color:
-    rgba(255, 239, 225, 0.87);
-
-  background:
-    rgba(16, 8, 5, 0.38);
-
-  font-size: 11px;
-
-  outline: none;
-
-  transition:
-    border-color 150ms ease,
-    background 150ms ease;
-}
-
-.automatic-search input:focus {
-  border-color:
-    rgba(215, 133, 73, 0.38);
-
-  background:
-    rgba(16, 8, 5, 0.52);
-}
-
-.automatic-search input::placeholder {
-  color:
-    rgba(245, 222, 204, 0.28);
-}
-
-.search-label {
-  position: absolute;
-
-  right: 12px;
-  top: 50%;
-
-  transform:
-    translateY(-50%);
-
-  color:
-    rgba(220, 159, 111, 0.36);
-
-  font-size: 7px;
-  font-weight: 700;
-
-  letter-spacing:
-    0.9px;
-}
-
-
-/* =========================================================
-   AUTOMATIC RESULTS
-   ========================================================= */
-
-.automatic-results {
-  display: flex;
-  flex-direction: column;
-
-  gap: 5px;
-}
-
-.automatic-result {
-  width: 100%;
-
-  display: flex;
-  align-items: center;
-
-  gap: 11px;
-
-  padding:
-    8px;
-
-  border:
-    1px solid
-    rgba(255, 225, 199, 0.06);
-
-  border-radius: 5px;
-
-  color: white;
-
-  background:
-    rgba(255, 225, 196, 0.018);
-
-  cursor: pointer;
-
-  text-align: left;
-
-  transition:
-    background 150ms ease,
-    border-color 150ms ease;
-}
-
-.automatic-result:hover {
-  border-color:
-    rgba(255, 225, 198, 0.13);
-
-  background:
-    rgba(255, 225, 198, 0.04);
-}
-
-.automatic-result.selected {
-  border-color:
-    rgba(214, 132, 72, 0.3);
-
-  background:
-    rgba(151, 87, 45, 0.16);
-}
-
-.result-cover {
-  width: 37px;
-  height: 51px;
-
-  display: grid;
-  place-items: center;
-
-  flex-shrink: 0;
-
-  border:
-    1px solid
-    rgba(255, 225, 200, 0.1);
-
-  border-radius: 3px;
-
-  color:
-    rgba(255, 237, 221, 0.46);
-
-  background:
-    linear-gradient(
-      145deg,
-      #74452f,
-      #2c1710
-    );
-
-  font-size: 6px;
-  font-weight: 800;
-
-  letter-spacing: 0.7px;
-}
-
-.result-info {
-  min-width: 0;
-
-  display: flex;
-  flex-direction: column;
-
-  gap: 4px;
-}
-
-.result-info strong {
-  overflow: hidden;
-
-  color:
-    rgba(255, 239, 225, 0.84);
-
-  font-size: 11px;
-
-  white-space: nowrap;
-  text-overflow: ellipsis;
-}
-
-.result-info span {
-  color:
-    rgba(245, 221, 201, 0.38);
-
-  font-size: 8px;
-}
-
-.result-check {
-  margin-left: auto;
-
-  color:
-    rgba(224, 144, 80, 0.55);
-
-  font-size: 13px;
-}
-
-.empty-search {
-  padding: 18px;
-
-  border:
-    1px solid
-    rgba(255, 225, 200, 0.06);
-
-  border-radius: 5px;
-
-  color:
-    rgba(245, 222, 204, 0.35);
-
-  background:
-    rgba(255, 225, 198, 0.018);
-
-  font-size: 10px;
-
-  text-align: center;
-}
-
-
-/* =========================================================
-   AUTOMATIC PREVIEW
-   ========================================================= */
-
-.automatic-preview {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  gap: 15px;
-
-  margin-top: 10px;
-
-  padding: 12px;
-
-  border:
-    1px solid
-    rgba(210, 130, 71, 0.2);
-
-  border-radius: 5px;
-
-  background:
-    linear-gradient(
-      90deg,
-      rgba(147, 81, 42, 0.15),
-      rgba(147, 81, 42, 0.05)
-    );
-}
-
-.automatic-preview div {
-  display: flex;
-  flex-direction: column;
-
-  gap: 4px;
-}
-
-.automatic-preview span {
-  color:
-    rgba(220, 143, 84, 0.46);
-
-  font-size: 7px;
-  font-weight: 700;
-
-  letter-spacing:
-    1px;
-}
-
-.automatic-preview strong {
-  color:
-    rgba(255, 238, 224, 0.87);
-
-  font-size: 11px;
-}
-
-.automatic-preview button {
-  flex-shrink: 0;
-
-  padding:
-    9px 13px;
-
-  border:
-    1px solid
-    rgba(225, 147, 82, 0.24);
-
-  border-radius: 4px;
-
-  color:
-    #ffeada;
-
-  background:
-    rgba(170, 95, 45, 0.28);
-
-  font-size: 9px;
-
-  cursor: pointer;
-
-  transition:
-    background 150ms ease;
-}
-
-.automatic-preview button:hover {
-  background:
-    rgba(190, 108, 53, 0.38);
-}
-
-
-/* =========================================================
-   MANUAL FORM
-   ========================================================= */
-
-.manual-form {
-  display: flex;
-  flex-direction: column;
-
-  gap: 14px;
-}
-
-.manual-form label {
-  display: flex;
-  flex-direction: column;
-
-  gap: 6px;
-}
-
-.manual-form label > span,
-.orientation-field > span {
-  color:
-    rgba(255, 222, 199, 0.47);
-
-  font-size: 8px;
-  font-weight: 700;
-
-  letter-spacing:
-    0.8px;
-
-  text-transform:
-    uppercase;
-}
-
-.manual-form input,
-.manual-form select,
-.manual-form textarea {
-  width: 100%;
-
-  border:
-    1px solid
-    rgba(255, 224, 199, 0.09);
-
-  border-radius: 4px;
-
-  color:
-    rgba(255, 240, 227, 0.83);
-
-  background:
-    rgba(14, 7, 4, 0.4);
-
-  font: inherit;
-
-  font-size: 10px;
-
-  outline: none;
-
-  transition:
-    border-color 150ms ease,
-    background 150ms ease;
-}
-
-.manual-form input,
-.manual-form select {
-  height: 39px;
-
-  padding:
-    0 10px;
-}
-
-.manual-form textarea {
-  padding:
-    10px;
-
-  resize: vertical;
-
-  line-height: 1.5;
-}
-
-.manual-form input:focus,
-.manual-form select:focus,
-.manual-form textarea:focus {
-  border-color:
-    rgba(215, 132, 72, 0.38);
-
-  background:
-    rgba(14, 7, 4, 0.56);
-}
-
-.manual-form input::placeholder,
-.manual-form textarea::placeholder {
-  color:
-    rgba(245, 222, 204, 0.23);
-}
-
-.manual-form select {
-  cursor: pointer;
-}
-
-.form-grid {
-  display: grid;
-
-  grid-template-columns:
-    1fr 1fr;
-
-  gap: 10px;
-}
-
-.manual-options {
-  display: flex;
-
-  justify-content: space-between;
-  align-items: flex-start;
-
-  gap: 20px;
-
-  padding-top: 3px;
-}
-
-.checkbox-field {
-  flex-direction: row !important;
-
-  align-items: center;
-
-  gap: 8px !important;
-
-  cursor: pointer;
-}
-
-.checkbox-field input {
-  width: 14px;
-  height: 14px;
-
-  accent-color: #b66b3e;
-}
-
-.checkbox-field span {
-  color:
-    rgba(246, 225, 207, 0.48) !important;
-
-  font-size: 9px !important;
-
-  text-transform: none !important;
-  letter-spacing: 0 !important;
-}
-
-.orientation-field {
-  display: flex;
-  flex-direction: column;
-
-  align-items: flex-end;
-
-  gap: 7px;
-}
-
-.orientation-field > div {
-  display: flex;
-  gap: 4px;
-}
-
-.orientation-field button {
-  padding:
-    7px 10px;
-
-  border:
-    1px solid
-    rgba(255, 224, 199, 0.08);
-
-  border-radius: 4px;
-
-  color:
-    rgba(246, 225, 207, 0.44);
-
-  background:
-    rgba(255, 224, 199, 0.02);
-
-  font-size: 8px;
-
-  cursor: pointer;
-}
-
-.orientation-field button.active {
-  color:
-    rgba(255, 239, 224, 0.88);
-
-  border-color:
-    rgba(214, 132, 72, 0.27);
-
-  background:
-    rgba(154, 86, 44, 0.2);
-}
-
-.manual-submit {
-  width: 100%;
-
-  height: 43px;
-
-  margin-top: 5px;
-
-  border:
-    1px solid
-    rgba(224, 145, 80, 0.22);
-
-  border-radius: 5px;
-
-  color:
-    rgba(255, 239, 224, 0.9);
-
-  background:
-    linear-gradient(
-      180deg,
-      rgba(164, 92, 48, 0.35),
-      rgba(83, 41, 24, 0.32)
-    );
-
-  font-size: 10px;
-  font-weight: 650;
-
-  cursor: pointer;
-
-  transition:
-    background 150ms ease,
-    border-color 150ms ease;
-}
-
-.manual-submit:hover:not(:disabled) {
-  border-color:
-    rgba(224, 145, 80, 0.34);
-
-  background:
-    linear-gradient(
-      180deg,
-      rgba(186, 106, 55, 0.43),
-      rgba(97, 46, 26, 0.39)
-    );
-}
-
-.manual-submit:disabled {
-  opacity: 0.35;
-  cursor: not-allowed;
-}
-
-
-/* =========================================================
-   ADD MEDIA ANIMATION
-   ========================================================= */
-
-@keyframes addMediaFade {
-  from {
-    opacity: 0;
-  }
-
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes addMediaOpen {
-  from {
-    opacity: 0;
-
-    transform:
-      translateY(14px)
-      scale(0.985);
-  }
-
-  to {
-    opacity: 1;
-
-    transform:
-      translateY(0)
-      scale(1);
-  }
-}
-
-
-/* =========================================================
-   ADD MEDIA RESPONSIVE
-   ========================================================= */
-
-@media (max-width: 700px) {
-
-  .library-controls {
-    margin-bottom: 10px;
-  }
-
-  .add-media-backdrop {
-    padding: 10px;
-  }
-
-  .add-media-modal {
-    max-height:
-      calc(100vh - 20px);
-  }
-
-  .add-media-header {
-    padding:
-      20px;
-    }
-
-  .add-media-body {
-    padding:
-      20px;
-    }
-
-  .media-type-switch,
-  .add-mode-switch,
-  .form-grid {
-    grid-template-columns:
-      1fr;
-  }
-
-  .manual-options {
-    flex-direction: column;
-  }
-
-  .orientation-field {
-    align-items: flex-start;
-  }
-
-  .automatic-preview {
-    align-items: flex-start;
-    flex-direction: column;
-  }
-
-  .automatic-preview button {
-    width: 100%;
-  }
-}
-
-/* =========================================================
-   ADD MEDIA - ORANGE RETRO PALETTE
-   ========================================================= */
-
-.add-media-modal {
-  background:
-    linear-gradient(
-      135deg,
-      #5f301d,
-      #32170e 68%,
-      #24100a
-    );
-
-  box-shadow:
-    0 45px 100px
-      rgba(0, 0, 0, 0.56),
-    inset 0 1px 0
-      rgba(255, 231, 210, 0.06);
-}
-
-.add-media-header {
-  background:
-    linear-gradient(
-      180deg,
-      rgba(111, 55, 29, 0.98),
-      rgba(69, 32, 18, 0.98)
-    );
-}
-
-.add-media-section-heading strong {
-  color:
-    rgba(255, 239, 224, 0.9);
-}
-
-.add-media-section-heading span {
-  color:
-    #e08a49;
-}
-
-.media-type-switch button.active,
 .add-mode-switch button.active {
   border-color:
     rgba(231, 137, 72, 0.4);
@@ -4080,23 +3262,173 @@
     );
 }
 
-.add-mode-switch button:hover,
-.media-type-switch button:hover {
-  border-color:
-    rgba(230, 137, 72, 0.25);
+
+/* =========================================================
+   AUTOMATIC SEARCH
+   ========================================================= */
+
+.automatic-search {
+  position:
+    relative;
+
+  margin-bottom:
+    9px;
 }
 
-.automatic-search input:focus,
-.manual-form input:focus,
-.manual-form select:focus,
-.manual-form textarea:focus {
+
+.automatic-search input {
+  width:
+    100%;
+
+  height:
+    44px;
+
+  box-sizing:
+    border-box;
+
+  padding:
+    0 112px
+    0 13px;
+
+  border:
+    1px solid
+    rgba(255, 225, 199, 0.1);
+
+  border-radius:
+    5px;
+
+  color:
+    rgba(255, 239, 225, 0.87);
+
+  background:
+    rgba(16, 8, 5, 0.38);
+
+  font-size:
+    11px;
+
+  outline:
+    none;
+
+  transition:
+    border-color 150ms ease,
+    background 150ms ease;
+}
+
+
+.automatic-search input:focus {
   border-color:
     rgba(229, 137, 70, 0.48);
+
+  background:
+    rgba(16, 8, 5, 0.52);
 
   box-shadow:
     0 0 0 2px
       rgba(222, 126, 60, 0.06);
 }
+
+
+.automatic-search input::placeholder {
+  color:
+    rgba(245, 222, 204, 0.28);
+}
+
+
+.search-label {
+  position:
+    absolute;
+
+  right:
+    12px;
+
+  top:
+    50%;
+
+  transform:
+    translateY(-50%);
+
+  color:
+    rgba(220, 159, 111, 0.36);
+
+  font-size:
+    7px;
+
+  font-weight:
+    700;
+
+  letter-spacing:
+    0.9px;
+}
+
+
+/* =========================================================
+   AUTOMATIC RESULTS
+   ========================================================= */
+
+.automatic-results {
+  display:
+    flex;
+
+  flex-direction:
+    column;
+
+  gap:
+    5px;
+}
+
+
+.automatic-result {
+  width:
+    100%;
+
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  gap:
+    11px;
+
+  padding:
+    8px;
+
+  box-sizing:
+    border-box;
+
+  border:
+    1px solid
+    rgba(255, 225, 199, 0.06);
+
+  border-radius:
+    5px;
+
+  color:
+    white;
+
+  background:
+    rgba(255, 225, 196, 0.018);
+
+  cursor:
+    pointer;
+
+  text-align:
+    left;
+
+  transition:
+    background 150ms ease,
+    border-color 150ms ease;
+}
+
+
+.automatic-result:hover {
+  border-color:
+    rgba(255, 225, 198, 0.13);
+
+  background:
+    rgba(255, 225, 198, 0.04);
+}
+
 
 .automatic-result.selected {
   border-color:
@@ -4110,9 +3442,159 @@
     );
 }
 
+
+.result-cover {
+  width:
+    37px;
+
+  height:
+    51px;
+
+  display:
+    grid;
+
+  place-items:
+    center;
+
+  flex-shrink:
+    0;
+
+  border:
+    1px solid
+    rgba(255, 225, 200, 0.1);
+
+  border-radius:
+    3px;
+
+  color:
+    rgba(255, 237, 221, 0.46);
+
+  background:
+    linear-gradient(
+      145deg,
+      #74452f,
+      #2c1710
+    );
+
+  font-size:
+    6px;
+
+  font-weight:
+    800;
+
+  letter-spacing:
+    0.7px;
+}
+
+
+.result-info {
+  min-width:
+    0;
+
+  display:
+    flex;
+
+  flex-direction:
+    column;
+
+  gap:
+    4px;
+}
+
+
+.result-info strong {
+  overflow:
+    hidden;
+
+  color:
+    rgba(255, 239, 225, 0.84);
+
+  font-size:
+    11px;
+
+  white-space:
+    nowrap;
+
+  text-overflow:
+    ellipsis;
+}
+
+
+.result-info span {
+  color:
+    rgba(245, 221, 201, 0.38);
+
+  font-size:
+    8px;
+}
+
+
+.result-check {
+  margin-left:
+    auto;
+
+  color:
+    rgba(224, 144, 80, 0.55);
+
+  font-size:
+    13px;
+}
+
+
+.empty-search {
+  padding:
+    18px;
+
+  border:
+    1px solid
+    rgba(255, 225, 200, 0.06);
+
+  border-radius:
+    5px;
+
+  color:
+    rgba(245, 222, 204, 0.35);
+
+  background:
+    rgba(255, 225, 198, 0.018);
+
+  font-size:
+    10px;
+
+  text-align:
+    center;
+}
+
+
+/* =========================================================
+   AUTOMATIC PREVIEW
+   ========================================================= */
+
 .automatic-preview {
-  border-color:
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    space-between;
+
+  gap:
+    15px;
+
+  margin-top:
+    10px;
+
+  padding:
+    12px;
+
+  border:
+    1px solid
     rgba(230, 137, 72, 0.27);
+
+  border-radius:
+    5px;
 
   background:
     linear-gradient(
@@ -4122,10 +3604,59 @@
     );
 }
 
-.automatic-preview button,
-.manual-submit {
-  border-color:
+
+.automatic-preview div {
+  display:
+    flex;
+
+  flex-direction:
+    column;
+
+  gap:
+    4px;
+}
+
+
+.automatic-preview span {
+  color:
+    rgba(220, 143, 84, 0.46);
+
+  font-size:
+    7px;
+
+  font-weight:
+    700;
+
+  letter-spacing:
+    1px;
+}
+
+
+.automatic-preview strong {
+  color:
+    rgba(255, 238, 224, 0.87);
+
+  font-size:
+    11px;
+}
+
+
+.automatic-preview button {
+  flex-shrink:
+    0;
+
+  padding:
+    9px 13px;
+
+  border:
+    1px solid
     rgba(231, 141, 77, 0.34);
+
+  border-radius:
+    4px;
+
+  color:
+    #ffeada;
 
   background:
     linear-gradient(
@@ -4133,10 +3664,19 @@
       rgba(198, 108, 54, 0.43),
       rgba(102, 46, 23, 0.35)
     );
+
+  font-size:
+    9px;
+
+  cursor:
+    pointer;
+
+  transition:
+    background 150ms ease;
 }
 
-.automatic-preview button:hover,
-.manual-submit:hover:not(:disabled) {
+
+.automatic-preview button:hover {
   background:
     linear-gradient(
       180deg,
@@ -4145,17 +3685,191 @@
     );
 }
 
-.field-add-button {
-  width: 39px;
-  height: 39px;
 
-  flex-shrink: 0;
+/* =========================================================
+   MANUAL FORM
+   ========================================================= */
+
+.manual-form {
+  display:
+    flex;
+
+  flex-direction:
+    column;
+
+  gap:
+    14px;
+}
+
+
+.manual-form label {
+  display:
+    flex;
+
+  flex-direction:
+    column;
+
+  gap:
+    6px;
+}
+
+
+.manual-form label > span,
+.orientation-field > span {
+  color:
+    rgba(255, 222, 199, 0.47);
+
+  font-size:
+    8px;
+
+  font-weight:
+    700;
+
+  letter-spacing:
+    0.8px;
+
+  text-transform:
+    uppercase;
+}
+
+
+.manual-form input,
+.manual-form select,
+.manual-form textarea {
+  width:
+    100%;
+
+  box-sizing:
+    border-box;
+
+  border:
+    1px solid
+    rgba(255, 224, 199, 0.09);
+
+  border-radius:
+    4px;
+
+  color:
+    rgba(255, 240, 227, 0.83);
+
+  background:
+    rgba(14, 7, 4, 0.4);
+
+  font:
+    inherit;
+
+  font-size:
+    10px;
+
+  outline:
+    none;
+
+  transition:
+    border-color 150ms ease,
+    background 150ms ease;
+}
+
+
+.manual-form input,
+.manual-form select {
+  height:
+    39px;
+
+  padding:
+    0 10px;
+}
+
+
+.manual-form textarea {
+  padding:
+    10px;
+
+  resize:
+    vertical;
+
+  line-height:
+    1.5;
+}
+
+
+.manual-form input:focus,
+.manual-form select:focus,
+.manual-form textarea:focus {
+  border-color:
+    rgba(229, 137, 70, 0.48);
+
+  background:
+    rgba(14, 7, 4, 0.56);
+
+  box-shadow:
+    0 0 0 2px
+      rgba(222, 126, 60, 0.06);
+}
+
+
+.manual-form input::placeholder,
+.manual-form textarea::placeholder {
+  color:
+    rgba(245, 222, 204, 0.23);
+}
+
+
+.manual-form select {
+  cursor:
+    pointer;
+}
+
+
+.form-grid {
+  display:
+    grid;
+
+  grid-template-columns:
+    1fr 1fr;
+
+  gap:
+    10px;
+}
+
+
+/* =========================================================
+   SELECT WITH ADD BUTTON
+   ========================================================= */
+
+.select-with-action {
+  display:
+    flex;
+
+  gap:
+    6px;
+}
+
+
+.select-with-action select {
+  flex:
+    1;
+
+  min-width:
+    0;
+}
+
+
+.field-add-button {
+  width:
+    39px;
+
+  height:
+    39px;
+
+  flex-shrink:
+    0;
 
   border:
     1px solid
     rgba(231, 139, 74, 0.22);
 
-  border-radius: 4px;
+  border-radius:
+    4px;
 
   color:
     #e89a5b;
@@ -4163,14 +3877,17 @@
   background:
     rgba(176, 89, 40, 0.12);
 
-  font-size: 17px;
+  font-size:
+    17px;
 
-  cursor: pointer;
+  cursor:
+    pointer;
 
   transition:
     background 150ms ease,
     border-color 150ms ease;
 }
+
 
 .field-add-button:hover {
   background:
@@ -4180,20 +3897,17 @@
     rgba(231, 139, 74, 0.4);
 }
 
-.select-with-action {
-  display: flex;
-  gap: 6px;
-}
 
-.select-with-action select {
-  flex: 1;
-  min-width: 0;
-}
+/* =========================================================
+   CUSTOM OPTION EDITOR
+   ========================================================= */
 
 .custom-option-editor {
-  display: flex;
+  display:
+    flex;
 
-  gap: 6px;
+  gap:
+    6px;
 
   padding:
     9px;
@@ -4202,19 +3916,26 @@
     1px solid
     rgba(230, 137, 72, 0.15);
 
-  border-radius: 5px;
+  border-radius:
+    5px;
 
   background:
     rgba(187, 94, 39, 0.08);
 }
 
+
 .custom-option-editor input {
-  flex: 1;
-  min-width: 0;
+  flex:
+    1;
+
+  min-width:
+    0;
 }
 
+
 .custom-option-editor button {
-  flex-shrink: 0;
+  flex-shrink:
+    0;
 
   padding:
     0 12px;
@@ -4223,7 +3944,8 @@
     1px solid
     rgba(231, 141, 77, 0.24);
 
-  border-radius: 4px;
+  border-radius:
+    4px;
 
   color:
     rgba(255, 237, 222, 0.86);
@@ -4231,9 +3953,136 @@
   background:
     rgba(182, 93, 42, 0.2);
 
-  font-size: 9px;
+  font-size:
+    9px;
 
-  cursor: pointer;
+  cursor:
+    pointer;
+}
+
+
+/* =========================================================
+   MANUAL OPTIONS
+   ========================================================= */
+
+.manual-options {
+  display:
+    flex;
+
+  justify-content:
+    space-between;
+
+  align-items:
+    flex-start;
+
+  gap:
+    20px;
+
+  padding-top:
+    3px;
+}
+
+
+.checkbox-field {
+  flex-direction:
+    row !important;
+
+  align-items:
+    center;
+
+  gap:
+    8px !important;
+
+  cursor:
+    pointer;
+}
+
+
+.checkbox-field input {
+  width:
+    14px;
+
+  height:
+    14px;
+
+  accent-color:
+    #b66b3e;
+}
+
+
+.checkbox-field span {
+  color:
+    rgba(246, 225, 207, 0.48) !important;
+
+  font-size:
+    9px !important;
+
+  text-transform:
+    none !important;
+
+  letter-spacing:
+    0 !important;
+}
+
+
+.orientation-field {
+  display:
+    flex;
+
+  flex-direction:
+    column;
+
+  align-items:
+    flex-end;
+
+  gap:
+    7px;
+}
+
+
+.orientation-field > div {
+  display:
+    flex;
+
+  gap:
+    4px;
+}
+
+
+.orientation-field button {
+  padding:
+    7px 10px;
+
+  border:
+    1px solid
+    rgba(255, 224, 199, 0.08);
+
+  border-radius:
+    4px;
+
+  color:
+    rgba(246, 225, 207, 0.44);
+
+  background:
+    rgba(255, 224, 199, 0.02);
+
+  font-size:
+    8px;
+
+  cursor:
+    pointer;
+}
+
+
+.orientation-field button.active {
+  color:
+    rgba(255, 239, 224, 0.88);
+
+  border-color:
+    rgba(214, 132, 72, 0.27);
+
+  background:
+    rgba(154, 86, 44, 0.2);
 }
 
 
@@ -4242,41 +4091,57 @@
    ========================================================= */
 
 .appearance-layout {
-  display: grid;
+  display:
+    grid;
 
   grid-template-columns:
     minmax(0, 1fr)
     245px;
 
-  gap: 18px;
+  gap:
+    18px;
 
-  align-items: start;
+  align-items:
+    start;
 }
+
 
 .appearance-fields {
-  min-width: 0;
+  min-width:
+    0;
 }
 
+
 .image-upload-grid {
-  display: grid;
+  display:
+    grid;
 
   grid-template-columns:
     1fr 1fr;
 
-  gap: 8px;
+  gap:
+    8px;
 
-  margin-bottom: 13px;
+  margin-bottom:
+    13px;
 }
 
+
 .image-upload-card {
-  min-height: 76px;
+  min-height:
+    76px;
 
-  display: flex;
+  display:
+    flex;
 
-  align-items: center;
-  justify-content: space-between;
+  align-items:
+    center;
 
-  gap: 10px;
+  justify-content:
+    space-between;
+
+  gap:
+    10px;
 
   padding:
     11px;
@@ -4285,51 +4150,76 @@
     1px solid
     rgba(255, 224, 198, 0.08);
 
-  border-radius: 5px;
+  border-radius:
+    5px;
 
   background:
     rgba(255, 221, 195, 0.025);
 }
 
+
 .image-upload-card > div:first-child {
-  display: flex;
-  flex-direction: column;
+  display:
+    flex;
 
-  gap: 4px;
+  flex-direction:
+    column;
 
-  min-width: 0;
+  gap:
+    4px;
+
+  min-width:
+    0;
 }
+
 
 .image-upload-card span {
   color:
     rgba(255, 220, 194, 0.43);
 
-  font-size: 7px;
-  font-weight: 700;
+  font-size:
+    7px;
+
+  font-weight:
+    700;
 
   letter-spacing:
     0.9px;
 }
 
+
 .image-upload-card strong {
   color:
     rgba(255, 238, 224, 0.72);
 
-  font-size: 9px;
-  font-weight: 500;
+  font-size:
+    9px;
 
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
+  font-weight:
+    500;
+
+  overflow:
+    hidden;
+
+  white-space:
+    nowrap;
+
+  text-overflow:
+    ellipsis;
 }
+
 
 .image-upload-actions {
-  display: flex;
+  display:
+    flex;
 
-  gap: 4px;
+  gap:
+    4px;
 
-  flex-shrink: 0;
+  flex-shrink:
+    0;
 }
+
 
 .image-upload-actions button {
   padding:
@@ -4339,7 +4229,8 @@
     1px solid
     rgba(232, 139, 74, 0.21);
 
-  border-radius: 4px;
+  border-radius:
+    4px;
 
   color:
     rgba(255, 238, 223, 0.75);
@@ -4347,15 +4238,19 @@
   background:
     rgba(178, 91, 42, 0.15);
 
-  font-size: 8px;
+  font-size:
+    8px;
 
-  cursor: pointer;
+  cursor:
+    pointer;
 }
+
 
 .image-upload-actions button:hover {
   background:
     rgba(193, 102, 48, 0.26);
 }
+
 
 .image-upload-actions .remove-image {
   color:
@@ -4374,7 +4269,8 @@
    ========================================================= */
 
 .media-preview-panel {
-  min-width: 0;
+  min-width:
+    0;
 
   padding:
     12px;
@@ -4383,7 +4279,8 @@
     1px solid
     rgba(255, 224, 198, 0.09);
 
-  border-radius: 6px;
+  border-radius:
+    6px;
 
   background:
     linear-gradient(
@@ -4397,48 +4294,65 @@
       rgba(255, 226, 202, 0.035);
 }
 
+
 .preview-heading {
-  display: flex;
+  display:
+    flex;
 
-  flex-direction: column;
+  flex-direction:
+    column;
 
-  gap: 4px;
+  gap:
+    4px;
 
-  margin-bottom: 12px;
+  margin-bottom:
+    12px;
 }
+
 
 .preview-heading span {
   color:
     rgba(228, 141, 80, 0.5);
 
-  font-size: 7px;
+  font-size:
+    7px;
 
-  font-weight: 700;
+  font-weight:
+    700;
 
   letter-spacing:
     1px;
 }
 
+
 .preview-heading strong {
   color:
     rgba(255, 237, 223, 0.78);
 
-  font-size: 10px;
+  font-size:
+    10px;
 }
 
+
 .media-preview-stage {
-  min-height: 235px;
+  min-height:
+    235px;
 
-  display: grid;
-  place-items: center;
+  display:
+    grid;
 
-  padding: 10px;
+  place-items:
+    center;
+
+  padding:
+    10px;
 
   border:
     1px solid
     rgba(255, 225, 201, 0.05);
 
-  border-radius: 4px;
+  border-radius:
+    4px;
 
   background:
     radial-gradient(
@@ -4449,37 +4363,59 @@
     rgba(11, 5, 3, 0.45);
 }
 
+
 .preview-media {
-  position: relative;
+  position:
+    relative;
 
-  display: flex;
+  display:
+    flex;
 
-  align-items: flex-end;
-  justify-content: center;
+  align-items:
+    flex-end;
+
+  justify-content:
+    center;
 }
 
+
 .preview-spine {
-  position: relative;
+  position:
+    relative;
 
-  width: 82px;
-  height: 205px;
+  width:
+    82px;
 
-  display: flex;
-  flex-direction: column;
+  height:
+    205px;
 
-  align-items: center;
-  justify-content: space-between;
+  display:
+    flex;
+
+  flex-direction:
+    column;
+
+  align-items:
+    center;
+
+  justify-content:
+    space-between;
+
+  box-sizing:
+    border-box;
 
   padding:
     12px 8px 9px;
 
-  overflow: hidden;
+  overflow:
+    hidden;
 
   border:
     1px solid
     rgba(255, 220, 190, 0.18);
 
-  border-radius: 3px;
+  border-radius:
+    3px;
 
   background:
     linear-gradient(
@@ -4500,25 +4436,38 @@
       rgba(0, 0, 0, 0.42);
 }
 
+
 .preview-cover {
-  width: 175px;
-  height: 125px;
+  width:
+    175px;
 
-  display: flex;
-  flex-direction: column;
+  height:
+    125px;
 
-  justify-content: space-between;
+  display:
+    flex;
+
+  flex-direction:
+    column;
+
+  justify-content:
+    space-between;
+
+  box-sizing:
+    border-box;
 
   padding:
     12px;
 
-  overflow: hidden;
+  overflow:
+    hidden;
 
   border:
     1px solid
     rgba(255, 220, 190, 0.18);
 
-  border-radius: 3px;
+  border-radius:
+    3px;
 
   background:
     linear-gradient(
@@ -4539,23 +4488,29 @@
       rgba(0, 0, 0, 0.42);
 }
 
+
 .preview-spine span,
 .preview-cover span {
-  align-self: flex-start;
+  align-self:
+    flex-start;
 
   color:
     rgba(255, 242, 227, 0.62);
 
-  font-size: 6px;
+  font-size:
+    6px;
 
-  font-weight: 700;
+  font-weight:
+    700;
 
   letter-spacing:
     0.9px;
 }
 
+
 .preview-spine strong {
-  max-width: 100%;
+  max-width:
+    100%;
 
   writing-mode:
     vertical-rl;
@@ -4566,1594 +4521,1114 @@
   color:
     rgba(255, 246, 237, 0.94);
 
-  font-size: 13px;
+  font-size:
+    13px;
 
-  text-align: center;
+  text-align:
+    center;
 }
+
 
 .preview-cover strong {
   color:
     rgba(255, 246, 237, 0.94);
 
-  font-size: 16px;
+  font-size:
+    16px;
 
-  line-height: 0.96;
+  line-height:
+    0.96;
 }
+
 
 .preview-spine small,
 .preview-cover small {
   color:
     rgba(255, 232, 212, 0.47);
 
-  font-size: 6px;
+  font-size:
+    6px;
 }
+
 
 .preview-summary {
-  display: flex;
+  display:
+    flex;
 
-  flex-direction: column;
+  flex-direction:
+    column;
 
-  gap: 4px;
+  gap:
+    4px;
 
-  margin-top: 10px;
+  margin-top:
+    10px;
 }
+
 
 .preview-summary span {
   color:
     rgba(229, 144, 83, 0.47);
 
-  font-size: 7px;
+  font-size:
+    7px;
 
-  font-weight: 700;
+  font-weight:
+    700;
 
-  text-transform: uppercase;
+  text-transform:
+    uppercase;
 }
+
 
 .preview-summary strong {
   color:
     rgba(255, 237, 223, 0.79);
 
-  font-size: 10px;
+  font-size:
+    10px;
 }
+
 
 .preview-summary small {
   color:
     rgba(242, 218, 198, 0.38);
 
-  font-size: 8px;
-}
-
-
-/* =========================================================
-   ADD MEDIA RESPONSIVE
-   ========================================================= */
-
-@media (max-width: 760px) {
-  .appearance-layout {
-    grid-template-columns: 1fr;
-  }
-
-  .image-upload-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .media-preview-panel {
-    order: -1;
-  }
-}
-
-/* =========================================================
-   CUSTOM MEDIA ARTWORK
-   ========================================================= */
-
-.media-artwork-overlay {
-  position: absolute;
-  inset: 0;
-
-  z-index: 3;
-
-  display: flex;
-  align-items: flex-end;
-
-  padding:
-    10px 8px;
-
-  background:
-    linear-gradient(
-      180deg,
-      transparent 55%,
-      rgba(8, 3, 2, 0.72)
-    );
-}
-
-.media-artwork-overlay .media-title {
-  width: 100%;
-  max-width: 100%;
-
-  color:
-    rgba(255, 248, 239, 0.94);
-
-  text-shadow:
-    0 2px 5px
-    rgba(0, 0, 0, 0.65);
-}
-
-.orientation-cover
-.media-artwork-overlay {
-  padding: 12px;
-}
-
-.orientation-cover
-.media-artwork-overlay
-.media-title {
-  writing-mode: initial;
-  transform: none;
-
-  font-size: 16px;
-  line-height: 0.95;
-}
-
-/* =========================================================
-   DETAIL ACTIONS
-   ========================================================= */
-
-.detail-actions {
-  display: flex;
-
-  gap: 8px;
-
-  margin-top: 32px;
-}
-
-.detail-actions button {
-  height: 38px;
-
-  padding:
-    0 14px;
-
-  border-radius: 4px;
-
-  font-size: 9px;
-  font-weight: 650;
-
-  cursor: pointer;
-
-  transition:
-    background 150ms ease,
-    border-color 150ms ease,
-    transform 150ms ease;
-}
-
-.detail-edit-button {
-  border:
-    1px solid
-    rgba(230, 140, 75, 0.26);
-
-  color:
-    rgba(255, 236, 222, 0.83);
-
-  background:
-    rgba(173, 91, 42, 0.22);
-}
-
-.detail-edit-button:hover {
-  border-color:
-    rgba(230, 140, 75, 0.4);
-
-  background:
-    rgba(191, 103, 50, 0.31);
-
-  transform:
-    translateY(-1px);
-}
-
-.detail-remove-button {
-  border:
-    1px solid
-    rgba(200, 112, 91, 0.18);
-
-  color:
-    rgba(255, 214, 201, 0.58);
-
-  background:
-    rgba(104, 39, 27, 0.13);
-}
-
-.detail-remove-button:hover {
-  border-color:
-    rgba(211, 112, 91, 0.32);
-
-  color:
-    rgba(255, 226, 214, 0.8);
-
-  background:
-    rgba(122, 43, 28, 0.25);
-
-  transform:
-    translateY(-1px);
-}
-
-/* =========================================================
-   BEDROOM / PHYSICAL BOOKCASE - PASS 1
-   ========================================================= */
-
-/* ---------------------------------------------------------
-   ROOM ATMOSPHERE
-   --------------------------------------------------------- */
-
-.room {
-  background:
-    radial-gradient(
-      ellipse at 50% 34%,
-      rgba(35, 14, 7, 0.22) 0%,
-      rgba(35, 14, 7, 0.38) 34%,
-      rgba(26, 10, 6, 0.16) 63%,
-      rgba(20, 8, 5, 0.02) 100%
-    ),
-    linear-gradient(
-      90deg,
-      rgba(63, 29, 19, 0.7),
-      rgba(102, 49, 28, 0.39) 48%,
-      rgba(62, 27, 19, 0.7)
-    ),
-    url("https://img.magnific.com/free-vector/abstract-background-with-retro-styled-swirl-pattern_1048-19600.jpg?semt=ais_hybrid&w=740&q=80");
-
-  background-size:
-    cover,
-    cover,
-    1500px auto;
-
-  background-position:
-    center,
-    center,
-    center top;
-}
-
-.room::before {
-  background:
-    radial-gradient(
-      ellipse at 50% 24%,
-      rgba(255, 183, 105, 0.11),
-      transparent 34%
-    ),
-    radial-gradient(
-      ellipse at 50% 68%,
-      rgba(139, 70, 36, 0.09),
-      transparent 40%
-    ),
-    linear-gradient(
-      180deg,
-      rgba(33, 14, 8, 0.15),
-      rgba(46, 18, 10, 0.05) 42%,
-      rgba(24, 9, 6, 0.31)
-    );
-
-  box-shadow:
-    inset 0 0 180px
-      rgba(27, 9, 4, 0.5);
-}
-
-
-/* ---------------------------------------------------------
-   BOOKCASE - OUTER STRUCTURE
-   --------------------------------------------------------- */
-
-.bookcase {
-  filter:
-    drop-shadow(
-      0 28px 34px
-      rgba(17, 5, 2, 0.38)
-    );
-}
-
-/* ---------------------------------------------------------
-   TOP BOARD
-   --------------------------------------------------------- */
-
-.bookcase-top {
-  height: 34px;
-
-  background:
-    linear-gradient(
-      180deg,
-      rgba(139, 86, 49, 0.55),
-      rgba(93, 49, 28, 0.58) 46%,
-      rgba(51, 26, 16, 0.76) 100%
-    ),
-    url("https://www.textures4photoshop.com/tex/thumbs/dark-wood-texture-seamless-free-thumb31.jpg");
-
-  background-size:
-    cover,
-    430px auto;
-
-  background-position:
-    center,
-    center;
-
-  border-color:
-    rgba(40, 16, 7, 0.78);
-
-  box-shadow:
-    inset 0 2px 0
-      rgba(255, 231, 204, 0.16),
-    inset 0 -3px 0
-      rgba(30, 9, 3, 0.28),
-    0 9px 17px
-      rgba(24, 7, 2, 0.32);
-}
-
-.bookcase-top::before {
-  content: "";
-
-  position: absolute;
-  left: 9px;
-  right: 9px;
-  top: 4px;
-
-  height: 5px;
-
-  border-radius: 2px;
-
-  background:
-    linear-gradient(
-      180deg,
-      rgba(255, 230, 203, 0.12),
-      rgba(255, 230, 203, 0.015)
-    );
-
-  pointer-events: none;
-}
-
-
-/* ---------------------------------------------------------
-   MAIN CABINET
-   --------------------------------------------------------- */
-
-.bookcase-content {
-  padding:
-    28px
-    30px
-    42px;
-
-  background:
-    linear-gradient(
-      90deg,
-      rgba(74, 38, 23, 0.88),
-      rgba(45, 21, 12, 0.7) 12%,
-      rgba(37, 17, 10, 0.72) 50%,
-      rgba(45, 21, 12, 0.7) 88%,
-      rgba(74, 38, 23, 0.88)
-    ),
-    url("https://www.textures4photoshop.com/tex/thumbs/dark-wood-texture-seamless-free-thumb31.jpg");
-
-  background-size:
-    cover,
-    620px auto;
-
-  background-position:
-    center,
-    center;
-
-  border-left-width: 22px;
-  border-right-width: 22px;
-
-  box-shadow:
-    inset 14px 0 26px
-      rgba(18, 6, 2, 0.34),
-    inset -14px 0 26px
-      rgba(18, 6, 2, 0.34),
-    inset 0 0 45px
-      rgba(27, 8, 3, 0.19);
-}
-
-
-/* ---------------------------------------------------------
-   SIDE POSTS
-   --------------------------------------------------------- */
-
-.bookcase-content::before,
-.bookcase-content::after {
-  width: 22px;
-
-  background:
-    linear-gradient(
-      90deg,
-      #351d13 0%,
-      #68402a 34%,
-      #7b4b30 50%,
-      #4e2f20 72%,
-      #2d170f 100%
-    ),
-    url("https://www.textures4photoshop.com/tex/thumbs/dark-wood-texture-seamless-free-thumb31.jpg");
-
-  background-size:
-    cover,
-    240px auto;
-
-  box-shadow:
-    inset 0 0 5px
-      rgba(16, 4, 1, 0.3);
-}
-
-.bookcase-content::before {
-  box-shadow:
-    inset -3px 0 5px
-      rgba(16, 4, 1, 0.3),
-    3px 0 7px
-      rgba(14, 4, 1, 0.12);
-}
-
-.bookcase-content::after {
-  box-shadow:
-    inset 3px 0 5px
-      rgba(16, 4, 1, 0.3),
-    -3px 0 7px
-      rgba(14, 4, 1, 0.12);
-}
-
-
-/* ---------------------------------------------------------
-   BACK PANEL
-   --------------------------------------------------------- */
-
-.bookcase-back {
-  background:
-    linear-gradient(
-      180deg,
-      rgba(58, 27, 15, 0.22),
-      rgba(31, 13, 8, 0.06) 24%,
-      rgba(21, 8, 4, 0.24) 100%
-    ),
-    url("https://www.textures4photoshop.com/tex/thumbs/dark-wood-texture-seamless-free-thumb31.jpg");
-
-  background-size:
-    cover,
-    720px auto;
-
-  background-position:
-    center,
-    center;
-
-  opacity: 0.78;
-}
-
-
-/* ---------------------------------------------------------
-   SHELF INTERIOR
-   --------------------------------------------------------- */
-
-.shelf-interior {
-  min-height: 320px;
-
-  background:
-    linear-gradient(
-      180deg,
-      rgba(56, 26, 15, 0.9),
-      rgba(42, 18, 10, 0.87) 35%,
-      rgba(35, 14, 8, 0.94) 100%
-    ),
-    url("https://www.textures4photoshop.com/tex/thumbs/dark-wood-texture-seamless-free-thumb31.jpg");
-
-  background-size:
-    cover,
-    540px auto;
-
-  background-position:
-    center,
-    center;
-
-  border-left:
-    1px solid
-    rgba(255, 220, 188, 0.08);
-
-  border-right:
-    1px solid
-    rgba(255, 220, 188, 0.08);
-
-  box-shadow:
-    inset 0 18px 28px
-      rgba(10, 3, 1, 0.31),
-    inset 0 -22px 30px
-      rgba(8, 2, 1, 0.34),
-    inset 0 0 42px
-      rgba(11, 3, 1, 0.18);
-}
-
-
-/* ---------------------------------------------------------
-   SHELF INTERIOR LIGHT
-   --------------------------------------------------------- */
-
-.shelf-interior::after {
-  content: "";
-
-  position: absolute;
-  inset: 0;
-
-  pointer-events: none;
-
-  background:
-    linear-gradient(
-      180deg,
-      rgba(245, 155, 88, 0.035),
-      transparent 25%
-    );
-
-  opacity: 1;
-}
-
-
-/* ---------------------------------------------------------
-   SHELF BOARD - MORE PHYSICAL
-   --------------------------------------------------------- */
-
-.shelf-board {
-  height: 27px;
-
-  background:
-    linear-gradient(
-      180deg,
-      rgba(151, 92, 53, 0.68),
-      rgba(105, 56, 30, 0.72) 42%,
-      rgba(57, 28, 16, 0.9) 100%
-    ),
-    url("https://www.textures4photoshop.com/tex/thumbs/dark-wood-texture-seamless-free-thumb31.jpg");
-
-  background-size:
-    cover,
-    430px auto;
-
-  background-position:
-    center,
-    center;
-
-  border:
-    1px solid
-    rgba(30, 10, 4, 0.78);
-
-  box-shadow:
-    inset 0 2px 0
-      rgba(255, 229, 200, 0.15),
-    inset 0 -3px 4px
-      rgba(22, 6, 2, 0.34),
-    0 7px 10px
-      rgba(13, 3, 1, 0.45);
-}
-
-.shelf-board::before {
-  content: "";
-
-  position: absolute;
-
-  left: 7px;
-  right: 7px;
-  top: 3px;
-
-  height: 4px;
-
-  border-radius: 2px;
-
-  background:
-    linear-gradient(
-      180deg,
-      rgba(255, 231, 207, 0.1),
-      rgba(255, 231, 207, 0)
-    );
-
-  pointer-events: none;
-}
-
-.shelf-board::after {
-  content: "";
-
-  position: absolute;
-
-  left: 0;
-  right: 0;
-  bottom: -6px;
-
-  height: 7px;
-
-  background:
-    linear-gradient(
-      180deg,
-      rgba(24, 7, 2, 0.32),
-      rgba(15, 3, 1, 0)
-    );
-
-  pointer-events: none;
-}
-
-
-/* ---------------------------------------------------------
-   BOOKCASE BASE
-   --------------------------------------------------------- */
-
-.bookcase-base {
-  height: 34px;
-
-  background:
-    linear-gradient(
-      180deg,
-      rgba(137, 81, 45, 0.63),
-      rgba(78, 40, 22, 0.76) 52%,
-      rgba(39, 18, 10, 0.94) 100%
-    ),
-    url("https://www.textures4photoshop.com/tex/thumbs/dark-wood-texture-seamless-free-thumb31.jpg");
-
-  background-size:
-    cover,
-    430px auto;
-
-  background-position:
-    center,
-    center;
-
-  box-shadow:
-    inset 0 2px 0
-      rgba(255, 224, 194, 0.13),
-    inset 0 -5px 7px
-      rgba(15, 4, 1, 0.3),
-    0 22px 31px
-      rgba(19, 5, 1, 0.38);
-}
-
-
-/* ---------------------------------------------------------
-   SPACE BETWEEN SHELVES
-   --------------------------------------------------------- */
-
-.rows {
-  gap: 52px;
-}
-
-
-/* ---------------------------------------------------------
-   MEDIA RESTING AREA
-   --------------------------------------------------------- */
-
-.media-line {
-  padding:
-    13px
-    10px
-    0;
-}
-
-
-/* ---------------------------------------------------------
-   AMBIENT LIGHT AROUND BOOKCASE
-   --------------------------------------------------------- */
-
-.room-glow-left {
-  left: -210px;
-  top: 240px;
-
-  width: 500px;
-  height: 500px;
-
-  opacity: 0.11;
-
-  filter:
-    blur(95px);
-
-  background:
-    #ef8b42;
-}
-
-.room-glow-right {
-  right: -210px;
-  top: 470px;
-
-  width: 500px;
-  height: 500px;
-
-  opacity: 0.055;
-
-  filter:
-    blur(105px);
-
-  background:
-    #61769e;
-}
-
-
-/* =========================================================
-   BOOKCASE - LARGE DESKTOP REFINEMENT
-   ========================================================= */
-
-@media (min-width: 1051px) {
-
-  .library {
-    width:
-      min(1375px, calc(100% - 120px));
-  }
-
-  .bookcase-top {
-    height: 36px;
-  }
-
-  .bookcase-content {
-    padding:
-      30px
-      31px
-      45px;
-
-    border-left-width: 24px;
-    border-right-width: 24px;
-  }
-
-  .bookcase-content::before,
-  .bookcase-content::after {
-    width: 24px;
-  }
-
-  .bookcase-base {
-    height: 36px;
-  }
-
-  .rows {
-    gap: 56px;
-  }
-
-  .shelf-interior {
-    min-height: 330px;
-
-    padding:
-      18px
-      18px
-      27px;
-  }
-
-  .shelf-board {
-    height: 29px;
-  }
-}
-
-
-/* =========================================================
-   MEDIUM DESKTOP REFINEMENT
-   ========================================================= */
-
-@media (min-width: 761px) and (max-width: 1380px) {
-
-  .bookcase-top,
-  .bookcase-base {
-    height: 28px;
-  }
-
-  .bookcase-content {
-    border-left-width: 17px;
-    border-right-width: 17px;
-  }
-
-  .bookcase-content::before,
-  .bookcase-content::after {
-    width: 17px;
-  }
-
-  .shelf-interior {
-    min-height: 290px;
-  }
-
-  .shelf-board {
-    height: 24px;
-  }
-
-  .rows {
-    gap: 42px;
-  }
-}
-
-
-/* =========================================================
-   MOBILE SAFETY
-   ========================================================= */
-
-@media (max-width: 760px) {
-
-  .bookcase-content {
-    border-left-width: 9px;
-    border-right-width: 9px;
-  }
-
-  .bookcase-content::before,
-  .bookcase-content::after {
-    width: 9px;
-  }
-
-  .shelf-board {
-    height: 20px;
-  }
-
-  .rows {
-    gap: 32px;
-  }
-}
-
-
-/* =========================================================
-   BOOKCASE DEPTH / SYMMETRY - PASS 2
-   ========================================================= */
-
-/* ---------------------------------------------------------
-   SYMMETRICAL SIDE POSTS
-   --------------------------------------------------------- */
-
-.bookcase-content::before,
-.bookcase-content::after {
-  width: 24px;
-
-  background:
-    linear-gradient(
-      90deg,
-      #382016 0%,
-      #5b3623 32%,
-      #70432a 50%,
-      #593421 68%,
-      #331b11 100%
-    ),
-    url("https://www.textures4photoshop.com/tex/thumbs/dark-wood-texture-seamless-free-thumb31.jpg");
-
-  background-size:
-    cover,
-    240px auto;
-
-  background-position:
-    center,
-    center;
-
-  opacity: 0.98;
-}
-
-/* Left-facing depth */
-.bookcase-content::before {
-  box-shadow:
-    inset -4px 0 6px
-      rgba(15, 4, 1, 0.38),
-    3px 0 7px
-      rgba(15, 4, 1, 0.12);
-}
-
-/* Right-facing depth */
-.bookcase-content::after {
-  box-shadow:
-    inset 4px 0 6px
-      rgba(15, 4, 1, 0.38),
-    -3px 0 7px
-      rgba(15, 4, 1, 0.12);
-}
-
-
-/* ---------------------------------------------------------
-   REMOVE THE "PANEL INSIDE THE BOOKCASE" LOOK
-   --------------------------------------------------------- */
-
-.shelf-interior {
-  background:
-    linear-gradient(
-      180deg,
-      rgba(62, 29, 16, 0.5),
-      rgba(42, 17, 9, 0.34) 45%,
-      rgba(25, 9, 5, 0.48) 100%
-    );
-
-  border-left: 0;
-  border-right: 0;
-
-  box-shadow:
-    inset 0 24px 35px
-      rgba(10, 3, 1, 0.34),
-    inset 0 -24px 35px
-      rgba(7, 2, 1, 0.38);
-}
-
-/* Remove the harsh rectangular atmosphere layer */
-.shelf-interior::before {
-  background:
-    radial-gradient(
-      ellipse at 50% 8%,
-      rgba(204, 107, 53, 0.055),
-      transparent 38%
-    ),
-    repeating-linear-gradient(
-      90deg,
-      rgba(255, 183, 132, 0.014) 0,
-      rgba(255, 183, 132, 0.014) 1px,
-      transparent 1px,
-      transparent 9px
-    );
-}
-
-.shelf-interior::after {
-  content: "";
-
-  position: absolute;
-  inset: 0;
-
-  pointer-events: none;
-
-  background:
-    linear-gradient(
-      180deg,
-      rgba(255, 184, 108, 0.025),
-      transparent 24%,
-      transparent 72%,
-      rgba(10, 3, 1, 0.08)
-    );
-}
-
-
-/* ---------------------------------------------------------
-   MEDIA SHOULD SIT ON THE SHELF
-   --------------------------------------------------------- */
-
-.shelf-scroll {
-  padding:
-    18px
-    6px
+  font-size:
     8px;
 }
 
-.media-line {
-  align-items: flex-end;
-
-  padding:
-    22px
-    10px
-    0;
-}
-
-
-/* ---------------------------------------------------------
-   CONTACT SHADOW UNDER EACH ITEM
-   --------------------------------------------------------- */
-
-.media-object::after {
-  content: "";
-
-  position: absolute;
-
-  left: 8%;
-  right: 8%;
-  bottom: -3px;
-
-  height: 7px;
-
-  border-radius: 50%;
-
-  background:
-    rgba(7, 2, 1, 0.5);
-
-  filter:
-    blur(4px);
-
-  opacity: 0.58;
-
-  pointer-events: none;
-
-  transition:
-    opacity 180ms ease,
-    transform 180ms ease;
-}
-
-.media-object:hover::after {
-  opacity: 0.75;
-
-  transform:
-    scaleX(1.04);
-}
-
-
-/* ---------------------------------------------------------
-   STRONGER REAR DEPTH
-   --------------------------------------------------------- */
-
-.bookcase-content {
-  box-shadow:
-    inset 18px 0 28px
-      rgba(14, 4, 1, 0.34),
-    inset -18px 0 28px
-      rgba(14, 4, 1, 0.34),
-    inset 0 32px 42px
-      rgba(16, 5, 2, 0.18),
-    inset 0 -18px 32px
-      rgba(16, 5, 2, 0.2);
-}
-
 
 /* =========================================================
-   BEDROOM / PHYSICAL BOOKCASE - PASS 1
+   MANUAL SUBMIT
    ========================================================= */
 
-/* ---------------------------------------------------------
-   ROOM ATMOSPHERE
-   --------------------------------------------------------- */
-
-.room {
-  background:
-    radial-gradient(
-      ellipse at 50% 34%,
-      rgba(35, 14, 7, 0.22) 0%,
-      rgba(35, 14, 7, 0.38) 34%,
-      rgba(26, 10, 6, 0.16) 63%,
-      rgba(20, 8, 5, 0.02) 100%
-    ),
-    linear-gradient(
-      90deg,
-      rgba(63, 29, 19, 0.7),
-      rgba(102, 49, 28, 0.39) 48%,
-      rgba(62, 27, 19, 0.7)
-    ),
-    url("https://img.magnific.com/free-vector/abstract-background-with-retro-styled-swirl-pattern_1048-19600.jpg?semt=ais_hybrid&w=740&q=80");
-
-  background-size:
-    cover,
-    cover,
-    1500px auto;
-
-  background-position:
-    center,
-    center,
-    center top;
-}
-
-.room::before {
-  background:
-    radial-gradient(
-      ellipse at 50% 24%,
-      rgba(255, 183, 105, 0.11),
-      transparent 34%
-    ),
-    radial-gradient(
-      ellipse at 50% 68%,
-      rgba(139, 70, 36, 0.09),
-      transparent 40%
-    ),
-    linear-gradient(
-      180deg,
-      rgba(33, 14, 8, 0.15),
-      rgba(46, 18, 10, 0.05) 42%,
-      rgba(24, 9, 6, 0.31)
-    );
-
-  box-shadow:
-    inset 0 0 180px
-      rgba(27, 9, 4, 0.5);
-}
-
-
-/* ---------------------------------------------------------
-   BOOKCASE - OUTER STRUCTURE
-   --------------------------------------------------------- */
-
-.bookcase {
-  filter:
-    drop-shadow(
-      0 28px 34px
-      rgba(17, 5, 2, 0.38)
-    );
-}
-
-/* ---------------------------------------------------------
-   TOP BOARD
-   --------------------------------------------------------- */
-
-.bookcase-top {
-  height: 34px;
-
-  background:
-    linear-gradient(
-      180deg,
-      rgba(139, 86, 49, 0.55),
-      rgba(93, 49, 28, 0.58) 46%,
-      rgba(51, 26, 16, 0.76) 100%
-    ),
-    url("https://www.textures4photoshop.com/tex/thumbs/dark-wood-texture-seamless-free-thumb31.jpg");
-
-  background-size:
-    cover,
-    430px auto;
-
-  background-position:
-    center,
-    center;
-
-  border-color:
-    rgba(40, 16, 7, 0.78);
-
-  box-shadow:
-    inset 0 2px 0
-      rgba(255, 231, 204, 0.16),
-    inset 0 -3px 0
-      rgba(30, 9, 3, 0.28),
-    0 9px 17px
-      rgba(24, 7, 2, 0.32);
-}
-
-.bookcase-top::before {
-  content: "";
-
-  position: absolute;
-  left: 9px;
-  right: 9px;
-  top: 4px;
-
-  height: 5px;
-
-  border-radius: 2px;
-
-  background:
-    linear-gradient(
-      180deg,
-      rgba(255, 230, 203, 0.12),
-      rgba(255, 230, 203, 0.015)
-    );
-
-  pointer-events: none;
-}
-
-
-/* ---------------------------------------------------------
-   MAIN CABINET
-   --------------------------------------------------------- */
-
-.bookcase-content {
-  padding:
-    28px
-    30px
-    42px;
-
-  background:
-    linear-gradient(
-      90deg,
-      rgba(74, 38, 23, 0.88),
-      rgba(45, 21, 12, 0.7) 12%,
-      rgba(37, 17, 10, 0.72) 50%,
-      rgba(45, 21, 12, 0.7) 88%,
-      rgba(74, 38, 23, 0.88)
-    ),
-    url("https://www.textures4photoshop.com/tex/thumbs/dark-wood-texture-seamless-free-thumb31.jpg");
-
-  background-size:
-    cover,
-    620px auto;
-
-  background-position:
-    center,
-    center;
-
-  border-left-width: 22px;
-  border-right-width: 22px;
-
-  box-shadow:
-    inset 14px 0 26px
-      rgba(18, 6, 2, 0.34),
-    inset -14px 0 26px
-      rgba(18, 6, 2, 0.34),
-    inset 0 0 45px
-      rgba(27, 8, 3, 0.19);
-}
-
-
-/* ---------------------------------------------------------
-   SIDE POSTS
-   --------------------------------------------------------- */
-
-.bookcase-content::before,
-.bookcase-content::after {
-  width: 22px;
-
-  background:
-    linear-gradient(
-      90deg,
-      #351d13 0%,
-      #68402a 34%,
-      #7b4b30 50%,
-      #4e2f20 72%,
-      #2d170f 100%
-    ),
-    url("https://www.textures4photoshop.com/tex/thumbs/dark-wood-texture-seamless-free-thumb31.jpg");
-
-  background-size:
-    cover,
-    240px auto;
-
-  box-shadow:
-    inset 0 0 5px
-      rgba(16, 4, 1, 0.3);
-}
-
-.bookcase-content::before {
-  box-shadow:
-    inset -3px 0 5px
-      rgba(16, 4, 1, 0.3),
-    3px 0 7px
-      rgba(14, 4, 1, 0.12);
-}
-
-.bookcase-content::after {
-  box-shadow:
-    inset 3px 0 5px
-      rgba(16, 4, 1, 0.3),
-    -3px 0 7px
-      rgba(14, 4, 1, 0.12);
-}
-
-
-/* ---------------------------------------------------------
-   BACK PANEL
-   --------------------------------------------------------- */
-
-.bookcase-back {
-  background:
-    linear-gradient(
-      180deg,
-      rgba(58, 27, 15, 0.22),
-      rgba(31, 13, 8, 0.06) 24%,
-      rgba(21, 8, 4, 0.24) 100%
-    ),
-    url("https://www.textures4photoshop.com/tex/thumbs/dark-wood-texture-seamless-free-thumb31.jpg");
-
-  background-size:
-    cover,
-    720px auto;
-
-  background-position:
-    center,
-    center;
-
-  opacity: 0.78;
-}
-
-
-/* ---------------------------------------------------------
-   SHELF INTERIOR
-   --------------------------------------------------------- */
-
-.shelf-interior {
-  min-height: 320px;
-
-  background:
-    linear-gradient(
-      180deg,
-      rgba(56, 26, 15, 0.9),
-      rgba(42, 18, 10, 0.87) 35%,
-      rgba(35, 14, 8, 0.94) 100%
-    ),
-    url("https://www.textures4photoshop.com/tex/thumbs/dark-wood-texture-seamless-free-thumb31.jpg");
-
-  background-size:
-    cover,
-    540px auto;
-
-  background-position:
-    center,
-    center;
-
-  border-left:
-    1px solid
-    rgba(255, 220, 188, 0.08);
-
-  border-right:
-    1px solid
-    rgba(255, 220, 188, 0.08);
-
-  box-shadow:
-    inset 0 18px 28px
-      rgba(10, 3, 1, 0.31),
-    inset 0 -22px 30px
-      rgba(8, 2, 1, 0.34),
-    inset 0 0 42px
-      rgba(11, 3, 1, 0.18);
-}
-
-
-/* ---------------------------------------------------------
-   SHELF INTERIOR LIGHT
-   --------------------------------------------------------- */
-
-.shelf-interior::after {
-  content: "";
-
-  position: absolute;
-  inset: 0;
-
-  pointer-events: none;
-
-  background:
-    linear-gradient(
-      180deg,
-      rgba(245, 155, 88, 0.035),
-      transparent 25%
-    );
-
-  opacity: 1;
-}
-
-
-/* ---------------------------------------------------------
-   SHELF BOARD - MORE PHYSICAL
-   --------------------------------------------------------- */
-
-.shelf-board {
-  height: 27px;
-
-  background:
-    linear-gradient(
-      180deg,
-      rgba(151, 92, 53, 0.68),
-      rgba(105, 56, 30, 0.72) 42%,
-      rgba(57, 28, 16, 0.9) 100%
-    ),
-    url("https://www.textures4photoshop.com/tex/thumbs/dark-wood-texture-seamless-free-thumb31.jpg");
-
-  background-size:
-    cover,
-    430px auto;
-
-  background-position:
-    center,
-    center;
+.manual-submit {
+  width:
+    100%;
+
+  height:
+    43px;
+
+  margin-top:
+    5px;
 
   border:
     1px solid
-    rgba(30, 10, 4, 0.78);
+    rgba(231, 141, 77, 0.34);
 
-  box-shadow:
-    inset 0 2px 0
-      rgba(255, 229, 200, 0.15),
-    inset 0 -3px 4px
-      rgba(22, 6, 2, 0.34),
-    0 7px 10px
-      rgba(13, 3, 1, 0.45);
-}
+  border-radius:
+    5px;
 
-.shelf-board::before {
-  content: "";
-
-  position: absolute;
-
-  left: 7px;
-  right: 7px;
-  top: 3px;
-
-  height: 4px;
-
-  border-radius: 2px;
+  color:
+    rgba(255, 239, 224, 0.9);
 
   background:
     linear-gradient(
       180deg,
-      rgba(255, 231, 207, 0.1),
-      rgba(255, 231, 207, 0)
+      rgba(198, 108, 54, 0.43),
+      rgba(102, 46, 23, 0.35)
     );
 
-  pointer-events: none;
+  font-size:
+    10px;
+
+  font-weight:
+    650;
+
+  cursor:
+    pointer;
+
+  transition:
+    background 150ms ease,
+    border-color 150ms ease;
 }
 
-.shelf-board::after {
-  content: "";
 
-  position: absolute;
-
-  left: 0;
-  right: 0;
-  bottom: -6px;
-
-  height: 7px;
+.manual-submit:hover:not(:disabled) {
+  border-color:
+    rgba(231, 141, 77, 0.46);
 
   background:
     linear-gradient(
       180deg,
-      rgba(24, 7, 2, 0.32),
-      rgba(15, 3, 1, 0)
+      rgba(216, 125, 64, 0.52),
+      rgba(119, 52, 25, 0.43)
     );
-
-  pointer-events: none;
 }
 
 
-/* ---------------------------------------------------------
-   BOOKCASE BASE
-   --------------------------------------------------------- */
+.manual-submit:disabled {
+  opacity:
+    0.35;
 
-.bookcase-base {
-  height: 34px;
-
-  background:
-    linear-gradient(
-      180deg,
-      rgba(137, 81, 45, 0.63),
-      rgba(78, 40, 22, 0.76) 52%,
-      rgba(39, 18, 10, 0.94) 100%
-    ),
-    url("https://www.textures4photoshop.com/tex/thumbs/dark-wood-texture-seamless-free-thumb31.jpg");
-
-  background-size:
-    cover,
-    430px auto;
-
-  background-position:
-    center,
-    center;
-
-  box-shadow:
-    inset 0 2px 0
-      rgba(255, 224, 194, 0.13),
-    inset 0 -5px 7px
-      rgba(15, 4, 1, 0.3),
-    0 22px 31px
-      rgba(19, 5, 1, 0.38);
-}
-
-
-/* ---------------------------------------------------------
-   SPACE BETWEEN SHELVES
-   --------------------------------------------------------- */
-
-.rows {
-  gap: 52px;
-}
-
-
-/* ---------------------------------------------------------
-   MEDIA RESTING AREA
-   --------------------------------------------------------- */
-
-.media-line {
-  padding:
-    13px
-    10px
-    0;
-}
-
-
-/* ---------------------------------------------------------
-   AMBIENT LIGHT AROUND BOOKCASE
-   --------------------------------------------------------- */
-
-.room-glow-left {
-  left: -210px;
-  top: 240px;
-
-  width: 500px;
-  height: 500px;
-
-  opacity: 0.11;
-
-  filter:
-    blur(95px);
-
-  background:
-    #ef8b42;
-}
-
-.room-glow-right {
-  right: -210px;
-  top: 470px;
-
-  width: 500px;
-  height: 500px;
-
-  opacity: 0.055;
-
-  filter:
-    blur(105px);
-
-  background:
-    #61769e;
+  cursor:
+    not-allowed;
 }
 
 
 /* =========================================================
-   BOOKCASE - LARGE DESKTOP REFINEMENT
+   LIBRARY CONTROLS
+   ========================================================= */
+
+.library-controls {
+  display:
+    flex;
+
+  justify-content:
+    flex-end;
+
+  margin-bottom:
+    14px;
+}
+
+
+.add-button {
+  display:
+    inline-flex;
+
+  align-items:
+    center;
+
+  gap:
+    8px;
+
+  padding:
+    11px 16px;
+
+  border:
+    1px solid
+    rgba(255, 226, 198, 0.16);
+
+  border-radius:
+    5px;
+
+  color:
+    rgba(255, 238, 222, 0.86);
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(163, 96, 53, 0.4),
+      rgba(73, 38, 24, 0.43)
+    );
+
+  box-shadow:
+    inset 0 1px 0
+      rgba(255, 234, 216, 0.07),
+    0 5px 14px
+      rgba(38, 10, 3, 0.17);
+
+  font-size:
+    11px;
+
+  font-weight:
+    600;
+
+  cursor:
+    pointer;
+
+  transition:
+    transform 150ms ease,
+    border-color 150ms ease,
+    background 150ms ease;
+}
+
+
+.add-button span {
+  font-size:
+    16px;
+
+  line-height:
+    1;
+}
+
+
+.add-button:hover {
+  transform:
+    translateY(-1px);
+
+  border-color:
+    rgba(255, 224, 194, 0.25);
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(188, 112, 63, 0.47),
+      rgba(85, 43, 26, 0.48)
+    );
+}
+
+
+/* =========================================================
+   ANIMATIONS
+   ========================================================= */
+
+@keyframes detailFade {
+  from {
+    opacity:
+      0;
+  }
+
+  to {
+    opacity:
+      1;
+  }
+}
+
+
+@keyframes addMediaFade {
+  from {
+    opacity:
+      0;
+  }
+
+  to {
+    opacity:
+      1;
+  }
+}
+
+
+@keyframes addMediaOpen {
+  from {
+    opacity:
+      0;
+
+    transform:
+      translateY(14px)
+      scale(0.985);
+  }
+
+  to {
+    opacity:
+      1;
+
+    transform:
+      translateY(0)
+      scale(1);
+  }
+}
+
+
+/* =========================================================
+   LARGE DESKTOP
    ========================================================= */
 
 @media (min-width: 1051px) {
 
+  .site-header {
+    height:
+      100px;
+  }
+
+  .room-content {
+    padding:
+      148px
+      0
+      140px;
+  }
+
   .library {
     width:
-      min(1375px, calc(100% - 120px));
+      80vw;
+
+    max-width:
+      none;
   }
 
   .bookcase-top {
-    height: 36px;
+    height:
+      38px;
   }
 
   .bookcase-content {
     padding:
-      30px
-      31px
-      45px;
+      28px
+      32px
+      42px;
 
-    border-left-width: 24px;
-    border-right-width: 24px;
+    border-left-width:
+      28px;
+
+    border-right-width:
+      28px;
   }
 
   .bookcase-content::before,
   .bookcase-content::after {
-    width: 24px;
+    width:
+      28px;
   }
 
   .bookcase-base {
-    height: 36px;
+    height:
+      38px;
   }
 
   .rows {
-    gap: 56px;
+    gap:
+      62px;
   }
 
   .shelf-interior {
-    min-height: 330px;
-
-    padding:
-      18px
-      18px
-      27px;
+    min-height:
+      325px;
   }
 
   .shelf-board {
-    height: 29px;
+    height:
+      31px;
+  }
+
+  .media-line {
+    gap:
+      7px;
+  }
+
+  .media-object:hover {
+    transform:
+      translateY(-20px)
+      rotate(-0.8deg);
+  }
+
+  .media-object:nth-child(7n):hover {
+    transform:
+      translateY(-20px)
+      rotate(0.45deg);
+  }
+
+  .media-object:nth-child(9n):hover {
+    transform:
+      translateY(-20px)
+      rotate(-0.35deg);
+  }
+
+  .media-detail {
+    width:
+      min(
+        1080px,
+        calc(100% - 60px)
+      );
   }
 }
 
 
 /* =========================================================
-   MEDIUM DESKTOP REFINEMENT
+   TABLET / MEDIUM DESKTOP
    ========================================================= */
 
-@media (min-width: 761px) and (max-width: 1380px) {
+@media (min-width: 761px) and (max-width: 1050px) {
+
+  .site-header {
+    height:
+      90px;
+  }
+
+  .header-inner {
+    padding:
+      0 24px;
+  }
+
+  .brand-console {
+    height:
+      54px;
+  }
+
+  .brand-mark {
+    font-size:
+      19px;
+  }
+
+  .brand-caption {
+    display:
+      none;
+  }
+
+  .main-nav {
+    gap:
+      5px;
+  }
+
+  .nav-item {
+    min-width:
+      80px;
+
+    height:
+      48px;
+
+    padding:
+      0 12px;
+
+    font-size:
+      12px;
+  }
+
+  .header-add-media {
+    min-width:
+      80px;
+
+    height:
+      48px;
+
+    padding:
+      0 12px;
+
+    font-size:
+      11px;
+  }
+
+  .room-content {
+    padding:
+      132px
+      0
+      110px;
+  }
+
+  .library {
+    width:
+      80vw;
+
+    max-width:
+      none;
+  }
 
   .bookcase-top,
   .bookcase-base {
-    height: 28px;
+    height:
+      27px;
   }
 
   .bookcase-content {
-    border-left-width: 17px;
-    border-right-width: 17px;
+    padding:
+      22px
+      22px
+      30px;
+
+    border-left-width:
+      18px;
+
+    border-right-width:
+      18px;
   }
 
   .bookcase-content::before,
   .bookcase-content::after {
-    width: 17px;
+    width:
+      18px;
   }
 
   .shelf-interior {
-    min-height: 290px;
+    min-height:
+      285px;
   }
 
   .shelf-board {
-    height: 24px;
+    height:
+      25px;
   }
 
   .rows {
-    gap: 42px;
+    gap:
+      42px;
+  }
+
+  .orientation-spine {
+    --object-width:
+      70px;
+
+    --object-height:
+      225px;
+  }
+
+  .format-vhs {
+    --object-width:
+      76px;
+
+    --object-height:
+      228px;
+  }
+
+  .format-dvd {
+    --object-width:
+      65px;
+
+    --object-height:
+      223px;
+  }
+
+  .format-bluray {
+    --object-width:
+      61px;
+
+    --object-height:
+      226px;
+  }
+
+  .format-laserdisc {
+    --object-width:
+      87px;
+
+    --object-height:
+      226px;
+  }
+
+  .format-nes {
+    --object-width:
+      78px;
+
+    --object-height:
+      210px;
+  }
+
+  .format-ps1 {
+    --object-width:
+      71px;
+
+    --object-height:
+      215px;
+  }
+
+  .format-xbox360 {
+    --object-width:
+      73px;
+
+    --object-height:
+      219px;
+  }
+
+  .format-custom {
+    --object-width:
+      68px;
+
+    --object-height:
+      213px;
+  }
+
+  .orientation-cover {
+    width:
+      175px;
+
+    height:
+      133px;
+  }
+
+  .media-detail {
+    width:
+      min(
+        900px,
+        calc(100% - 40px)
+      );
   }
 }
 
 
 /* =========================================================
-   MOBILE SAFETY
+   MOBILE
    ========================================================= */
 
 @media (max-width: 760px) {
 
+  .site-header {
+    height:
+      64px;
+  }
+
+  .header-inner {
+    padding:
+      0 12px;
+
+    grid-template-columns:
+      1fr auto;
+  }
+
+  .brand-console {
+    height:
+      40px;
+
+    gap:
+      8px;
+
+    padding:
+      0 10px;
+  }
+
+  .brand-light {
+    width:
+      5px;
+
+    height:
+      5px;
+  }
+
+  .brand-mark {
+    font-size:
+      13px;
+  }
+
+  .brand-caption {
+    display:
+      none;
+  }
+
+  .header-status {
+    display:
+      none;
+  }
+
+  .main-nav {
+    gap:
+      1px;
+  }
+
+  .nav-item {
+    min-width:
+      0;
+
+    height:
+      37px;
+
+    padding:
+      0 7px;
+
+    font-size:
+      9px;
+  }
+
+  .nav-item.active .nav-indicator {
+    width:
+      15px;
+  }
+
+  .header-add-media {
+    min-width:
+      0;
+
+    width:
+      42px;
+
+    height:
+      37px;
+
+    padding:
+      0;
+
+    gap:
+      0;
+  }
+
+  .header-add-media > span:last-child {
+    display:
+      none;
+  }
+
+  .header-add-icon {
+    font-size:
+      18px;
+  }
+
+  .room-content {
+    min-height:
+      100vh;
+
+    padding:
+      94px
+      0
+      80px;
+  }
+
+  .library {
+    width:
+      calc(100% - 24px);
+
+    max-width:
+      none;
+  }
+
   .bookcase-content {
-    border-left-width: 9px;
-    border-right-width: 9px;
+    padding:
+      16px
+      11px
+      25px;
+
+    border-left-width:
+      8px;
+
+    border-right-width:
+      8px;
   }
 
   .bookcase-content::before,
   .bookcase-content::after {
-    width: 9px;
+    width:
+      8px;
+  }
+
+  .bookcase-top,
+  .bookcase-base {
+    height:
+      18px;
+  }
+
+  .shelf-interior {
+    min-height:
+      225px;
+
+    padding:
+      11px
+      8px
+      20px;
   }
 
   .shelf-board {
-    height: 20px;
+    height:
+      20px;
+  }
+
+  .shelf-scroll {
+    padding:
+      11px
+      4px
+      4px;
+  }
+
+  .media-line {
+    gap:
+      4px;
+
+    padding:
+      10px
+      7px
+      0;
   }
 
   .rows {
-    gap: 32px;
+    gap:
+      30px;
+  }
+
+  .orientation-spine {
+    --object-width:
+      60px;
+
+    --object-height:
+      188px;
+  }
+
+  .format-vhs {
+    --object-width:
+      64px;
+
+    --object-height:
+      187px;
+  }
+
+  .format-dvd {
+    --object-width:
+      56px;
+
+    --object-height:
+      181px;
+  }
+
+  .format-bluray {
+    --object-width:
+      52px;
+
+    --object-height:
+      184px;
+  }
+
+  .format-laserdisc {
+    --object-width:
+      72px;
+
+    --object-height:
+      186px;
+  }
+
+  .format-nes {
+    --object-width:
+      65px;
+
+    --object-height:
+      174px;
+  }
+
+  .format-ps1 {
+    --object-width:
+      59px;
+
+    --object-height:
+      178px;
+  }
+
+  .format-xbox360 {
+    --object-width:
+      61px;
+
+    --object-height:
+      181px;
+  }
+
+  .format-custom {
+    --object-width:
+      61px;
+
+    --object-height:
+      177px;
+  }
+
+  .orientation-cover {
+    width:
+      145px;
+
+    height:
+      108px;
+  }
+
+  .shelf-control {
+    width:
+      26px;
+
+    height:
+      24px;
+
+    font-size:
+      17px;
+  }
+
+  .media-detail {
+    width:
+      min(
+        860px,
+        calc(100% - 20px)
+      );
+
+    grid-template-columns:
+      1fr;
+
+    max-height:
+      calc(100vh - 20px);
+
+    overflow-y:
+      auto;
+  }
+
+  .detail-cover {
+    min-height:
+      320px;
+  }
+
+  .detail-info {
+    padding:
+      31px
+      25px
+      30px;
+  }
+
+  .detail-facts {
+    grid-template-columns:
+      1fr;
+  }
+
+  .detail-actions {
+    flex-wrap:
+      wrap;
+  }
+
+  .detail-actions button {
+    flex:
+      1;
+  }
+
+  .appearance-layout {
+    grid-template-columns:
+      1fr;
+  }
+
+  .image-upload-grid {
+    grid-template-columns:
+      1fr;
+  }
+
+  .media-preview-panel {
+    order:
+      -1;
+  }
+
+  .media-preview-stage {
+    min-height:
+      220px;
+  }
+
+  .add-media-backdrop {
+    padding:
+      10px;
+  }
+
+  .add-media-modal {
+    max-height:
+      calc(100vh - 20px);
+  }
+
+  .add-media-header {
+    padding:
+      20px;
+  }
+
+  .add-media-body {
+    padding:
+      20px;
+  }
+
+  .media-type-switch,
+  .add-mode-switch,
+  .form-grid {
+    grid-template-columns:
+      1fr;
+  }
+
+  .manual-options {
+    flex-direction:
+      column;
+  }
+
+  .orientation-field {
+    align-items:
+      flex-start;
+  }
+
+  .automatic-preview {
+    align-items:
+      flex-start;
+
+    flex-direction:
+      column;
+  }
+
+  .automatic-preview button {
+    width:
+      100%;
+  }
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 470px) {
+
+  .header-inner {
+    padding:
+      0 9px;
+  }
+
+  .brand-console {
+    border:
+      0;
+
+    background:
+      transparent;
+
+    box-shadow:
+      none;
+
+    padding-left:
+      2px;
+
+    padding-right:
+      2px;
+  }
+
+  .brand-console:hover {
+    background:
+      transparent;
+
+    transform:
+      none;
+  }
+
+  .brand-mark {
+    font-size:
+      12px;
+  }
+
+  .nav-item {
+    padding-inline:
+      5px;
+
+    font-size:
+      8px;
+  }
+
+  .library {
+    width:
+      calc(100% - 14px);
+  }
+
+  .bookcase-content {
+    padding:
+      11px
+      6px
+      20px;
+  }
+
+  .shelf-interior {
+    padding-inline:
+      4px;
+  }
+
+  .shelf-control {
+    width:
+      23px;
+
+    height:
+      22px;
+  }
+
+  .media-line {
+    gap:
+      4px;
+  }
+
+  .detail-backdrop {
+    padding:
+      10px;
+  }
+
+  .detail-info h2 {
+    font-size:
+      30px;
+  }
+
+  .cover-title {
+    font-size:
+      36px;
+  }
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    scroll-behavior:
+      auto !important;
+
+    transition-duration:
+      0.01ms !important;
+
+    animation-duration:
+      0.01ms !important;
+
+    animation-iteration-count:
+      1 !important;
   }
 }
