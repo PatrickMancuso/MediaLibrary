@@ -88,9 +88,7 @@ function CollectionDashboard({
             <h2>Recently Added</h2>
           </div>
 
-          <small>
-            {recentlyAdded.length} titles
-          </small>
+        
         </div>
 
         <div className="recent-media-track">

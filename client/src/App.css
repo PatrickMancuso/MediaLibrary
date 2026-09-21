@@ -5810,10 +5810,8 @@
 }
 
 .dashboard-section-header > small {
-  color:
-    rgba(245, 220, 198, 0.3);
-
-  font-size: 9px;
+  font-size: 12px;
+  color: rgba(220, 216, 196, 0.5);
 }
 
 
@@ -7542,14 +7540,14 @@
 
 
 .recent-media-info strong {
-  font-size:
-    11px;
+  font-size: 12px;
 }
+
 
 
 .recent-media-info span {
   font-size:
-    9px;
+    10px;
 
   color:
     rgba(211, 216, 194, 0.45);
@@ -7635,14 +7633,9 @@
 
 
 .category-content em {
-  margin-top:
-    7px;
-
-  font-size:
-    10px;
-
-  color:
-    #d98b4b;
+  margin-top: 7px;
+  font-size: 11px;
+  color: #d98b4b;
 }
 
 
@@ -7697,11 +7690,8 @@
 
 
 .dashboard-text-button {
-  font-size:
-    10px;
-
-  color:
-    rgba(224, 148, 87, 0.72);
+  font-size: 12px;
+  color: rgba(224, 148, 87, 0.78);
 }
 
 
@@ -7749,11 +7739,8 @@
 
 .overview-stats span,
 .overview-formats span {
-  font-size:
-    8px;
-
-  color:
-    rgba(211, 214, 191, 0.42);
+  font-size: 9px;
+  color: rgba(211, 214, 191, 0.46);
 }
 
 
@@ -7767,11 +7754,8 @@
 
 
 .overview-formats strong {
-  font-size:
-    14px;
-
-  color:
-    #da904f;
+  font-size: 15px;
+  color: #da904f;
 }
 
 
