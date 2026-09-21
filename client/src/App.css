@@ -6778,3 +6778,455 @@
       repeat(2, 1fr);
   }
 }
+
+
+/* =========================================================
+   COLLECTION DASHBOARD - COMPOSITION + NEW PALETTE
+   ========================================================= */
+
+/* ---------------------------------------------------------
+   DASHBOARD COMPOSITION
+   --------------------------------------------------------- */
+
+.collection-dashboard {
+  width: 80vw;
+  max-width: none;
+
+  margin:
+    0 auto;
+
+  gap: 30px;
+}
+
+
+/* ---------------------------------------------------------
+   INTRO
+   --------------------------------------------------------- */
+
+.dashboard-intro {
+  padding:
+    4px 2px
+    0;
+}
+
+.dashboard-kicker {
+  color:
+    rgba(191, 202, 166, 0.58);
+}
+
+.dashboard-intro h1 {
+  color:
+    #f0e5d3;
+
+  text-shadow:
+    0 4px 18px
+    rgba(19, 35, 25, 0.34);
+}
+
+.dashboard-intro p {
+  color:
+    rgba(224, 218, 195, 0.55);
+}
+
+.dashboard-total {
+  min-width:
+    135px;
+
+  border-color:
+    rgba(125, 151, 105, 0.2);
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(66, 88, 60, 0.45),
+      rgba(31, 42, 34, 0.5)
+    );
+
+  box-shadow:
+    inset 0 1px 0
+      rgba(222, 229, 205, 0.05),
+    0 10px 22px
+      rgba(16, 26, 18, 0.17);
+}
+
+.dashboard-total span {
+  color:
+    rgba(191, 202, 166, 0.5);
+}
+
+.dashboard-total strong {
+  color:
+    #e3a060;
+}
+
+.dashboard-total small {
+  color:
+    rgba(224, 218, 195, 0.4);
+}
+
+
+/* ---------------------------------------------------------
+   SECTION HEADERS
+   --------------------------------------------------------- */
+
+.dashboard-section {
+  gap:
+    11px;
+}
+
+.dashboard-section-header {
+  padding:
+    0 3px;
+}
+
+.dashboard-section-header span,
+.overview-heading span {
+  color:
+    rgba(213, 138, 69, 0.67);
+}
+
+.dashboard-section-header h2,
+.overview-heading h2 {
+  color:
+    rgba(238, 230, 213, 0.93);
+}
+
+
+/* =========================================================
+   RECENTLY ADDED
+   ========================================================= */
+
+.recent-media-track {
+  gap:
+    13px;
+
+  padding:
+    5px 4px
+    15px;
+}
+
+.recent-media-card {
+  flex:
+    0 0 160px;
+}
+
+.recent-media-art {
+  height:
+    220px;
+
+  border-color:
+    rgba(121, 148, 103, 0.2);
+
+  background:
+    linear-gradient(
+      145deg,
+      #536448,
+      #29372d 58%,
+      #1b251f
+    );
+
+  box-shadow:
+    0 12px 19px
+      rgba(15, 24, 17, 0.3);
+}
+
+.recent-media-card:hover
+.recent-media-art {
+  border-color:
+    rgba(218, 150, 87, 0.4);
+
+  box-shadow:
+    0 20px 30px
+      rgba(13, 22, 15, 0.4);
+}
+
+.recent-art-type {
+  color:
+    rgba(229, 229, 208, 0.57);
+}
+
+.recent-media-art strong {
+  color:
+    #f2e9da;
+}
+
+.recent-art-bottom {
+  color:
+    rgba(221, 216, 194, 0.52);
+}
+
+.recent-media-info strong {
+  color:
+    rgba(239, 231, 215, 0.84);
+}
+
+.recent-media-info span {
+  color:
+    rgba(211, 215, 193, 0.43);
+}
+
+
+/* =========================================================
+   MOVIES / GAMES
+   ========================================================= */
+
+.dashboard-category-grid {
+  gap:
+    13px;
+}
+
+.dashboard-category-card {
+  min-height:
+    235px;
+
+  border-color:
+    rgba(116, 141, 99, 0.18);
+
+  background:
+    #263329;
+
+  box-shadow:
+    0 17px 28px
+      rgba(13, 21, 15, 0.3);
+}
+
+.dashboard-category-card:hover {
+  border-color:
+    rgba(215, 142, 78, 0.34);
+
+  box-shadow:
+    0 23px 35px
+      rgba(11, 19, 13, 0.42);
+}
+
+
+/* Movie palette */
+
+.dashboard-category-movies
+.category-art-item:nth-child(1) {
+  background:
+    linear-gradient(
+      155deg,
+      #c56d36,
+      #5a3425
+    );
+}
+
+.dashboard-category-movies
+.category-art-item:nth-child(2) {
+  background:
+    linear-gradient(
+      155deg,
+      #617865,
+      #26352c
+    );
+}
+
+.dashboard-category-movies
+.category-art-item:nth-child(3) {
+  background:
+    linear-gradient(
+      155deg,
+      #a64f2d,
+      #4a2920
+    );
+}
+
+.dashboard-category-movies
+.category-art-item:nth-child(4) {
+  background:
+    linear-gradient(
+      155deg,
+      #777d54,
+      #353823
+    );
+}
+
+
+/* Game palette */
+
+.dashboard-category-games
+.category-art-item:nth-child(1) {
+  background:
+    linear-gradient(
+      155deg,
+      #59704d,
+      #253529
+    );
+}
+
+.dashboard-category-games
+.category-art-item:nth-child(2) {
+  background:
+    linear-gradient(
+      155deg,
+      #7b8760,
+      #39432c
+    );
+}
+
+.dashboard-category-games
+.category-art-item:nth-child(3) {
+  background:
+    linear-gradient(
+      155deg,
+      #bd6333,
+      #512a20
+    );
+}
+
+.dashboard-category-games
+.category-art-item:nth-child(4) {
+  background:
+    linear-gradient(
+      155deg,
+      #687a59,
+      #29392c
+    );
+}
+
+
+.category-overlay {
+  background:
+    linear-gradient(
+      90deg,
+      rgba(17, 27, 21, 0.78),
+      rgba(17, 27, 21, 0.18) 58%,
+      rgba(17, 27, 21, 0.54)
+    ),
+    linear-gradient(
+      180deg,
+      rgba(12, 20, 15, 0.04),
+      rgba(12, 20, 15, 0.72)
+    );
+}
+
+.category-content span {
+  color:
+    rgba(221, 203, 176, 0.52);
+}
+
+.category-content strong {
+  color:
+    #eee5d5;
+}
+
+.category-content small {
+  color:
+    rgba(220, 215, 195, 0.56);
+}
+
+.category-content em {
+  color:
+    #d58a49;
+}
+
+
+/* =========================================================
+   FAVORITES
+   ========================================================= */
+
+.favorite-grid {
+  gap:
+    11px;
+}
+
+.favorite-art {
+  border-color:
+    rgba(116, 141, 99, 0.16);
+
+  background:
+    linear-gradient(
+      145deg,
+      #596b4d,
+      #2b382d
+    );
+
+  box-shadow:
+    0 8px 14px
+      rgba(13, 21, 15, 0.27);
+}
+
+.favorite-card:hover
+.favorite-art {
+  border-color:
+    rgba(216, 140, 77, 0.36);
+}
+
+.favorite-art span {
+  color:
+    rgba(239, 229, 210, 0.82);
+}
+
+.favorite-card strong {
+  color:
+    rgba(237, 229, 213, 0.82);
+}
+
+.favorite-card small {
+  color:
+    rgba(207, 214, 190, 0.38);
+}
+
+
+/* =========================================================
+   OVERVIEW
+   ========================================================= */
+
+.dashboard-overview {
+  padding:
+    20px;
+
+  border-color:
+    rgba(110, 137, 94, 0.17);
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(43, 61, 48, 0.5),
+      rgba(24, 34, 28, 0.4)
+    );
+
+  box-shadow:
+    inset 0 1px 0
+      rgba(224, 230, 210, 0.035);
+}
+
+.overview-stats div,
+.overview-formats div {
+  border-color:
+    rgba(122, 146, 102, 0.13);
+
+  background:
+    rgba(72, 91, 66, 0.12);
+}
+
+.overview-stats span,
+.overview-formats span {
+  color:
+    rgba(206, 207, 182, 0.4);
+}
+
+.overview-stats strong {
+  color:
+    rgba(238, 229, 211, 0.87);
+}
+
+.overview-formats strong {
+  color:
+    #d58a49;
+}
+
+
+/* =========================================================
+   DASHBOARD MOBILE
+   ========================================================= */
+
+@media (max-width: 760px) {
+
+  .collection-dashboard {
+    width:
+      calc(100% - 24px);
+  }
+
+}
