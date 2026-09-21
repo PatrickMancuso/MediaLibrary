@@ -9,28 +9,18 @@
    ========================================================= */
 
 .room {
-  position: relative;
-
-  min-height: 100vh;
-
-  overflow-x: hidden;
-
-  color: #f5e9dc;
-
   background:
     linear-gradient(
       90deg,
-      rgba(52, 25, 16, 0.58) 0%,
-      rgba(96, 43, 24, 0.28) 20%,
-      rgba(42, 18, 10, 0.54) 50%,
-      rgba(96, 43, 24, 0.28) 80%,
-      rgba(52, 25, 16, 0.58) 100%
+      rgba(31, 43, 35, 0.32),
+      rgba(53, 70, 54, 0.16),
+      rgba(31, 43, 35, 0.32)
     ),
-    url("https://chatgpt.com/backend-api/estuary/content?id=file_0000000000e8820fb5f2618f38285f01&ts=497229&p=fs&cid=1&sig=bd7d822f57b0a0e6a8e9752258543aee600a5b1393614fc50e53a8a61d9de125&v=0");
+    url("./assets/Background1.png");
 
   background-size:
     cover,
-    1500px auto;
+    cover;
 
   background-position:
     center,
@@ -38,7 +28,7 @@
 
   background-repeat:
     no-repeat,
-    repeat;
+    no-repeat;
 
   background-attachment:
     fixed,
