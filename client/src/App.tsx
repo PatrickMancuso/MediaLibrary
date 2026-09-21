@@ -264,6 +264,44 @@ function App() {
     ])
   }
 
+  const handleRemoveMedia = (
+  mediaToRemove: MediaItem,
+) => {
+  const confirmed =
+    window.confirm(
+      `Remove "${mediaToRemove.title}" from your collection?`,
+    )
+
+  if (!confirmed) {
+    return
+  }
+
+  setCollection((current) =>
+    current.filter(
+      (item) =>
+        item.id !== mediaToRemove.id,
+    ),
+  )
+
+  setSelectedMedia(null)
+}
+
+const handleEditMedia = (
+  mediaToEdit: MediaItem,
+) => {
+  /*
+   * We'll connect this to the same media editor
+   * in the next step.
+   *
+   * For now, keep the selected item open so
+   * nothing breaks while we wire the editor.
+   */
+  console.log(
+    'Edit media:',
+    mediaToEdit,
+  )
+}
+
   /*
    * These are passed to AddMediaModal so that the
    * parent remains the source of truth for custom
@@ -472,12 +510,14 @@ const handleAddCustomGenre = (
           ======================================================= */}
 
       {selectedMedia && (
-        <MediaDetail
-          media={selectedMedia}
-          onClose={() =>
-            setSelectedMedia(null)
-          }
-        />
+       <MediaDetail
+  media={selectedMedia}
+  onClose={() =>
+    setSelectedMedia(null)
+  }
+  onRemove={handleRemoveMedia}
+  onEdit={handleEditMedia}
+/>
       )}
 
       {/* =======================================================

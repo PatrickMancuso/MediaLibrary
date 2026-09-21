@@ -3,6 +3,8 @@ import type { MediaItem } from '../data/sampleMedia'
 interface MediaDetailProps {
   media: MediaItem
   onClose: () => void
+  onRemove: (media: MediaItem) => void
+  onEdit: (media: MediaItem) => void
 }
 
 const formatLabels: Record<
@@ -29,6 +31,8 @@ const mediaTypeLabels: Record<
 function MediaDetail({
   media,
   onClose,
+  onRemove,
+  onEdit,
 }: MediaDetailProps) {
   const formatLabel =
     formatLabels[media.format] ??
@@ -58,14 +62,33 @@ function MediaDetail({
           ×
         </button>
 
-        <div className="detail-cover">
+        <div
+          className="detail-cover"
+          style={
+            media.coverImage
+              ? {
+                  backgroundImage:
+                    `linear-gradient(
+                      rgba(40, 15, 7, 0.2),
+                      rgba(40, 15, 7, 0.3)
+                    ),
+                    url("${media.coverImage}")`,
+                  backgroundSize: 'cover',
+                  backgroundPosition:
+                    'center',
+                }
+              : undefined
+          }
+        >
           <span className="cover-type">
             {mediaTypeLabel} · {formatLabel}
           </span>
 
-          <span className="cover-title">
-            {media.title}
-          </span>
+          {!media.coverImage && (
+            <span className="cover-title">
+              {media.title}
+            </span>
+          )}
 
           <span className="cover-year">
             {media.year}
@@ -80,7 +103,9 @@ function MediaDetail({
           <h2>{media.title}</h2>
 
           <div className="detail-meta">
-            <span>{media.year}</span>
+            <span>
+              {media.year}
+            </span>
 
             <span>
               {formatLabel}
@@ -121,6 +146,28 @@ function MediaDetail({
                 {media.genre}
               </strong>
             </div>
+          </div>
+
+          <div className="detail-actions">
+            <button
+              type="button"
+              className="detail-edit-button"
+              onClick={() =>
+                onEdit(media)
+              }
+            >
+              Edit Media
+            </button>
+
+            <button
+              type="button"
+              className="detail-remove-button"
+              onClick={() =>
+                onRemove(media)
+              }
+            >
+              Remove
+            </button>
           </div>
         </div>
       </div>
