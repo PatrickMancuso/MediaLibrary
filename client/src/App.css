@@ -7220,3 +7220,695 @@
   }
 
 }
+
+
+/* =========================================================
+   COLLECTION DASHBOARD - CONTRAST + TYPOGRAPHY PASS
+   ========================================================= */
+
+/* ---------------------------------------------------------
+   MAIN DASHBOARD SURFACE
+   --------------------------------------------------------- */
+
+.collection-dashboard {
+  width: 80vw;
+  max-width: none;
+
+  margin:
+    0 auto;
+
+  padding:
+    30px;
+
+  box-sizing:
+    border-box;
+
+  gap:
+    38px;
+
+  border:
+    1px solid
+    rgba(173, 191, 155, 0.14);
+
+  border-radius:
+    10px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(21, 34, 27, 0.72),
+      rgba(28, 40, 31, 0.58) 45%,
+      rgba(16, 27, 21, 0.73)
+    );
+
+  box-shadow:
+    inset 0 1px 0
+      rgba(235, 231, 208, 0.045),
+    0 24px 50px
+      rgba(10, 18, 13, 0.24);
+
+  backdrop-filter:
+    blur(2px);
+}
+
+
+/* ---------------------------------------------------------
+   INTRO
+   --------------------------------------------------------- */
+
+.dashboard-intro {
+  padding:
+    4px
+    2px
+    0;
+}
+
+
+.dashboard-kicker {
+  margin-bottom:
+    10px;
+
+  color:
+    rgba(207, 214, 185, 0.58);
+
+  font-size:
+    10px;
+
+  letter-spacing:
+    2px;
+}
+
+
+.dashboard-intro h1 {
+  font-size:
+    clamp(44px, 4vw, 58px);
+
+  line-height:
+    0.95;
+
+  letter-spacing:
+    -2.2px;
+
+  color:
+    #f3ead8;
+}
+
+
+.dashboard-intro p {
+  margin-top:
+    14px;
+
+  color:
+    rgba(225, 221, 202, 0.62);
+
+  font-size:
+    15px;
+
+  line-height:
+    1.45;
+}
+
+
+.dashboard-total {
+  min-width:
+    165px;
+
+  padding:
+    18px 20px;
+
+  border:
+    1px solid
+    rgba(128, 157, 108, 0.23);
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(69, 91, 62, 0.48),
+      rgba(27, 40, 31, 0.62)
+    );
+
+  box-shadow:
+    inset 0 1px 0
+      rgba(230, 228, 208, 0.05),
+    0 10px 22px
+      rgba(11, 20, 14, 0.2);
+}
+
+
+.dashboard-total span {
+  font-size:
+    8px;
+
+  color:
+    rgba(208, 215, 188, 0.55);
+}
+
+
+.dashboard-total strong {
+  margin-top:
+    4px;
+
+  font-size:
+    37px;
+
+  color:
+    #dfa066;
+}
+
+
+.dashboard-total small {
+  font-size:
+    10px;
+
+  color:
+    rgba(224, 218, 198, 0.45);
+}
+
+
+/* =========================================================
+   SECTION HEADERS
+   ========================================================= */
+
+.dashboard-section {
+  gap:
+    15px;
+}
+
+
+.dashboard-section-header {
+  padding:
+    0
+    3px;
+}
+
+
+.dashboard-section-header > div {
+  gap:
+    7px;
+}
+
+
+.dashboard-section-header span,
+.overview-heading span {
+  font-size:
+    8px;
+
+  letter-spacing:
+    1.5px;
+
+  color:
+    rgba(222, 150, 88, 0.7);
+}
+
+
+.dashboard-section-header h2,
+.overview-heading h2 {
+  font-size:
+    24px;
+
+  line-height:
+    1;
+
+  letter-spacing:
+    -0.45px;
+
+  color:
+    rgba(242, 235, 218, 0.94);
+}
+
+
+.dashboard-section-header > small {
+  font-size:
+    10px;
+
+  color:
+    rgba(220, 216, 196, 0.42);
+}
+
+
+/* =========================================================
+   RECENTLY ADDED
+   ========================================================= */
+
+.recent-media-track {
+  gap:
+    15px;
+
+  padding:
+    8px
+    4px
+    17px;
+}
+
+
+.recent-media-card {
+  flex:
+    0 0 175px;
+}
+
+
+.recent-media-art {
+  height:
+    235px;
+
+  border-radius:
+    5px;
+
+  border-color:
+    rgba(126, 153, 108, 0.22);
+
+  background:
+    linear-gradient(
+      145deg,
+      #5b6d50,
+      #2a382e 60%,
+      #17221c
+    );
+
+  box-shadow:
+    0 13px 21px
+      rgba(7, 15, 10, 0.32);
+}
+
+
+.recent-media-card:hover
+.recent-media-art {
+  transform:
+    translateY(-10px)
+    rotate(-0.7deg);
+
+  border-color:
+    rgba(222, 151, 88, 0.43);
+
+  box-shadow:
+    0 21px 31px
+      rgba(8, 16, 11, 0.42);
+}
+
+
+.recent-art-type {
+  font-size:
+    8px;
+
+  letter-spacing:
+    1px;
+}
+
+
+.recent-media-art strong {
+  font-size:
+    21px;
+
+  line-height:
+    0.98;
+}
+
+
+.recent-art-bottom {
+  font-size:
+    8px;
+}
+
+
+.recent-media-info {
+  gap:
+    5px;
+
+  padding:
+    10px
+    2px
+    0;
+}
+
+
+.recent-media-info strong {
+  font-size:
+    11px;
+}
+
+
+.recent-media-info span {
+  font-size:
+    9px;
+
+  color:
+    rgba(211, 216, 194, 0.45);
+}
+
+
+/* =========================================================
+   MOVIES / GAMES
+   ========================================================= */
+
+.dashboard-category-grid {
+  gap:
+    15px;
+}
+
+
+.dashboard-category-card {
+  min-height:
+    255px;
+
+  border-radius:
+    7px;
+
+  border-color:
+    rgba(126, 151, 108, 0.2);
+
+  box-shadow:
+    0 17px 28px
+      rgba(8, 16, 11, 0.3);
+}
+
+
+.dashboard-category-card:hover {
+  transform:
+    translateY(-6px);
+
+  border-color:
+    rgba(218, 148, 84, 0.38);
+
+  box-shadow:
+    0 25px 38px
+      rgba(7, 15, 10, 0.42);
+}
+
+
+.category-content {
+  left:
+    24px;
+
+  bottom:
+    22px;
+
+  gap:
+    7px;
+}
+
+
+.category-content span {
+  font-size:
+    8px;
+
+  letter-spacing:
+    1.4px;
+
+  color:
+    rgba(221, 211, 185, 0.56);
+}
+
+
+.category-content strong {
+  font-size:
+    36px;
+
+  letter-spacing:
+    -1.2px;
+}
+
+
+.category-content small {
+  font-size:
+    11px;
+}
+
+
+.category-content em {
+  margin-top:
+    7px;
+
+  font-size:
+    10px;
+
+  color:
+    #d98b4b;
+}
+
+
+/* =========================================================
+   FAVORITES
+   ========================================================= */
+
+.favorite-grid {
+  gap:
+    12px;
+}
+
+
+.favorite-art {
+  aspect-ratio:
+    0.76;
+
+  border-radius:
+    5px;
+
+  border-color:
+    rgba(126, 151, 108, 0.19);
+}
+
+
+.favorite-card:hover
+.favorite-art {
+  transform:
+    translateY(-7px);
+
+  border-color:
+    rgba(219, 149, 87, 0.39);
+}
+
+
+.favorite-card strong {
+  font-size:
+    10px;
+
+  color:
+    rgba(240, 232, 216, 0.86);
+}
+
+
+.favorite-card small {
+  font-size:
+    8px;
+
+  color:
+    rgba(210, 216, 194, 0.39);
+}
+
+
+.dashboard-text-button {
+  font-size:
+    10px;
+
+  color:
+    rgba(224, 148, 87, 0.72);
+}
+
+
+/* =========================================================
+   OVERVIEW
+   ========================================================= */
+
+.dashboard-overview {
+  padding:
+    23px;
+
+  border-radius:
+    7px;
+
+  border-color:
+    rgba(126, 151, 108, 0.18);
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(46, 63, 50, 0.52),
+      rgba(18, 29, 23, 0.48)
+    );
+}
+
+
+.overview-stats {
+  gap:
+    9px;
+}
+
+
+.overview-stats div,
+.overview-formats div {
+  padding:
+    13px;
+
+  border-color:
+    rgba(125, 150, 106, 0.13);
+
+  background:
+    rgba(78, 98, 71, 0.11);
+}
+
+
+.overview-stats span,
+.overview-formats span {
+  font-size:
+    8px;
+
+  color:
+    rgba(211, 214, 191, 0.42);
+}
+
+
+.overview-stats strong {
+  font-size:
+    23px;
+
+  color:
+    rgba(243, 235, 216, 0.9);
+}
+
+
+.overview-formats strong {
+  font-size:
+    14px;
+
+  color:
+    #da904f;
+}
+
+
+/* =========================================================
+   EXTRA SEPARATION FROM WALLPAPER
+   ========================================================= */
+
+.dashboard-section,
+.dashboard-overview {
+  position:
+    relative;
+}
+
+
+/*
+ * Very subtle shadow underneath the major sections.
+ * This separates them from the artwork without creating
+ * another obvious box around everything.
+ */
+
+.dashboard-section::before {
+  content:
+    "";
+
+  position:
+    absolute;
+
+  left:
+    0;
+
+  right:
+    0;
+
+  top:
+    28px;
+
+  bottom:
+    -7px;
+
+  z-index:
+    -1;
+
+  border-radius:
+    8px;
+
+  background:
+    rgba(8, 17, 11, 0.13);
+
+  filter:
+    blur(12px);
+
+  pointer-events:
+    none;
+}
+
+
+/* =========================================================
+   LARGE DESKTOP
+   ========================================================= */
+
+@media (min-width: 1051px) {
+
+  .collection-dashboard {
+    width:
+      80vw;
+
+    padding:
+      34px;
+  }
+
+  .recent-media-card {
+    flex-basis:
+      180px;
+  }
+
+  .recent-media-art {
+    height:
+      245px;
+  }
+
+  .dashboard-category-card {
+    min-height:
+      275px;
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 760px) {
+
+  .collection-dashboard {
+    width:
+      calc(100% - 24px);
+
+    padding:
+      18px;
+
+    gap:
+      28px;
+  }
+
+  .dashboard-intro h1 {
+    font-size:
+      40px;
+  }
+
+  .dashboard-intro p {
+    font-size:
+      12px;
+  }
+
+  .dashboard-section-header h2,
+  .overview-heading h2 {
+    font-size:
+      20px;
+  }
+
+  .recent-media-card {
+    flex-basis:
+      150px;
+  }
+
+  .recent-media-art {
+    height:
+      205px;
+  }
+
+  .dashboard-category-card {
+    min-height:
+      220px;
+  }
+
+  .category-content strong {
+    font-size:
+      30px;
+  }
+}
