@@ -5369,3 +5369,193 @@
     gap: 32px;
   }
 }
+
+
+/* =========================================================
+   BOOKCASE DEPTH / SYMMETRY - PASS 2
+   ========================================================= */
+
+/* ---------------------------------------------------------
+   SYMMETRICAL SIDE POSTS
+   --------------------------------------------------------- */
+
+.bookcase-content::before,
+.bookcase-content::after {
+  width: 24px;
+
+  background:
+    linear-gradient(
+      90deg,
+      #382016 0%,
+      #5b3623 32%,
+      #70432a 50%,
+      #593421 68%,
+      #331b11 100%
+    ),
+    url("https://www.textures4photoshop.com/tex/thumbs/dark-wood-texture-seamless-free-thumb31.jpg");
+
+  background-size:
+    cover,
+    240px auto;
+
+  background-position:
+    center,
+    center;
+
+  opacity: 0.98;
+}
+
+/* Left-facing depth */
+.bookcase-content::before {
+  box-shadow:
+    inset -4px 0 6px
+      rgba(15, 4, 1, 0.38),
+    3px 0 7px
+      rgba(15, 4, 1, 0.12);
+}
+
+/* Right-facing depth */
+.bookcase-content::after {
+  box-shadow:
+    inset 4px 0 6px
+      rgba(15, 4, 1, 0.38),
+    -3px 0 7px
+      rgba(15, 4, 1, 0.12);
+}
+
+
+/* ---------------------------------------------------------
+   REMOVE THE "PANEL INSIDE THE BOOKCASE" LOOK
+   --------------------------------------------------------- */
+
+.shelf-interior {
+  background:
+    linear-gradient(
+      180deg,
+      rgba(62, 29, 16, 0.5),
+      rgba(42, 17, 9, 0.34) 45%,
+      rgba(25, 9, 5, 0.48) 100%
+    );
+
+  border-left: 0;
+  border-right: 0;
+
+  box-shadow:
+    inset 0 24px 35px
+      rgba(10, 3, 1, 0.34),
+    inset 0 -24px 35px
+      rgba(7, 2, 1, 0.38);
+}
+
+/* Remove the harsh rectangular atmosphere layer */
+.shelf-interior::before {
+  background:
+    radial-gradient(
+      ellipse at 50% 8%,
+      rgba(204, 107, 53, 0.055),
+      transparent 38%
+    ),
+    repeating-linear-gradient(
+      90deg,
+      rgba(255, 183, 132, 0.014) 0,
+      rgba(255, 183, 132, 0.014) 1px,
+      transparent 1px,
+      transparent 9px
+    );
+}
+
+.shelf-interior::after {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 184, 108, 0.025),
+      transparent 24%,
+      transparent 72%,
+      rgba(10, 3, 1, 0.08)
+    );
+}
+
+
+/* ---------------------------------------------------------
+   MEDIA SHOULD SIT ON THE SHELF
+   --------------------------------------------------------- */
+
+.shelf-scroll {
+  padding:
+    18px
+    6px
+    8px;
+}
+
+.media-line {
+  align-items: flex-end;
+
+  padding:
+    22px
+    10px
+    0;
+}
+
+
+/* ---------------------------------------------------------
+   CONTACT SHADOW UNDER EACH ITEM
+   --------------------------------------------------------- */
+
+.media-object::after {
+  content: "";
+
+  position: absolute;
+
+  left: 8%;
+  right: 8%;
+  bottom: -3px;
+
+  height: 7px;
+
+  border-radius: 50%;
+
+  background:
+    rgba(7, 2, 1, 0.5);
+
+  filter:
+    blur(4px);
+
+  opacity: 0.58;
+
+  pointer-events: none;
+
+  transition:
+    opacity 180ms ease,
+    transform 180ms ease;
+}
+
+.media-object:hover::after {
+  opacity: 0.75;
+
+  transform:
+    scaleX(1.04);
+}
+
+
+/* ---------------------------------------------------------
+   STRONGER REAR DEPTH
+   --------------------------------------------------------- */
+
+.bookcase-content {
+  box-shadow:
+    inset 18px 0 28px
+      rgba(14, 4, 1, 0.34),
+    inset -18px 0 28px
+      rgba(14, 4, 1, 0.34),
+    inset 0 32px 42px
+      rgba(16, 5, 2, 0.18),
+    inset 0 -18px 32px
+      rgba(16, 5, 2, 0.2);
+}
