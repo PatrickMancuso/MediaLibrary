@@ -3,6 +3,7 @@ import Header from './components/Header'
 import MediaDetail from './components/MediaDetail'
 import MediaRow from './components/MediaRow'
 import AddMediaModal from './components/AddMediaModal'
+import CollectionDashboard from './components/CollectionDashboard'
 import {
   gameGenres,
   media as sampleMedia,
@@ -426,53 +427,20 @@ const handleAddCustomGenre = (
           </>
         )
 
-      case 'collection':
-      default:
-        return (
-          <>
-            <MediaRow
-              title="Recently Added"
-              items={recentlyAdded}
-              onSelect={handleSelect}
-            />
-
-            <MediaRow
-              title="Movies"
-              items={movies}
-              onSelect={handleSelect}
-            />
-
-            {movieGenreRows
-              .slice(0, 4)
-              .map((row) => (
-                <MediaRow
-                  key={row.title}
-                  title={row.title}
-                  items={row.items}
-                  onSelect={handleSelect}
-                />
-              ))}
-
-            <MediaRow
-              title="Games"
-              items={games}
-              onSelect={handleSelect}
-            />
-
-            {gameGenreRows
-              .slice(0, 4)
-              .map((row) => (
-                <MediaRow
-                  key={row.title}
-                  title={row.title}
-                  items={row.items}
-                  onSelect={handleSelect}
-                />
-              ))}
-          </>
-        )
+      
     }
   }
+
+const renderCollectionDashboard = () => (
+  <CollectionDashboard
+    recentlyAdded={recentlyAdded}
+    movies={movies}
+    games={games}
+    favorites={favorites}
+    onSelect={handleSelect}
+    onViewChange={setActiveView}
+  />
+)
 
   return (
     <div className="room">
@@ -488,21 +456,25 @@ const handleAddCustomGenre = (
         <div className="room-glow room-glow-left" />
         <div className="room-glow room-glow-right" />
 
-        <div className="library">
-          <div className="bookcase">
-            <div className="bookcase-top" />
+        {activeView === 'collection' ? (
+  renderCollectionDashboard()
+) : (
+  <div className="library">
+    <div className="bookcase">
+      <div className="bookcase-top" />
 
-            <div className="bookcase-content">
-              <div className="bookcase-back" />
+      <div className="bookcase-content">
+        <div className="bookcase-back" />
 
-              <div className="rows">
-                {renderRows()}
-              </div>
-            </div>
-
-            <div className="bookcase-base" />
-          </div>
+        <div className="rows">
+          {renderRows()}
         </div>
+      </div>
+
+      <div className="bookcase-base" />
+    </div>
+  </div>
+)}
       </main>
 
       {/* =======================================================
