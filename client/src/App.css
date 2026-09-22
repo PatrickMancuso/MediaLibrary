@@ -7911,94 +7911,98 @@
 /* =========================================================
    WARM ORANGE HEADER + NEUTRAL DASHBOARD
    ========================================================= */
-
-/* ---------------------------------------------------------
-   HEADER
-   --------------------------------------------------------- */
+/* =========================================================
+   CHOCOLATE HEADER
+   ========================================================= */
 
 .site-header {
   background:
     linear-gradient(
       105deg,
-      rgba(48, 31, 23, 0.94) 0%,
-      rgba(67, 37, 23, 0.93) 32%,
-      rgba(89, 43, 22, 0.92) 68%,
-      rgba(105, 51, 25, 0.93) 100%
+      #241814 0%,
+      #2d1c15 34%,
+      #382016 68%,
+      #442419 100%
     );
 
-  border-bottom-color:
-    rgba(225, 146, 78, 0.18);
+  border-bottom:
+    1px solid
+    rgba(215, 127, 66, 0.22);
 
   box-shadow:
-    0 10px 30px
-      rgba(18, 7, 3, 0.32),
+    0 10px 28px
+      rgba(0, 0, 0, 0.38),
     inset 0 -1px 0
-      rgba(255, 222, 190, 0.045);
+      rgba(255, 221, 190, 0.05);
 
   backdrop-filter:
     blur(8px);
 }
 
 
-/* Subtle texture over header */
+/* Keep the header texture extremely subtle */
 
 .site-header::before {
-  opacity: 0.1;
+  opacity: 0.08;
 
   background:
     repeating-linear-gradient(
       90deg,
-      rgba(255, 255, 255, 0.025) 0,
-      rgba(255, 255, 255, 0.025) 1px,
+      rgba(255, 255, 255, 0.018) 0,
+      rgba(255, 255, 255, 0.018) 1px,
       transparent 1px,
       transparent 7px
     );
 }
 
 
-/* Header accent line */
+/* Warm copper edge */
 
 .site-header::after {
+  height: 2px;
+
   background:
     linear-gradient(
       90deg,
-      #5d2b1a 0%,
-      #7a381e 18%,
-      #a64f27 37%,
-      #c66a35 50%,
-      #a64f27 63%,
-      #7a381e 82%,
-      #5d2b1a 100%
+      #572719 0%,
+      #7b351d 20%,
+      #a84f27 40%,
+      #d07a43 50%,
+      #a84f27 60%,
+      #7b351d 80%,
+      #572719 100%
     );
 
-  opacity: 0.85;
+  opacity: 0.88;
+
+  box-shadow:
+    0 -1px 5px
+      rgba(204, 113, 56, 0.17);
 }
 
 
-/* ---------------------------------------------------------
-   MEDIA VAULT BRAND
-   --------------------------------------------------------- */
+/* =========================================================
+   LOGO
+   ========================================================= */
 
 .brand-console {
   background:
     linear-gradient(
       180deg,
-      rgba(126, 69, 38, 0.18),
-      rgba(64, 34, 22, 0.12)
+      rgba(86, 47, 27, 0.62),
+      rgba(54, 29, 20, 0.56)
     );
 
   border-color:
-    rgba(255, 216, 177, 0.12);
+    rgba(245, 202, 159, 0.17);
 
   box-shadow:
     inset 0 1px 0
-      rgba(255, 239, 221, 0.045),
-    0 3px 12px
-      rgba(16, 5, 2, 0.09);
-}
-
-.brand-mark span {
-  color: #e39a5f;
+      rgba(255, 239, 220, 0.07),
+    inset 0 -1px 0
+      rgba(0, 0, 0, 0.18),
+    0 4px 12px
+      rgba(0, 0, 0, 0.18);
 }
 
 
@@ -8006,107 +8010,115 @@
   background:
     linear-gradient(
       180deg,
-      rgba(126, 70, 40, 0.25),
-      rgba(53, 31, 21, 0.18)
+      rgba(109, 59, 31, 0.72),
+      rgba(65, 33, 21, 0.63)
     );
 
   border-color:
-    rgba(255, 220, 184, 0.20);
+    rgba(255, 218, 181, 0.26);
 }
 
 
-/* Logo indicator */
-
-.brand-light {
-  background:
-    #e4a064;
-
-  box-shadow:
-    0 0 5px
-      rgba(227, 160, 93, 0.9),
-    0 0 13px
-      rgba(227, 160, 93, 0.35);
-}
-
-
-/* VAULT portion of logo */
+/* Keep the logo warm orange */
 
 .brand-mark span {
   color:
-    #e2a064;
+    #e6a064;
 }
 
 
-/* Small subtitle */
+.brand-light {
+  background:
+    #e6a064;
+
+  box-shadow:
+    0 0 5px
+      rgba(230, 160, 100, 0.9),
+    0 0 13px
+      rgba(230, 160, 100, 0.32);
+}
+
 
 .brand-caption {
   color:
-    rgba(255, 226, 199, 0.45);
+    rgba(255, 226, 199, 0.46);
 }
 
 
-/* ---------------------------------------------------------
+/* =========================================================
    NAVIGATION
-   --------------------------------------------------------- */
+   ========================================================= */
 
 .nav-item {
   color:
-    rgba(247, 224, 204, 0.68);
+    rgba(244, 222, 202, 0.64);
 }
 
 
 .nav-item:hover {
   color:
-    #fff1e3;
+    #fff1e4;
 
   background:
-    rgba(255, 222, 191, 0.07);
+    rgba(255, 220, 190, 0.06);
 
   border-color:
-    rgba(255, 224, 196, 0.10);
+    rgba(255, 220, 190, 0.09);
 }
 
 
 .nav-item.active {
   color:
-    #fff3e8;
+    #fff4e8;
 
   background:
     linear-gradient(
       180deg,
-      rgba(174, 91, 43, 0.34),
-      rgba(93, 42, 22, 0.30)
+      rgba(104, 56, 31, 0.72),
+      rgba(73, 37, 23, 0.66)
     );
 
   border-color:
-    rgba(248, 205, 165, 0.17);
+    rgba(247, 204, 161, 0.21);
+
+  box-shadow:
+    inset 0 1px 0
+      rgba(255, 238, 219, 0.07),
+    0 3px 10px
+      rgba(0, 0, 0, 0.16);
 }
 
 
 .nav-indicator {
   background:
-    #e09a5c;
+    #e29a5f;
 
   box-shadow:
     0 0 5px
-      rgba(224, 154, 92, 0.40);
+      rgba(226, 154, 95, 0.42);
 }
 
 
-/* ---------------------------------------------------------
-   ADD MEDIA BUTTON
-   --------------------------------------------------------- */
+/* =========================================================
+   ADD MEDIA
+   ========================================================= */
 
 .header-add-media {
   background:
     linear-gradient(
       180deg,
-      rgba(174, 91, 43, 0.31),
-      rgba(91, 42, 23, 0.27)
+      rgba(101, 53, 28, 0.68),
+      rgba(69, 34, 21, 0.61)
     );
 
   border-color:
-    rgba(248, 205, 165, 0.17);
+    rgba(248, 205, 165, 0.18);
+
+  box-shadow:
+    inset 0 1px 0
+      rgba(255, 236, 216, 0.06),
+    0 3px 11px
+      rgba(0, 0, 0, 0.16);
 }
 
 
@@ -8114,20 +8126,19 @@
   background:
     linear-gradient(
       180deg,
-      rgba(194, 105, 51, 0.40),
-      rgba(102, 48, 25, 0.34)
+      rgba(127, 66, 34, 0.78),
+      rgba(82, 39, 23, 0.68)
     );
 
   border-color:
-    rgba(255, 219, 181, 0.27);
+    rgba(255, 219, 181, 0.28);
 }
 
 
 .header-add-icon {
   color:
-    #e5a064;
+    #e6a064;
 }
-
 
 /* =========================================================
    MAIN DASHBOARD - NEUTRAL GRAPHITE
