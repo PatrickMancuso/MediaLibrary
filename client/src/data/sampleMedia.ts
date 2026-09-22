@@ -14,7 +14,6 @@ export type MediaFormat =
   | (string & {})
 
 export type MediaOrientation = 'spine' | 'cover'
-
 export interface MediaItem {
   id: string
   title: string
@@ -24,15 +23,32 @@ export interface MediaItem {
   genre: string
   description: string
   favorite: boolean
-
-  /*
-   * spine = upright physical case
-   * cover = title displayed horizontally with cover facing forward
-   */
   orientation: MediaOrientation
 
-    spineImage?: string
+  spineImage?: string
   coverImage?: string
+
+  // API metadata
+  source?: 'tmdb' | 'igdb' | 'manual'
+  externalId?: string
+
+  // Artwork
+  backdropImage?: string
+  logoImage?: string
+
+  // General metadata
+  rating?: number
+  runtime?: number
+
+  // Movie metadata
+  director?: string
+  cast?: string[]
+
+  // Game metadata
+  developer?: string
+  publisher?: string
+  platforms?: string[]
+  screenshots?: string[]
 }
 
 export const media: MediaItem[] = [

@@ -13,8 +13,6 @@ import type {
   MediaType,
 } from '../data/sampleMedia'
 
-import { media as sampleMedia } from '../data/sampleMedia'
-
 interface CustomOption {
   id: string
   label: string
@@ -39,6 +37,26 @@ interface AddMediaModalProps {
     type: 'movie' | 'game',
     option: CustomOption,
   ) => void
+}
+
+interface ApiSearchResult {
+  externalId: number
+  title: string
+  releaseDate: string
+  year: number | null
+  description: string
+  posterImage: string | null
+  backdropImage: string | null
+}
+
+interface ApiMovieDetails extends ApiSearchResult {
+  source: 'tmdb'
+  originalTitle?: string
+  runtime?: number | null
+  rating?: number | null
+  genres?: string[]
+  directors?: string[]
+  cast?: string[]
 }
 
 type AddMode =
@@ -106,6 +124,7 @@ const BUILTIN_GAME_GENRES = [
   'Strategy',
 ]
 
+
 function slugify(value: string) {
   return value
     .trim()
@@ -138,13 +157,42 @@ function AddMediaModal({
      AUTOMATIC MODE
      ========================================================= */
 
-  const [search, setSearch] =
-    useState('')
+  
+  
+     const [search, setSearch] =
+  useState('')
 
-  const [
-    selectedAutomaticMedia,
-    setSelectedAutomaticMedia,
-  ] = useState<MediaItem | null>(null)
+const [
+  searchResults,
+  setSearchResults,
+] = useState<ApiSearchResult[]>([])
+
+const [
+  selectedAutomaticResult,
+  setSelectedAutomaticResult,
+] =
+  useState<ApiSearchResult | null>(null)
+
+const [
+  isSearching,
+  setIsSearching,
+] = useState(false)
+
+const [
+  isLoadingDetails,
+  setIsLoadingDetails,
+] = useState(false)
+
+const [
+  automaticError,
+  setAutomaticError,
+] = useState('')
+
+
+const [
+  isCustomizingAutomatic,
+  setIsCustomizingAutomatic,
+] = useState(false)
 
   /* =========================================================
      MANUAL MODE
@@ -277,7 +325,10 @@ function AddMediaModal({
     }
 
     setManualGenre('')
-    setSelectedAutomaticMedia(null)
+setSelectedAutomaticResult(null)
+setSearchResults([])
+setAutomaticError('')
+setIsCustomizingAutomatic(false)
   }, [
     mediaType,
     formatOptions,
@@ -287,38 +338,69 @@ function AddMediaModal({
      AUTOMATIC SEARCH
      ========================================================= */
 
-  const searchResults = useMemo(() => {
-    const normalizedSearch =
-      search.trim().toLowerCase()
+const API_BASE_URL =
+  import.meta.env.VITE_API_URL ??
+  'http://localhost:3000'
 
-    return sampleMedia
-      .filter(
-        (item) =>
-          item.type === mediaType,
-      )
-      .filter((item) => {
-        if (!normalizedSearch) {
-          return true
+const handleAutomaticSearch =
+  async () => {
+    const query = search.trim()
+
+    if (!query) {
+      setSearchResults([])
+      return
+    }
+
+    setIsSearching(true)
+    setAutomaticError('')
+    setSelectedAutomaticResult(null)
+
+    try {
+      if (mediaType === 'movie') {
+        const response = await fetch(
+          `${API_BASE_URL}/api/media/search/movie?q=${encodeURIComponent(
+            query,
+          )}`,
+        )
+
+        if (!response.ok) {
+          throw new Error(
+            `Movie search failed with status ${response.status}`,
+          )
         }
 
-        return (
-          item.title
-            .toLowerCase()
-            .includes(
-              normalizedSearch,
-            ) ||
-          item.genre
-            .toLowerCase()
-            .includes(
-              normalizedSearch,
-            )
+        const data =
+          await response.json()
+
+        setSearchResults(
+          Array.isArray(data.results)
+            ? data.results
+            : [],
         )
-      })
-      .slice(0, 6)
-  }, [
-    mediaType,
-    search,
-  ])
+
+        return
+      }
+
+      setSearchResults([])
+
+      setAutomaticError(
+        'Game search will be connected to IGDB next.',
+      )
+    } catch (error) {
+      console.error(
+        'Automatic media search failed:',
+        error,
+      )
+
+      setSearchResults([])
+
+      setAutomaticError(
+        'Unable to search for media right now.',
+      )
+    } finally {
+      setIsSearching(false)
+    }
+  }
 
   /* =========================================================
      MEDIA TYPE SWITCH
@@ -329,8 +411,9 @@ function AddMediaModal({
   ) => {
     setMediaType(type)
 
-    setSelectedAutomaticMedia(null)
-
+setSelectedAutomaticResult(null)
+setSearchResults([])
+setAutomaticError('')
     const formats =
       type === 'movie'
         ? BUILTIN_MOVIE_FORMATS
@@ -453,38 +536,90 @@ function AddMediaModal({
   /* =========================================================
      AUTOMATIC SELECTION
      ========================================================= */
-
-  const handleAutomaticSelect = (
-    item: MediaItem,
+const handleAutomaticSelect =
+  async (
+    result: ApiSearchResult,
   ) => {
-    setSelectedAutomaticMedia(
-      item,
+    setSelectedAutomaticResult(
+      result,
     )
+
+    if (mediaType !== 'movie') {
+      return
+    }
+
+    setIsLoadingDetails(true)
+    setAutomaticError('')
+
+    try {
+      const response = await fetch(
+        `${API_BASE_URL}/api/media/movie/${result.externalId}`,
+      )
+
+      if (!response.ok) {
+        throw new Error(
+          `Movie details failed with status ${response.status}`,
+        )
+      }
+
+      const details: ApiMovieDetails =
+        await response.json()
+
+      setManualTitle(
+        details.title ?? '',
+      )
+
+      setManualYear(
+        details.year
+          ? String(details.year)
+          : '',
+      )
+
+      setManualDescription(
+        details.description ?? '',
+      )
+
+      setCoverImage(
+        details.posterImage ??
+          undefined,
+      )
+
+      const firstGenre =
+        details.genres?.[0] ?? ''
+
+      const matchingGenre =
+        genreOptions.find(
+          (genre) =>
+            genre.toLowerCase() ===
+            firstGenre.toLowerCase(),
+        )
+
+      if (matchingGenre) {
+        setManualGenre(
+          matchingGenre,
+        )
+      }
+
+    } catch (error) {
+      console.error(
+        'Automatic detail lookup failed:',
+        error,
+      )
+
+      setAutomaticError(
+        'The title was found, but its detailed information could not be loaded.',
+      )
+    } finally {
+      setIsLoadingDetails(false)
+    }
+
   }
 
   /* =========================================================
      AUTOMATIC ADD
      ========================================================= */
 
-  const handleAutomaticAdd = () => {
-    if (
-      !selectedAutomaticMedia
-    ) {
-      return
-    }
-
-    onAdd({
-      ...selectedAutomaticMedia,
-
-      id: crypto.randomUUID(),
-
-      favorite: false,
-
-      orientation: 'spine',
-    })
-
-    onClose()
-  }
+  
 
   /* =========================================================
      MANUAL ADD
@@ -523,15 +658,28 @@ function AddMediaModal({
         'No description has been added yet.',
 
       favorite:
-        manualFavorite,
+  manualFavorite,
 
-      orientation:
-        manualOrientation,
+orientation:
+  manualOrientation,
 
-      spineImage,
+spineImage,
 
-      coverImage,
-    }
+coverImage,
+
+source:
+  mode === 'automatic'
+    ? 'tmdb'
+    : 'manual',
+
+externalId:
+  mode === 'automatic' &&
+  selectedAutomaticResult
+    ? String(
+        selectedAutomaticResult.externalId,
+      )
+    : undefined,
+}
 
     onAdd(newMedia)
 
@@ -622,57 +770,54 @@ function AddMediaModal({
               MEDIA TYPE
               ================================================= */}
 
-          <section className="add-media-section">
-            <div className="add-media-section-heading">
-              <span>01</span>
+         <section className="add-media-section">
+  <div className="add-media-section-heading">
+    <span>01</span>
 
-              <strong>
-                Media Type
-              </strong>
-            </div>
+    <strong>
+      What are you adding?
+    </strong>
+  </div>
 
-            <div className="media-type-switch">
-              <button
-                type="button"
-                className={
-                  mediaType === 'movie'
-                    ? 'active'
-                    : ''
-                }
-                onClick={() =>
-                  switchMediaType(
-                    'movie',
-                  )
-                }
-              >
-                <span className="type-icon">
-                  FILM
-                </span>
+  <div className="media-type-switch">
+    <button
+      type="button"
+      className={
+        mediaType === 'movie'
+          ? 'active'
+          : ''
+      }
+      onClick={() =>
+        switchMediaType('movie')
+      }
+    >
+      <strong>Movie</strong>
 
-                Movie
-              </button>
+      <span>
+        VHS, DVD, Blu-ray,
+        LaserDisc
+      </span>
+    </button>
 
-              <button
-                type="button"
-                className={
-                  mediaType === 'game'
-                    ? 'active'
-                    : ''
-                }
-                onClick={() =>
-                  switchMediaType(
-                    'game',
-                  )
-                }
-              >
-                <span className="type-icon">
-                  GAME
-                </span>
+    <button
+      type="button"
+      className={
+        mediaType === 'game'
+          ? 'active'
+          : ''
+      }
+      onClick={() =>
+        switchMediaType('game')
+      }
+    >
+      <strong>Video Game</strong>
 
-                Video Game
-              </button>
-            </div>
-          </section>
+      <span>
+        NES, PlayStation, Xbox
+      </span>
+    </button>
+  </div>
+</section>
 
           {/* =================================================
               ADD MODE
@@ -738,135 +883,212 @@ function AddMediaModal({
               ================================================= */}
 
           {mode === 'automatic' && (
-            <section className="add-media-section">
-              <div className="add-media-section-heading">
-                <span>03</span>
+  <section className="add-media-section">
+    <div className="add-media-section-heading">
+      <span>03</span>
 
-                <strong>
-                  Find{' '}
-                  {mediaType ===
-                  'movie'
-                    ? 'a Movie'
-                    : 'a Game'}
-                </strong>
-              </div>
+      <strong>
+        {isCustomizingAutomatic
+          ? 'Customize Imported Media'
+          : `Find ${
+              mediaType === 'movie'
+                ? 'a Movie'
+                : 'a Game'
+            }`}
+      </strong>
+    </div>
 
-              <div className="automatic-search">
-                <input
-                  type="search"
-                  value={search}
-                  onChange={(
-                    event,
-                  ) =>
-                    setSearch(
-                      event.target.value,
-                    )
+    {!isCustomizingAutomatic && (
+      <>
+        <div className="automatic-search">
+          <input
+            type="search"
+            value={search}
+            onChange={(event) =>
+              setSearch(
+                event.target.value,
+              )
+            }
+            onKeyDown={(event) => {
+              if (
+                event.key === 'Enter'
+              ) {
+                void handleAutomaticSearch()
+              }
+            }}
+            placeholder={
+              mediaType === 'movie'
+                ? 'Search for a movie...'
+                : 'Search for a game...'
+            }
+          />
+
+          <button
+            type="button"
+            className="automatic-search-button"
+            onClick={() =>
+              void handleAutomaticSearch()
+            }
+            disabled={
+              isSearching ||
+              !search.trim()
+            }
+          >
+            {isSearching
+              ? 'Searching...'
+              : 'Search'}
+          </button>
+        </div>
+
+        <div className="automatic-results">
+          {searchResults.map(
+            (result) => (
+              <button
+                key={result.externalId}
+                type="button"
+                className={`automatic-result ${
+                  selectedAutomaticResult?.externalId ===
+                  result.externalId
+                    ? 'selected'
+                    : ''
+                }`}
+                onClick={() =>
+                  void handleAutomaticSelect(
+                    result,
+                  )
+                }
+              >
+                <span
+                  className="result-cover"
+                  style={
+                    result.posterImage
+                      ? {
+                          backgroundImage:
+                            `url("${result.posterImage}")`,
+                          backgroundSize:
+                            'cover',
+                          backgroundPosition:
+                            'center',
+                        }
+                      : undefined
                   }
-                  placeholder={
-                    mediaType ===
-                    'movie'
-                      ? 'Search for a movie...'
-                      : 'Search for a game...'
-                  }
-                />
-
-                <span className="search-label">
-                  LOCAL TEST DATA
+                >
+                  {!result.posterImage &&
+                    (mediaType === 'movie'
+                      ? 'FILM'
+                      : 'GAME')}
                 </span>
-              </div>
 
-              <div className="automatic-results">
-                {searchResults.map(
-                  (item) => (
-                    <button
-                      key={
-                        item.id
-                      }
-                      type="button"
-                      className={`automatic-result ${
-                        selectedAutomaticMedia?.id ===
-                        item.id
-                          ? 'selected'
-                          : ''
-                      }`}
-                      onClick={() =>
-                        handleAutomaticSelect(
-                          item,
-                        )
-                      }
-                    >
-                      <span className="result-cover">
-                        {item.type ===
-                        'movie'
-                          ? 'FILM'
-                          : 'GAME'}
-                      </span>
+                <span className="result-info">
+                  <strong>
+                    {result.title}
+                  </strong>
 
-                      <span className="result-info">
-                        <strong>
-                          {item.title}
-                        </strong>
+                  <span>
+                    {result.year ??
+                      'Unknown year'}
+                  </span>
+                </span>
 
-                        <span>
-                          {item.year}
-                          {' · '}
-                          {item.genre}
-                          {' · '}
-                          {item.format}
-                        </span>
-                      </span>
-
-                      <span className="result-check">
-                        {selectedAutomaticMedia?.id ===
-                        item.id
-                          ? '✓'
-                          : '＋'}
-                      </span>
-                    </button>
-                  ),
-                )}
-
-                {searchResults.length ===
-                  0 && (
-                  <div className="empty-search">
-                    No matching sample data
-                    found.
-                  </div>
-                )}
-              </div>
-
-              {selectedAutomaticMedia && (
-                <div className="automatic-preview">
-                  <div>
-                    <span>
-                      SELECTED
-                    </span>
-
-                    <strong>
-                      {
-                        selectedAutomaticMedia.title
-                      }
-                    </strong>
-                  </div>
-
-                  <button
-                    type="button"
-                    onClick={
-                      handleAutomaticAdd
-                    }
-                  >
-                    Add to Collection
-                  </button>
-                </div>
-              )}
-            </section>
+                <span className="result-check">
+                  {selectedAutomaticResult?.externalId ===
+                  result.externalId
+                    ? '✓'
+                    : '＋'}
+                </span>
+              </button>
+            ),
           )}
 
+          {isLoadingDetails && (
+            <div className="empty-search">
+              Loading title details...
+            </div>
+          )}
+
+          {automaticError && (
+            <div className="empty-search">
+              {automaticError}
+            </div>
+          )}
+
+          {!isSearching &&
+            !automaticError &&
+            search.trim() &&
+            searchResults.length === 0 && (
+              <div className="empty-search">
+                No results found.
+              </div>
+            )}
+        </div>
+
+        {selectedAutomaticResult && (
+          <div className="automatic-import-preview">
+            <div className="automatic-import-art">
+              {selectedAutomaticResult.posterImage ? (
+                <img
+                  src={
+                    selectedAutomaticResult.posterImage
+                  }
+                  alt=""
+                />
+              ) : (
+                <span>
+                  {mediaType === 'movie'
+                    ? 'FILM'
+                    : 'GAME'}
+                </span>
+              )}
+            </div>
+
+            <div className="automatic-import-info">
+              <span>
+                {mediaType === 'movie'
+                  ? 'TMDB RESULT'
+                  : 'GAME RESULT'}
+              </span>
+
+              <strong>
+                {
+                  selectedAutomaticResult.title
+                }
+              </strong>
+
+              <p>
+                {
+                  selectedAutomaticResult.year ??
+                    'Unknown year'
+                }
+                {' · '}
+                Imported metadata ready
+                to customize
+              </p>
+
+              <button
+                type="button"
+                onClick={() =>
+                  setIsCustomizingAutomatic(
+                    true,
+                  )
+                }
+              >
+                Customize &amp; Add
+              </button>
+            </div>
+          </div>
+        )}
+      </>
+    )}
+
+  </section>
+)}
           {/* =================================================
               MANUAL MODE
               ================================================= */}
 
-          {mode === 'manual' && (
+          {(mode === 'manual' ||
+  (mode === 'automatic' &&
+    isCustomizingAutomatic)) && (
             <>
               {/* ===============================================
                   BASIC DETAILS
