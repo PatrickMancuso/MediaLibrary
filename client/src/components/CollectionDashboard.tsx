@@ -59,10 +59,10 @@ function CollectionDashboard({
       <section className="dashboard-intro">
         <div>
 
-          <h1>Your Collection</h1>
+          <h1>The Collection</h1>
 
           <p>
-            Your movies, games, and physical media,
+            Your Movies, Games, and Entertainment,
             all in one place.
           </p>
         </div>
@@ -176,7 +176,7 @@ function CollectionDashboard({
       <section className="dashboard-section">
         <div className="dashboard-section-header">
           <div>
-            <h2>Browse Collection</h2>
+            <h2>Browse the Archives</h2>
           </div>
         </div>
 

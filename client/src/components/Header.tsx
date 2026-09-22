@@ -54,11 +54,11 @@ function Header({
           <span className="brand-light" />
 
           <span className="brand-mark">
-            MEDIA<span>LIBRARY</span>
+            MEDIA<span>VAULT</span>
           </span>
 
           <span className="brand-caption">
-            PERSONAL MEDIA SYSTEM
+            PERSONAL MEDIA ARCHIVE
           </span>
         </button>
 
