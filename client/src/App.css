@@ -7943,7 +7943,7 @@
 /* Subtle texture over header */
 
 .site-header::before {
-  opacity: 0.09;
+  opacity: 0.1;
 
   background:
     repeating-linear-gradient(
