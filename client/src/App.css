@@ -219,38 +219,64 @@
    ========================================================= */
 
 .brand-console {
-  color:
-    #f5eadf;
+  justify-self: start;
+
+  height: 62px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 16px;
+
+  padding:
+    0 22px
+    0 16px;
+
+  border:
+    1px solid
+    rgba(242, 208, 178, 0.14);
+
+  border-radius: 5px;
+
+  color: #f5ebe0;
 
   background:
     linear-gradient(
       180deg,
-      rgba(112, 66, 39, 0.16),
-      rgba(48, 28, 19, 0.10)
+      rgba(115, 69, 43, 0.28),
+      rgba(44, 28, 21, 0.26)
     );
-
-  border:
-    1px solid
-    rgba(255, 219, 185, 0.11);
 
   box-shadow:
     inset 0 1px 0
-      rgba(255, 239, 221, 0.045),
+      rgba(255, 239, 221, 0.065),
+    inset 0 -1px 0
+      rgba(0, 0, 0, 0.2),
     0 3px 12px
-      rgba(13, 4, 1, 0.08);
+      rgba(16, 5, 2, 0.15);
+
+  cursor: pointer;
+
+  transition:
+    transform 160ms ease,
+    background 160ms ease,
+    border-color 160ms ease;
 }
 
 
 .brand-console:hover {
+  transform:
+    translateY(-1px);
+
+  border-color:
+    rgba(245, 213, 184, 0.23);
+
   background:
     linear-gradient(
       180deg,
-      rgba(133, 73, 40, 0.21),
-      rgba(54, 29, 19, 0.14)
+      rgba(137, 79, 46, 0.34),
+      rgba(51, 30, 21, 0.28)
     );
-
-  border-color:
-    rgba(255, 220, 185, 0.18);
 }
 
 
@@ -7893,71 +7919,60 @@
 .site-header {
   background:
     linear-gradient(
-      180deg,
-      rgba(48, 31, 22, 0.78) 0%,
-      rgba(53, 31, 20, 0.72) 55%,
-      rgba(39, 24, 18, 0.76) 100%
+      105deg,
+      rgba(55, 38, 27, 0.88) 0%,
+      rgba(69, 42, 26, 0.86) 38%,
+      rgba(88, 47, 25, 0.84) 70%,
+      rgba(111, 55, 27, 0.86) 100%
     );
 
-  border-bottom:
-    1px solid
-    rgba(226, 145, 80, 0.14);
+  border-bottom-color:
+    rgba(225, 145, 78, 0.18);
 
   box-shadow:
     0 10px 30px
-      rgba(12, 5, 2, 0.24),
+      rgba(21, 8, 4, 0.30),
     inset 0 -1px 0
-      rgba(255, 220, 190, 0.035);
+      rgba(255, 221, 194, 0.05);
 
   backdrop-filter:
-    blur(12px);
+    blur(10px);
 }
 
 
-/* subtle warm illumination */
+/* Subtle texture over header */
 
 .site-header::before {
-  opacity: 1;
+  opacity: 0.1;
 
   background:
-    radial-gradient(
-      ellipse at 50% 0%,
-      rgba(214, 119, 59, 0.12),
-      transparent 45%
-    ),
-    linear-gradient(
+    repeating-linear-gradient(
       90deg,
-      rgba(255, 255, 255, 0.012),
-      transparent 35%,
-      rgba(255, 168, 99, 0.018) 70%,
-      transparent
+      rgba(255, 255, 255, 0.025) 0,
+      rgba(255, 255, 255, 0.025) 1px,
+      transparent 1px,
+      transparent 7px
     );
 }
 
 
-/* keep the orange accent line */
+/* Header accent line */
 
 .site-header::after {
-  height: 2px;
-
   background:
     linear-gradient(
       90deg,
-      #67301d 0%,
-      #87401f 20%,
-      #b65d2e 40%,
-      #d7864e 50%,
-      #b65d2e 60%,
-      #87401f 80%,
-      #67301d 100%
+      #5d2a18 0%,
+      #8d4425 20%,
+      #c56a35 40%,
+      #e09a5c 50%,
+      #bd6030 68%,
+      #632c19 100%
     );
 
-  opacity: 0.72;
-
-  box-shadow:
-    0 -1px 5px
-      rgba(213, 124, 65, 0.16);
+  opacity: 0.9;
 }
+
 
 /* ---------------------------------------------------------
    MEDIA VAULT BRAND
@@ -8018,7 +8033,7 @@
 
 .brand-mark span {
   color:
-    #e29a60;
+    #e2a064;
 }
 
 
@@ -8054,17 +8069,17 @@
 
 .nav-item.active {
   color:
-    #fff2e5;
+    #fff3e8;
 
   background:
-    rgba(255, 220, 190, 0.045);
+    linear-gradient(
+      180deg,
+      rgba(174, 91, 43, 0.34),
+      rgba(93, 42, 22, 0.30)
+    );
 
   border-color:
-    rgba(255, 220, 190, 0.08);
-
-  box-shadow:
-    inset 0 1px 0
-      rgba(255, 236, 218, 0.035);
+    rgba(248, 205, 165, 0.17);
 }
 
 
@@ -8115,30 +8130,26 @@
 
 
 /* =========================================================
-   MAIN DASHBOARD 
+   MAIN DASHBOARD - NEUTRAL GRAPHITE
    ========================================================= */
-
 
 .collection-dashboard {
   background:
     linear-gradient(
       135deg,
-      rgba(22, 24, 23, 0.64),
-      rgba(30, 31, 29, 0.58) 45%,
-      rgba(18, 20, 19, 0.66)
+      rgba(25, 26, 24, 0.96),
+      rgba(34, 35, 33, 0.94) 45%,
+      rgba(20, 21, 20, 0.97)
     );
 
   border-color:
-    rgba(191, 184, 170, 0.11);
+    rgba(174, 173, 163, 0.16);
 
   box-shadow:
     inset 0 1px 0
-      rgba(255, 255, 255, 0.028),
+      rgba(255, 255, 255, 0.035),
     0 24px 50px
-      rgba(0, 0, 0, 0.22);
-
-  backdrop-filter:
-    blur(3px);
+      rgba(0, 0, 0, 0.32);
 }
 
 
