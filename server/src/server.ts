@@ -83,7 +83,7 @@ app.get("/api/media/search/movie", async (req, res) => {
 
     const results = Array.isArray(data.results)
       ? data.results
-          .slice(0, 10)
+          .slice(0, 5)
           .map((movie: any) => ({
             externalId: movie.id,
             title:

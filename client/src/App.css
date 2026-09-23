@@ -2222,7 +2222,7 @@
 
   border:
     1px solid
-    rgba(255, 226, 200, 0.13);
+    rgba(214, 220, 211, 0.14);
 
   border-radius:
     8px;
@@ -2230,13 +2230,13 @@
   background:
     linear-gradient(
       135deg,
-      #4f2a1d,
-      #26140e
+      #343936,
+      #171b18
     );
 
   box-shadow:
     0 40px 90px
-      rgba(0, 0, 0, 0.52);
+      rgba(0, 0, 0, 0.58);
 }
 
 
@@ -2339,9 +2339,9 @@
   background:
     linear-gradient(
       145deg,
-      #a66a45,
-      #643524 52%,
-      #25130c
+      #4b504c,
+      #292d2a 52%,
+      #121513 100%
     );
 }
 
