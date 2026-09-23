@@ -79,96 +79,77 @@ function CollectionDashboard({
       </section>
 
       {/* =================================================
-          RECENTLY ADDED
-          ================================================= */}
+    RECENTLY ADDED
+    ================================================= */}
 
-      <section className="dashboard-section">
-        <div className="dashboard-section-header">
-          <div>
-            <h2>Recently Added</h2>
+<section className="dashboard-section">
+  <div className="dashboard-section-header">
+    <div>
+      <h2>Recently Added</h2>
+    </div>
+  </div>
+
+  <div className="recent-media-track">
+    {recentlyAdded.map((item) => {
+      const artwork = getArtwork(item)
+
+      return (
+        <button
+          key={item.id}
+          type="button"
+          className="recent-media-card"
+          onClick={() => onSelect(item)}
+        >
+          <div className="recent-media-art">
+            {artwork ? (
+              <img
+                src={artwork}
+                alt=""
+                className="recent-media-image"
+              />
+            ) : (
+              <>
+                <span className="recent-art-type">
+                  {item.type === 'movie'
+                    ? 'FILM'
+                    : 'GAME'}
+                </span>
+
+                <strong>
+                  {item.title}
+                </strong>
+              </>
+            )}
+
+            <div className="recent-art-bottom">
+              <span>
+                {formatLabels[item.format] ??
+                  item.format}
+              </span>
+
+              <span>
+                {item.year}
+              </span>
+            </div>
           </div>
 
-        
-        </div>
+          <div className="recent-media-info">
+            <strong>
+              {item.title}
+            </strong>
 
-        <div className="recent-media-track">
-          {recentlyAdded.map((item) => {
-            const artwork =
-              getArtwork(item)
-
-            return (
-              <button
-                key={item.id}
-                type="button"
-                className="recent-media-card"
-                onClick={() =>
-                  onSelect(item)
-                }
-              >
-                <div
-                  className="recent-media-art"
-                  style={
-                    artwork
-                      ? {
-                          backgroundImage: `
-                            linear-gradient(
-                              180deg,
-                              rgba(15, 6, 3, 0.02),
-                              rgba(15, 6, 3, 0.46)
-                            ),
-                            url("${artwork}")
-                          `,
-                        }
-                      : undefined
-                  }
-                >
-                  {!artwork && (
-                    <>
-                      <span className="recent-art-type">
-                        {item.type ===
-                        'movie'
-                          ? 'FILM'
-                          : 'GAME'}
-                      </span>
-
-                      <strong>
-                        {item.title}
-                      </strong>
-                    </>
-                  )}
-
-                  <div className="recent-art-bottom">
-                    <span>
-                      {formatLabels[
-                        item.format
-                      ] ??
-                        item.format}
-                    </span>
-
-                    <span>
-                      {item.year}
-                    </span>
-                  </div>
-                </div>
-
-                <div className="recent-media-info">
-                  <strong>
-                    {item.title}
-                  </strong>
-
-                  <span>
-                    {item.type === 'movie'
-                      ? 'Movie'
-                      : 'Game'}{' '}
-                    · {item.genre}
-                  </span>
-                </div>
-              </button>
-            )
-          })}
-        </div>
-      </section>
-
+            <span>
+              {item.type === 'movie'
+                ? 'Movie'
+                : 'Game'}{' '}
+              · {item.genre}
+            </span>
+          </div>
+        </button>
+      )
+    })}
+  </div>
+</section>
       {/* =================================================
           MOVIES / GAMES
           ================================================= */}
