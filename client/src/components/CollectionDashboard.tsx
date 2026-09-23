@@ -299,23 +299,19 @@ function CollectionDashboard({
                       onSelect(item)
                     }
                   >
-                    <div
-                      className="favorite-art"
-                      style={
-                        artwork
-                          ? {
-                              backgroundImage:
-                                `url("${artwork}")`,
-                            }
-                          : undefined
-                      }
-                    >
-                      {!artwork && (
-                        <span>
-                          {item.title}
-                        </span>
-                      )}
-                    </div>
+                    <div className="favorite-art">
+  {artwork ? (
+    <img
+      src={artwork}
+      alt={item.title}
+      className="favorite-image"
+    />
+  ) : (
+    <span>
+      {item.title}
+    </span>
+  )}
+</div>
 
                     <div>
                       <strong>

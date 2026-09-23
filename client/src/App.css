@@ -8626,3 +8626,85 @@
   color:
     rgba(239, 236, 225, 0.92);
 }
+
+
+/* =========================================================
+   FINAL FAVORITES POSTER DISPLAY
+   ========================================================= */
+
+.favorite-art {
+  position: relative;
+
+  width: 100%;
+  aspect-ratio: 2 / 3;
+
+  overflow: hidden;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  box-sizing: border-box;
+
+  padding: 5px;
+
+  border:
+    1px solid
+    rgba(214, 220, 211, 0.16);
+
+  border-radius: 5px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #343936,
+      #1c211e
+    );
+
+  background-image: none !important;
+
+  box-shadow:
+    0 9px 15px
+    rgba(8, 14, 10, 0.28);
+
+  transition:
+    transform 170ms ease,
+    border-color 170ms ease,
+    box-shadow 170ms ease;
+}
+
+.favorite-image {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: contain;
+  object-position: center;
+
+  border-radius: 3px;
+}
+
+.favorite-card:hover .favorite-art {
+  transform:
+    translateY(-6px);
+
+  border-color:
+    rgba(218, 156, 96, 0.42);
+
+  box-shadow:
+    0 15px 24px
+    rgba(8, 14, 10, 0.36);
+}
+
+.favorite-art > span {
+  padding: 14px;
+
+  color:
+    rgba(243, 238, 224, 0.88);
+
+  font-size: 14px;
+  line-height: 1.15;
+
+  text-align: center;
+}
