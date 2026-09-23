@@ -120,17 +120,6 @@ function CollectionDashboard({
                 </strong>
               </>
             )}
-
-            <div className="recent-art-bottom">
-              <span>
-                {formatLabels[item.format] ??
-                  item.format}
-              </span>
-
-              <span>
-                {item.year}
-              </span>
-            </div>
           </div>
 
           <div className="recent-media-info">
@@ -142,7 +131,10 @@ function CollectionDashboard({
               {item.type === 'movie'
                 ? 'Movie'
                 : 'Game'}{' '}
-              · {item.genre}
+              · {item.genre} ·{' '}
+              {formatLabels[item.format] ??
+                item.format}{' '}
+              · {item.year}
             </span>
           </div>
         </button>
