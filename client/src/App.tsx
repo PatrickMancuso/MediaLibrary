@@ -1,4 +1,8 @@
-import { useEffect, useMemo, useState } from 'react'
+import {
+  useEffect,
+  useMemo,
+  useState,
+} from 'react'
 import Header from './components/Header'
 import MediaDetail from './components/MediaDetail'
 import MediaRow from './components/MediaRow'
@@ -60,8 +64,40 @@ function App() {
   const [activeView, setActiveView] =
     useState<View>('collection')
 
-  const [collection, setCollection] =
-    useState<MediaItem[]>(sampleMedia)
+ const [collection, setCollection] =
+  useState<MediaItem[]>(() => {
+    try {
+      const saved =
+        localStorage.getItem(
+          'media-library-collection',
+        )
+
+      if (saved) {
+        return JSON.parse(saved) as MediaItem[]
+      }
+    } catch (error) {
+      console.error(
+        'Failed to load saved collection:',
+        error,
+      )
+    }
+
+    return sampleMedia
+  })
+
+useEffect(() => {
+  try {
+    localStorage.setItem(
+      'media-library-collection',
+      JSON.stringify(collection),
+    )
+  } catch (error) {
+    console.error(
+      'Failed to save collection:',
+      error,
+    )
+  }
+}, [collection])
 
   const [selectedMedia, setSelectedMedia] =
     useState<MediaItem | null>(null)
