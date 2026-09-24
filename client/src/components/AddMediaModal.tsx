@@ -543,79 +543,127 @@ const handleAutomaticSelect =
   async (
     result: ApiSearchResult,
   ) => {
-    setSelectedAutomaticResult(
-      result,
-    )
+    setSelectedAutomaticResult(result)
+    setAutomaticError('')
 
-    if (mediaType !== 'movie') {
+    /*
+     * MOVIE
+     * -----
+     * TMDB search results need a second request
+     * to get the richer movie information.
+     */
+    if (mediaType === 'movie') {
+      setIsLoadingDetails(true)
+
+      try {
+        const response = await fetch(
+          `${API_BASE_URL}/api/media/movie/${result.externalId}`,
+        )
+
+        if (!response.ok) {
+          throw new Error(
+            `Movie details failed with status ${response.status}`,
+          )
+        }
+
+        const details: ApiMovieDetails =
+          await response.json()
+
+        setManualTitle(
+          details.title ?? '',
+        )
+
+        setManualYear(
+          details.year
+            ? String(details.year)
+            : '',
+        )
+
+        setManualDescription(
+          details.description ?? '',
+        )
+
+        setCoverImage(
+          details.posterImage ??
+            undefined,
+        )
+
+        const firstGenre =
+          details.genres?.[0] ?? ''
+
+        const matchingGenre =
+          genreOptions.find(
+            (genre) =>
+              genre.toLowerCase() ===
+              firstGenre.toLowerCase(),
+          )
+
+        if (matchingGenre) {
+          setManualGenre(
+            matchingGenre,
+          )
+        } else {
+          setManualGenre('')
+        }
+      } catch (error) {
+        console.error(
+          'Automatic movie detail lookup failed:',
+          error,
+        )
+
+        setAutomaticError(
+          'The title was found, but its detailed information could not be loaded.',
+        )
+      } finally {
+        setIsLoadingDetails(false)
+      }
+
       return
     }
 
-    setIsLoadingDetails(true)
-    setAutomaticError('')
+    /*
+     * GAME
+     * ----
+     * IGDB search results already contain the
+     * basic information we need, so no second
+     * request is required yet.
+     */
+    setManualTitle(
+      result.title ?? '',
+    )
 
-    try {
-      const response = await fetch(
-        `${API_BASE_URL}/api/media/movie/${result.externalId}`,
+    setManualYear(
+      result.year
+        ? String(result.year)
+        : '',
+    )
+
+    setManualDescription(
+      result.description ?? '',
+    )
+
+    setCoverImage(
+      result.coverImage ??
+        undefined,
+    )
+
+    const firstGameGenre =
+      result.genres?.[0] ?? ''
+
+    const matchingGameGenre =
+      genreOptions.find(
+        (genre) =>
+          genre.toLowerCase() ===
+          firstGameGenre.toLowerCase(),
       )
 
-      if (!response.ok) {
-        throw new Error(
-          `Movie details failed with status ${response.status}`,
-        )
-      }
-
-      const details: ApiMovieDetails =
-        await response.json()
-
-      setManualTitle(
-        details.title ?? '',
+    if (matchingGameGenre) {
+      setManualGenre(
+        matchingGameGenre,
       )
-
-      setManualYear(
-        details.year
-          ? String(details.year)
-          : '',
-      )
-
-      setManualDescription(
-        details.description ?? '',
-      )
-
-      setCoverImage(
-        details.posterImage ??
-          undefined,
-      )
-
-      const firstGenre =
-        details.genres?.[0] ?? ''
-
-      const matchingGenre =
-        genreOptions.find(
-          (genre) =>
-            genre.toLowerCase() ===
-            firstGenre.toLowerCase(),
-        )
-
-      if (matchingGenre) {
-        setManualGenre(
-          matchingGenre,
-        )
-      }
-
-    } catch (error) {
-      console.error(
-        'Automatic detail lookup failed:',
-        error,
-      )
-
-      setAutomaticError(
-        'The title was found, but its detailed information could not be loaded.',
-      )
-    } finally {
-      setIsLoadingDetails(false)
+    } else {
+      setManualGenre('')
     }
-
   }
 
   /* =========================================================
