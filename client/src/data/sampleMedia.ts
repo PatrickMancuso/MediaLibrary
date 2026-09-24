@@ -14,43 +14,105 @@ export type MediaFormat =
   | (string & {})
 
 export type MediaOrientation = 'spine' | 'cover'
+
+export interface MediaVideo {
+  name: string
+
+  provider?: string
+
+  videoId?: string
+
+  url?: string
+}
+
 export interface MediaItem {
   id: string
+
   title: string
   type: MediaType
+
   format: MediaFormat
+
   year: number
+
   genre: string
+
   description: string
+
   favorite: boolean
+
   orientation: MediaOrientation
 
   spineImage?: string
   coverImage?: string
 
-  // API metadata
+  // =====================================================
+  // API METADATA
+  // =====================================================
+
   source?: 'tmdb' | 'igdb' | 'manual'
+
   externalId?: string
 
-  // Artwork
+  // =====================================================
+  // ARTWORK
+  // =====================================================
+
   backdropImage?: string
   logoImage?: string
 
-  // General metadata
+  // =====================================================
+  // GENERAL METADATA
+  // =====================================================
+
   rating?: number
+
+  ratingCount?: number
+
   runtime?: number
 
-  // Movie metadata
+  releaseDate?: string
+
+  // =====================================================
+  // MOVIE METADATA
+  // =====================================================
+
   director?: string
+
   cast?: string[]
 
-  // Game metadata
-  developer?: string
-  publisher?: string
-  platforms?: string[]
-  screenshots?: string[]
-}
+  productionCompanies?: string[]
 
+  countries?: string[]
+
+  languages?: string[]
+
+  certification?: string
+
+  // =====================================================
+  // GAME METADATA
+  // =====================================================
+
+  developer?: string
+
+  publisher?: string
+
+  platforms?: string[]
+
+  screenshots?: string[]
+
+  gameModes?: string[]
+
+  playerPerspectives?: string[]
+
+  themes?: string[]
+
+  // =====================================================
+  // VIDEO
+  // =====================================================
+
+  videos?: MediaVideo[]
+}
 export const media: MediaItem[] = [
   // =====================================================
   // MOVIES
