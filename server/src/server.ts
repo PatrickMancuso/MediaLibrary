@@ -17,14 +17,99 @@ const PORT = Number(process.env.PORT) || 3000;
 const TMDB_ACCESS_TOKEN =
   process.env.TMDB_ACCESS_TOKEN;
 
+  const TWITCH_CLIENT_ID =
+  process.env.TWITCH_CLIENT_ID;
+
+const TWITCH_CLIENT_SECRET =
+  process.env.TWITCH_CLIENT_SECRET;
+
 app.use(cors());
 app.use(express.json());
 
+let igdbAccessToken:
+  | string
+  | null = null;
+
+let igdbTokenExpiresAt = 0;
+
+async function getIgdbAccessToken() {
+  if (
+    igdbAccessToken &&
+    Date.now() < igdbTokenExpiresAt
+  ) {
+    return igdbAccessToken;
+  }
+
+  if (
+    !TWITCH_CLIENT_ID ||
+    !TWITCH_CLIENT_SECRET
+  ) {
+    throw new Error(
+      'TWITCH_CLIENT_ID or TWITCH_CLIENT_SECRET is not configured.',
+    );
+  }
+
+  const tokenResponse = await fetch(
+    'https://id.twitch.tv/oauth2/token',
+    {
+      method: 'POST',
+      headers: {
+        'Content-Type':
+          'application/x-www-form-urlencoded',
+      },
+      body: new URLSearchParams({
+        client_id:
+          TWITCH_CLIENT_ID,
+        client_secret:
+          TWITCH_CLIENT_SECRET,
+        grant_type:
+          'client_credentials',
+      }),
+    },
+  );
+
+  if (!tokenResponse.ok) {
+    const errorText =
+      await tokenResponse.text();
+
+    console.error(
+      'Twitch token request failed:',
+      tokenResponse.status,
+      errorText,
+    );
+
+    throw new Error(
+      'Unable to authenticate with IGDB.',
+    );
+  }
+
+  const tokenData =
+    await tokenResponse.json();
+
+  igdbAccessToken =
+    tokenData.access_token;
+
+  igdbTokenExpiresAt =
+    Date.now() +
+    Number(tokenData.expires_in) * 1000 -
+    60_000;
+
+  return igdbAccessToken;
+}
+
 app.get("/api/health", (_req, res) => {
   res.json({
-    status: "ok",
-    tmdbConfigured: Boolean(TMDB_ACCESS_TOKEN),
-  });
+  status: 'ok',
+
+  tmdbConfigured:
+    Boolean(TMDB_ACCESS_TOKEN),
+
+  igdbConfigured:
+    Boolean(
+      TWITCH_CLIENT_ID &&
+      TWITCH_CLIENT_SECRET,
+    ),
+});
 });
 
 /**
@@ -128,6 +213,176 @@ app.get("/api/media/search/movie", async (req, res) => {
     });
   }
 });
+
+/**
+ * Search IGDB for video games.
+ *
+ * Example:
+ * GET /api/media/search/game?q=Halo
+ */
+app.get(
+  "/api/media/search/game",
+  async (req, res) => {
+    try {
+      const query =
+        String(
+          req.query.q ?? "",
+        ).trim();
+
+      if (!query) {
+        return res.status(400).json({
+          error:
+            "A search query is required.",
+        });
+      }
+
+      if (
+        !TWITCH_CLIENT_ID ||
+        !TWITCH_CLIENT_SECRET
+      ) {
+        return res.status(500).json({
+          error:
+            "IGDB credentials are not configured.",
+        });
+      }
+
+      const accessToken =
+        await getIgdbAccessToken();
+
+      const igdbQuery = `
+        search "${query.replace(
+          /"/g,
+          '\\"',
+        )}";
+        fields
+          name,
+          summary,
+          first_release_date,
+          cover.image_id,
+          genres.name,
+          platforms.name,
+          slug;
+        where version_parent = null;
+        limit 5;
+      `;
+
+      const response =
+        await fetch(
+          "https://api.igdb.com/v4/games",
+          {
+            method: "POST",
+
+            headers: {
+              Accept:
+                "application/json",
+
+              "Client-ID":
+                TWITCH_CLIENT_ID,
+
+              Authorization:
+                `Bearer ${accessToken}`,
+
+              "Content-Type":
+                "text/plain",
+            },
+
+            body: igdbQuery,
+          },
+        );
+
+      if (!response.ok) {
+        const errorText =
+          await response.text();
+
+        console.error(
+          "IGDB search failed:",
+          response.status,
+          errorText,
+        );
+
+        return res
+          .status(response.status)
+          .json({
+            error:
+              "IGDB search failed.",
+          });
+      }
+
+      const data =
+        await response.json();
+
+      const results =
+        Array.isArray(data)
+          ? data.map(
+              (game: any) => ({
+                externalId:
+                  game.id,
+
+                title:
+                  game.name ?? "",
+
+                year:
+                  game.first_release_date
+                    ? new Date(
+                        game.first_release_date *
+                          1000,
+                      ).getFullYear()
+                    : null,
+
+                releaseDate:
+                  game.first_release_date
+                    ? new Date(
+                        game.first_release_date *
+                          1000,
+                      )
+                        .toISOString()
+                        .slice(0, 10)
+                    : null,
+
+                description:
+                  game.summary ?? "",
+
+                genres:
+                  game.genres?.map(
+                    (genre: any) =>
+                      genre.name,
+                  ) ?? [],
+
+                platforms:
+                  game.platforms?.map(
+                    (platform: any) =>
+                      platform.name,
+                  ) ?? [],
+
+                slug:
+                  game.slug ?? null,
+
+                coverImage:
+                  game.cover?.image_id
+                    ? `https://images.igdb.com/igdb/image/upload/t_cover_big/${game.cover.image_id}.jpg`
+                    : null,
+              }),
+            )
+          : [];
+
+      return res.json({
+        source: "igdb",
+        results,
+      });
+    } catch (error) {
+      console.error(
+        "Unexpected IGDB search error:",
+        error,
+      );
+
+      return res.status(500).json({
+        error:
+          "Unexpected server error.",
+      });
+    }
+  },
+);
+
 
 
 /**
