@@ -42,11 +42,17 @@ interface AddMediaModalProps {
 interface ApiSearchResult {
   externalId: number
   title: string
-  releaseDate: string
+  releaseDate: string | null
   year: number | null
   description: string
-  posterImage: string | null
-  backdropImage: string | null
+
+  posterImage?: string | null
+  backdropImage?: string | null
+  coverImage?: string | null
+
+  genres?: string[]
+  platforms?: string[]
+  slug?: string | null
 }
 
 interface ApiMovieDetails extends ApiSearchResult {
@@ -356,35 +362,32 @@ const handleAutomaticSearch =
     setSelectedAutomaticResult(null)
 
     try {
-      if (mediaType === 'movie') {
-        const response = await fetch(
-          `${API_BASE_URL}/api/media/search/movie?q=${encodeURIComponent(
-            query,
-          )}`,
+      const endpoint =
+        mediaType === 'movie'
+          ? '/api/media/search/movie'
+          : '/api/media/search/game'
+
+      const response = await fetch(
+        `${API_BASE_URL}${endpoint}?q=${encodeURIComponent(
+          query,
+        )}`,
+      )
+
+      if (!response.ok) {
+        throw new Error(
+          `${mediaType === 'movie'
+            ? 'Movie'
+            : 'Game'} search failed with status ${response.status}`,
         )
-
-        if (!response.ok) {
-          throw new Error(
-            `Movie search failed with status ${response.status}`,
-          )
-        }
-
-        const data =
-          await response.json()
-
-        setSearchResults(
-          Array.isArray(data.results)
-            ? data.results
-            : [],
-        )
-
-        return
       }
 
-      setSearchResults([])
+      const data =
+        await response.json()
 
-      setAutomaticError(
-        'Game search will be connected to IGDB next.',
+      setSearchResults(
+        Array.isArray(data.results)
+          ? data.results
+          : [],
       )
     } catch (error) {
       console.error(
@@ -959,25 +962,32 @@ externalId:
                 }
               >
                 <span
-                  className="result-cover"
-                  style={
-                    result.posterImage
-                      ? {
-                          backgroundImage:
-                            `url("${result.posterImage}")`,
-                          backgroundSize:
-                            'cover',
-                          backgroundPosition:
-                            'center',
-                        }
-                      : undefined
-                  }
-                >
-                  {!result.posterImage &&
-                    (mediaType === 'movie'
-                      ? 'FILM'
-                      : 'GAME')}
-                </span>
+  className="result-cover"
+  style={
+    (
+      result.posterImage ??
+      result.coverImage
+    )
+      ? {
+          backgroundImage:
+            `url("${
+              result.posterImage ??
+              result.coverImage
+            }")`,
+          backgroundSize:
+            'cover',
+          backgroundPosition:
+            'center',
+        }
+      : undefined
+  }
+>
+  {!result.posterImage &&
+    !result.coverImage &&
+    (mediaType === 'movie'
+      ? 'FILM'
+      : 'GAME')}
+</span>
 
                 <span className="result-info">
                   <strong>
@@ -1025,27 +1035,32 @@ externalId:
         {selectedAutomaticResult && (
           <div className="automatic-import-preview">
             <div className="automatic-import-art">
-              {selectedAutomaticResult.posterImage ? (
-                <img
-                  src={
-                    selectedAutomaticResult.posterImage
-                  }
-                  alt=""
-                />
-              ) : (
-                <span>
-                  {mediaType === 'movie'
-                    ? 'FILM'
-                    : 'GAME'}
-                </span>
-              )}
-            </div>
+  {(
+    selectedAutomaticResult.posterImage ??
+    selectedAutomaticResult.coverImage
+  ) ? (
+    <img
+      src={
+        selectedAutomaticResult.posterImage ??
+        selectedAutomaticResult.coverImage ??
+        ''
+      }
+      alt=""
+    />
+  ) : (
+    <span>
+      {mediaType === 'movie'
+        ? 'FILM'
+        : 'GAME'}
+    </span>
+  )}
+</div>
 
             <div className="automatic-import-info">
               <span>
                 {mediaType === 'movie'
-                  ? 'TMDB RESULT'
-                  : 'GAME RESULT'}
+  ? 'TMDB RESULT'
+  : 'IGDB RESULT'}
               </span>
 
               <strong>
