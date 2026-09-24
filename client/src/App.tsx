@@ -28,6 +28,7 @@ interface CustomOption {
 }
 
 const STORAGE_KEYS = {
+collection: 'media-library-collection',
   movieGenres: 'medialibrary.customMovieGenres',
   gameGenres: 'medialibrary.customGameGenres',
   movieFormats: 'medialibrary.customMovieFormats',
@@ -60,37 +61,43 @@ function loadStoredOptions(
   }
 }
 
+function loadStoredCollection(): MediaItem[] {
+  try {
+    const saved = localStorage.getItem(
+      STORAGE_KEYS.collection,
+    )
+
+    if (!saved) {
+      return sampleMedia
+    }
+
+    const parsed = JSON.parse(saved)
+
+    if (!Array.isArray(parsed)) {
+      return sampleMedia
+    }
+
+    return parsed as MediaItem[]
+  } catch {
+    return sampleMedia
+  }
+}
+
 function App() {
   const [activeView, setActiveView] =
     useState<View>('collection')
 
  const [collection, setCollection] =
-  useState<MediaItem[]>(() => {
-    try {
-      const saved =
-        localStorage.getItem(
-          'media-library-collection',
-        )
-
-      if (saved) {
-        return JSON.parse(saved) as MediaItem[]
-      }
-    } catch (error) {
-      console.error(
-        'Failed to load saved collection:',
-        error,
-      )
-    }
-
-    return sampleMedia
-  })
+  useState<MediaItem[]>(
+    loadStoredCollection,
+  )
 
 useEffect(() => {
   try {
-    localStorage.setItem(
-      'media-library-collection',
-      JSON.stringify(collection),
-    )
+   localStorage.setItem(
+  STORAGE_KEYS.collection,
+  JSON.stringify(collection),
+)
   } catch (error) {
     console.error(
       'Failed to save collection:',
