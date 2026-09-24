@@ -39,6 +39,20 @@ interface AddMediaModalProps {
   ) => void
 }
 
+interface ApiVideo {
+  name: string
+  videoId?: string
+  provider?: string
+  url?: string
+}
+
+interface ApiScreenshot {
+  imageId: string
+  width?: number | null
+  height?: number | null
+  url: string
+}
+
 interface ApiSearchResult {
   externalId: number
   title: string
@@ -53,6 +67,19 @@ interface ApiSearchResult {
   genres?: string[]
   platforms?: string[]
   slug?: string | null
+
+  rating?: number | null
+  ratingCount?: number
+
+  developers?: string[]
+  publishers?: string[]
+
+  gameModes?: string[]
+  playerPerspectives?: string[]
+  themes?: string[]
+
+  screenshots?: ApiScreenshot[]
+  videos?: ApiVideo[]
 }
 
 interface ApiMovieDetails extends ApiSearchResult {
@@ -199,6 +226,13 @@ const [
   isCustomizingAutomatic,
   setIsCustomizingAutomatic,
 ] = useState(false)
+
+const [
+  importedMetadata,
+  setImportedMetadata,
+] = useState<ApiSearchResult | null>(
+  null,
+)
 
   /* =========================================================
      MANUAL MODE
@@ -415,6 +449,7 @@ const handleAutomaticSearch =
     setMediaType(type)
 
 setSelectedAutomaticResult(null)
+setImportedMetadata(null)
 setSearchResults([])
 setAutomaticError('')
     const formats =
@@ -544,7 +579,8 @@ const handleAutomaticSelect =
     result: ApiSearchResult,
   ) => {
     setSelectedAutomaticResult(result)
-    setAutomaticError('')
+setImportedMetadata(result)
+setAutomaticError('')
 
     /*
      * MOVIE
@@ -568,6 +604,8 @@ const handleAutomaticSelect =
 
         const details: ApiMovieDetails =
           await response.json()
+
+          setImportedMetadata(details)
 
         setManualTitle(
           details.title ?? '',
@@ -720,7 +758,9 @@ coverImage,
 
 source:
   mode === 'automatic'
-    ? 'tmdb'
+    ? mediaType === 'movie'
+      ? 'tmdb'
+      : 'igdb'
     : 'manual',
 
 externalId:
@@ -730,6 +770,70 @@ externalId:
         selectedAutomaticResult.externalId,
       )
     : undefined,
+
+    releaseDate:
+  importedMetadata?.releaseDate ??
+  undefined,
+
+rating:
+  importedMetadata?.rating ??
+  undefined,
+
+platforms:
+  mediaType === 'game'
+    ? importedMetadata?.platforms
+    : undefined,
+
+developers:
+  mediaType === 'game'
+    ? importedMetadata?.developers
+    : undefined,
+
+publishers:
+  mediaType === 'game'
+    ? importedMetadata?.publishers
+    : undefined,
+
+gameModes:
+  mediaType === 'game'
+    ? importedMetadata?.gameModes
+    : undefined,
+
+playerPerspectives:
+  mediaType === 'game'
+    ? importedMetadata?.playerPerspectives
+    : undefined,
+
+themes:
+  mediaType === 'game'
+    ? importedMetadata?.themes
+    : undefined,
+
+screenshots:
+  mediaType === 'game'
+    ? importedMetadata?.screenshots
+        ?.map(
+          (screenshot) =>
+            screenshot.url,
+        )
+        .filter(Boolean)
+    : undefined,
+
+videos:
+  importedMetadata?.videos?.map(
+    (video) => ({
+      name: video.name,
+
+      provider:
+        video.provider,
+
+      videoId:
+        video.videoId,
+
+      url:
+        video.url,
+    }),
+  ),
 }
 
     onAdd(newMedia)
@@ -1431,6 +1535,253 @@ externalId:
 
                 </div>
               </section>
+
+              {/* ===============================================
+                  IMPORTED GAME INFORMATION
+                  =============================================== */}
+
+              {mode === 'automatic' &&
+                mediaType === 'game' &&
+                importedMetadata && (
+                  <section className="add-media-section imported-media-section">
+                    <div className="add-media-section-heading">
+                      <span>04</span>
+
+                      <strong>
+                        Imported Game Information
+                      </strong>
+                    </div>
+
+                    <div className="imported-game-panel">
+                      <div className="imported-game-header">
+                        <div>
+                          <span className="imported-label">
+                            IGDB METADATA
+                          </span>
+
+                          <h3>
+                            {importedMetadata.title}
+                          </h3>
+
+                          <p>
+                            {importedMetadata.year ??
+                              'Unknown year'}
+                            {' · '}
+                            {importedMetadata.genres
+                              ?.join(' · ') ||
+                              'No genres available'}
+                          </p>
+                        </div>
+
+                        {importedMetadata.rating != null && (
+                          <div className="imported-rating">
+                            <span>IGDB RATING</span>
+
+                            <strong>
+                              {importedMetadata.rating.toFixed(
+                                1,
+                              )}
+                            </strong>
+
+                            <small>
+                              / 100
+                            </small>
+                          </div>
+                        )}
+                      </div>
+
+                      <div className="imported-info-grid">
+                        {importedMetadata.developers &&
+                          importedMetadata.developers.length >
+                            0 && (
+                            <div className="imported-info-card">
+                              <span>
+                                Developer
+                              </span>
+
+                              <strong>
+                                {importedMetadata.developers.join(
+                                  ', ',
+                                )}
+                              </strong>
+                            </div>
+                          )}
+
+                        {importedMetadata.publishers &&
+                          importedMetadata.publishers.length >
+                            0 && (
+                            <div className="imported-info-card">
+                              <span>
+                                Publisher
+                              </span>
+
+                              <strong>
+                                {importedMetadata.publishers.join(
+                                  ', ',
+                                )}
+                              </strong>
+                            </div>
+                          )}
+
+                        {importedMetadata.platforms &&
+                          importedMetadata.platforms.length >
+                            0 && (
+                            <div className="imported-info-card">
+                              <span>
+                                Platforms
+                              </span>
+
+                              <strong>
+                                {importedMetadata.platforms.join(
+                                  ' · ',
+                                )}
+                              </strong>
+                            </div>
+                          )}
+
+                        {importedMetadata.gameModes &&
+                          importedMetadata.gameModes.length >
+                            0 && (
+                            <div className="imported-info-card">
+                              <span>
+                                Game Modes
+                              </span>
+
+                              <strong>
+                                {importedMetadata.gameModes.join(
+                                  ' · ',
+                                )}
+                              </strong>
+                            </div>
+                          )}
+
+                        {importedMetadata.playerPerspectives &&
+                          importedMetadata.playerPerspectives.length >
+                            0 && (
+                            <div className="imported-info-card">
+                              <span>
+                                Perspective
+                              </span>
+
+                              <strong>
+                                {importedMetadata.playerPerspectives.join(
+                                  ' · ',
+                                )}
+                              </strong>
+                            </div>
+                          )}
+
+                        {importedMetadata.themes &&
+                          importedMetadata.themes.length >
+                            0 && (
+                            <div className="imported-info-card">
+                              <span>
+                                Themes
+                              </span>
+
+                              <strong>
+                                {importedMetadata.themes.join(
+                                  ' · ',
+                                )}
+                              </strong>
+                            </div>
+                          )}
+                      </div>
+
+                      {importedMetadata.screenshots &&
+                        importedMetadata.screenshots.length >
+                          0 && (
+                          <div className="imported-media-group">
+                            <div className="imported-media-heading">
+                              <span>
+                                SCREENSHOTS
+                              </span>
+
+                              <small>
+                                {
+                                  importedMetadata
+                                    .screenshots
+                                    .length
+                                }{' '}
+                                available
+                              </small>
+                            </div>
+
+                            <div className="imported-screenshot-grid">
+                              {importedMetadata.screenshots.map(
+                                (screenshot) => (
+                                  <div
+                                    key={
+                                      screenshot.imageId
+                                    }
+                                    className="imported-screenshot"
+                                  >
+                                    <img
+                                      src={
+                                        screenshot.url
+                                      }
+                                      alt=""
+                                    />
+                                  </div>
+                                ),
+                              )}
+                            </div>
+                          </div>
+                        )}
+
+                      {importedMetadata.videos &&
+                        importedMetadata.videos.length >
+                          0 && (
+                          <div className="imported-media-group">
+                            <div className="imported-media-heading">
+                              <span>
+                                VIDEOS
+                              </span>
+
+                              <small>
+                                {
+                                  importedMetadata
+                                    .videos.length
+                                }{' '}
+                                available
+                              </small>
+                            </div>
+
+                            <div className="imported-video-list">
+                              {importedMetadata.videos.map(
+                                (video) => (
+                                  <a
+                                    key={
+                                      video.videoId ??
+                                      video.url ??
+                                      video.name
+                                    }
+                                    href={video.url}
+                                    target="_blank"
+                                    rel="noreferrer"
+                                    className="imported-video-card"
+                                  >
+                                    <span className="imported-video-icon">
+                                      ▶
+                                    </span>
+
+                                    <span>
+                                      {video.name ||
+                                        'Game Video'}
+                                    </span>
+                                  </a>
+                                ),
+                              )}
+                            </div>
+                          </div>
+                        )}
+                    </div>
+                  </section>
+                )}
+
+           
+
+
 
               {/* ===============================================
                   APPEARANCE

@@ -168,7 +168,7 @@ app.get("/api/media/search/movie", async (req, res) => {
 
     const results = Array.isArray(data.results)
       ? data.results
-          .slice(0, 5)
+          .slice(0, 2)
           .map((movie: any) => ({
             externalId: movie.id,
             title:
@@ -249,22 +249,47 @@ app.get(
       const accessToken =
         await getIgdbAccessToken();
 
-      const igdbQuery = `
-        search "${query.replace(
-          /"/g,
-          '\\"',
-        )}";
-        fields
-          name,
-          summary,
-          first_release_date,
-          cover.image_id,
-          genres.name,
-          platforms.name,
-          slug;
-        where version_parent = null;
-        limit 5;
-      `;
+   const igdbQuery = `
+  search "${query.replace(
+    /"/g,
+    '\\"',
+  )}";
+
+  fields
+    name,
+    summary,
+    storyline,
+    first_release_date,
+
+    cover.image_id,
+
+    genres.name,
+    platforms.name,
+
+    rating,
+    rating_count,
+
+    involved_companies.developer,
+    involved_companies.publisher,
+    involved_companies.company.name,
+
+    game_modes.name,
+    player_perspectives.name,
+    themes.name,
+
+    screenshots.image_id,
+    screenshots.width,
+    screenshots.height,
+
+    videos.name,
+    videos.video_id,
+
+    slug;
+
+  where version_parent = null;
+
+  limit 5;
+`;
 
       const response =
         await fetch(
@@ -311,59 +336,170 @@ app.get(
       const data =
         await response.json();
 
-      const results =
-        Array.isArray(data)
-          ? data.map(
-              (game: any) => ({
-                externalId:
-                  game.id,
+     const results =
+  Array.isArray(data)
+    ? data.map(
+        (game: any) => {
+          const developers =
+            game.involved_companies
+              ?.filter(
+                (entry: any) =>
+                  entry.developer,
+              )
+              ?.map(
+                (entry: any) =>
+                  entry.company?.name,
+              )
+              ?.filter(Boolean) ?? [];
 
-                title:
-                  game.name ?? "",
+          const publishers =
+            game.involved_companies
+              ?.filter(
+                (entry: any) =>
+                  entry.publisher,
+              )
+              ?.map(
+                (entry: any) =>
+                  entry.company?.name,
+              )
+              ?.filter(Boolean) ?? [];
 
-                year:
-                  game.first_release_date
-                    ? new Date(
-                        game.first_release_date *
-                          1000,
-                      ).getFullYear()
-                    : null,
+          return {
+            externalId:
+              game.id,
 
-                releaseDate:
-                  game.first_release_date
-                    ? new Date(
-                        game.first_release_date *
-                          1000,
-                      )
-                        .toISOString()
-                        .slice(0, 10)
-                    : null,
+            title:
+              game.name ?? "",
 
-                description:
-                  game.summary ?? "",
+            year:
+              game.first_release_date
+                ? new Date(
+                    game.first_release_date *
+                      1000,
+                  ).getFullYear()
+                : null,
 
-                genres:
-                  game.genres?.map(
-                    (genre: any) =>
-                      genre.name,
-                  ) ?? [],
+            releaseDate:
+              game.first_release_date
+                ? new Date(
+                    game.first_release_date *
+                      1000,
+                  )
+                    .toISOString()
+                    .slice(0, 10)
+                : null,
 
-                platforms:
-                  game.platforms?.map(
-                    (platform: any) =>
-                      platform.name,
-                  ) ?? [],
+            description:
+              game.summary ?? "",
 
-                slug:
-                  game.slug ?? null,
+            storyline:
+              game.storyline ?? "",
 
-                coverImage:
-                  game.cover?.image_id
-                    ? `https://images.igdb.com/igdb/image/upload/t_cover_big/${game.cover.image_id}.jpg`
-                    : null,
-              }),
-            )
-          : [];
+            genres:
+              game.genres?.map(
+                (genre: any) =>
+                  genre.name,
+              ) ?? [],
+
+            platforms:
+              game.platforms?.map(
+                (platform: any) =>
+                  platform.name,
+              ) ?? [],
+
+            developers,
+
+            publishers,
+
+            rating:
+              typeof game.rating ===
+              "number"
+                ? game.rating
+                : null,
+
+            ratingCount:
+              typeof game.rating_count ===
+              "number"
+                ? game.rating_count
+                : 0,
+
+            gameModes:
+              game.game_modes?.map(
+                (mode: any) =>
+                  mode.name,
+              ) ?? [],
+
+            playerPerspectives:
+              game.player_perspectives?.map(
+                (perspective: any) =>
+                  perspective.name,
+              ) ?? [],
+
+            themes:
+              game.themes?.map(
+                (theme: any) =>
+                  theme.name,
+              ) ?? [],
+
+            slug:
+              game.slug ?? null,
+
+            coverImage:
+              game.cover?.image_id
+                ? `https://images.igdb.com/igdb/image/upload/t_cover_big/${game.cover.image_id}.jpg`
+                : null,
+
+            screenshots:
+              game.screenshots
+                ?.filter(
+                  (screenshot: any) =>
+                    screenshot.image_id,
+                )
+                ?.slice(0, 4)
+                ?.map(
+                  (screenshot: any) => ({
+                    imageId:
+                      screenshot.image_id,
+
+                    width:
+                      screenshot.width ??
+                      null,
+
+                    height:
+                      screenshot.height ??
+                      null,
+
+                    url:
+                      `https://images.igdb.com/igdb/image/upload/t_screenshot_huge/${screenshot.image_id}.jpg`,
+                  }),
+                ) ?? [],
+
+            videos:
+              game.videos
+                ?.filter(
+                  (video: any) =>
+                    video.video_id,
+                )
+                ?.slice(0, 2)
+                ?.map(
+                  (video: any) => ({
+                    name:
+                      video.name ?? "",
+
+                    videoId:
+                      video.video_id,
+
+                    provider:
+                      "youtube",
+
+                    url:
+                      `https://www.youtube.com/watch?v=${video.video_id}`,
+                  }),
+                ) ?? [],
+          };
+        },
+      )
+    : [];
 
       return res.json({
         source: "igdb",

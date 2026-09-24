@@ -93,9 +93,9 @@ export interface MediaItem {
   // GAME METADATA
   // =====================================================
 
-  developer?: string
-
-  publisher?: string
+  
+developers?: string[]
+publishers?: string[]
 
   platforms?: string[]
 
