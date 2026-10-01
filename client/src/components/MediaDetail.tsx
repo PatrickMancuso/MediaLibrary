@@ -1,7 +1,9 @@
 import {
+  useEffect,
   useRef,
   useState,
 } from 'react'
+
 import type { MediaItem } from '../data/sampleMedia'
 
 interface MediaDetailProps {
@@ -39,6 +41,19 @@ function MediaDetail({
 
   const detailInfoRef =
     useRef<HTMLDivElement>(null)
+
+    useEffect(() => {
+  const previousOverflow =
+    document.body.style.overflow
+
+  document.body.style.overflow =
+    'hidden'
+
+  return () => {
+    document.body.style.overflow =
+      previousOverflow
+  }
+}, [])
 
   const formatLabel =
     formatLabels[media.format] ??
@@ -79,19 +94,26 @@ function MediaDetail({
   onClick={(event) =>
     event.stopPropagation()
   }
-  onWheel={(event) => {
-    const detailInfo =
-      detailInfoRef.current
+onWheel={(event) => {
+  const detailInfo =
+    detailInfoRef.current
 
-    if (!detailInfo) {
-      return
-    }
+  if (!detailInfo) {
+    return
+  }
 
-    detailInfo.scrollTop +=
-      event.deltaY
+  const target =
+    event.target as Node
 
-    event.preventDefault()
-  }}
+  if (
+    detailInfo.contains(target)
+  ) {
+    return
+  }
+
+  detailInfo.scrollTop +=
+    event.deltaY
+}}
 >
         <button
           type="button"

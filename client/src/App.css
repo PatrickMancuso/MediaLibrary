@@ -2193,6 +2193,9 @@
   padding:
     30px;
 
+    overscroll-behavior:
+  contain;
+
   background:
     rgba(13, 6, 3, 0.74);
 
