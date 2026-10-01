@@ -74,12 +74,25 @@ function MediaDetail({
       className="detail-backdrop"
       onClick={onClose}
     >
-      <div
-        className="media-detail"
-        onClick={(event) =>
-          event.stopPropagation()
-        }
-      >
+     <div
+  className="media-detail"
+  onClick={(event) =>
+    event.stopPropagation()
+  }
+  onWheel={(event) => {
+    const detailInfo =
+      detailInfoRef.current
+
+    if (!detailInfo) {
+      return
+    }
+
+    detailInfo.scrollTop +=
+      event.deltaY
+
+    event.preventDefault()
+  }}
+>
         <button
           type="button"
           className="detail-close"
