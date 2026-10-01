@@ -53,13 +53,17 @@ function AuthModal({
         return
       }
 
-      const {
-        data,
-        error: signUpError,
-      } = await supabase.auth.signUp({
-        email,
-        password,
-      })
+     const {
+  data,
+  error: signUpError,
+} = await supabase.auth.signUp({
+  email,
+  password,
+  options: {
+    emailRedirectTo:
+      window.location.origin,
+  },
+})
 
       if (signUpError) {
         throw signUpError
