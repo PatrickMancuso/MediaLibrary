@@ -1,4 +1,7 @@
-import { useState } from 'react'
+import {
+  useRef,
+  useState,
+} from 'react'
 import type { MediaItem } from '../data/sampleMedia'
 
 interface MediaDetailProps {
@@ -7,6 +10,9 @@ interface MediaDetailProps {
   onRemove: (media: MediaItem) => void
   onEdit: (media: MediaItem) => void
 }
+
+const detailInfoRef =
+  useRef<HTMLDivElement>(null)
 
 const formatLabels: Record<string, string> = {
   vhs: 'VHS',
@@ -103,9 +109,7 @@ function MediaDetail({
               : undefined
           }
         >
-          <span className="cover-type">
-            {mediaTypeLabel} · {formatLabel}
-          </span>
+      
 
           {!media.coverImage && (
             <span className="cover-title">
@@ -113,17 +117,18 @@ function MediaDetail({
             </span>
           )}
 
-          <span className="cover-year">
-            {media.year}
-          </span>
+         
         </div>
 
         {/* =====================================================
             INFORMATION
             ===================================================== */}
 
-        <div className="detail-info">
-          <div className="detail-eyebrow">
+<div
+  className="detail-info"
+  ref={detailInfoRef}
+>
+            <div className="detail-eyebrow">
             {mediaTypeLabel}
           </div>
 
@@ -275,7 +280,6 @@ function MediaDetail({
 
           <div className="detail-copy-section">
             <div className="detail-section-label">
-              YOUR COPY
             </div>
 
             <div className="detail-facts">
