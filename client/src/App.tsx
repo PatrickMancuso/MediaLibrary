@@ -3,11 +3,17 @@ import {
   useMemo,
   useState,
 } from 'react'
+
+import type { User } from '@supabase/supabase-js'
+
 import Header from './components/Header'
 import MediaDetail from './components/MediaDetail'
 import MediaRow from './components/MediaRow'
+import AuthModal from './components/AuthModal'
+import { supabase } from './lib/supabase'
 import AddMediaModal from './components/AddMediaModal'
 import CollectionDashboard from './components/CollectionDashboard'
+
 import {
   gameGenres,
   media as sampleMedia,
@@ -87,10 +93,53 @@ function App() {
   const [activeView, setActiveView] =
     useState<View>('collection')
 
+    const [user, setUser] =
+  useState<User | null>(null)
+
+const [isAuthModalOpen, setIsAuthModalOpen] =
+  useState(false)
+
+const [authLoading, setAuthLoading] =
+  useState(true)
+
  const [collection, setCollection] =
   useState<MediaItem[]>(
     loadStoredCollection,
   )
+
+  useEffect(() => {
+  let mounted = true
+
+  supabase.auth.getSession().then(
+    ({ data }) => {
+      if (!mounted) {
+        return
+      }
+
+      setUser(data.session?.user ?? null)
+      setAuthLoading(false)
+    },
+  )
+
+  const {
+    data: authListener,
+  } =
+    supabase.auth.onAuthStateChange(
+      (_event, session) => {
+        setUser(
+          session?.user ?? null,
+        )
+
+        setAuthLoading(false)
+      },
+    )
+
+  return () => {
+    mounted = false
+
+    authListener.subscription.unsubscribe()
+  }
+}, [])
 
 useEffect(() => {
   try {
@@ -308,6 +357,23 @@ useEffect(() => {
     ])
   }
 
+  const handleSignOut = async () => {
+  const {
+    error,
+  } = await supabase.auth.signOut()
+
+  if (error) {
+    console.error(
+      'Failed to sign out:',
+      error,
+    )
+
+    return
+  }
+
+  setIsAuthModalOpen(false)
+}
+
   const handleRemoveMedia = (
   mediaToRemove: MediaItem,
 ) => {
@@ -488,12 +554,22 @@ const renderCollectionDashboard = () => (
   return (
     <div className="room">
       <Header
-        activeView={activeView}
-        onViewChange={setActiveView}
-        onAddMedia={() =>
-          setIsAddMediaOpen(true)
-        }
-      />
+  activeView={activeView}
+  onViewChange={setActiveView}
+  onAddMedia={() =>
+    setIsAddMediaOpen(true)
+  }
+  onAccount={() => {
+    if (user) {
+      void handleSignOut()
+    } else {
+      setIsAuthModalOpen(true)
+    }
+  }}
+  userEmail={
+    user?.email ?? null
+  }
+/>
 
       <main className="room-content">
         <div className="room-glow room-glow-left" />
@@ -534,6 +610,16 @@ const renderCollectionDashboard = () => (
   onEdit={handleEditMedia}
 />
       )}
+
+
+{isAuthModalOpen && !authLoading && (
+  <AuthModal
+    onClose={() =>
+      setIsAuthModalOpen(false)
+    }
+  />
+)}
+
 
       {/* =======================================================
           ADD MEDIA

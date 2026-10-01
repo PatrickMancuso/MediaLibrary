@@ -14,12 +14,17 @@ interface HeaderProps {
   ) => void
 
   onAddMedia: () => void
-}
 
+  onAccount: () => void
+
+  userEmail?: string | null
+}
 function Header({
   activeView,
   onViewChange,
   onAddMedia,
+  onAccount,
+  userEmail,
 }: HeaderProps) {
   const navigation = [
     {
@@ -88,17 +93,39 @@ function Header({
           ))}
         </nav>
 
-        <button
-          type="button"
-          className="header-add-media"
-          onClick={onAddMedia}
-        >
-          <span className="header-add-icon">
-            +
-          </span>
+   <div className="header-actions">
+  <button
+    type="button"
+    className="header-account"
+    onClick={onAccount}
+  >
+    <span className="header-account-icon">
+      {userEmail
+        ? userEmail
+            .charAt(0)
+            .toUpperCase()
+        : '○'}
+    </span>
 
-          <span>Add Media</span>
-        </button>
+    <span>
+      {userEmail
+        ? userEmail
+        : 'Account'}
+    </span>
+  </button>
+
+  <button
+    type="button"
+    className="header-add-media"
+    onClick={onAddMedia}
+  >
+    <span className="header-add-icon">
+      +
+    </span>
+
+    <span>Add Media</span>
+  </button>
+</div>
       </div>
     </header>
   )
