@@ -11,8 +11,7 @@ interface MediaDetailProps {
   onEdit: (media: MediaItem) => void
 }
 
-const detailInfoRef =
-  useRef<HTMLDivElement>(null)
+
 
 const formatLabels: Record<string, string> = {
   vhs: 'VHS',
@@ -37,6 +36,9 @@ function MediaDetail({
 }: MediaDetailProps) {
   const [showMoreDetails, setShowMoreDetails] =
     useState(false)
+
+  const detailInfoRef =
+    useRef<HTMLDivElement>(null)
 
   const formatLabel =
     formatLabels[media.format] ??
