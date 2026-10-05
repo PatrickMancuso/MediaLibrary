@@ -181,6 +181,92 @@ function rowToMediaItem(
 }
 
 
+function mediaItemToRow(
+  media: MediaItem,
+  userId: string,
+) {
+  return {
+    id: media.id,
+    user_id: userId,
+
+    title: media.title,
+    type: media.type,
+    format: media.format,
+    year: media.year,
+    genre: media.genre,
+    description: media.description,
+    favorite: media.favorite,
+    orientation: media.orientation,
+
+    spine_image:
+      media.spineImage ?? null,
+
+    cover_image:
+      media.coverImage ?? null,
+
+    source:
+      media.source ?? null,
+
+    external_id:
+      media.externalId ?? null,
+
+    backdrop_image:
+      media.backdropImage ?? null,
+
+    logo_image:
+      media.logoImage ?? null,
+
+    release_date:
+      media.releaseDate ?? null,
+
+    rating:
+      media.rating ?? null,
+
+    runtime:
+      media.runtime ?? null,
+
+    director:
+      media.director ?? null,
+
+    cast_members:
+      media.cast ?? null,
+
+    production_companies:
+      media.productionCompanies ?? null,
+
+    countries:
+      media.countries ?? null,
+
+    languages:
+      media.languages ?? null,
+
+    developers:
+      media.developers ?? null,
+
+    publishers:
+      media.publishers ?? null,
+
+    platforms:
+      media.platforms ?? null,
+
+    game_modes:
+      media.gameModes ?? null,
+
+    player_perspectives:
+      media.playerPerspectives ?? null,
+
+    themes:
+      media.themes ?? null,
+
+    screenshots:
+      media.screenshots ?? null,
+
+    videos:
+      media.videos ?? null,
+  }
+}
+
+
 const STORAGE_KEYS = {
   movieGenres: 'medialibrary.customMovieGenres',
   gameGenres: 'medialibrary.customGameGenres',
@@ -532,14 +618,57 @@ useEffect(() => {
     setSelectedMedia(item)
   }
 
-  const handleAddMedia = (
-    newMedia: MediaItem,
-  ) => {
-    setCollection((current) => [
-      ...current,
-      newMedia,
-    ])
+ const handleAddMedia = async (
+  newMedia: MediaItem,
+) => {
+  if (!user) {
+    console.error(
+      'Cannot add media without a signed-in user.',
+    )
+
+    return
   }
+
+  const row =
+    mediaItemToRow(
+      newMedia,
+      user.id,
+    )
+
+  const {
+    data,
+    error,
+  } = await supabase
+    .from('media_items')
+    .insert(row)
+    .select()
+    .single()
+
+  if (error) {
+    console.error(
+      'Failed to save media to Supabase:',
+      error,
+    )
+
+    window.alert(
+      'Unable to save this media item. Please try again.',
+    )
+
+    return
+  }
+
+  const savedMedia =
+    rowToMediaItem(
+      data as MediaItemRow,
+    )
+
+  setCollection(
+    (current) => [
+      ...current,
+      savedMedia,
+    ],
+  )
+}
 
 
 
