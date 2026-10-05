@@ -357,6 +357,184 @@ useEffect(() => {
     ])
   }
 
+
+const testSupabaseInsert = async () => {
+  if (!user) {
+    console.error(
+      'You must be signed in to test Supabase.',
+    )
+
+    return
+  }
+
+  const testItem =
+    collection[0]
+
+  if (!testItem) {
+    console.error(
+      'No media item is available to test.',
+    )
+
+    return
+  }
+
+  const {
+    data,
+    error,
+  } = await supabase
+    .from('media_items')
+    .insert({
+      user_id:
+        user.id,
+
+      title:
+        testItem.title,
+
+      type:
+        testItem.type,
+
+      format:
+        testItem.format,
+
+      year:
+        testItem.year,
+
+      genre:
+        testItem.genre,
+
+      description:
+        testItem.description,
+
+      favorite:
+        testItem.favorite,
+
+      orientation:
+        testItem.orientation,
+
+      spine_image:
+        testItem.spineImage ??
+        null,
+
+      cover_image:
+        testItem.coverImage ??
+        null,
+
+      source:
+        testItem.source ??
+        null,
+
+      external_id:
+        testItem.externalId ??
+        null,
+
+      backdrop_image:
+        testItem.backdropImage ??
+        null,
+
+      logo_image:
+        testItem.logoImage ??
+        null,
+
+      release_date:
+        testItem.releaseDate ??
+        null,
+
+      rating:
+        testItem.rating ??
+        null,
+
+      runtime:
+        testItem.runtime ??
+        null,
+
+      director:
+        testItem.director ??
+        null,
+
+      cast_members:
+        testItem.cast ??
+        null,
+
+      production_companies:
+        testItem.productionCompanies ??
+        null,
+
+      countries:
+        testItem.countries ??
+        null,
+
+      languages:
+        testItem.languages ??
+        null,
+
+      developers:
+        testItem.developers ??
+        null,
+
+      publishers:
+        testItem.publishers ??
+        null,
+
+      platforms:
+        testItem.platforms ??
+        null,
+
+      game_modes:
+        testItem.gameModes ??
+        null,
+
+      player_perspectives:
+        testItem.playerPerspectives ??
+        null,
+
+      themes:
+        testItem.themes ??
+        null,
+
+      screenshots:
+        testItem.screenshots ??
+        null,
+
+      videos:
+        testItem.videos ??
+        null,
+    })
+    .select()
+    .single()
+
+  if (error) {
+    console.error(
+      'Supabase insert test failed:',
+      error,
+    )
+
+    return
+  }
+
+  console.log(
+    'Supabase insert test succeeded:',
+    data,
+  )
+}
+
+
+useEffect(() => {
+  const testWindow =
+    window as typeof window & {
+      testSupabaseInsert?: () => Promise<void>
+    }
+
+  testWindow.testSupabaseInsert =
+    testSupabaseInsert
+
+  return () => {
+    delete testWindow.testSupabaseInsert
+  }
+}, [
+  user,
+  collection,
+])
+
   const handleSignOut = async () => {
   const {
     error,
