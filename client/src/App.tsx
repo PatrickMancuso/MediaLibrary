@@ -868,7 +868,7 @@ const renderCollectionDashboard = () => (
 
   return (
     <div className="room">
-      <Header
+<Header
   activeView={activeView}
   onViewChange={setActiveView}
   onAddMedia={() =>
