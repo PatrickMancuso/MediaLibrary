@@ -16,7 +16,6 @@ import CollectionDashboard from './components/CollectionDashboard'
 
 import {
   gameGenres,
-  media as sampleMedia,
   movieGenres,
   type MediaItem,
 } from './data/sampleMedia'
@@ -33,8 +32,156 @@ interface CustomOption {
   label: string
 }
 
+
+interface MediaItemRow {
+  id: string
+  user_id: string
+
+  title: string
+  type: 'movie' | 'game'
+  format: string
+  year: number
+  genre: string
+  description: string
+  favorite: boolean
+  orientation: 'spine' | 'cover'
+
+  spine_image: string | null
+  cover_image: string | null
+
+  source:
+    | 'tmdb'
+    | 'igdb'
+    | 'manual'
+    | null
+
+  external_id: string | null
+
+  backdrop_image: string | null
+  logo_image: string | null
+
+  release_date: string | null
+  rating: number | null
+  runtime: number | null
+
+  director: string | null
+
+  cast_members: string[] | null
+  production_companies: string[] | null
+  countries: string[] | null
+  languages: string[] | null
+
+  developers: string[] | null
+  publishers: string[] | null
+  platforms: string[] | null
+  game_modes: string[] | null
+  player_perspectives: string[] | null
+  themes: string[] | null
+
+  screenshots: string[] | null
+
+  videos:
+    | MediaItem['videos']
+    | null
+
+  created_at: string
+  updated_at: string
+}
+
+function rowToMediaItem(
+  row: MediaItemRow,
+): MediaItem {
+  return {
+    id: row.id,
+
+    title: row.title,
+
+    type: row.type,
+
+    format: row.format,
+
+    year: row.year,
+
+    genre: row.genre,
+
+    description: row.description,
+
+    favorite: row.favorite,
+
+    orientation: row.orientation,
+
+    spineImage:
+      row.spine_image ?? undefined,
+
+    coverImage:
+      row.cover_image ?? undefined,
+
+    source:
+      row.source ?? undefined,
+
+    externalId:
+      row.external_id ?? undefined,
+
+    backdropImage:
+      row.backdrop_image ?? undefined,
+
+    logoImage:
+      row.logo_image ?? undefined,
+
+    releaseDate:
+      row.release_date ?? undefined,
+
+    rating:
+      row.rating ?? undefined,
+
+    runtime:
+      row.runtime ?? undefined,
+
+    director:
+      row.director ?? undefined,
+
+    cast:
+      row.cast_members ?? undefined,
+
+    productionCompanies:
+      row.production_companies ??
+      undefined,
+
+    countries:
+      row.countries ?? undefined,
+
+    languages:
+      row.languages ?? undefined,
+
+    developers:
+      row.developers ?? undefined,
+
+    publishers:
+      row.publishers ?? undefined,
+
+    platforms:
+      row.platforms ?? undefined,
+
+    gameModes:
+      row.game_modes ?? undefined,
+
+    playerPerspectives:
+      row.player_perspectives ??
+      undefined,
+
+    themes:
+      row.themes ?? undefined,
+
+    screenshots:
+      row.screenshots ?? undefined,
+
+    videos:
+      row.videos ?? undefined,
+  }
+}
+
+
 const STORAGE_KEYS = {
-collection: 'media-library-collection',
   movieGenres: 'medialibrary.customMovieGenres',
   gameGenres: 'medialibrary.customGameGenres',
   movieFormats: 'medialibrary.customMovieFormats',
@@ -67,27 +214,6 @@ function loadStoredOptions(
   }
 }
 
-function loadStoredCollection(): MediaItem[] {
-  try {
-    const saved = localStorage.getItem(
-      STORAGE_KEYS.collection,
-    )
-
-    if (!saved) {
-      return sampleMedia
-    }
-
-    const parsed = JSON.parse(saved)
-
-    if (!Array.isArray(parsed)) {
-      return sampleMedia
-    }
-
-    return parsed as MediaItem[]
-  } catch {
-    return sampleMedia
-  }
-}
 
 function App() {
   const [activeView, setActiveView] =
@@ -102,10 +228,13 @@ const [isAuthModalOpen, setIsAuthModalOpen] =
 const [authLoading, setAuthLoading] =
   useState(true)
 
- const [collection, setCollection] =
-  useState<MediaItem[]>(
-    loadStoredCollection,
-  )
+const [collection, setCollection] =
+  useState<MediaItem[]>([])
+
+const [
+  collectionLoading,
+  setCollectionLoading,
+] = useState(true)
 
   useEffect(() => {
   let mounted = true
@@ -142,18 +271,73 @@ const [authLoading, setAuthLoading] =
 }, [])
 
 useEffect(() => {
-  try {
-   localStorage.setItem(
-  STORAGE_KEYS.collection,
-  JSON.stringify(collection),
-)
-  } catch (error) {
-    console.error(
-      'Failed to save collection:',
-      error,
-    )
+  let cancelled = false
+
+  const loadCollection =
+    async () => {
+      if (authLoading) {
+        return
+      }
+
+      if (!user) {
+        setCollection([])
+        setCollectionLoading(false)
+
+        return
+      }
+
+      setCollectionLoading(true)
+
+      const {
+        data,
+        error,
+      } = await supabase
+        .from('media_items')
+        .select('*')
+        .order(
+          'created_at',
+          {
+            ascending: true,
+          },
+        )
+
+      if (cancelled) {
+        return
+      }
+
+      if (error) {
+        console.error(
+          'Failed to load collection from Supabase:',
+          error,
+        )
+
+        setCollection([])
+        setCollectionLoading(false)
+
+        return
+      }
+
+      const items =
+        (data ?? []).map(
+          (row) =>
+            rowToMediaItem(
+              row as MediaItemRow,
+            ),
+        )
+
+      setCollection(items)
+      setCollectionLoading(false)
+    }
+
+  void loadCollection()
+
+  return () => {
+    cancelled = true
   }
-}, [collection])
+}, [
+  user,
+  authLoading,
+])
 
   const [selectedMedia, setSelectedMedia] =
     useState<MediaItem | null>(null)
@@ -358,182 +542,6 @@ useEffect(() => {
   }
 
 
-const testSupabaseInsert = async () => {
-  if (!user) {
-    console.error(
-      'You must be signed in to test Supabase.',
-    )
-
-    return
-  }
-
-  const testItem =
-    collection[0]
-
-  if (!testItem) {
-    console.error(
-      'No media item is available to test.',
-    )
-
-    return
-  }
-
-  const {
-    data,
-    error,
-  } = await supabase
-    .from('media_items')
-    .insert({
-      user_id:
-        user.id,
-
-      title:
-        testItem.title,
-
-      type:
-        testItem.type,
-
-      format:
-        testItem.format,
-
-      year:
-        testItem.year,
-
-      genre:
-        testItem.genre,
-
-      description:
-        testItem.description,
-
-      favorite:
-        testItem.favorite,
-
-      orientation:
-        testItem.orientation,
-
-      spine_image:
-        testItem.spineImage ??
-        null,
-
-      cover_image:
-        testItem.coverImage ??
-        null,
-
-      source:
-        testItem.source ??
-        null,
-
-      external_id:
-        testItem.externalId ??
-        null,
-
-      backdrop_image:
-        testItem.backdropImage ??
-        null,
-
-      logo_image:
-        testItem.logoImage ??
-        null,
-
-      release_date:
-        testItem.releaseDate ??
-        null,
-
-      rating:
-        testItem.rating ??
-        null,
-
-      runtime:
-        testItem.runtime ??
-        null,
-
-      director:
-        testItem.director ??
-        null,
-
-      cast_members:
-        testItem.cast ??
-        null,
-
-      production_companies:
-        testItem.productionCompanies ??
-        null,
-
-      countries:
-        testItem.countries ??
-        null,
-
-      languages:
-        testItem.languages ??
-        null,
-
-      developers:
-        testItem.developers ??
-        null,
-
-      publishers:
-        testItem.publishers ??
-        null,
-
-      platforms:
-        testItem.platforms ??
-        null,
-
-      game_modes:
-        testItem.gameModes ??
-        null,
-
-      player_perspectives:
-        testItem.playerPerspectives ??
-        null,
-
-      themes:
-        testItem.themes ??
-        null,
-
-      screenshots:
-        testItem.screenshots ??
-        null,
-
-      videos:
-        testItem.videos ??
-        null,
-    })
-    .select()
-    .single()
-
-  if (error) {
-    console.error(
-      'Supabase insert test failed:',
-      error,
-    )
-
-    return
-  }
-
-  console.log(
-    'Supabase insert test succeeded:',
-    data,
-  )
-}
-
-
-useEffect(() => {
-  const testWindow =
-    window as typeof window & {
-      testSupabaseInsert?: () => Promise<void>
-    }
-
-  testWindow.testSupabaseInsert =
-    testSupabaseInsert
-
-  return () => {
-    delete testWindow.testSupabaseInsert
-  }
-}, [
-  user,
-  collection,
-])
 
   const handleSignOut = async () => {
   const {
@@ -750,10 +758,14 @@ const renderCollectionDashboard = () => (
 />
 
       <main className="room-content">
-        <div className="room-glow room-glow-left" />
-        <div className="room-glow room-glow-right" />
+<div className="room-glow room-glow-left" />
+<div className="room-glow room-glow-right" />
 
-        {activeView === 'collection' ? (
+{collectionLoading ? (
+  <div className="collection-loading">
+    Loading your collection...
+  </div>
+) : activeView === 'collection' ? (
   renderCollectionDashboard()
 ) : (
   <div className="library">
