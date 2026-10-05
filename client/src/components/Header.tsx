@@ -1,3 +1,5 @@
+import { useEffect, useRef, useState } from 'react'
+
 interface HeaderProps {
   activeView:
     | 'collection'
@@ -17,15 +19,27 @@ interface HeaderProps {
 
   onAccount: () => void
 
+  onSignOut: () => void
+
   userEmail?: string | null
 }
+
 function Header({
   activeView,
   onViewChange,
   onAddMedia,
   onAccount,
+  onSignOut,
   userEmail,
 }: HeaderProps) {
+  const [
+    isAccountMenuOpen,
+    setIsAccountMenuOpen,
+  ] = useState(false)
+
+  const accountMenuRef =
+    useRef<HTMLDivElement>(null)
+
   const navigation = [
     {
       id: 'collection' as const,
@@ -44,6 +58,49 @@ function Header({
       label: 'Favorites',
     },
   ]
+
+  useEffect(() => {
+    const handleOutsideClick = (
+      event: MouseEvent,
+    ) => {
+      if (
+        accountMenuRef.current &&
+        !accountMenuRef.current.contains(
+          event.target as Node,
+        )
+      ) {
+        setIsAccountMenuOpen(false)
+      }
+    }
+
+    document.addEventListener(
+      'mousedown',
+      handleOutsideClick,
+    )
+
+    return () => {
+      document.removeEventListener(
+        'mousedown',
+        handleOutsideClick,
+      )
+    }
+  }, [])
+
+  const handleAccountClick = () => {
+    if (!userEmail) {
+      onAccount()
+      return
+    }
+
+    setIsAccountMenuOpen(
+      (current) => !current,
+    )
+  }
+
+  const handleSignOut = () => {
+    setIsAccountMenuOpen(false)
+    onSignOut()
+  }
 
   return (
     <header className="site-header">
@@ -93,39 +150,129 @@ function Header({
           ))}
         </nav>
 
-   <div className="header-actions">
-  <button
-    type="button"
-    className="header-account"
-    onClick={onAccount}
-  >
-    <span className="header-account-icon">
-      {userEmail
-        ? userEmail
-            .charAt(0)
-            .toUpperCase()
-        : '○'}
-    </span>
+        <div className="header-actions">
+          <button
+            type="button"
+            className="header-add-media"
+            onClick={onAddMedia}
+          >
+            <span className="header-add-icon">
+              +
+            </span>
 
-    <span>
-      {userEmail
-        ? userEmail
-        : 'Account'}
-    </span>
-  </button>
+            <span>Add Media</span>
+          </button>
 
-  <button
-    type="button"
-    className="header-add-media"
-    onClick={onAddMedia}
-  >
-    <span className="header-add-icon">
-      +
-    </span>
+          <button
+            type="button"
+            className="header-settings"
+            onClick={() => {
+              // Placeholder for future settings
+            }}
+          >
+            <span className="header-settings-icon">
+              ⚙
+            </span>
 
-    <span>Add Media</span>
-  </button>
-</div>
+            <span>Settings</span>
+          </button>
+
+          <div
+            className="header-account-wrapper"
+            ref={accountMenuRef}
+          >
+            <button
+              type="button"
+              className="header-account"
+              onClick={
+                handleAccountClick
+              }
+              aria-expanded={
+                userEmail
+                  ? isAccountMenuOpen
+                  : undefined
+              }
+              aria-haspopup={
+                userEmail
+                  ? 'menu'
+                  : undefined
+              }
+            >
+              <span className="header-account-icon">
+                {userEmail
+                  ? userEmail
+                      .charAt(0)
+                      .toUpperCase()
+                  : '○'}
+              </span>
+
+              <span className="header-account-label">
+                {userEmail ??
+                  'Account'}
+              </span>
+
+              {userEmail && (
+                <span
+                  className={
+                    isAccountMenuOpen
+                      ? 'header-account-arrow open'
+                      : 'header-account-arrow'
+                  }
+                >
+                  ▾
+                </span>
+              )}
+            </button>
+
+            {userEmail &&
+              isAccountMenuOpen && (
+                <div
+                  className="account-menu"
+                  role="menu"
+                >
+                  <div className="account-menu-email">
+                    {userEmail}
+                  </div>
+
+                  <div className="account-menu-divider" />
+
+                  <button
+                    type="button"
+                    className="account-menu-item"
+                    role="menuitem"
+                    onClick={() => {
+                      setIsAccountMenuOpen(
+                        false,
+                      )
+
+                      onAccount()
+                    }}
+                  >
+                    <span>
+                      Account Settings
+                    </span>
+
+                    <span>›</span>
+                  </button>
+
+                  <div className="account-menu-divider" />
+
+                  <button
+                    type="button"
+                    className="account-menu-item account-menu-signout"
+                    role="menuitem"
+                    onClick={
+                      handleSignOut
+                    }
+                  >
+                    <span>
+                      Sign Out
+                    </span>
+                  </button>
+                </div>
+              )}
+          </div>
+        </div>
       </div>
     </header>
   )

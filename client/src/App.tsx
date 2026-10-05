@@ -875,11 +875,12 @@ const renderCollectionDashboard = () => (
     setIsAddMediaOpen(true)
   }
   onAccount={() => {
-    if (user) {
-      void handleSignOut()
-    } else {
+    if (!user) {
       setIsAuthModalOpen(true)
     }
+  }}
+  onSignOut={() => {
+    void handleSignOut()
   }}
   userEmail={
     user?.email ?? null
