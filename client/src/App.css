@@ -6560,7 +6560,7 @@
     relative;
 
   min-height:
-    280px;
+    300px;
 
   overflow:
     hidden;
@@ -7464,20 +7464,6 @@
     13px;
 }
 
-.dashboard-category-card {
-  min-height:
-    235px;
-
-  border-color:
-    rgba(116, 141, 99, 0.18);
-
-  background:
-    #263329;
-
-  box-shadow:
-    0 17px 28px
-      rgba(13, 21, 15, 0.3);
-}
 
 .dashboard-category-card:hover {
   border-color:
@@ -8337,10 +8323,7 @@
       245px;
   }
 
-  .dashboard-category-card {
-    min-height:
-      275px;
-  }
+ 
 }
 
 
