@@ -9936,9 +9936,9 @@
 .library-cover-card {
   display: flex;
   flex-direction: column;
-  flex: 0 0 130px;
+  flex: 0 0 150px;
 
-  width: 130px;
+  width: 150px;
   min-width: 0;
 
   gap: 7px;

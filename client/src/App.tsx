@@ -305,6 +305,20 @@ function App() {
   const [activeView, setActiveView] =
     useState<View>('collection')
 
+    const [librarySearch, setLibrarySearch] =
+  useState('')
+
+const [libraryGenre, setLibraryGenre] =
+  useState('all')
+
+const [libraryFormat, setLibraryFormat] =
+  useState('all')
+
+const [librarySort, setLibrarySort] =
+  useState<'title-asc' | 'title-desc' | 'year-new' | 'year-old'>(
+    'title-asc',
+  )
+
     const [user, setUser] =
   useState<User | null>(null)
 
@@ -607,6 +621,93 @@ useEffect(() => {
       (row) => row.items.length > 0,
     )
 
+
+    /* =========================================================
+   LIBRARY SEARCH AND FILTERS
+   ========================================================= */
+
+const libraryItems =
+  activeView === 'movies'
+    ? movies
+    : activeView === 'games'
+      ? games
+      : []
+
+const libraryGenreOptions = Array.from(
+  new Set(
+    libraryItems
+      .map((item) => item.genre)
+      .filter(Boolean),
+  ),
+).sort((a, b) => a.localeCompare(b))
+
+const libraryFormatOptions = Array.from(
+  new Set(
+    libraryItems
+      .map((item) => item.format)
+      .filter(Boolean),
+  ),
+).sort((a, b) => a.localeCompare(b))
+
+const isLibraryFiltered =
+  librarySearch.trim() !== '' ||
+  libraryGenre !== 'all' ||
+  libraryFormat !== 'all'
+
+const filteredLibraryItems = libraryItems
+  .filter((item) => {
+    const search = librarySearch.trim().toLowerCase()
+
+    const searchableValues = [
+      item.title,
+      String(item.year),
+      item.genre,
+      item.format,
+    ]
+
+    const matchesSearch =
+      search === '' ||
+      searchableValues.some((value) =>
+        value.toLowerCase().includes(search),
+      )
+
+    const matchesGenre =
+      libraryGenre === 'all' ||
+      item.genre === libraryGenre
+
+    const matchesFormat =
+      libraryFormat === 'all' ||
+      item.format === libraryFormat
+
+    return (
+      matchesSearch &&
+      matchesGenre &&
+      matchesFormat
+    )
+  })
+  .sort((a, b) => {
+    switch (librarySort) {
+      case 'title-desc':
+        return b.title.localeCompare(a.title)
+
+      case 'year-new':
+        return b.year - a.year
+
+      case 'year-old':
+        return a.year - b.year
+
+      default:
+        return a.title.localeCompare(b.title)
+    }
+  })
+
+const clearLibraryFilters = () => {
+  setLibrarySearch('')
+  setLibraryGenre('all')
+  setLibraryFormat('all')
+  setLibrarySort('title-asc')
+}
+
   /* =========================================================
      HANDLERS
      ========================================================= */
@@ -843,11 +944,164 @@ const handleAddCustomGenre = (
     }
   }
 
+
+  /* =========================================================
+   LIBRARY SEARCH CONTROLS
+   ========================================================= */
+
+const renderLibrarySearch = () => {
+  if (
+    activeView !== 'movies' &&
+    activeView !== 'games'
+  ) {
+    return null
+  }
+
+  return (
+    <div className="library-search-panel">
+      <div className="library-search-heading">
+        <div>
+          <h2>
+            {activeView === 'movies'
+              ? 'Movie Library'
+              : 'Game Library'}
+          </h2>
+
+          <p>
+            Search and explore your collection
+          </p>
+        </div>
+
+        <span className="library-result-count">
+          {filteredLibraryItems.length} of{' '}
+          {libraryItems.length} titles
+        </span>
+      </div>
+
+      <div className="library-search-input-wrapper">
+        <span aria-hidden="true">⌕</span>
+
+        <input
+          type="search"
+          value={librarySearch}
+          onChange={(event) =>
+            setLibrarySearch(event.target.value)
+          }
+          placeholder="Search title, year, genre, or format..."
+          aria-label="Search library"
+        />
+      </div>
+
+      <div className="library-filter-row">
+        <label>
+          <span>Genre</span>
+
+          <select
+            value={libraryGenre}
+            onChange={(event) =>
+              setLibraryGenre(event.target.value)
+            }
+          >
+            <option value="all">All Genres</option>
+
+            {libraryGenreOptions.map((genre) => (
+              <option key={genre} value={genre}>
+                {genre}
+              </option>
+            ))}
+          </select>
+        </label>
+
+        <label>
+          <span>Format</span>
+
+          <select
+            value={libraryFormat}
+            onChange={(event) =>
+              setLibraryFormat(event.target.value)
+            }
+          >
+            <option value="all">All Formats</option>
+
+            {libraryFormatOptions.map((format) => (
+              <option key={format} value={format}>
+                {format}
+              </option>
+            ))}
+          </select>
+        </label>
+
+        <label>
+          <span>Sort By</span>
+
+          <select
+            value={librarySort}
+            onChange={(event) =>
+              setLibrarySort(
+                event.target.value as typeof librarySort,
+              )
+            }
+          >
+            <option value="title-asc">
+              Title A-Z
+            </option>
+
+            <option value="title-desc">
+              Title Z-A
+            </option>
+
+            <option value="year-new">
+              Newest First
+            </option>
+
+            <option value="year-old">
+              Oldest First
+            </option>
+          </select>
+        </label>
+
+        <button
+          type="button"
+          className="library-clear-filters"
+          onClick={clearLibraryFilters}
+        >
+          Clear Filters
+        </button>
+      </div>
+    </div>
+  )
+}
+
   /* =========================================================
      RENDER ROWS
      ========================================================= */
 
   const renderRows = () => {
+
+    if (
+  (activeView === 'movies' ||
+    activeView === 'games') &&
+  isLibraryFiltered
+) {
+  if (filteredLibraryItems.length === 0) {
+    return (
+      <div className="library-no-results">
+        <h3>No matching titles found</h3>
+        <p>
+          Try another search or adjust your filters.
+        </p>
+      </div>
+    )
+  }
+
+  return (
+    <MediaRow
+      title="Search Results"
+      items={filteredLibraryItems}
+      onSelect={handleSelect}
+    />
+  )
+}
     switch (activeView) {
       case 'movies':
         return (
@@ -976,6 +1230,8 @@ const renderCollectionDashboard = () => (
   renderCollectionDashboard()
 ) : (
   <div className="library">
+      {renderLibrarySearch()}
+
     <div className="bookcase">
       <div className="bookcase-top" />
 
