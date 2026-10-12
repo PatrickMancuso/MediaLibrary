@@ -689,22 +689,57 @@ useEffect(() => {
   setIsAuthModalOpen(false)
 }
 
-  const handleRemoveMedia = (
+ const handleRemoveMedia = async (
   mediaToRemove: MediaItem,
 ) => {
-  const confirmed =
-    window.confirm(
-      `Remove "${mediaToRemove.title}" from your collection?`,
+  if (!user) {
+    window.alert(
+      'You must be signed in to remove media.',
     )
+    return
+  }
+
+  const confirmed = window.confirm(
+    `Permanently remove "${mediaToRemove.title}" from your collection?`,
+  )
 
   if (!confirmed) {
     return
   }
 
+  const { data, error } = await supabase
+    .from('media_items')
+    .delete()
+    .eq('id', mediaToRemove.id)
+    .eq('user_id', user.id)
+    .select('id')
+
+  if (error) {
+    console.error(
+      'Failed to remove media from Supabase:',
+      error,
+    )
+
+    window.alert(
+      'Unable to remove this item. Please try again.',
+    )
+    return
+  }
+
+  if (!data || data.length === 0) {
+    console.error(
+      'No matching media item was deleted.',
+    )
+
+    window.alert(
+      'The item could not be found or you do not have permission to remove it.',
+    )
+    return
+  }
+
   setCollection((current) =>
     current.filter(
-      (item) =>
-        item.id !== mediaToRemove.id,
+      (item) => item.id !== mediaToRemove.id,
     ),
   )
 
