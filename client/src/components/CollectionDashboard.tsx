@@ -1,3 +1,5 @@
+import { useMemo } from 'react'
+
 import type { MediaItem } from '../data/sampleMedia'
 
 interface CollectionDashboardProps {
@@ -25,6 +27,21 @@ function getArtwork(media: MediaItem) {
   return media.coverImage ?? media.spineImage
 }
 
+function shuffleMedia(items: MediaItem[]): MediaItem[] {
+  const shuffled = [...items]
+
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1))
+
+    ;[shuffled[i], shuffled[j]] = [
+      shuffled[j],
+      shuffled[i],
+    ]
+  }
+
+  return shuffled
+}
+
 function CollectionDashboard({
   recentlyAdded,
   movies,
@@ -48,7 +65,20 @@ function CollectionDashboard({
     )
   })
 
-  const favoritePreview = favorites.slice(0, 6)
+const randomMovies = useMemo(
+  () => shuffleMedia(movies).slice(0, 4),
+  [movies],
+)
+
+const randomGames = useMemo(
+  () => shuffleMedia(games).slice(0, 4),
+  [games],
+)
+
+const favoritePreview = useMemo(
+  () => shuffleMedia(favorites).slice(0, 6),
+  [favorites],
+)
 
   return (
     <div className="collection-dashboard">
@@ -162,31 +192,26 @@ function CollectionDashboard({
             }
           >
             <div className="category-art">
-              {movies
-                .slice(0, 4)
-                .map((item) => {
+              {randomMovies.map((item) => {
                   const artwork =
                     getArtwork(item)
 
                   return (
-                    <div
-                      key={item.id}
-                      className="category-art-item"
-                      style={
-                        artwork
-                          ? {
-                              backgroundImage:
-                                `url("${artwork}")`,
-                            }
-                          : undefined
-                      }
-                    >
-                      {!artwork && (
-                        <span>
-                          {item.title}
-                        </span>
-                      )}
-                    </div>
+                  <div
+  key={item.id}
+  className="category-art-item"
+>
+  {artwork ? (
+    <img
+      src={artwork}
+      alt=""
+      className="category-movie-poster"
+      loading="lazy"
+    />
+  ) : (
+    <span>{item.title}</span>
+  )}
+</div>
                   )
                 })}
             </div>
@@ -215,9 +240,7 @@ function CollectionDashboard({
             }
           >
             <div className="category-art">
-              {games
-                .slice(0, 4)
-                .map((item) => {
+             {randomGames.map((item) => {
                   const artwork =
                     getArtwork(item)
 
