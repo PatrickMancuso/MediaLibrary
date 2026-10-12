@@ -386,6 +386,17 @@ block: 'end',
 useEffect(() => {
   if (!isCustomizingAutomatic) return
 
+  const modal = document.querySelector(
+    '.add-media-modal',
+  )
+
+  if (modal instanceof HTMLElement) {
+    modal.scrollTo({
+      top: 0,
+      behavior: 'instant',
+    })
+  }
+
   modalBodyRef.current?.scrollTo({
     top: 0,
     behavior: 'instant',
