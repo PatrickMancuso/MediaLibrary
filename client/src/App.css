@@ -8052,11 +8052,11 @@
 
 
 .dashboard-category-card {
-  min-height:
-    255px;
+  height: 350px;
+  min-height: 350px;
+  box-sizing: border-box;
 
-  border-radius:
-    7px;
+  border-radius: 7px;
 
   border-color:
     rgba(126, 151, 108, 0.2);
