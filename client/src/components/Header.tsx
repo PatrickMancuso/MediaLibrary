@@ -163,20 +163,7 @@ function Header({
             <span>Add Media</span>
           </button>
 
-          <button
-            type="button"
-            className="header-settings"
-            onClick={() => {
-              // Placeholder for future settings
-            }}
-          >
-            <span className="header-settings-icon">
-              ⚙
-            </span>
-
-            <span>Settings</span>
-          </button>
-
+        
           <div
             className="header-account-wrapper"
             ref={accountMenuRef}

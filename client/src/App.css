@@ -124,7 +124,7 @@
     linear-gradient(
       180deg,
       rgba(41, 32, 24, 0.985),
-      rgba(41, 32, 24, 0.985),
+      rgba(41, 32, 24, 0.985)
     );
 
   border-bottom:
@@ -9047,20 +9047,23 @@
 }
 
 .recent-media-info strong {
-  font-size: 13px;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
 
-  line-height: 1.15;
-
-  font-weight: 650;
-
-  color:
-    rgba(243, 238, 224, 0.9);
-
-  white-space: nowrap;
+  line-clamp: 2;
 
   overflow: hidden;
+  white-space: normal;
+  overflow-wrap: anywhere;
 
-  text-overflow: ellipsis;
+  line-height: 1.35;
+  min-height: 2.7em;
+}
+
+.recent-media-card {
+  min-width: 0;
+  flex-shrink: 0;
 }
 
 .recent-media-info span {
@@ -9565,11 +9568,13 @@
 
 .header-actions {
   display: flex;
-
   align-items: center;
-
-  gap: 8px;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-left: auto;
+  justify-self: end;
 }
+
 
 .header-account {
   display: inline-flex;
