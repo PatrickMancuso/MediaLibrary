@@ -1,6 +1,6 @@
 import { useRef } from 'react'
 import type { MediaItem } from '../data/sampleMedia'
-import MediaSpine from './MediaSpine'
+import MediaCover from './MediaCover'
 
 interface MediaRowProps {
   title: string
@@ -62,13 +62,13 @@ function MediaRow({ title, items, onSelect }: MediaRowProps) {
         <div className="shelf-interior">
           <div className="shelf-scroll" ref={rowRef}>
             <div className="media-line">
-              {items.map((item) => (
-                <MediaSpine
-                  key={item.id}
-                  media={item}
-                  onClick={onSelect}
-                />
-              ))}
+            {items.map((item) => (
+  <MediaCover
+    key={item.id}
+    media={item}
+    onClick={onSelect}
+  />
+))}
             </div>
           </div>
         </div>

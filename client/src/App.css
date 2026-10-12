@@ -9927,3 +9927,157 @@
   gap: 5px;
   padding-top: 6px;
 }
+
+
+/* =========================================================
+   LIBRARY - COVER CARD DISPLAY
+   ========================================================= */
+
+.library-cover-card {
+  display: flex;
+  flex-direction: column;
+  flex: 0 0 130px;
+
+  width: 130px;
+  min-width: 0;
+
+  gap: 7px;
+  padding: 0;
+  border: 0;
+
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+  font: inherit;
+}
+
+/* COVER CONTAINER */
+
+.library-cover-art {
+  position: relative;
+
+  width: 100%;
+  aspect-ratio: 2 / 3;
+
+  box-sizing: border-box;
+  overflow: hidden;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 5px;
+
+  border: 1px solid rgba(214, 220, 211, 0.16);
+  border-radius: 5px;
+
+  background: linear-gradient(
+    145deg,
+    #343936,
+    #1c211e
+  );
+
+  box-shadow: 0 9px 15px rgba(8, 14, 10, 0.28);
+
+  transition:
+    transform 170ms ease,
+    border-color 170ms ease,
+    box-shadow 170ms ease;
+}
+
+/* COVER IMAGE */
+
+.library-cover-image {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+  object-position: center;
+
+  border-radius: 3px;
+}
+
+/* FALLBACK FOR MISSING ARTWORK */
+
+.library-cover-fallback {
+  padding: 14px;
+
+  color: rgba(243, 238, 224, 0.88);
+
+  font-size: 14px;
+  font-weight: 650;
+  line-height: 1.2;
+
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+
+/* TITLE AND METADATA */
+
+.library-cover-info {
+  display: flex;
+  flex-direction: column;
+
+  gap: 5px;
+  min-width: 0;
+
+  padding-top: 6px;
+}
+
+.library-cover-info strong {
+  font-size: 14px;
+  font-weight: 650;
+  line-height: 1.35;
+
+  color: rgba(245, 239, 230, 0.95);
+
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+.library-cover-info small {
+  font-size: 12px;
+  line-height: 1.4;
+
+  color: rgba(220, 215, 205, 0.72);
+}
+
+/* HOVER EFFECT */
+
+.library-cover-card:hover .library-cover-art {
+  transform: translateY(-6px);
+
+  border-color: rgba(218, 156, 96, 0.42);
+
+  box-shadow: 0 15px 24px rgba(8, 14, 10, 0.36);
+}
+
+/* RESPONSIVE CARD SIZING */
+
+@media (max-width: 760px) {
+  .library-cover-card {
+    flex-basis: 145px;
+    width: 145px;
+  }
+}
+
+
+/* =========================================================
+   LIBRARY - COVER ROW ALIGNMENT
+   ========================================================= */
+
+.media-line {
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.shelf-interior {
+  min-height: 0;
+}
+
+.shelf-scroll {
+  padding-top: 10px;
+  padding-bottom: 14px;
+}
