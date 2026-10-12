@@ -431,11 +431,10 @@ useEffect(() => {
   const [isAddMediaOpen, setIsAddMediaOpen] =
     useState(false)
 
-  /*
-   * Persistent user-created genres/formats.
-   *
-   * These are loaded once when the application starts.
-   */
+    const [editingMedia, setEditingMedia] =
+  useState<MediaItem | null>(null)
+
+  
   const [customMovieGenres, setCustomMovieGenres] =
     useState<CustomOption[]>(() =>
       loadStoredOptions(
@@ -749,17 +748,9 @@ useEffect(() => {
 const handleEditMedia = (
   mediaToEdit: MediaItem,
 ) => {
-  /*
-   * We'll connect this to the same media editor
-   * in the next step.
-   *
-   * For now, keep the selected item open so
-   * nothing breaks while we wire the editor.
-   */
-  console.log(
-    'Edit media:',
-    mediaToEdit,
-  )
+  setEditingMedia(mediaToEdit)
+  setSelectedMedia(null)
+  setIsAddMediaOpen(true)
 }
 
   /*
@@ -982,9 +973,10 @@ const renderCollectionDashboard = () => (
 
       {isAddMediaOpen && (
         <AddMediaModal
-          onClose={() =>
-            setIsAddMediaOpen(false)
-          }
+         onClose={() => {
+  setIsAddMediaOpen(false)
+  setEditingMedia(null)
+}}
           onAdd={handleAddMedia}
           customMovieGenres={
             customMovieGenres
@@ -1001,6 +993,7 @@ const renderCollectionDashboard = () => (
           onAddCustomGenre={
             handleAddCustomGenre
           }
+          editingMedia={editingMedia}
           onAddCustomFormat={
             handleAddCustomFormat
           }

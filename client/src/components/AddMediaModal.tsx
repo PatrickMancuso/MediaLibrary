@@ -22,6 +22,8 @@ interface AddMediaModalProps {
   onClose: () => void
   onAdd: (media: MediaItem) => void
 
+  editingMedia?: MediaItem | null
+
   customMovieGenres: CustomOption[]
   customGameGenres: CustomOption[]
 
@@ -169,6 +171,7 @@ function slugify(value: string) {
 function AddMediaModal({
   onClose,
   onAdd,
+  editingMedia,
   customMovieGenres,
   customGameGenres,
   customMovieFormats,
@@ -180,8 +183,12 @@ function AddMediaModal({
      GENERAL STATE
      ========================================================= */
 
-  const [mode, setMode] =
-    useState<AddMode>('automatic')
+const isEditing = Boolean(editingMedia)
+
+const [mode, setMode] =
+  useState<AddMode>(
+    editingMedia ? 'manual' : 'automatic',
+  )
 
   const [mediaType, setMediaType] =
     useState<MediaType>('movie')
@@ -355,24 +362,34 @@ const [
   /* =========================================================
      RESET TYPE-SPECIFIC VALUES
      ========================================================= */
+useEffect(() => {
+  if (editingMedia) {
+    setMediaType(editingMedia.type)
+    setManualTitle(editingMedia.title)
+    setManualYear(String(editingMedia.year))
+    setManualGenre(editingMedia.genre)
+    setManualFormat(editingMedia.format)
+    setManualDescription(editingMedia.description)
+    setManualFavorite(editingMedia.favorite)
+    setManualOrientation(editingMedia.orientation)
+    setSpineImage(editingMedia.spineImage)
+    setCoverImage(editingMedia.coverImage)
+    setMode('manual')
+    return
+  }
 
-  useEffect(() => {
-    const firstFormat =
-      formatOptions[0]?.value
+  const firstFormat = formatOptions[0]?.value
 
-    if (firstFormat) {
-      setManualFormat(firstFormat)
-    }
+  if (firstFormat) {
+    setManualFormat(firstFormat)
+  }
 
-    setManualGenre('')
-setSelectedAutomaticResult(null)
-setSearchResults([])
-setAutomaticError('')
-setIsCustomizingAutomatic(false)
-  }, [
-    mediaType,
-    formatOptions,
-  ])
+  setManualGenre('')
+  setSelectedAutomaticResult(null)
+  setSearchResults([])
+  setAutomaticError('')
+  setIsCustomizingAutomatic(false)
+}, [editingMedia, mediaType, formatOptions])
 
   /* =========================================================
      AUTOMATIC SEARCH
@@ -901,12 +918,12 @@ videos:
               MEDIA LIBRARY
             </p>
 
-            <h2>Add Media</h2>
-
-            <p>
-              Add something to your physical
-              collection.
-            </p>
+<h2>{isEditing ? 'Edit Media' : 'Add Media'}</h2>
+          <p>
+  {isEditing
+    ? 'Update the details of your collection item.'
+    : 'Add something to your physical collection.'}
+</p>
           </div>
 
           <button
@@ -921,6 +938,11 @@ videos:
 
         <div className="add-media-body">
 
+          
+          {!isEditing && (
+  <>
+
+          
           {/* =================================================
               MEDIA TYPE
               ================================================= */}
@@ -1032,6 +1054,9 @@ videos:
               </button>
             </div>
           </section>
+
+            </>
+)}
 
           {/* =================================================
               AUTOMATIC MODE
@@ -2162,7 +2187,7 @@ videos:
                     !manualTitle.trim()
                   }
                 >
-                  Add to Collection
+{isEditing ? 'Save Changes' : 'Add to Collection'}
                 </button>
 
               </section>
