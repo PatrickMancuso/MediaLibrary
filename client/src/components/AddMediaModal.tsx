@@ -293,6 +293,9 @@ const [
     const selectedResultRef =
   useRef<HTMLDivElement>(null)
 
+  const modalBodyRef =
+  useRef<HTMLDivElement>(null)
+
   /* =========================================================
      CUSTOM GENRE / FORMAT UI
      ========================================================= */
@@ -374,6 +377,20 @@ block: 'end',
   })
 }, [selectedAutomaticResult])
 
+
+
+/* =========================================================
+   SCROLL TO TOP WHEN CUSTOMIZING
+   ========================================================= */
+
+useEffect(() => {
+  if (!isCustomizingAutomatic) return
+
+  modalBodyRef.current?.scrollTo({
+    top: 0,
+    behavior: 'instant',
+  })
+}, [isCustomizingAutomatic])
   /* =========================================================
      RESET TYPE-SPECIFIC VALUES
      ========================================================= */
@@ -967,8 +984,10 @@ onClose()
           </button>
         </header>
 
-        <div className="add-media-body">
-
+<div
+  className="add-media-body"
+  ref={modalBodyRef}
+>
           
           {!isEditing && (
   <>
