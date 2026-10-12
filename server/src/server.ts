@@ -167,9 +167,9 @@ app.get("/api/media/search/movie", async (req, res) => {
     const data = await response.json();
 
     const results = Array.isArray(data.results)
-      ? data.results
-          .slice(0, 2)
-          .map((movie: any) => ({
+  ? data.results
+      .slice(0, 12)
+      .map((movie: any) => ({
             externalId: movie.id,
             title:
               movie.title ??
@@ -288,7 +288,7 @@ app.get(
 
   where version_parent = null;
 
-  limit 5;
+  limit 12;
 `;
 
       const response =
