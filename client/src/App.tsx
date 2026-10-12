@@ -753,11 +753,62 @@ const handleEditMedia = (
   setIsAddMediaOpen(true)
 }
 
-  /*
-   * These are passed to AddMediaModal so that the
-   * parent remains the source of truth for custom
-   * genres and formats.
-   */
+
+const handleSaveEdit = async (
+  updatedMedia: MediaItem,
+): Promise<boolean> => {
+  if (!user) {
+    window.alert(
+      'You must be signed in to edit media.',
+    )
+    return false
+  }
+
+  const row = mediaItemToRow(
+    updatedMedia,
+    user.id,
+  )
+
+  const { id, user_id, ...changes } = row
+
+  const { data, error } = await supabase
+    .from('media_items')
+    .update(changes)
+    .eq('id', id)
+    .eq('user_id', user_id)
+    .select()
+    .single()
+
+  if (error) {
+    console.error(
+      'Failed to update media:',
+      error,
+    )
+
+    window.alert(
+      'Unable to save changes. Please try again.',
+    )
+
+    return false
+  }
+
+  const savedMedia = rowToMediaItem(
+    data as MediaItemRow,
+  )
+
+  setCollection((current) =>
+    current.map((item) =>
+      item.id === savedMedia.id
+        ? savedMedia
+        : item,
+    ),
+  )
+
+  setSelectedMedia(null)
+
+  return true
+}
+
 const handleAddCustomGenre = (
   type: 'movie' | 'game',
   option: CustomOption,
@@ -997,6 +1048,7 @@ const renderCollectionDashboard = () => (
           onAddCustomFormat={
             handleAddCustomFormat
           }
+          onSaveEdit={handleSaveEdit}
         />
       )}
     </div>

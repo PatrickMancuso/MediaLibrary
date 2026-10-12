@@ -21,6 +21,7 @@ interface CustomOption {
 interface AddMediaModalProps {
   onClose: () => void
   onAdd: (media: MediaItem) => void
+  onSaveEdit?: (media: MediaItem) => Promise<boolean>
 
   editingMedia?: MediaItem | null
 
@@ -171,6 +172,7 @@ function slugify(value: string) {
 function AddMediaModal({
   onClose,
   onAdd,
+    onSaveEdit,
   editingMedia,
   customMovieGenres,
   customGameGenres,
@@ -363,20 +365,23 @@ const [
      RESET TYPE-SPECIFIC VALUES
      ========================================================= */
 useEffect(() => {
-  if (editingMedia) {
-    setMediaType(editingMedia.type)
-    setManualTitle(editingMedia.title)
-    setManualYear(String(editingMedia.year))
-    setManualGenre(editingMedia.genre)
-    setManualFormat(editingMedia.format)
-    setManualDescription(editingMedia.description)
-    setManualFavorite(editingMedia.favorite)
-    setManualOrientation(editingMedia.orientation)
-    setSpineImage(editingMedia.spineImage)
-    setCoverImage(editingMedia.coverImage)
-    setMode('manual')
-    return
-  }
+  if (!editingMedia) return
+
+  setMediaType(editingMedia.type)
+  setManualTitle(editingMedia.title)
+  setManualYear(String(editingMedia.year))
+  setManualGenre(editingMedia.genre)
+  setManualFormat(editingMedia.format)
+  setManualDescription(editingMedia.description)
+  setManualFavorite(editingMedia.favorite)
+  setManualOrientation(editingMedia.orientation)
+  setSpineImage(editingMedia.spineImage)
+  setCoverImage(editingMedia.coverImage)
+  setMode('manual')
+}, [editingMedia])
+
+useEffect(() => {
+  if (editingMedia) return
 
   const firstFormat = formatOptions[0]?.value
 
@@ -731,8 +736,8 @@ setAutomaticError('')
      MANUAL ADD
      ========================================================= */
 
-  const handleManualAdd = () => {
-    const trimmedTitle =
+const handleManualAdd = async () => {
+      const trimmedTitle =
       manualTitle.trim()
 
     if (!trimmedTitle) {
@@ -743,9 +748,10 @@ setAutomaticError('')
       Number(manualYear) ||
       new Date().getFullYear()
 
-    const newMedia: MediaItem = {
-      id: crypto.randomUUID(),
+const newMedia: MediaItem = {
+  ...(editingMedia ?? {}),
 
+  id: editingMedia?.id ?? crypto.randomUUID(),
       title: trimmedTitle,
 
       type: mediaType,
@@ -774,88 +780,100 @@ spineImage,
 coverImage,
 
 source:
-  mode === 'automatic'
+  editingMedia?.source ??
+  (mode === 'automatic'
     ? mediaType === 'movie'
       ? 'tmdb'
       : 'igdb'
-    : 'manual',
+    : 'manual'),
 
 externalId:
-  mode === 'automatic' &&
-  selectedAutomaticResult
-    ? String(
-        selectedAutomaticResult.externalId,
-      )
-    : undefined,
+  editingMedia?.externalId ??
+  (mode === 'automatic' && selectedAutomaticResult
+    ? String(selectedAutomaticResult.externalId)
+    : undefined),
 
-    releaseDate:
+releaseDate:
+  editingMedia?.releaseDate ??
   importedMetadata?.releaseDate ??
   undefined,
 
 rating:
+  editingMedia?.rating ??
   importedMetadata?.rating ??
   undefined,
 
 platforms:
-  mediaType === 'game'
+  editingMedia?.platforms ??
+  (mediaType === 'game'
     ? importedMetadata?.platforms
-    : undefined,
+    : undefined),
 
 developers:
-  mediaType === 'game'
+  editingMedia?.developers ??
+  (mediaType === 'game'
     ? importedMetadata?.developers
-    : undefined,
+    : undefined),
 
 publishers:
-  mediaType === 'game'
+  editingMedia?.publishers ??
+  (mediaType === 'game'
     ? importedMetadata?.publishers
-    : undefined,
+    : undefined),
 
 gameModes:
-  mediaType === 'game'
+  editingMedia?.gameModes ??
+  (mediaType === 'game'
     ? importedMetadata?.gameModes
-    : undefined,
+    : undefined),
 
 playerPerspectives:
-  mediaType === 'game'
+  editingMedia?.playerPerspectives ??
+  (mediaType === 'game'
     ? importedMetadata?.playerPerspectives
-    : undefined,
+    : undefined),
 
 themes:
-  mediaType === 'game'
+  editingMedia?.themes ??
+  (mediaType === 'game'
     ? importedMetadata?.themes
-    : undefined,
+    : undefined),
 
 screenshots:
-  mediaType === 'game'
+  editingMedia?.screenshots ??
+  (mediaType === 'game'
     ? importedMetadata?.screenshots
-        ?.map(
-          (screenshot) =>
-            screenshot.url,
-        )
+        ?.map((screenshot) => screenshot.url)
         .filter(Boolean)
-    : undefined,
+    : undefined),
 
 videos:
-  importedMetadata?.videos?.map(
-    (video) => ({
-      name: video.name,
-
-      provider:
-        video.provider,
-
-      videoId:
-        video.videoId,
-
-      url:
-        video.url,
-    }),
-  ),
+  editingMedia?.videos ??
+  importedMetadata?.videos?.map((video) => ({
+    name: video.name,
+    provider: video.provider,
+    videoId: video.videoId,
+    url: video.url,
+  })),
 }
 
-    onAdd(newMedia)
+    if (editingMedia) {
+  if (!onSaveEdit) {
+    window.alert('Editing is not configured.')
+    return
+  }
 
+  const saved = await onSaveEdit(newMedia)
+
+  if (saved) {
     onClose()
+  }
+
+  return
+}
+
+onAdd(newMedia)
+onClose()
   }
 
   /* =========================================================
