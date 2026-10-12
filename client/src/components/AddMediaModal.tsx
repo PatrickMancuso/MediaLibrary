@@ -290,6 +290,9 @@ const [
   const coverInputRef =
     useRef<HTMLInputElement>(null)
 
+    const selectedResultRef =
+  useRef<HTMLDivElement>(null)
+
   /* =========================================================
      CUSTOM GENRE / FORMAT UI
      ========================================================= */
@@ -360,6 +363,16 @@ const [
     customMovieGenres,
     customGameGenres,
   ])
+
+
+  useEffect(() => {
+  if (!selectedAutomaticResult) return
+
+  selectedResultRef.current?.scrollIntoView({
+    behavior: 'smooth',
+block: 'end',
+  })
+}, [selectedAutomaticResult])
 
   /* =========================================================
      RESET TYPE-SPECIFIC VALUES
@@ -1228,7 +1241,10 @@ onClose()
         </div>
 
         {selectedAutomaticResult && (
-          <div className="automatic-import-preview">
+  <div
+    className="automatic-import-preview"
+    ref={selectedResultRef}
+  >
             <div className="automatic-import-art">
   {(
     selectedAutomaticResult.posterImage ??
