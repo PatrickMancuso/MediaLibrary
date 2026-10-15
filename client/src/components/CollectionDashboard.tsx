@@ -14,13 +14,13 @@ interface CollectionDashboardProps {
 }
 
 const formatLabels: Record<string, string> = {
-  VHS: 'VHS',
-  DVD: 'DVD',
-  Bluray: 'Blu-ray',
+  vhs: 'VHS',
+  dvd: 'DVD',
+  bluray: 'Blu-ray',
   laserdisc: 'LaserDisc',
-  NES: 'NES',
-  PS1: 'PlayStation',
-  Xbox360: 'Xbox 360',
+  nes: 'NES',
+  ps1: 'PlayStation',
+  xbox360: 'Xbox 360',
 }
 
 function getArtwork(media: MediaItem) {
