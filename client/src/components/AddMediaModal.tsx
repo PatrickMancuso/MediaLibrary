@@ -143,19 +143,19 @@ const BUILTIN_MOVIE_FORMATS: {
   label: string
 }[] = [
   {
-    value: 'vhs',
+    value: 'VHS',
     label: 'VHS',
   },
   {
-    value: 'dvd',
+    value: 'DVD',
     label: 'DVD',
   },
   {
-    value: 'bluray',
+    value: 'Blu-Ray',
     label: 'Blu-ray',
   },
   {
-    value: 'laserdisc',
+    value: 'Laserdisc',
     label: 'LaserDisc',
   },
 ]
@@ -165,15 +165,15 @@ const BUILTIN_GAME_FORMATS: {
   label: string
 }[] = [
   {
-    value: 'nes',
+    value: 'NES',
     label: 'NES',
   },
   {
-    value: 'ps1',
+    value: 'PS1',
     label: 'PlayStation',
   },
   {
-    value: 'xbox360',
+    value: 'Xbox 360',
     label: 'Xbox 360',
   },
 ]
