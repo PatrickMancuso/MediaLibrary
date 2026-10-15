@@ -55,9 +55,25 @@ function MediaDetail({
   }
 }, [])
 
-  const formatLabel =
-    formatLabels[media.format] ??
-    media.format
+
+const displayGenres =
+  media.genres?.length
+    ? media.genres
+    : [media.genre]
+
+const displayFormats =
+  media.formats?.length
+    ? media.formats
+    : [media.format]
+
+const displayFormatLabels =
+  displayFormats.map(
+    (format) =>
+      formatLabels[format] ?? format,
+  )
+
+
+ 
 
   const mediaTypeLabel =
     mediaTypeLabels[media.type] ??
@@ -172,24 +188,24 @@ onWheel={(event) => {
           <h2>{media.title}</h2>
 
           <div className="detail-meta">
-            <span>
-              {media.year}
-            </span>
+  <span>{media.year}</span>
 
-            <span>
-              {formatLabel}
-            </span>
+  {displayFormatLabels.map((format) => (
+    <span key={`format-${format}`}>
+      {format}
+    </span>
+  ))}
 
-            <span>
-              {media.genre}
-            </span>
+  {displayGenres.map((genre) => (
+    <span key={`genre-${genre}`}>
+      {genre}
+    </span>
+  ))}
 
-            {media.runtime && (
-              <span>
-                {media.runtime} min
-              </span>
-            )}
-          </div>
+  {media.runtime && (
+    <span>{media.runtime} min</span>
+  )}
+</div>
 
           {/* ===================================================
               PRIMARY METADATA
@@ -324,7 +340,7 @@ onWheel={(event) => {
                 <span>Format</span>
 
                 <strong>
-                  {formatLabel}
+{displayFormatLabels.join(', ')}
                 </strong>
               </div>
 
@@ -340,7 +356,7 @@ onWheel={(event) => {
                 <span>Genre</span>
 
                 <strong>
-                  {media.genre}
+                  {displayGenres.join(', ')}
                 </strong>
               </div>
             </div>
@@ -367,7 +383,7 @@ onWheel={(event) => {
 
                 <div className="detail-screenshot-grid">
                   {media.screenshots
-                    .slice(0, 4)
+                    .slice(0, 7)
                     .map(
                       (screenshot) => (
                         <a
@@ -623,27 +639,7 @@ onWheel={(event) => {
               ACTIONS
               =================================================== */}
 
-          <div className="detail-actions">
-            <button
-              type="button"
-              className="detail-edit-button"
-              onClick={() =>
-                onEdit(media)
-              }
-            >
-              Edit Media
-            </button>
-
-            <button
-              type="button"
-              className="detail-remove-button"
-              onClick={() =>
-                onRemove(media)
-              }
-            >
-              Remove
-            </button>
-          </div>
+      
         </div>
         <div className="detail-footer">
   <div className="detail-footer-label">
