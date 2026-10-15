@@ -94,11 +94,15 @@ const displayFormatLabels =
         : rating.toFixed(1)
       : null
 
-  const primaryVideo =
-    media.videos?.[0]
+ const playableVideos =
+  (media.videos ?? []).filter(
+    (video) => Boolean(video.url),
+  )
 
-  const additionalVideos =
-    media.videos?.slice(1) ?? []
+const primaryVideo = playableVideos[0]
+
+const additionalVideos =
+  playableVideos.slice(1)
 
   return (
     <div
@@ -263,39 +267,7 @@ onWheel={(event) => {
             </p>
           </div>
 
-          {/* ===================================================
-              TRAILER / VIDEO
-              =================================================== */}
-
-          {primaryVideo?.url && (
-            <div className="detail-video-section">
-              <a
-                href={primaryVideo.url}
-                target="_blank"
-                rel="noreferrer"
-                className="detail-video-button"
-              >
-                <span className="detail-video-icon">
-                  ▶
-                </span>
-
-                <span>
-                  {primaryVideo.name ||
-                    (isMovie
-                      ? 'Watch Trailer'
-                      : 'Watch Video')}
-                </span>
-              </a>
-
-              {additionalVideos.length >
-                0 && (
-                <span className="detail-video-count">
-                  +{additionalVideos.length}{' '}
-                  more
-                </span>
-              )}
-            </div>
-          )}
+      
 
           {/* ===================================================
               YOUR COPY
@@ -329,6 +301,41 @@ onWheel={(event) => {
                 </strong>
               </div>
             </div>
+
+
+                {/* ===================================================
+              TRAILER / VIDEO
+              =================================================== */}
+
+          {primaryVideo?.url && (
+            <div className="detail-video-section">
+              <a
+                href={primaryVideo.url}
+                target="_blank"
+                rel="noreferrer"
+                className="detail-video-button"
+              >
+                <span className="detail-video-icon">
+                  ▶
+                </span>
+
+                <span>
+                  {primaryVideo.name ||
+                    (isMovie
+                      ? 'Watch Trailer'
+                      : 'Watch Video')}
+                </span>
+              </a>
+
+              {additionalVideos.length >
+                0 && (
+                <span className="detail-video-count">
+                  +{additionalVideos.length}{' '}
+                  more
+                </span>
+              )}
+            </div>
+          )}
 
           {/* ===================================================
               SCREENSHOTS
