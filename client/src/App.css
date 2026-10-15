@@ -10588,26 +10588,32 @@
 
 /* Dark translucent overlay above the posters */
 
+
 .dashboard-category-movies .category-overlay {
   position: absolute;
   inset: 0;
-  z-index: 5;
+  z-index: 10;
+
+  display: block;
+  opacity: 1;
+  visibility: visible;
 
   pointer-events: none;
 
   background:
     linear-gradient(
-      90deg,
-      rgba(12, 22, 17, 0.62) 0%,
-      rgba(12, 22, 17, 0.28) 45%,
-      rgba(12, 22, 17, 0.36) 100%
-    ),
-    linear-gradient(
       180deg,
-      rgba(8, 16, 12, 0.08) 0%,
-      rgba(8, 16, 12, 0.18) 40%,
-      rgba(8, 16, 12, 0.78) 100%
+      rgba(8, 17, 13, 0.32) 0%,
+      rgba(8, 17, 13, 0.42) 40%,
+      rgba(8, 17, 13, 0.78) 100%
     );
+}
+
+/* Keep text above the dark overlay */
+
+.dashboard-category-movies .category-content {
+  position: absolute;
+  z-index: 11;
 }
 
 /* Movie title, count, and link */
