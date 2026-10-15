@@ -645,6 +645,34 @@ onWheel={(event) => {
             </button>
           </div>
         </div>
+        <div className="detail-footer">
+  <div className="detail-footer-label">
+    <strong>{media.title}</strong>
+    <span>
+      {media.type === 'movie' ? 'Movie' : 'Game'}
+      {' · '}
+      {media.year}
+    </span>
+  </div>
+
+  <div className="detail-actions">
+    <button
+      type="button"
+      className="detail-edit-button"
+      onClick={() => onEdit(media)}
+    >
+      Edit Media
+    </button>
+
+    <button
+      type="button"
+      className="detail-remove-button"
+      onClick={() => onRemove(media)}
+    >
+      Remove
+    </button>
+  </div>
+</div>
       </div>
     </div>
   )

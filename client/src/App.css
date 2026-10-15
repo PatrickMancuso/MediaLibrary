@@ -10632,3 +10632,126 @@
 
   pointer-events: none;
 }
+
+
+
+
+/* =========================================================
+   MEDIA DETAIL - EXPANDED DESKTOP LAYOUT
+   ========================================================= */
+
+@media (min-width: 900px) {
+  .detail-backdrop {
+    padding: 20px;
+  }
+
+  .media-detail {
+    width: min(1600px, calc(100vw - 40px));
+    height: min(940px, calc(100dvh - 40px));
+    max-height: calc(100dvh - 40px);
+
+    grid-template-columns:
+      minmax(300px, 34%)
+      minmax(0, 1fr);
+  }
+
+  .detail-cover {
+    min-width: 0;
+    height: 100%;
+  }
+
+  .detail-info {
+    padding: 36px 42px 100px;
+    min-height: 0;
+    overflow-y: auto;
+  }
+
+  .detail-info h2 {
+    font-size: clamp(32px, 2.8vw, 48px);
+  }
+}
+
+
+
+/* =========================================================
+   MEDIA DETAIL - FIXED ACTION FOOTER
+   ========================================================= */
+
+.media-detail {
+  position: relative;
+}
+
+.detail-footer {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+
+  z-index: 10;
+
+  width: 66%;
+  min-height: 76px;
+  box-sizing: border-box;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+
+  padding: 14px 32px;
+
+  border-top: 1px solid rgba(214, 220, 211, 0.12);
+
+  background: rgba(25, 31, 27, 0.97);
+
+  backdrop-filter: blur(12px);
+}
+
+.detail-footer-label {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.detail-footer-label strong {
+  color: #f2e8dd;
+  font-size: 13px;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.detail-footer-label span {
+  color: rgba(220, 225, 215, 0.45);
+  font-size: 11px;
+}
+
+.detail-footer .detail-actions {
+  display: flex;
+  flex-shrink: 0;
+  gap: 10px;
+
+  margin: 0;
+}
+
+@media (max-width: 899px) {
+  .detail-footer {
+    width: 100%;
+    padding: 12px 18px;
+  }
+
+  .detail-footer-label {
+    display: none;
+  }
+
+  .detail-footer .detail-actions {
+    width: 100%;
+    justify-content: flex-end;
+  }
+
+  .detail-info {
+    padding-bottom: 100px;
+  }
+}
