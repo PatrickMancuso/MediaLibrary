@@ -305,38 +305,8 @@ description: media.description,
 }
 
 
-const STORAGE_KEYS = {
-  movieGenres: 'medialibrary.customMovieGenres',
-  gameGenres: 'medialibrary.customGameGenres',
-  movieFormats: 'medialibrary.customMovieFormats',
-  gameFormats: 'medialibrary.customGameFormats',
-}
 
-function loadStoredOptions(
-  key: string,
-): CustomOption[] {
-  try {
-    const saved = localStorage.getItem(key)
 
-    if (!saved) {
-      return []
-    }
-
-    const parsed = JSON.parse(saved)
-
-    if (!Array.isArray(parsed)) {
-      return []
-    }
-
-    return parsed.filter(
-      (item): item is CustomOption =>
-        typeof item?.id === 'string' &&
-        typeof item?.label === 'string',
-    )
-  } catch {
-    return []
-  }
-}
 
 
 function App() {
@@ -487,33 +457,17 @@ useEffect(() => {
   useState<MediaItem | null>(null)
 
   
-  const [customMovieGenres, setCustomMovieGenres] =
-    useState<CustomOption[]>(() =>
-      loadStoredOptions(
-        STORAGE_KEYS.movieGenres,
-      ),
-    )
+const [customMovieGenres, setCustomMovieGenres] =
+  useState<CustomOption[]>([])
 
-  const [customGameGenres, setCustomGameGenres] =
-    useState<CustomOption[]>(() =>
-      loadStoredOptions(
-        STORAGE_KEYS.gameGenres,
-      ),
-    )
+const [customGameGenres, setCustomGameGenres] =
+  useState<CustomOption[]>([])
 
-  const [customMovieFormats, setCustomMovieFormats] =
-    useState<CustomOption[]>(() =>
-      loadStoredOptions(
-        STORAGE_KEYS.movieFormats,
-      ),
-    )
+const [customMovieFormats, setCustomMovieFormats] =
+  useState<CustomOption[]>([])
 
-  const [customGameFormats, setCustomGameFormats] =
-    useState<CustomOption[]>(() =>
-      loadStoredOptions(
-        STORAGE_KEYS.gameFormats,
-      ),
-    )
+const [customGameFormats, setCustomGameFormats] =
+  useState<CustomOption[]>([])
 
 
 /* =========================================================
@@ -582,36 +536,7 @@ useEffect(() => {
 }, [user?.id, authLoading])
 
 
-  /*
-   * Keep localStorage synchronized with state.
-   */
-  useEffect(() => {
-    localStorage.setItem(
-      STORAGE_KEYS.movieGenres,
-      JSON.stringify(customMovieGenres),
-    )
-  }, [customMovieGenres])
 
-  useEffect(() => {
-    localStorage.setItem(
-      STORAGE_KEYS.gameGenres,
-      JSON.stringify(customGameGenres),
-    )
-  }, [customGameGenres])
-
-  useEffect(() => {
-    localStorage.setItem(
-      STORAGE_KEYS.movieFormats,
-      JSON.stringify(customMovieFormats),
-    )
-  }, [customMovieFormats])
-
-  useEffect(() => {
-    localStorage.setItem(
-      STORAGE_KEYS.gameFormats,
-      JSON.stringify(customGameFormats),
-    )
-  }, [customGameFormats])
 
   /* =========================================================
      COLLECTION FILTERS
@@ -666,65 +591,62 @@ useEffect(() => {
    *
    * The Set prevents duplicates.
    */
-  const allMovieGenres = useMemo(() => {
-    const values = new Set([
-      ...movieGenres,
-      ...customMovieGenres.map(
-        (item) => item.label,
-      ),
-      ...movies.map(
-        (item) => item.genre,
-      ),
-    ])
-
-    return Array.from(values)
-  }, [
-    movies,
-    customMovieGenres,
+const allMovieGenres = useMemo(() => {
+  const values = new Set([
+    ...movieGenres,
+    ...customMovieGenres.map((item) => item.label),
+    ...movies.flatMap((item) =>
+      item.genres?.length
+        ? item.genres
+        : [item.genre],
+    ),
   ])
 
-  const allGameGenres = useMemo(() => {
-    const values = new Set([
-      ...gameGenres,
-      ...customGameGenres.map(
-        (item) => item.label,
-      ),
-      ...games.map(
-        (item) => item.genre,
-      ),
-    ])
+  return Array.from(values)
+}, [movies, customMovieGenres])
 
-    return Array.from(values)
-  }, [
-    games,
-    customGameGenres,
+const allGameGenres = useMemo(() => {
+  const values = new Set([
+    ...gameGenres,
+    ...customGameGenres.map((item) => item.label),
+    ...games.flatMap((item) =>
+      item.genres?.length
+        ? item.genres
+        : [item.genre],
+    ),
   ])
+
+  return Array.from(values)
+}, [games, customGameGenres])
 
   /* =========================================================
      GENRE ROWS
      ========================================================= */
 
-  const movieGenreRows = allMovieGenres
-    .map((genre) => ({
-      title: genre,
-      items: movies.filter(
-        (item) => item.genre === genre,
-      ),
-    }))
-    .filter(
-      (row) => row.items.length > 0,
-    )
+ const movieGenreRows = allMovieGenres
+  .map((genre) => ({
+    title: genre,
+    items: movies.filter((item) =>
+      (item.genres?.length
+        ? item.genres
+        : [item.genre]
+      ).includes(genre),
+    ),
+  }))
+  .filter((row) => row.items.length > 0)
+    
 
-  const gameGenreRows = allGameGenres
-    .map((genre) => ({
-      title: genre,
-      items: games.filter(
-        (item) => item.genre === genre,
-      ),
-    }))
-    .filter(
-      (row) => row.items.length > 0,
-    )
+const gameGenreRows = allGameGenres
+  .map((genre) => ({
+    title: genre,
+    items: games.filter((item) =>
+      (item.genres?.length
+        ? item.genres
+        : [item.genre]
+      ).includes(genre),
+    ),
+  }))
+  .filter((row) => row.items.length > 0)
 
 
     /* =========================================================
@@ -740,17 +662,21 @@ const libraryItems =
 
 const libraryGenreOptions = Array.from(
   new Set(
-    libraryItems
-      .map((item) => item.genre)
-      .filter(Boolean),
+    libraryItems.flatMap((item) =>
+      item.genres?.length
+        ? item.genres
+        : [item.genre],
+    ),
   ),
 ).sort((a, b) => a.localeCompare(b))
 
 const libraryFormatOptions = Array.from(
   new Set(
-    libraryItems
-      .map((item) => item.format)
-      .filter(Boolean),
+    libraryItems.flatMap((item) =>
+      item.formats?.length
+        ? item.formats
+        : [item.format],
+    ),
   ),
 ).sort((a, b) => a.localeCompare(b))
 
@@ -763,26 +689,36 @@ const filteredLibraryItems = libraryItems
   .filter((item) => {
     const search = librarySearch.trim().toLowerCase()
 
-    const searchableValues = [
-      item.title,
-      String(item.year),
-      item.genre,
-      item.format,
-    ]
+    const itemGenres =
+  item.genres?.length
+    ? item.genres
+    : [item.genre]
 
-    const matchesSearch =
-      search === '' ||
-      searchableValues.some((value) =>
-        value.toLowerCase().includes(search),
-      )
+const itemFormats =
+  item.formats?.length
+    ? item.formats
+    : [item.format]
 
-    const matchesGenre =
-      libraryGenre === 'all' ||
-      item.genre === libraryGenre
+const searchableValues = [
+  item.title,
+  String(item.year),
+  ...itemGenres,
+  ...itemFormats,
+]
 
-    const matchesFormat =
-      libraryFormat === 'all' ||
-      item.format === libraryFormat
+const matchesSearch =
+  search === '' ||
+  searchableValues.some((value) =>
+    value.toLowerCase().includes(search),
+  )
+
+const matchesGenre =
+  libraryGenre === 'all' ||
+  itemGenres.includes(libraryGenre)
+
+const matchesFormat =
+  libraryFormat === 'all' ||
+  itemFormats.includes(libraryFormat)
 
     return (
       matchesSearch &&
