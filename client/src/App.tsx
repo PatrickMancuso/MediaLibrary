@@ -573,7 +573,7 @@ useEffect(() => {
   const recentlyAdded = useMemo(
     () =>
       [...collection]
-        .slice(-12)
+        .slice(-10)
         .reverse(),
     [collection],
   )
