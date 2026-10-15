@@ -10517,42 +10517,57 @@
 
 
 /* =========================================================
-   BROWSE THE ARCHIVES - OVERLAPPING ARTWORK
+   BROWSE THE ARCHIVES - MOVIE COLLAGE ONLY
    ========================================================= */
 
-/* Keep the artwork inside the category tile */
+/* Allow movie posters to overlap their grid columns */
 
-.category-art {
+.dashboard-category-movies .category-art {
   overflow: hidden;
+  gap: 0;
 }
 
-/* Allow artwork to sit closely together */
+/* Movie artwork containers */
 
-.category-art-item {
+.dashboard-category-movies .category-art-item {
   position: relative;
+
   min-width: 0;
+  overflow: visible;
+
+  border-right: 0;
+
+  background: transparent;
 }
 
-/* Add subtle overlap between neighboring covers */
+/* Make posters fill their assigned space */
 
-.category-art-item + .category-art-item {
-  margin-left: -12px;
+.dashboard-category-movies .category-movie-poster {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+  object-position: center;
+
+  transform: scale(1.08);
 }
 
-/* Keep artwork layered in a consistent order */
+/* Control movie artwork layering */
 
-.category-art-item:nth-child(1) {
+.dashboard-category-movies .category-art-item:nth-child(1) {
   z-index: 4;
 }
 
-.category-art-item:nth-child(2) {
+.dashboard-category-movies .category-art-item:nth-child(2) {
   z-index: 3;
 }
 
-.category-art-item:nth-child(3) {
+.dashboard-category-movies .category-art-item:nth-child(3) {
   z-index: 2;
 }
 
-.category-art-item:nth-child(4) {
+.dashboard-category-movies .category-art-item:nth-child(4) {
   z-index: 1;
 }
