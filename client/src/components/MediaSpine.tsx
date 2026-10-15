@@ -7,23 +7,23 @@ interface MediaSpineProps {
 }
 
 const formatClasses: Record<string, string> = {
-  vhs: 'format-vhs',
-  dvd: 'format-dvd',
-  bluray: 'format-bluray',
-  laserdisc: 'format-laserdisc',
-  nes: 'format-nes',
-  ps1: 'format-ps1',
-  xbox360: 'format-xbox360',
+  VHS: 'format-VHS',
+  DVD: 'format-DVD',
+  Bluray: 'format-Blue-Ray',
+  Laserdisc: 'format-Laserdisc',
+  NES: 'format-NES',
+  Ps1: 'format-PS1',
+  Xbox360: 'format-Xbox 360',
 }
 
 const formatLabels: Record<string, string> = {
-  vhs: 'VHS',
-  dvd: 'DVD',
-  bluray: 'Blu-ray',
-  laserdisc: 'LaserDisc',
-  nes: 'NES',
-  ps1: 'PlayStation',
-  xbox360: 'Xbox 360',
+  VHS: 'VHS',
+  DVD: 'DVD',
+  Bluray: 'Blu-ray',
+  Laserdisc: 'LaserDisc',
+  NES: 'NES',
+  Ps1: 'PlayStation',
+  Xbox360: 'Xbox 360',
 }
 
 function MediaSpine({
