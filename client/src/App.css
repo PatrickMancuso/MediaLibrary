@@ -10574,41 +10574,55 @@
 
 
 /* =========================================================
-   BROWSE THE ARCHIVES - MOVIES OVERLAY FIX
+   BROWSE THE ARCHIVES - MOVIE OVERLAY FIX
    ========================================================= */
 
-/* Keep movie collage behind the text */
+/* Establish a stacking context for the Movies tile */
+
+.dashboard-category-movies {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+/* Keep the overlapping movie artwork behind the overlay */
 
 .dashboard-category-movies .category-art {
-  position: relative;
+  position: absolute;
+  inset: 0;
   z-index: 1;
 }
 
-/* Restore the dark gradient over the artwork */
+/* Restore the dark semi-transparent overlay */
 
-.dashboard-category-movies::after {
-  content: "";
-
+.dashboard-category-movies .category-overlay {
   position: absolute;
   inset: 0;
-
   z-index: 2;
+
   pointer-events: none;
 
   background: linear-gradient(
     180deg,
-    rgba(8, 17, 13, 0.02) 0%,
-    rgba(8, 17, 13, 0.12) 38%,
-    rgba(8, 17, 13, 0.45) 68%,
-    rgba(8, 17, 13, 0.88) 100%
+    rgba(8, 17, 13, 0.06) 0%,
+    rgba(8, 17, 13, 0.18) 35%,
+    rgba(8, 17, 13, 0.52) 70%,
+    rgba(8, 17, 13, 0.86) 100%
   );
 }
 
-/* Ensure the title and details stay above everything */
+/* Keep the Movies title and details above the artwork */
 
-.dashboard-category-movies .category-info,
-.dashboard-category-movies .category-content,
-.dashboard-category-movies .category-label {
-  position: relative;
+.dashboard-category-movies .category-content {
+  position: absolute;
   z-index: 3;
+
+  left: 20px;
+  bottom: 20px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  pointer-events: none;
 }
