@@ -10571,3 +10571,44 @@
 .dashboard-category-movies .category-art-item:nth-child(4) {
   z-index: 1;
 }
+
+
+/* =========================================================
+   BROWSE THE ARCHIVES - MOVIES OVERLAY FIX
+   ========================================================= */
+
+/* Keep movie collage behind the text */
+
+.dashboard-category-movies .category-art {
+  position: relative;
+  z-index: 1;
+}
+
+/* Restore the dark gradient over the artwork */
+
+.dashboard-category-movies::after {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  z-index: 2;
+  pointer-events: none;
+
+  background: linear-gradient(
+    180deg,
+    rgba(8, 17, 13, 0.02) 0%,
+    rgba(8, 17, 13, 0.12) 38%,
+    rgba(8, 17, 13, 0.45) 68%,
+    rgba(8, 17, 13, 0.88) 100%
+  );
+}
+
+/* Ensure the title and details stay above everything */
+
+.dashboard-category-movies .category-info,
+.dashboard-category-movies .category-content,
+.dashboard-category-movies .category-label {
+  position: relative;
+  z-index: 3;
+}
