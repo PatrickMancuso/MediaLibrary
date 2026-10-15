@@ -665,15 +665,26 @@ app.get("/api/media/movie/:id", async (req, res) => {
             language.name,
         ) ?? [],
 
-      videos:
-        movie.videos?.results
-          ?.slice(0, 10)
-          ?.map((video: any) => ({
-            key: video.key,
-            name: video.name,
-            site: video.site,
-            type: video.type,
-          })) ?? [],
+    videos:
+  movie.videos?.results
+    ?.filter(
+      (video: any) =>
+        video.site === "YouTube" &&
+        Boolean(video.key),
+    )
+    ?.slice(0, 10)
+    ?.map((video: any) => ({
+      name: video.name ?? "Movie Video",
+
+      videoId: video.key,
+
+      provider: "youtube",
+
+      type: video.type,
+
+      url:
+        `https://www.youtube.com/watch?v=${video.key}`,
+    })) ?? [],
 
       images: {
         posters:

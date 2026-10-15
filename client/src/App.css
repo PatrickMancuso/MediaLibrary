@@ -10764,28 +10764,23 @@
    ========================================================= */
 
 .detail-screenshot-grid {
-  display: flex;
-  gap: 12px;
-
-  overflow-x: auto;
-  overflow-y: hidden;
-
-  padding: 4px 2px 12px;
-
-  scroll-behavior: smooth;
-  scrollbar-width: thin;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
 }
 
 .detail-screenshot {
-  flex: 0 0 clamp(180px, 24%, 260px);
-
-  width: auto;
+  display: block;
+  width: 100%;
   min-width: 0;
 
   aspect-ratio: 16 / 9;
-
   overflow: hidden;
-  border-radius: 6px;
+
+  border: 1px solid rgba(214, 220, 211, 0.08);
+  border-radius: 5px;
+
+  background: #171c19;
 }
 
 .detail-screenshot img {
@@ -10794,10 +10789,4 @@
   height: 100%;
 
   object-fit: cover;
-}
-
-@media (max-width: 760px) {
-  .detail-screenshot {
-    flex-basis: 75%;
-  }
 }

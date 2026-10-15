@@ -87,13 +87,52 @@ interface ApiSearchResult {
 
 interface ApiMovieDetails extends ApiSearchResult {
   source: 'tmdb'
+
   originalTitle?: string
+
   runtime?: number | null
-  rating?: number | null
-  genres?: string[]
+
   directors?: string[]
   cast?: string[]
+
+  productionCompanies?: string[]
+  countries?: string[]
+  languages?: string[]
+
+  images?: {
+    posters?: {
+      filePath: string
+      url: string
+      width?: number
+      height?: number
+    }[]
+
+    backdrops?: {
+      filePath: string
+      url: string
+      width?: number
+      height?: number
+    }[]
+
+    logos?: {
+      filePath: string
+      url: string
+      width?: number
+      height?: number
+    }[]
+  }
 }
+
+function isMovieDetails(
+  value: ApiSearchResult | ApiMovieDetails | null,
+): value is ApiMovieDetails {
+  return (
+    value !== null &&
+    'source' in value &&
+    value.source === 'tmdb'
+  )
+}
+
 
 type AddMode =
   | 'automatic'
@@ -233,9 +272,13 @@ const [
 const [
   importedMetadata,
   setImportedMetadata,
-] = useState<ApiSearchResult | null>(
-  null,
-)
+] = useState<
+  ApiSearchResult | ApiMovieDetails | null
+>(null)
+
+
+
+
 
   /* =========================================================
      MANUAL MODE
@@ -931,6 +974,57 @@ rating:
   importedMetadata?.rating ??
   undefined,
 
+  /* =====================================================
+   IMPORTED MOVIE METADATA
+   ===================================================== */
+
+runtime:
+  editingMedia?.runtime ??
+  (isMovieDetails(importedMetadata)
+    ? importedMetadata.runtime ?? undefined
+    : undefined),
+
+director:
+  editingMedia?.director ??
+  (isMovieDetails(importedMetadata)
+    ? importedMetadata.directors?.join(', ')
+    : undefined),
+
+cast:
+  editingMedia?.cast ??
+  (isMovieDetails(importedMetadata)
+    ? importedMetadata.cast
+    : undefined),
+
+productionCompanies:
+  editingMedia?.productionCompanies ??
+  (isMovieDetails(importedMetadata)
+    ? importedMetadata.productionCompanies
+    : undefined),
+
+countries:
+  editingMedia?.countries ??
+  (isMovieDetails(importedMetadata)
+    ? importedMetadata.countries
+    : undefined),
+
+languages:
+  editingMedia?.languages ??
+  (isMovieDetails(importedMetadata)
+    ? importedMetadata.languages
+    : undefined),
+
+backdropImage:
+  editingMedia?.backdropImage ??
+  importedMetadata?.backdropImage ??
+  undefined,
+
+logoImage:
+  editingMedia?.logoImage ??
+  (isMovieDetails(importedMetadata)
+    ? importedMetadata.images?.logos?.[0]?.url
+    : undefined),
+
 platforms:
   editingMedia?.platforms ??
   (mediaType === 'game'
@@ -973,7 +1067,11 @@ screenshots:
     ? importedMetadata?.screenshots
         ?.map((screenshot) => screenshot.url)
         .filter(Boolean)
-    : undefined),
+    : isMovieDetails(importedMetadata)
+      ? importedMetadata.images?.backdrops
+          ?.map((image) => image.url)
+          .filter(Boolean)
+      : undefined),
 
 videos:
   editingMedia?.videos ??
