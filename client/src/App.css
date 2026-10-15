@@ -10824,3 +10824,56 @@
 
   object-fit: cover;
 }
+
+
+
+/* =========================================================
+   TMDB METADATA REFRESH
+   ========================================================= */
+
+.metadata-refresh-panel {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+
+  padding: 18px;
+
+  border: 1px solid rgba(217, 154, 99, 0.25);
+  border-radius: 6px;
+
+  background: rgba(217, 154, 99, 0.06);
+}
+
+.metadata-refresh-panel strong {
+  color: #f1e7db;
+  font-size: 13px;
+}
+
+.metadata-refresh-panel p {
+  margin: 6px 0 0;
+  color: rgba(230, 225, 215, 0.65);
+  font-size: 12px;
+}
+
+.metadata-refresh-panel button {
+  padding: 10px 14px;
+
+  border: 1px solid rgba(217, 154, 99, 0.35);
+  border-radius: 5px;
+
+  background: rgba(117, 62, 33, 0.35);
+  color: #f1e7db;
+
+  cursor: pointer;
+}
+
+.metadata-refresh-panel button:disabled {
+  opacity: 0.5;
+  cursor: wait;
+}
+
+.metadata-refresh-message {
+  flex-basis: 100%;
+}

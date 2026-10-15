@@ -259,9 +259,20 @@ const [
 ] = useState(false)
 
 const [
+  isRefreshingMetadata,
+  setIsRefreshingMetadata,
+] = useState(false)
+
+const [
+  refreshMessage,
+  setRefreshMessage,
+] = useState('')
+
+const [
   automaticError,
   setAutomaticError,
 ] = useState('')
+
 
 
 const [
@@ -891,7 +902,59 @@ setManualGenre(
      AUTOMATIC ADD
      ========================================================= */
 
-  
+  /* =========================================================
+   REFRESH EXISTING MOVIE METADATA
+   ========================================================= */
+
+const handleRefreshMovieMetadata = async () => {
+  if (
+    !editingMedia ||
+    editingMedia.type !== 'movie' ||
+    !editingMedia.externalId
+  ) {
+    setRefreshMessage(
+      'This movie does not have a TMDB ID.',
+    )
+    return
+  }
+
+  setIsRefreshingMetadata(true)
+  setRefreshMessage('')
+
+  try {
+    const response = await fetch(
+      `${API_BASE_URL}/api/media/movie/${encodeURIComponent(
+        editingMedia.externalId,
+      )}`,
+    )
+
+    if (!response.ok) {
+      throw new Error(
+        `TMDB request failed: ${response.status}`,
+      )
+    }
+
+    const details: ApiMovieDetails =
+      await response.json()
+
+    setImportedMetadata(details)
+
+    setRefreshMessage(
+      'Metadata retrieved. Save Changes to apply the update.',
+    )
+  } catch (error) {
+    console.error(
+      'Failed to refresh movie metadata:',
+      error,
+    )
+
+    setRefreshMessage(
+      'Unable to refresh metadata. Please try again.',
+    )
+  } finally {
+    setIsRefreshingMetadata(false)
+  }
+}
 
   /* =========================================================
      MANUAL ADD
@@ -1545,6 +1608,39 @@ onClose()
                 </div>
 
                 <div className="manual-form">
+
+                {isEditing &&
+  editingMedia?.type === 'movie' && (
+    <div className="metadata-refresh-panel">
+      <div>
+        <strong>TMDB Movie Metadata</strong>
+
+        <p>
+          Retrieve updated cast, crew, runtime,
+          production information, artwork,
+          and trailers.
+        </p>
+      </div>
+
+      <button
+        type="button"
+        onClick={() =>
+          void handleRefreshMovieMetadata()
+        }
+        disabled={isRefreshingMetadata}
+      >
+        {isRefreshingMetadata
+          ? 'Refreshing...'
+          : 'Refresh Metadata'}
+      </button>
+
+      {refreshMessage && (
+        <p className="metadata-refresh-message">
+          {refreshMessage}
+        </p>
+      )}
+    </div>
+  )}
 
                   {/* TITLE */}
 
