@@ -33,6 +33,16 @@ interface CustomOption {
 }
 
 
+interface LibraryOptionRow {
+  id: string
+  user_id: string
+  media_type: 'movie' | 'game'
+  option_type: 'genre' | 'format'
+  label: string
+  created_at: string
+}
+
+
 interface MediaItemRow {
   id: string
   user_id: string
@@ -477,6 +487,73 @@ useEffect(() => {
       ),
     )
 
+
+/* =========================================================
+   LOAD PERSONAL LIBRARY OPTIONS
+   ========================================================= */
+
+useEffect(() => {
+  let cancelled = false
+
+  const loadLibraryOptions = async () => {
+    if (authLoading) return
+
+    if (!user) {
+      setCustomMovieGenres([])
+      setCustomGameGenres([])
+      setCustomMovieFormats([])
+      setCustomGameFormats([])
+      return
+    }
+
+    const { data, error } = await supabase
+      .from('library_options')
+      .select('*')
+      .eq('user_id', user.id)
+      .order('label', { ascending: true })
+
+    if (cancelled) return
+
+    if (error) {
+      console.error(
+        'Failed to load library options:',
+        error,
+      )
+      return
+    }
+
+    const options =
+      (data ?? []) as LibraryOptionRow[]
+
+    const extract = (
+      mediaType: 'movie' | 'game',
+      optionType: 'genre' | 'format',
+    ): CustomOption[] =>
+      options
+        .filter(
+          (option) =>
+            option.media_type === mediaType &&
+            option.option_type === optionType,
+        )
+        .map((option) => ({
+          id: option.id,
+          label: option.label,
+        }))
+
+    setCustomMovieGenres(extract('movie', 'genre'))
+    setCustomGameGenres(extract('game', 'genre'))
+    setCustomMovieFormats(extract('movie', 'format'))
+    setCustomGameFormats(extract('game', 'format'))
+  }
+
+  void loadLibraryOptions()
+
+  return () => {
+    cancelled = true
+  }
+}, [user?.id, authLoading])
+
+
   /*
    * Keep localStorage synchronized with state.
    */
@@ -910,40 +987,105 @@ const handleSaveEdit = async (
   return true
 }
 
-const handleAddCustomGenre = (
+const handleAddCustomGenre = async (
   type: 'movie' | 'game',
   option: CustomOption,
 ) => {
+  if (!user) return null
+
+  const label = option.label.trim()
+  if (!label) return null
+
+  const { data, error } = await supabase
+    .from('library_options')
+    .insert({
+      user_id: user.id,
+      media_type: type,
+      option_type: 'genre',
+      label,
+    })
+    .select()
+    .single()
+
+  if (error) {
+    console.error('Failed to add genre:', error)
+    window.alert('Unable to save custom genre.')
+    return null
+  }
+
+  const savedOption: CustomOption = {
+    id: data.id,
+    label: data.label,
+  }
+
   if (type === 'movie') {
     setCustomMovieGenres((current) => [
       ...current,
-      option,
+      savedOption,
     ])
   } else {
     setCustomGameGenres((current) => [
       ...current,
-      option,
+      savedOption,
     ])
   }
+
+  return savedOption
 }
 
-  const handleAddCustomFormat = (
-    type: 'movie' | 'game',
-    option: CustomOption,
-  ) => {
-    if (type === 'movie') {
-      setCustomMovieFormats((current) => [
-        ...current,
-        option,
-      ])
-    } else {
-      setCustomGameFormats((current) => [
-        ...current,
-        option,
-      ])
-    }
+const handleAddCustomFormat = async (
+  type: 'movie' | 'game',
+  option: CustomOption,
+): Promise<CustomOption | null> => {
+  if (!user) return null
+
+  const label = option.label.trim()
+
+  if (!label) return null
+
+  const { data, error } = await supabase
+    .from('library_options')
+    .insert({
+      user_id: user.id,
+      media_type: type,
+      option_type: 'format',
+      label,
+    })
+    .select()
+    .single()
+
+  if (error) {
+    console.error(
+      'Failed to add format:',
+      error,
+    )
+
+    window.alert(
+      'Unable to save custom format.',
+    )
+
+    return null
   }
 
+  const savedOption: CustomOption = {
+    id: data.id,
+    label: data.label,
+  }
+
+  if (type === 'movie') {
+    setCustomMovieFormats((current) => [
+      ...current,
+      savedOption,
+    ])
+  } else {
+    setCustomGameFormats((current) => [
+      ...current,
+      savedOption,
+    ])
+  }
+
+  return savedOption
+}
 
   /* =========================================================
    LIBRARY SEARCH CONTROLS

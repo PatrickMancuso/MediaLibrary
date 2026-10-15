@@ -32,14 +32,14 @@ interface AddMediaModalProps {
   customGameFormats: CustomOption[]
 
   onAddCustomGenre: (
-    type: 'movie' | 'game',
-    option: CustomOption,
-  ) => void
+  type: 'movie' | 'game',
+  option: CustomOption,
+) => Promise<CustomOption | null>
 
-  onAddCustomFormat: (
-    type: 'movie' | 'game',
-    option: CustomOption,
-  ) => void
+onAddCustomFormat: (
+  type: 'movie' | 'game',
+  option: CustomOption,
+) => Promise<CustomOption | null>
 }
 
 interface ApiVideo {
@@ -161,13 +161,7 @@ const BUILTIN_GAME_GENRES = [
 ]
 
 
-function slugify(value: string) {
-  return value
-    .trim()
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/^-+|-+$/g, '')
-}
+
 
 function AddMediaModal({
   onClose,
@@ -330,9 +324,9 @@ const [
     return [
       ...builtins,
       ...custom.map((item) => ({
-        value: item.id,
-        label: item.label,
-      })),
+  value: item.label,
+  label: item.label,
+})),
     ]
   }, [
     mediaType,
@@ -576,63 +570,74 @@ setAutomaticError('')
      CUSTOM GENRE
      ========================================================= */
 
-  const addCustomGenre = () => {
-    const label =
-      newGenre.trim()
+const addCustomGenre = async () => {
+  const label = newGenre.trim()
 
-    if (!label) {
-      return
-    }
+  if (!label) return
 
-    const newOption: CustomOption = {
-      id:
-        `${slugify(label)}-${Date.now()}`,
-      label,
-    }
+  const existingGenre = genreOptions.find(
+    (genre) =>
+      genre.toLowerCase() === label.toLowerCase(),
+  )
 
-    onAddCustomGenre(
-      mediaType,
-      newOption,
-    )
-
-    setManualGenre(label)
-
+  if (existingGenre) {
+    setManualGenre(existingGenre)
     setNewGenre('')
-
     setShowNewGenre(false)
+    return
   }
+
+  const savedOption = await onAddCustomGenre(
+    mediaType,
+    {
+      id: crypto.randomUUID(),
+      label,
+    },
+  )
+
+  if (!savedOption) return
+
+  setManualGenre(savedOption.label)
+  setNewGenre('')
+  setShowNewGenre(false)
+}
 
   /* =========================================================
      CUSTOM FORMAT
      ========================================================= */
 
-  const addCustomFormat = () => {
-    const label =
-      newFormat.trim()
+const addCustomFormat = async () => {
+  const label = newFormat.trim()
 
-    if (!label) {
-      return
-    }
+  if (!label) return
 
-    const id =
-      `custom-${slugify(label)}-${Date.now()}`
+  const existingFormat = formatOptions.find(
+    (format) =>
+      format.label.toLowerCase() ===
+      label.toLowerCase(),
+  )
 
-    const newOption: CustomOption = {
-      id,
-      label,
-    }
-
-    onAddCustomFormat(
-      mediaType,
-      newOption,
-    )
-
-    setManualFormat(id)
-
+  if (existingFormat) {
+    setManualFormat(existingFormat.value)
     setNewFormat('')
-
     setShowNewFormat(false)
+    return
   }
+
+  const savedOption = await onAddCustomFormat(
+    mediaType,
+    {
+      id: crypto.randomUUID(),
+      label,
+    },
+  )
+
+  if (!savedOption) return
+
+  setManualFormat(savedOption.label)
+  setNewFormat('')
+  setShowNewFormat(false)
+}
 
   /* =========================================================
      AUTOMATIC SELECTION
