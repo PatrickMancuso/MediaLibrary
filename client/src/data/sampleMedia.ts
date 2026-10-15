@@ -1,13 +1,13 @@
 export type MediaType = 'movie' | 'game'
 
 export type BuiltInMediaFormat =
-  | 'vhs'
-  | 'dvd'
-  | 'bluray'
-  | 'laserdisc'
-  | 'nes'
-  | 'ps1'
-  | 'xbox360'
+  | 'VHS'
+  | 'DVD'
+  | 'Bluray'
+  | 'Laserdisc'
+  | 'NES'
+  | 'PS1'
+  | 'Xbox 360'
 
 export type MediaFormat =
   | BuiltInMediaFormat
@@ -31,13 +31,19 @@ export interface MediaItem {
   title: string
   type: MediaType
 
-  format: MediaFormat
+ format: MediaFormat
 
-  year: number
+// Multiple physical formats owned
+formats?: MediaFormat[]
 
-  genre: string
+year: number
 
-  description: string
+genre: string
+
+// Multiple genres assigned to this title
+genres?: string[]
+
+description: string
 
   favorite: boolean
 

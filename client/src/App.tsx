@@ -50,9 +50,14 @@ interface MediaItemRow {
   title: string
   type: 'movie' | 'game'
   format: string
-  year: number
-  genre: string
-  description: string
+formats: string[]
+
+year: number
+
+genre: string
+genres: string[]
+
+description: string
   favorite: boolean
   orientation: 'spine' | 'cover'
 
@@ -110,11 +115,21 @@ function rowToMediaItem(
 
     format: row.format,
 
-    year: row.year,
+formats:
+  row.formats?.length
+    ? row.formats
+    : [row.format],
 
-    genre: row.genre,
+year: row.year,
 
-    description: row.description,
+genre: row.genre,
+
+genres:
+  row.genres?.length
+    ? row.genres
+    : [row.genre],
+
+description: row.description,
 
     favorite: row.favorite,
 
@@ -202,9 +217,22 @@ function mediaItemToRow(
     title: media.title,
     type: media.type,
     format: media.format,
-    year: media.year,
-    genre: media.genre,
-    description: media.description,
+
+formats:
+  media.formats?.length
+    ? media.formats
+    : [media.format],
+
+year: media.year,
+
+genre: media.genre,
+
+genres:
+  media.genres?.length
+    ? media.genres
+    : [media.genre],
+
+description: media.description,
     favorite: media.favorite,
     orientation: media.orientation,
 
