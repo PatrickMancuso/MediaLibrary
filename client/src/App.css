@@ -10611,16 +10611,39 @@
 
 /* Keep text above the dark overlay */
 
-.dashboard-category-movies .category-content {
-  position: absolute;
-  z-index: 11;
+/* =========================================================
+   MOVIES CATEGORY - RESTORE TEXT VISIBILITY
+   ========================================================= */
+
+.dashboard-category-movies {
+  position: relative;
+  isolation: isolate;
 }
 
-/* Movie title, count, and link */
+.dashboard-category-movies .category-art {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.dashboard-category-movies .category-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+
+  pointer-events: none;
+
+  background: linear-gradient(
+    180deg,
+    rgba(8, 17, 13, 0.25) 0%,
+    rgba(8, 17, 13, 0.45) 50%,
+    rgba(8, 17, 13, 0.88) 100%
+  );
+}
 
 .dashboard-category-movies .category-content {
   position: absolute;
-  z-index: 6;
+  z-index: 20;
 
   left: 22px;
   bottom: 20px;
@@ -10630,9 +10653,20 @@
   align-items: flex-start;
   gap: 6px;
 
+  color: #f4eee5;
   pointer-events: none;
 }
 
+.dashboard-category-movies .category-content h2,
+.dashboard-category-movies .category-content h3,
+.dashboard-category-movies .category-content strong {
+  color: #f4eee5;
+}
+
+.dashboard-category-movies .category-content a,
+.dashboard-category-movies .category-content small {
+  color: #d99a63;
+}
 
 
 
