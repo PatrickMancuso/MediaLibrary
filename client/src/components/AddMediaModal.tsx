@@ -247,13 +247,19 @@ const [
   const [manualYear, setManualYear] =
     useState('')
 
-  const [manualGenre, setManualGenre] =
-    useState('')
+const [manualGenre, setManualGenre] =
+  useState('')
 
-  const [manualFormat, setManualFormat] =
-    useState<MediaFormat>(
-      BUILTIN_MOVIE_FORMATS[0].value,
-    )
+const [manualGenres, setManualGenres] =
+  useState<string[]>([])
+
+const [manualFormat, setManualFormat] =
+  useState<MediaFormat>(
+    BUILTIN_MOVIE_FORMATS[0].value,
+  )
+
+const [manualFormats, setManualFormats] =
+  useState<MediaFormat[]>([])
 
   const [
     manualDescription,
@@ -372,6 +378,49 @@ block: 'end',
 }, [selectedAutomaticResult])
 
 
+/* =========================================================
+   MULTI-SELECTION HELPERS
+   ========================================================= */
+
+const addSelectedGenre = (genre: string) => {
+  if (!genre) return
+
+  setManualGenres((current) =>
+    current.some(
+      (item) =>
+        item.toLowerCase() === genre.toLowerCase(),
+    )
+      ? current
+      : [...current, genre],
+  )
+}
+
+const removeSelectedGenre = (genre: string) => {
+  setManualGenres((current) =>
+    current.filter((item) => item !== genre),
+  )
+}
+
+const addSelectedFormat = (format: MediaFormat) => {
+  if (!format) return
+
+  setManualFormats((current) =>
+    current.some(
+      (item) =>
+        item.toLowerCase() === format.toLowerCase(),
+    )
+      ? current
+      : [...current, format],
+  )
+}
+
+const removeSelectedFormat = (format: MediaFormat) => {
+  setManualFormats((current) =>
+    current.filter((item) => item !== format),
+  )
+}
+
+
 
 /* =========================================================
    SCROLL TO TOP WHEN CUSTOMIZING
@@ -406,7 +455,20 @@ useEffect(() => {
   setManualTitle(editingMedia.title)
   setManualYear(String(editingMedia.year))
   setManualGenre(editingMedia.genre)
-  setManualFormat(editingMedia.format)
+
+setManualGenres(
+  editingMedia.genres?.length
+    ? [...editingMedia.genres]
+    : [editingMedia.genre],
+)
+
+setManualFormat(editingMedia.format)
+
+setManualFormats(
+  editingMedia.formats?.length
+    ? [...editingMedia.formats]
+    : [editingMedia.format],
+)
   setManualDescription(editingMedia.description)
   setManualFavorite(editingMedia.favorite)
   setManualOrientation(editingMedia.orientation)
@@ -425,6 +487,9 @@ useEffect(() => {
   }
 
   setManualGenre('')
+
+  setManualGenres([])
+setManualFormats([])
   setSelectedAutomaticResult(null)
   setSearchResults([])
   setAutomaticError('')
@@ -584,6 +649,7 @@ const addCustomGenre = async () => {
     setManualGenre(existingGenre)
     setNewGenre('')
     setShowNewGenre(false)
+    addSelectedGenre(existingGenre)
     return
   }
 
@@ -598,6 +664,7 @@ const addCustomGenre = async () => {
   if (!savedOption) return
 
   setManualGenre(savedOption.label)
+  addSelectedGenre(savedOption.label)
   setNewGenre('')
   setShowNewGenre(false)
 }
@@ -617,12 +684,13 @@ const addCustomFormat = async () => {
       label.toLowerCase(),
   )
 
-  if (existingFormat) {
-    setManualFormat(existingFormat.value)
-    setNewFormat('')
-    setShowNewFormat(false)
-    return
-  }
+ if (existingFormat) {
+  setManualFormat(existingFormat.value)
+  addSelectedFormat(existingFormat.value)
+  setNewFormat('')
+  setShowNewFormat(false)
+  return
+}
 
   const savedOption = await onAddCustomFormat(
     mediaType,
@@ -694,23 +762,22 @@ setAutomaticError('')
             undefined,
         )
 
-        const firstGenre =
-          details.genres?.[0] ?? ''
+  const matchingGenres = (
+  details.genres ?? []
+)
+  .map((genre) =>
+    genreOptions.find(
+      (option) =>
+        option.toLowerCase() ===
+        genre.toLowerCase(),
+    ),
+  )
+  .filter((genre): genre is string =>
+    Boolean(genre),
+  )
 
-        const matchingGenre =
-          genreOptions.find(
-            (genre) =>
-              genre.toLowerCase() ===
-              firstGenre.toLowerCase(),
-          )
-
-        if (matchingGenre) {
-          setManualGenre(
-            matchingGenre,
-          )
-        } else {
-          setManualGenre('')
-        }
+setManualGenres([...new Set(matchingGenres)])
+setManualGenre(matchingGenres[0] ?? '')
       } catch (error) {
         console.error(
           'Automatic movie detail lookup failed:',
@@ -753,23 +820,27 @@ setAutomaticError('')
         undefined,
     )
 
-    const firstGameGenre =
-      result.genres?.[0] ?? ''
+    const matchingGameGenres = (
+  result.genres ?? []
+)
+  .map((genre) =>
+    genreOptions.find(
+      (option) =>
+        option.toLowerCase() ===
+        genre.toLowerCase(),
+    ),
+  )
+  .filter((genre): genre is string =>
+    Boolean(genre),
+  )
 
-    const matchingGameGenre =
-      genreOptions.find(
-        (genre) =>
-          genre.toLowerCase() ===
-          firstGameGenre.toLowerCase(),
-      )
+setManualGenres([
+  ...new Set(matchingGameGenres),
+])
 
-    if (matchingGameGenre) {
-      setManualGenre(
-        matchingGameGenre,
-      )
-    } else {
-      setManualGenre('')
-    }
+setManualGenre(
+  matchingGameGenres[0] ?? '',
+)
   }
 
   /* =========================================================
@@ -794,6 +865,17 @@ const handleManualAdd = async () => {
       Number(manualYear) ||
       new Date().getFullYear()
 
+
+      const finalGenres =
+  manualGenres.length > 0
+    ? manualGenres
+    : [manualGenre || genreOptions[0] || 'Uncategorized']
+
+const finalFormats =
+  manualFormats.length > 0
+    ? manualFormats
+    : [manualFormat]
+
 const newMedia: MediaItem = {
   ...(editingMedia ?? {}),
 
@@ -802,14 +884,13 @@ const newMedia: MediaItem = {
 
       type: mediaType,
 
-      format: manualFormat,
+      format: finalFormats[0],
+formats: finalFormats,
 
-      year,
+year,
 
-      genre:
-        manualGenre ||
-        genreOptions[0] ||
-        'Uncategorized',
+genre: finalGenres[0],
+genres: finalGenres,
 
       description:
         manualDescription.trim() ||
@@ -1421,63 +1502,63 @@ onClose()
                       />
                     </label>
 
-                    <label>
-                      <span>
-                        Genre
-                      </span>
+                    <div className="multi-select-field">
+  <span>Genres</span>
 
-                      <div className="select-with-action">
-                        <select
-                          value={
-                            manualGenre
-                          }
-                          onChange={(
-                            event,
-                          ) =>
-                            setManualGenre(
-                              event.target
-                                .value,
-                            )
-                          }
-                        >
-                          <option value="">
-                            Select genre
-                          </option>
+  <div className="select-with-action">
+    <select
+      value={manualGenre}
+      onChange={(event) =>
+        setManualGenre(event.target.value)
+      }
+    >
+      <option value="">Select genre</option>
 
-                          {genreOptions.map(
-                            (genre) => (
-                              <option
-                                key={
-                                  genre
-                                }
-                                value={
-                                  genre
-                                }
-                              >
-                                {genre}
-                              </option>
-                            ),
-                          )}
-                        </select>
+      {genreOptions.map((genre) => (
+        <option key={genre} value={genre}>
+          {genre}
+        </option>
+      ))}
+    </select>
 
-                        <button
-                          type="button"
-                          className="field-add-button"
-                          onClick={() =>
-                            setShowNewGenre(
-                              (
-                                current,
-                              ) =>
-                                !current,
-                            )
-                          }
-                          aria-label="Add genre"
-                        >
-                          +
-                        </button>
-                      </div>
-                    </label>
+    <button
+      type="button"
+      className="field-add-button"
+      onClick={() => addSelectedGenre(manualGenre)}
+      disabled={!manualGenre}
+      title="Add selected genre"
+    >
+      Add
+    </button>
 
+    <button
+      type="button"
+      className="field-add-button"
+      onClick={() =>
+        setShowNewGenre((current) => !current)
+      }
+      title="Create custom genre"
+    >
+      +
+    </button>
+  </div>
+
+  <div className="multi-selected-options">
+    {manualGenres.map((genre) => (
+      <span className="multi-selected-tag" key={genre}>
+        {genre}
+
+        <button
+          type="button"
+          onClick={() => removeSelectedGenre(genre)}
+          aria-label={`Remove ${genre}`}
+        >
+          ×
+        </button>
+      </span>
+    ))}
+  </div>
+</div>
                   </div>
 
                   {/* NEW GENRE */}
@@ -1514,62 +1595,79 @@ onClose()
 
                   {/* FORMAT */}
 
-                  <label>
-                    <span>
-                      Physical Format
-                    </span>
+                <div className="multi-select-field">
+  <span>Physical Formats Owned</span>
 
-                    <div className="select-with-action">
-                      <select
-                        value={
-                          manualFormat
-                        }
-                        onChange={(
-                          event,
-                        ) =>
-                          setManualFormat(
-                            event.target
-                              .value as MediaFormat,
-                          )
-                        }
-                      >
-                        {formatOptions.map(
-                          (
-                            format,
-                          ) => (
-                            <option
-                              key={
-                                format.value
-                              }
-                              value={
-                                format.value
-                              }
-                            >
-                              {
-                                format.label
-                              }
-                            </option>
-                          ),
-                        )}
-                      </select>
+  <div className="select-with-action">
+    <select
+      value={manualFormat}
+      onChange={(event) =>
+        setManualFormat(
+          event.target.value as MediaFormat,
+        )
+      }
+    >
+      {formatOptions.map((format) => (
+        <option
+          key={format.value}
+          value={format.value}
+        >
+          {format.label}
+        </option>
+      ))}
+    </select>
 
-                      <button
-                        type="button"
-                        className="field-add-button"
-                        onClick={() =>
-                          setShowNewFormat(
-                            (
-                              current,
-                            ) =>
-                              !current,
-                          )
-                        }
-                        aria-label="Add format"
-                      >
-                        +
-                      </button>
-                    </div>
-                  </label>
+    <button
+      type="button"
+      className="field-add-button"
+      onClick={() =>
+        addSelectedFormat(manualFormat)
+      }
+      title="Add selected format"
+    >
+      Add
+    </button>
+
+    <button
+      type="button"
+      className="field-add-button"
+      onClick={() =>
+        setShowNewFormat((current) => !current)
+      }
+      title="Create custom format"
+    >
+      +
+    </button>
+  </div>
+
+  <div className="multi-selected-options">
+    {manualFormats.map((format) => {
+      const label =
+        formatOptions.find(
+          (option) => option.value === format,
+        )?.label ?? format
+
+      return (
+        <span
+          className="multi-selected-tag"
+          key={format}
+        >
+          {label}
+
+          <button
+            type="button"
+            onClick={() =>
+              removeSelectedFormat(format)
+            }
+            aria-label={`Remove ${label}`}
+          >
+            ×
+          </button>
+        </span>
+      )
+    })}
+  </div>
+</div>
 
                   {/* NEW FORMAT */}
 

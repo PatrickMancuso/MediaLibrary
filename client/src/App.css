@@ -10441,3 +10441,76 @@
 .bookcase-back {
   backdrop-filter: blur(3px);
 }
+
+
+
+/* =========================================================
+   ADD MEDIA - MULTI-SELECTION
+   ========================================================= */
+
+.multi-select-field {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  min-width: 0;
+}
+
+.multi-select-field > span {
+  color: rgba(245, 239, 230, 0.88);
+  font-size: 12px;
+  font-weight: 650;
+}
+
+.multi-selected-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  min-height: 10px;
+}
+
+.multi-selected-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+
+  padding: 6px 9px;
+
+  border: 1px solid rgba(218, 156, 96, 0.3);
+  border-radius: 5px;
+
+  background: rgba(155, 81, 39, 0.14);
+  color: #f1dfcb;
+
+  font-size: 12px;
+  line-height: 1.3;
+}
+
+.multi-selected-tag button {
+  border: 0;
+  background: transparent;
+  color: #d9a17a;
+
+  font-size: 16px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.multi-selected-tag button:hover {
+  color: #fff;
+}
+
+.multi-select-field .select-with-action {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.multi-select-field .select-with-action select {
+  flex: 1;
+  min-width: 0;
+}
+
+.multi-select-field .field-add-button {
+  flex-shrink: 0;
+  min-width: 38px;
+}
