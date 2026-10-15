@@ -383,7 +383,7 @@ onWheel={(event) => {
 
                 <div className="detail-screenshot-grid">
                   {media.screenshots
-                    .slice(0, 7)
+                    .slice(0, 4)
                     .map(
                       (screenshot) => (
                         <a
