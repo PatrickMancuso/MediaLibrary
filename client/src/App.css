@@ -10956,3 +10956,78 @@
     grid-template-columns: 1fr;
   }
 }
+
+
+/* =========================================================
+   MEDIA DETAIL - MOVIE PRIMARY INFORMATION
+   ========================================================= */
+
+.detail-primary-movie {
+  display: grid;
+  grid-template-columns:
+    100px
+    minmax(140px, 0.75fr)
+    minmax(0, 2fr);
+
+  gap: 10px;
+  align-items: stretch;
+}
+
+.detail-primary-movie .detail-director,
+.detail-primary-movie .detail-cast {
+  min-width: 0;
+}
+
+.detail-primary-movie .detail-cast strong {
+  line-height: 1.6;
+  overflow-wrap: break-word;
+}
+
+@media (max-width: 760px) {
+  .detail-primary-movie {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .detail-primary-movie .detail-rating {
+    grid-column: 1 / -1;
+  }
+}
+
+
+
+/* =========================================================
+   MEDIA DETAIL - LARGER TRAILER BUTTON
+   ========================================================= */
+
+.detail-video-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+
+  padding: 12px 18px;
+
+  min-height: 46px;
+
+  font-size: 13px;
+  font-weight: 650;
+
+  border-radius: 6px;
+}
+
+.detail-video-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 30px;
+  height: 30px;
+
+  flex-shrink: 0;
+
+  border-radius: 50%;
+
+  background: rgba(217, 154, 99, 0.18);
+  color: #e0a36b;
+
+  font-size: 15px;
+}

@@ -181,35 +181,23 @@ onWheel={(event) => {
   className="detail-info"
   ref={detailInfoRef}
 >
-           <div className="detail-eyebrow detail-eyebrow-formats">
-  <span>{mediaTypeLabel}</span>
-
-  {displayFormatLabels.map((format) => (
-    <span
-      className="detail-eyebrow-format"
-      key={format}
-    >
-      {format}
-    </span>
-  ))}
+       <div className="detail-eyebrow">
+  {mediaTypeLabel}
 </div>
 
           <h2>{media.title}</h2>
 
-      <div className="detail-meta">
-  <span>{media.year}</span>
 
-  {media.runtime != null &&
-    media.runtime > 0 && (
-      <span>{media.runtime} min</span>
-    )}
-</div>
 
           {/* ===================================================
               PRIMARY METADATA
               =================================================== */}
 
-          <div className="detail-primary-info">
+          <div
+  className={`detail-primary-info ${
+    isMovie ? 'detail-primary-movie' : ''
+  }`}
+>
   {rating !== null && (
     <div className="detail-rating">
       <span>
@@ -222,51 +210,46 @@ onWheel={(event) => {
     </div>
   )}
 
-  {!isMovie && (
+  {isMovie ? (
+    <>
+      {media.director && (
+        <div className="detail-primary-item detail-director">
+          <span>DIRECTED BY</span>
+          <strong>{media.director}</strong>
+        </div>
+      )}
+
+      {media.cast?.length ? (
+        <div className="detail-primary-item detail-cast">
+          <span>MAIN CAST</span>
+          <strong>
+            {media.cast.slice(0, 6).join(', ')}
+          </strong>
+        </div>
+      ) : null}
+    </>
+  ) : (
     <>
       {media.developers?.length ? (
         <div className="detail-primary-item">
           <span>DEVELOPED BY</span>
-          <strong>{media.developers.join(', ')}</strong>
+          <strong>
+            {media.developers.join(', ')}
+          </strong>
         </div>
       ) : null}
 
       {media.publishers?.length ? (
         <div className="detail-primary-item">
           <span>PUBLISHED BY</span>
-          <strong>{media.publishers.join(', ')}</strong>
+          <strong>
+            {media.publishers.join(', ')}
+          </strong>
         </div>
       ) : null}
     </>
   )}
 </div>
-
-{isMovie && (
-  <div className="detail-movie-info-grid">
-    {media.director && (
-      <div className="detail-movie-info-card">
-        <span>DIRECTED BY</span>
-        <strong>{media.director}</strong>
-      </div>
-    )}
-
-    {media.cast?.length ? (
-      <div className="detail-movie-info-card">
-        <span>MAIN CAST</span>
-        <strong>
-          {media.cast.slice(0, 5).join(', ')}
-        </strong>
-      </div>
-    ) : null}
-
-    <div className="detail-movie-info-card">
-      <span>RELEASE DATE</span>
-      <strong>
-        {media.releaseDate || String(media.year)}
-      </strong>
-    </div>
-  </div>
-)}
 
 <div className="detail-divider" />
 
