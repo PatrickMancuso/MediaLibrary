@@ -10877,3 +10877,82 @@
 .metadata-refresh-message {
   flex-basis: 100%;
 }
+
+
+/* =========================================================
+   MEDIA DETAIL - FORMAT IN HEADER
+   ========================================================= */
+
+.detail-eyebrow-formats {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.detail-eyebrow-format {
+  display: inline-flex;
+  align-items: center;
+
+  padding: 5px 9px;
+
+  border: 1px solid rgba(217, 154, 99, 0.28);
+  border-radius: 4px;
+
+  background: rgba(217, 154, 99, 0.08);
+  color: #d9a17a;
+
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: none;
+}
+
+
+
+/* =========================================================
+   MEDIA DETAIL - COMPACT MOVIE INFORMATION
+   ========================================================= */
+
+.detail-movie-info-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+
+  margin: 20px 0 24px;
+}
+
+.detail-movie-info-card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  min-width: 0;
+  padding: 15px 17px;
+
+  border: 1px solid rgba(214, 220, 211, 0.1);
+  border-radius: 5px;
+
+  background: rgba(255, 255, 255, 0.025);
+}
+
+.detail-movie-info-card > span {
+  color: rgba(217, 154, 99, 0.75);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+}
+
+.detail-movie-info-card > strong {
+  color: #eee7dd;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 650px) {
+  .detail-movie-info-grid {
+    grid-template-columns: 1fr;
+  }
+}

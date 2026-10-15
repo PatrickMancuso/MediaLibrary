@@ -181,30 +181,28 @@ onWheel={(event) => {
   className="detail-info"
   ref={detailInfoRef}
 >
-            <div className="detail-eyebrow">
-            {mediaTypeLabel}
-          </div>
-
-          <h2>{media.title}</h2>
-
-          <div className="detail-meta">
-  <span>{media.year}</span>
+           <div className="detail-eyebrow detail-eyebrow-formats">
+  <span>{mediaTypeLabel}</span>
 
   {displayFormatLabels.map((format) => (
-    <span key={`format-${format}`}>
+    <span
+      className="detail-eyebrow-format"
+      key={format}
+    >
       {format}
     </span>
   ))}
+</div>
 
-  {displayGenres.map((genre) => (
-    <span key={`genre-${genre}`}>
-      {genre}
-    </span>
-  ))}
+          <h2>{media.title}</h2>
 
-  {media.runtime && (
-    <span>{media.runtime} min</span>
-  )}
+      <div className="detail-meta">
+  <span>{media.year}</span>
+
+  {media.runtime != null &&
+    media.runtime > 0 && (
+      <span>{media.runtime} min</span>
+    )}
 </div>
 
           {/* ===================================================
@@ -212,76 +210,65 @@ onWheel={(event) => {
               =================================================== */}
 
           <div className="detail-primary-info">
-            {rating !== null && (
-              <div className="detail-rating">
-                <span>
-                  {isMovie
-                    ? 'TMDB RATING'
-                    : 'IGDB RATING'}
-                </span>
+  {rating !== null && (
+    <div className="detail-rating">
+      <span>
+        {isMovie ? 'TMDB RATING' : 'IGDB RATING'}
+      </span>
 
-                <strong>
-                  {formattedRating}
-                </strong>
+      <strong>{formattedRating}</strong>
 
-                <small>
-                  {isMovie
-                    ? '/ 10'
-                    : '/ 100'}
-                </small>
-              </div>
-            )}
+      <small>{isMovie ? '/ 10' : '/ 100'}</small>
+    </div>
+  )}
 
-            {isMovie ? (
-              <>
-                {media.director && (
-                  <div className="detail-primary-item">
-                    <span>
-                      DIRECTED BY
-                    </span>
+  {!isMovie && (
+    <>
+      {media.developers?.length ? (
+        <div className="detail-primary-item">
+          <span>DEVELOPED BY</span>
+          <strong>{media.developers.join(', ')}</strong>
+        </div>
+      ) : null}
 
-                    <strong>
-                      {media.director}
-                    </strong>
-                  </div>
-                )}
-              </>
-            ) : (
-              <>
-                {media.developers &&
-                  media.developers.length > 0 && (
-                    <div className="detail-primary-item">
-                      <span>
-                        DEVELOPED BY
-                      </span>
+      {media.publishers?.length ? (
+        <div className="detail-primary-item">
+          <span>PUBLISHED BY</span>
+          <strong>{media.publishers.join(', ')}</strong>
+        </div>
+      ) : null}
+    </>
+  )}
+</div>
 
-                      <strong>
-                        {media.developers.join(
-                          ', ',
-                        )}
-                      </strong>
-                    </div>
-                  )}
+{isMovie && (
+  <div className="detail-movie-info-grid">
+    {media.director && (
+      <div className="detail-movie-info-card">
+        <span>DIRECTED BY</span>
+        <strong>{media.director}</strong>
+      </div>
+    )}
 
-                {media.publishers &&
-                  media.publishers.length > 0 && (
-                    <div className="detail-primary-item">
-                      <span>
-                        PUBLISHED BY
-                      </span>
+    {media.cast?.length ? (
+      <div className="detail-movie-info-card">
+        <span>MAIN CAST</span>
+        <strong>
+          {media.cast.slice(0, 5).join(', ')}
+        </strong>
+      </div>
+    ) : null}
 
-                      <strong>
-                        {media.publishers.join(
-                          ', ',
-                        )}
-                      </strong>
-                    </div>
-                  )}
-              </>
-            )}
-          </div>
+    <div className="detail-movie-info-card">
+      <span>RELEASE DATE</span>
+      <strong>
+        {media.releaseDate || String(media.year)}
+      </strong>
+    </div>
+  </div>
+)}
 
-          <div className="detail-divider" />
+<div className="detail-divider" />
 
           {/* ===================================================
               DESCRIPTION
@@ -331,7 +318,6 @@ onWheel={(event) => {
               YOUR COPY
               =================================================== */}
 
-          <div className="detail-copy-section">
             <div className="detail-section-label">
             </div>
 
@@ -360,7 +346,6 @@ onWheel={(event) => {
                 </strong>
               </div>
             </div>
-          </div>
 
           {/* ===================================================
               SCREENSHOTS
@@ -443,33 +428,9 @@ onWheel={(event) => {
               <div className="detail-more-content">
                 {isMovie ? (
                   <>
-                    {media.cast &&
-                      media.cast.length >
-                        0 && (
-                        <div className="detail-more-group">
-                          <span>
-                            CAST
-                          </span>
+             
 
-                          <strong>
-                            {media.cast.join(
-                              ', ',
-                            )}
-                          </strong>
-                        </div>
-                      )}
-
-                    {media.releaseDate && (
-                      <div className="detail-more-group">
-                        <span>
-                          RELEASE DATE
-                        </span>
-
-                        <strong>
-                          {media.releaseDate}
-                        </strong>
-                      </div>
-                    )}
+                    
 
                     {media.productionCompanies &&
                       media.productionCompanies
