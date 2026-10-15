@@ -16,13 +16,13 @@ interface MediaDetailProps {
 
 
 const formatLabels: Record<string, string> = {
-  VHS: 'VHS',
-  DVD: 'DVD',
-  Bluray: 'Blu-ray',
-  Laserdisc: 'LaserDisc',
-  NES: 'NES',
-  Ps1: 'PlayStation',
-  Xbox360: 'Xbox 360',
+  vhs: 'VHS',
+  dvd: 'DVD',
+  bluray: 'Blu-ray',
+  laserdisc: 'LaserDisc',
+  nes: 'NES',
+  ps1: 'PlayStation',
+  xbox360: 'Xbox 360',
 }
 
 const mediaTypeLabels: Record<string, string> = {
