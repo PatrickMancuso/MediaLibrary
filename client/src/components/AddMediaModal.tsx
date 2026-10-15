@@ -480,21 +480,22 @@ setManualFormats(
 useEffect(() => {
   if (editingMedia) return
 
-  const firstFormat = formatOptions[0]?.value
+  const firstFormat =
+    mediaType === 'movie'
+      ? BUILTIN_MOVIE_FORMATS[0].value
+      : BUILTIN_GAME_FORMATS[0].value
 
-  if (firstFormat) {
-    setManualFormat(firstFormat)
-  }
-
+  setManualFormat(firstFormat)
   setManualGenre('')
 
   setManualGenres([])
-setManualFormats([])
+  setManualFormats([])
+
   setSelectedAutomaticResult(null)
   setSearchResults([])
   setAutomaticError('')
   setIsCustomizingAutomatic(false)
-}, [editingMedia, mediaType, formatOptions])
+}, [editingMedia, mediaType])
 
   /* =========================================================
      AUTOMATIC SEARCH
@@ -1522,14 +1523,14 @@ onClose()
     </select>
 
     <button
-      type="button"
-      className="field-add-button"
-      onClick={() => addSelectedGenre(manualGenre)}
-      disabled={!manualGenre}
-      title="Add selected genre"
-    >
-      Add
-    </button>
+  type="button"
+  className="field-add-button"
+  onClick={() => addSelectedGenre(manualGenre)}
+  disabled={!manualGenre}
+  title="Add selected genre"
+>
+  Add
+</button>
 
     <button
       type="button"
