@@ -10517,17 +10517,32 @@
 
 
 /* =========================================================
-   BROWSE THE ARCHIVES - MOVIE COLLAGE ONLY
+   BROWSE THE ARCHIVES - MOVIES COLLAGE
    ========================================================= */
 
-/* Allow movie posters to overlap their grid columns */
+/* Movie category container */
 
-.dashboard-category-movies .category-art {
+.dashboard-category-movies {
+  position: relative;
+  isolation: isolate;
   overflow: hidden;
-  gap: 0;
 }
 
-/* Movie artwork containers */
+/* Movie poster collage */
+
+.dashboard-category-movies .category-art {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0;
+
+  overflow: hidden;
+}
+
+/* Individual movie poster containers */
 
 .dashboard-category-movies .category-art-item {
   position: relative;
@@ -10535,12 +10550,11 @@
   min-width: 0;
   overflow: visible;
 
-  border-right: 0;
-
+  border: 0;
   background: transparent;
 }
 
-/* Make posters fill their assigned space */
+/* Preserve the overlapping poster effect */
 
 .dashboard-category-movies .category-movie-poster {
   display: block;
@@ -10554,7 +10568,7 @@
   transform: scale(1.08);
 }
 
-/* Control movie artwork layering */
+/* Poster stacking order */
 
 .dashboard-category-movies .category-art-item:nth-child(1) {
   z-index: 4;
@@ -10572,57 +10586,43 @@
   z-index: 1;
 }
 
-
-/* =========================================================
-   BROWSE THE ARCHIVES - MOVIE OVERLAY FIX
-   ========================================================= */
-
-/* Establish a stacking context for the Movies tile */
-
-.dashboard-category-movies {
-  position: relative;
-  isolation: isolate;
-  overflow: hidden;
-}
-
-/* Keep the overlapping movie artwork behind the overlay */
-
-.dashboard-category-movies .category-art {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-}
-
-/* Restore the dark semi-transparent overlay */
+/* Dark translucent overlay above the posters */
 
 .dashboard-category-movies .category-overlay {
   position: absolute;
   inset: 0;
-  z-index: 2;
+  z-index: 5;
 
   pointer-events: none;
 
-  background: linear-gradient(
-    180deg,
-    rgba(8, 17, 13, 0.06) 0%,
-    rgba(8, 17, 13, 0.18) 35%,
-    rgba(8, 17, 13, 0.52) 70%,
-    rgba(8, 17, 13, 0.86) 100%
-  );
+  background:
+    linear-gradient(
+      90deg,
+      rgba(12, 22, 17, 0.62) 0%,
+      rgba(12, 22, 17, 0.28) 45%,
+      rgba(12, 22, 17, 0.36) 100%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(8, 16, 12, 0.08) 0%,
+      rgba(8, 16, 12, 0.18) 40%,
+      rgba(8, 16, 12, 0.78) 100%
+    );
 }
 
-/* Keep the Movies title and details above the artwork */
+/* Movie title, count, and link */
 
 .dashboard-category-movies .category-content {
   position: absolute;
-  z-index: 3;
+  z-index: 6;
 
-  left: 20px;
+  left: 22px;
   bottom: 20px;
 
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  gap: 6px;
 
   pointer-events: none;
 }
