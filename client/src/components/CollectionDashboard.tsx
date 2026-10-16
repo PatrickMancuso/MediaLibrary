@@ -66,12 +66,12 @@ function CollectionDashboard({
   })
 
 const randomMovies = useMemo(
-  () => shuffleMedia(movies).slice(0, 6),
+  () => shuffleMedia(movies).slice(0, 5),
   [movies],
 )
 
 const randomGames = useMemo(
-  () => shuffleMedia(games).slice(0, 6),
+  () => shuffleMedia(games).slice(0, 5),
   [games],
 )
 
