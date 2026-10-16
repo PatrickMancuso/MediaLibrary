@@ -66,17 +66,17 @@ function CollectionDashboard({
   })
 
 const randomMovies = useMemo(
-  () => shuffleMedia(movies).slice(0, 4),
+  () => shuffleMedia(movies).slice(0, 6),
   [movies],
 )
 
 const randomGames = useMemo(
-  () => shuffleMedia(games).slice(0, 4),
+  () => shuffleMedia(games).slice(0, 6),
   [games],
 )
 
 const favoritePreview = useMemo(
-  () => shuffleMedia(favorites).slice(0, 6),
+  () => shuffleMedia(favorites).slice(0, 8),
   [favorites],
 )
 

@@ -11087,3 +11087,60 @@
 .detail-screenshots {
   margin-top: 12px;
 }
+
+
+
+/* =========================================================
+   COLLECTION DASHBOARD - MATCH LIBRARY PAGE
+   ========================================================= */
+
+.collection-dashboard {
+  width: 96%;
+  max-width: 1900px;
+  margin: 0 auto;
+
+  box-sizing: border-box;
+
+  padding: 30px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(12, 18, 16, 0.82),
+      rgba(18, 25, 21, 0.76) 50%,
+      rgba(12, 18, 16, 0.82)
+    );
+
+  border: 1px solid rgba(220, 230, 220, 0.1);
+  border-radius: 8px;
+
+  box-shadow:
+    0 18px 30px rgba(0, 0, 0, 0.24);
+
+  backdrop-filter: blur(3px);
+}
+
+/* Prevent child sections from exceeding the dashboard width */
+
+.collection-dashboard .dashboard-section,
+.collection-dashboard .recent-media-track,
+.collection-dashboard .dashboard-category-grid {
+  min-width: 0;
+}
+
+/* Tablet */
+
+@media (max-width: 1050px) {
+  .collection-dashboard {
+    padding: 22px;
+  }
+}
+
+/* Mobile */
+
+@media (max-width: 760px) {
+  .collection-dashboard {
+    width: calc(100% - 24px);
+    padding: 16px;
+  }
+}
