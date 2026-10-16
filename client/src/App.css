@@ -11091,44 +11091,26 @@
 
 
 /* =========================================================
-   COLLECTION DASHBOARD - MATCH LIBRARY PAGE
+   COLLECTION DASHBOARD - WIDTH AND COLOR
    ========================================================= */
 
 .collection-dashboard {
   width: 96%;
   max-width: 1900px;
   margin: 0 auto;
-
-  box-sizing: border-box;
-
   padding: 30px;
 
-  background:
-    linear-gradient(
-      135deg,
-      rgba(12, 18, 16, 0.82),
-      rgba(18, 25, 21, 0.76) 50%,
-      rgba(12, 18, 16, 0.82)
-    );
+  box-sizing: border-box;
+  min-width: 0;
 
-  border: 1px solid rgba(220, 230, 220, 0.1);
+  background: rgba(12, 18, 16, 0.92);
+
+  border: 1px solid rgba(126, 151, 108, 0.18);
   border-radius: 8px;
 
-  box-shadow:
-    0 18px 30px rgba(0, 0, 0, 0.24);
-
-  backdrop-filter: blur(3px);
+  box-shadow: 0 18px 35px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(8px);
 }
-
-/* Prevent child sections from exceeding the dashboard width */
-
-.collection-dashboard .dashboard-section,
-.collection-dashboard .recent-media-track,
-.collection-dashboard .dashboard-category-grid {
-  min-width: 0;
-}
-
-/* Tablet */
 
 @media (max-width: 1050px) {
   .collection-dashboard {
@@ -11136,11 +11118,82 @@
   }
 }
 
-/* Mobile */
-
 @media (max-width: 760px) {
   .collection-dashboard {
     width: calc(100% - 24px);
     padding: 16px;
+  }
+}
+
+
+
+/* =========================================================
+   BROWSE ARCHIVES - SINGLE ROW
+   ========================================================= */
+
+.dashboard-category-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 15px;
+}
+
+.dashboard-category-card {
+  min-width: 0;
+  overflow: hidden;
+}
+
+.dashboard-category-card .category-art {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow: hidden;
+}
+
+.dashboard-category-card .category-art-item {
+  flex: 1 1 0;
+  min-width: 0;
+  height: 100%;
+}
+
+.dashboard-category-card .category-art-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+
+
+/* =========================================================
+   FAVORITES - SINGLE HORIZONTAL ROW
+   ========================================================= */
+
+.favorite-grid {
+  display: flex;
+  flex-wrap: nowrap;
+
+  gap: 12px;
+
+  overflow-x: auto;
+  overflow-y: hidden;
+
+  padding: 4px 2px 14px;
+
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+}
+
+.favorite-card {
+  flex: 0 0 calc((100% - 60px) / 6);
+  min-width: 0;
+}
+
+@media (max-width: 1050px) {
+  .favorite-card {
+    flex-basis: calc((100% - 24px) / 3);
+  }
+}
+
+@media (max-width: 600px) {
+  .favorite-card {
+    flex-basis: calc((100% - 12px) / 2);
   }
 }

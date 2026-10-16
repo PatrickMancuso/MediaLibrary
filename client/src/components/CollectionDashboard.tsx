@@ -76,7 +76,7 @@ const randomGames = useMemo(
 )
 
 const favoritePreview = useMemo(
-  () => shuffleMedia(favorites).slice(0, 8),
+  () => shuffleMedia(favorites).slice(0, 6),
   [favorites],
 )
 
