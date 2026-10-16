@@ -1,5 +1,15 @@
 import type { MediaItem } from '../data/sampleMedia'
 
+const formatLabels: Record<string, string> = {
+  vhs: 'VHS',
+  dvd: 'DVD',
+  bluray: 'Blu-ray',
+  laserdisc: 'LaserDisc',
+  nes: 'NES',
+  ps1: 'PlayStation',
+  xbox360: 'Xbox 360',
+}
+
 interface MediaCoverProps {
   media: MediaItem
   onClick: (media: MediaItem) => void
@@ -34,14 +44,14 @@ function MediaCover({
       </div>
 
       <div className="library-cover-info">
-        <strong>{media.title}</strong>
+  <strong>{media.title}</strong>
 
-        <small>
-          {media.year}
-          {' · '}
-          {media.format}
-        </small>
-      </div>
+  <small>
+    {media.year}
+    {' · '}
+    {formatLabels[media.format.toLowerCase()] ?? media.format}
+  </small>
+</div>
     </button>
   )
 }
