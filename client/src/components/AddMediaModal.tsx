@@ -323,10 +323,10 @@ const [manualFormats, setManualFormats] =
   const [manualFavorite, setManualFavorite] =
     useState(false)
 
-  const [
-    manualOrientation,
-    setManualOrientation,
-  ] = useState<MediaOrientation>('spine')
+const [
+  manualOrientation,
+  setManualOrientation,
+] = useState<MediaOrientation>('cover')
 
   /* =========================================================
      IMAGES
@@ -2461,47 +2461,7 @@ onClose()
 
                         {/* COVER PREVIEW */}
 
-                        {manualOrientation ===
-                          'cover' && (
-                          <div
-                            className="preview-cover"
-                            style={
-                              coverImage
-                                ? {
-                                    backgroundImage:
-                                      `url("${coverImage}")`,
-                                    backgroundSize:
-                                      'cover',
-                                    backgroundPosition:
-                                      'center',
-                                  }
-                                : undefined
-                            }
-                          >
-                            {!coverImage && (
-                              <>
-                                <span>
-                                  {previewItem.type ===
-                                  'movie'
-                                    ? 'FILM'
-                                    : 'GAME'}
-                                </span>
-
-                                <strong>
-                                  {
-                                    previewItem.title
-                                  }
-                                </strong>
-
-                                <small>
-                                  {
-                                    previewItem.year
-                                  }
-                                </small>
-                              </>
-                            )}
-                          </div>
-                        )}
+                   
 
                       </div>
 

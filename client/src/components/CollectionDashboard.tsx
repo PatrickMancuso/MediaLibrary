@@ -88,7 +88,7 @@ const favoritePreview = useMemo(
 <section className="dashboard-intro dashboard-intro-compact">
   <div className="dashboard-intro-heading">
     <h1>The Vault</h1>
-    <p>Your collection at a glance</p>
+    <p>Your Media Collection at a Glance</p>
   </div>
 
   <div className="dashboard-summary">
