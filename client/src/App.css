@@ -10626,19 +10626,38 @@
   z-index: 0;
 }
 
-.dashboard-category-movies .category-overlay {
+/* =========================================================
+   BROWSE ARCHIVES - MATCH MOVIE AND GAME OVERLAYS
+   ========================================================= */
+
+.dashboard-category-movies .category-overlay,
+.dashboard-category-games .category-overlay {
   position: absolute;
   inset: 0;
-  z-index: 1;
+  z-index: 10;
 
   pointer-events: none;
 
-  background: linear-gradient(
-    180deg,
-    rgba(8, 17, 13, 0.25) 0%,
-    rgba(8, 17, 13, 0.45) 50%,
-    rgba(8, 17, 13, 0.88) 100%
-  );
+  opacity: 1;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(17, 27, 21, 0.78),
+      rgba(17, 27, 21, 0.18) 58%,
+      rgba(17, 27, 21, 0.54)
+    ),
+    linear-gradient(
+      180deg,
+      rgba(12, 20, 15, 0.04),
+      rgba(12, 20, 15, 0.72)
+    );
+}
+
+.dashboard-category-movies .category-content,
+.dashboard-category-games .category-content {
+  position: absolute;
+  z-index: 20;
 }
 
 .dashboard-category-movies .category-content {
