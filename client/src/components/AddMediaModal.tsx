@@ -2313,45 +2313,10 @@ onClose()
                       </label>
 
                       <div className="orientation-field">
-                        <span>
-                          Shelf Display
-                        </span>
+                      
 
                         <div>
 
-                          <button
-                            type="button"
-                            className={
-                              manualOrientation ===
-                              'spine'
-                                ? 'active'
-                                : ''
-                            }
-                            onClick={() =>
-                              setManualOrientation(
-                                'spine',
-                              )
-                            }
-                          >
-                            Spine
-                          </button>
-
-                          <button
-                            type="button"
-                            className={
-                              manualOrientation ===
-                              'cover'
-                                ? 'active'
-                                : ''
-                            }
-                            onClick={() =>
-                              setManualOrientation(
-                                'cover',
-                              )
-                            }
-                          >
-                            Cover
-                          </button>
 
                         </div>
                       </div>
