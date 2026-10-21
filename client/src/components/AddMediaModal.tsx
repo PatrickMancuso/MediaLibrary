@@ -1169,40 +1169,7 @@ onClose()
      LIVE PREVIEW DATA
      ========================================================= */
 
-  const previewItem: MediaItem = {
-    id: 'preview',
-
-    title:
-      manualTitle.trim() ||
-      'Your New Title',
-
-    type: mediaType,
-
-    format: manualFormat,
-
-    year:
-      Number(manualYear) ||
-      new Date().getFullYear(),
-
-    genre:
-      manualGenre ||
-      genreOptions[0] ||
-      'Genre',
-
-    description:
-      manualDescription ||
-      'Your media preview will update as you customize the item.',
-
-    favorite:
-      manualFavorite,
-
-    orientation:
-      manualOrientation,
-
-    spineImage,
-
-    coverImage,
-  }
+ 
 
   return (
     <div
@@ -2393,107 +2360,7 @@ onClose()
 
                   </div>
 
-                  {/* -------------------------------------------
-                      LIVE PREVIEW
-                      ------------------------------------------- */}
-
-                  <div className="media-preview-panel">
-
-                    <div className="preview-heading">
-                      <span>
-                        LIVE PREVIEW
-                      </span>
-
-                      <strong>
-                        Shelf Appearance
-                      </strong>
-                    </div>
-
-                    <div className="media-preview-stage">
-
-                      <div
-                        className={`preview-media preview-${manualOrientation}`}
-                      >
-
-                        {/* SPINE PREVIEW */}
-
-                        {manualOrientation ===
-                          'spine' && (
-                          <div
-                            className="preview-spine"
-                            style={
-                              spineImage
-                                ? {
-                                    backgroundImage:
-                                      `url("${spineImage}")`,
-                                    backgroundSize:
-                                      'cover',
-                                    backgroundPosition:
-                                      'center',
-                                  }
-                                : undefined
-                            }
-                          >
-                            {!spineImage && (
-                              <>
-                                <span>
-                                  {previewItem.type ===
-                                  'movie'
-                                    ? 'FILM'
-                                    : 'GAME'}
-                                </span>
-
-                                <strong>
-                                  {
-                                    previewItem.title
-                                  }
-                                </strong>
-
-                                <small>
-                                  {
-                                    previewItem.year
-                                  }
-                                </small>
-                              </>
-                            )}
-                          </div>
-                        )}
-
-                        {/* COVER PREVIEW */}
-
-                   
-
-                      </div>
-
-                    </div>
-
-                    <div className="preview-summary">
-
-                      <span>
-                        {
-                          previewItem.format
-                        }
-                      </span>
-
-                      <strong>
-                        {
-                          previewItem.title
-                        }
-                      </strong>
-
-                      <small>
-                        {
-                          previewItem.genre
-                        }
-                        {' · '}
-                        {
-                          previewItem.year
-                        }
-                      </small>
-
-                    </div>
-
-                  </div>
+                  
 
                 </div>
 
