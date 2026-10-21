@@ -85,29 +85,29 @@ const favoritePreview = useMemo(
       {/* =================================================
           INTRO
           ================================================= */}
+<section className="dashboard-intro dashboard-intro-compact">
+  <div className="dashboard-intro-heading">
+    <h1>The Vault</h1>
+    <p>Your collection at a glance</p>
+  </div>
 
-      <section className="dashboard-intro">
-        <div>
+  <div className="dashboard-summary">
+    <div className="dashboard-summary-stat">
+      <strong>{movies.length + games.length}</strong>
+      <span>Total Titles</span>
+    </div>
 
-          <h1>The Collection</h1>
+    <div className="dashboard-summary-stat">
+      <strong>{movies.length}</strong>
+      <span>Movies</span>
+    </div>
 
-          <p>
-            Your Movies, Games, and Entertainment,
-            all in one place.
-          </p>
-        </div>
-
-        <div className="dashboard-total">
-          <span>Total Library</span>
-
-          <strong>
-            {movies.length + games.length}
-          </strong>
-
-          <small>titles</small>
-        </div>
-      </section>
-
+    <div className="dashboard-summary-stat">
+      <strong>{games.length}</strong>
+      <span>Games</span>
+    </div>
+  </div>
+</section>
       {/* =================================================
     RECENTLY ADDED
     ================================================= */}
