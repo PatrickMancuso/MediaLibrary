@@ -112,8 +112,8 @@ const favoritePreview = useMemo(
   </div>
 
   <div className="recent-media-track">
-    {recentlyAdded.map((item) => {
-      const artwork = getArtwork(item)
+{recentlyAdded.slice(0, 9).map((item) => {
+        const artwork = getArtwork(item)
 
       return (
         <button
