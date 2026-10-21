@@ -97,15 +97,7 @@ const favoritePreview = useMemo(
       <span>Total Titles</span>
     </div>
 
-    <div className="dashboard-summary-stat">
-      <strong>{movies.length}</strong>
-      <span>Movies</span>
-    </div>
-
-    <div className="dashboard-summary-stat">
-      <strong>{games.length}</strong>
-      <span>Games</span>
-    </div>
+  
   </div>
 </section>
       {/* =================================================
