@@ -100,70 +100,7 @@ const favoritePreview = useMemo(
   
   </div>
 </section>
-      {/* =================================================
-    RECENTLY ADDED
-    ================================================= */}
-
-<section className="dashboard-section">
-  <div className="dashboard-section-header">
-    <div>
-      <h2>Recently Added</h2>
-    </div>
-  </div>
-
-  <div className="recent-media-track">
-{recentlyAdded.slice(0, 9).map((item) => {
-        const artwork = getArtwork(item)
-
-      return (
-        <button
-          key={item.id}
-          type="button"
-          className="recent-media-card"
-          onClick={() => onSelect(item)}
-        >
-          <div className="recent-media-art">
-            {artwork ? (
-              <img
-                src={artwork}
-                alt=""
-                className="recent-media-image"
-              />
-            ) : (
-              <>
-                <span className="recent-art-type">
-                  {item.type === 'movie'
-                    ? 'FILM'
-                    : 'GAME'}
-                </span>
-
-                <strong>
-                  {item.title}
-                </strong>
-              </>
-            )}
-          </div>
-
-          <div className="recent-media-info">
-            <strong>
-              {item.title}
-            </strong>
-
-            <span>
-              {item.type === 'movie'
-                ? 'Movie'
-                : 'Game'}{' '}
-              · {item.genre} ·{' '}
-              {formatLabels[item.format] ??
-                item.format}{' '}
-              · {item.year}
-            </span>
-          </div>
-        </button>
-      )
-    })}
-  </div>
-</section>
+      
       {/* =================================================
           MOVIES / GAMES
           ================================================= */}
@@ -276,6 +213,72 @@ const favoritePreview = useMemo(
           </button>
         </div>
       </section>
+
+
+      {/* =================================================
+    RECENTLY ADDED
+    ================================================= */}
+
+<section className="dashboard-section">
+  <div className="dashboard-section-header">
+    <div>
+      <h2>Recently Added</h2>
+    </div>
+  </div>
+
+  <div className="recent-media-track">
+{recentlyAdded.slice(0, 9).map((item) => {
+        const artwork = getArtwork(item)
+
+      return (
+        <button
+          key={item.id}
+          type="button"
+          className="recent-media-card"
+          onClick={() => onSelect(item)}
+        >
+          <div className="recent-media-art">
+            {artwork ? (
+              <img
+                src={artwork}
+                alt=""
+                className="recent-media-image"
+              />
+            ) : (
+              <>
+                <span className="recent-art-type">
+                  {item.type === 'movie'
+                    ? 'FILM'
+                    : 'GAME'}
+                </span>
+
+                <strong>
+                  {item.title}
+                </strong>
+              </>
+            )}
+          </div>
+
+          <div className="recent-media-info">
+            <strong>
+              {item.title}
+            </strong>
+
+            <span>
+              {item.type === 'movie'
+                ? 'Movie'
+                : 'Game'}{' '}
+              · {item.genre} ·{' '}
+              {formatLabels[item.format] ??
+                item.format}{' '}
+              · {item.year}
+            </span>
+          </div>
+        </button>
+      )
+    })}
+  </div>
+</section>
 
       {/* =================================================
           FAVORITES
