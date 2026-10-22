@@ -11,8 +11,8 @@
 .room {
   background:
       linear-gradient(
-    rgba(7, 15, 20, 0.25),
-    rgba(7, 15, 20, 0.20)
+    rgba(7, 15, 20, 0),
+    rgba(7, 15, 20, 0)
   ),
     url("./assets/Background6.png");
 
