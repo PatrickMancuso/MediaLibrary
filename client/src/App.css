@@ -10629,14 +10629,14 @@ box-shadow:
   background:
     linear-gradient(
       90deg,
-      rgba(17, 27, 21, 0.78),
-      rgba(17, 27, 21, 0.18) 58%,
-      rgba(17, 27, 21, 0.54)
+      rgba(17, 27, 21, 0.70),
+      rgba(17, 27, 21, 0.15) 58%,
+      rgba(17, 27, 21, 0.48)
     ),
     linear-gradient(
       180deg,
       rgba(12, 20, 15, 0.04),
-      rgba(12, 20, 15, 0.72)
+      rgba(12, 20, 15, 0.68)
     );
 }
 
@@ -11702,7 +11702,7 @@ box-shadow:
     90deg,
     #0d1613 0%,
     #161611 55%,
-    #171c18 100%
+    #171c18 95%
   );
 
   border-bottom: 1px solid rgba(65, 75, 69, 0.3);
