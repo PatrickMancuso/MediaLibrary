@@ -1,15 +1,22 @@
 import { useRef } from 'react'
 import type { MediaItem } from '../data/sampleMedia'
 import MediaCover from './MediaCover'
+import MediaSpine from './MediaSpine'
 
 interface MediaRowProps {
   title: string
   items: MediaItem[]
   onSelect: (media: MediaItem) => void
+  displayMode?: 'cover' | 'spine'
 }
 
-function MediaRow({ title, items, onSelect }: MediaRowProps) {
-  const rowRef = useRef<HTMLDivElement>(null)
+function MediaRow({
+  title,
+  items,
+  onSelect,
+  displayMode = 'cover',
+}: MediaRowProps) {
+    const rowRef = useRef<HTMLDivElement>(null)
 
   const scrollShelf = (direction: 'left' | 'right') => {
     if (!rowRef.current) return
@@ -61,15 +68,30 @@ function MediaRow({ title, items, onSelect }: MediaRowProps) {
       <div className="shelf">
         <div className="shelf-interior">
           <div className="shelf-scroll" ref={rowRef}>
-            <div className="media-line">
-            {items.map((item) => (
-  <MediaCover
-    key={item.id}
-    media={item}
-    onClick={onSelect}
-  />
-))}
-            </div>
+        <div
+  className={`media-line ${
+    displayMode === 'spine'
+      ? 'media-line-spines'
+      : 'media-line-covers'
+  }`}
+>
+  {items.map((item) =>
+    displayMode === 'spine' ? (
+      <MediaSpine
+        key={item.id}
+        media={item}
+        onClick={onSelect}
+        displayMode="spine"
+      />
+    ) : (
+      <MediaCover
+        key={item.id}
+        media={item}
+        onClick={onSelect}
+      />
+    ),
+  )}
+</div>
           </div>
         </div>
 

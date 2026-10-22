@@ -327,6 +327,13 @@ const [librarySort, setLibrarySort] =
     'title-asc',
   )
 
+  /* =========================================================
+   LIBRARY DISPLAY MODE
+   ========================================================= */
+
+const [libraryDisplayMode, setLibraryDisplayMode] =
+  useState<'cover' | 'spine'>('cover')
+
     const [user, setUser] =
   useState<User | null>(null)
 
@@ -1078,10 +1085,44 @@ const renderLibrarySearch = () => {
           </p>
         </div>
 
-        <span className="library-result-count">
-          {filteredLibraryItems.length} of{' '}
-          {libraryItems.length} titles
-        </span>
+      <div className="library-heading-actions">
+  <div
+    className="library-display-toggle"
+    role="group"
+    aria-label="Library display mode"
+  >
+    <button
+      type="button"
+      className={
+        libraryDisplayMode === 'cover'
+          ? 'active'
+          : ''
+      }
+      onClick={() => setLibraryDisplayMode('cover')}
+      aria-pressed={libraryDisplayMode === 'cover'}
+    >
+      Covers
+    </button>
+
+    <button
+      type="button"
+      className={
+        libraryDisplayMode === 'spine'
+          ? 'active'
+          : ''
+      }
+      onClick={() => setLibraryDisplayMode('spine')}
+      aria-pressed={libraryDisplayMode === 'spine'}
+    >
+      Spines
+    </button>
+  </div>
+
+  <span className="library-result-count">
+    {filteredLibraryItems.length} of{' '}
+    {libraryItems.length} titles
+  </span>
+</div>
       </div>
 
       <div className="library-search-input-wrapper">
@@ -1201,11 +1242,12 @@ const renderLibrarySearch = () => {
   }
 
   return (
-    <MediaRow
-      title="Search Results"
-      items={filteredLibraryItems}
-      onSelect={handleSelect}
-    />
+   <MediaRow
+  title="Search Results"
+  items={filteredLibraryItems}
+  onSelect={handleSelect}
+  displayMode={libraryDisplayMode}
+/>
   )
 }
     switch (activeView) {
@@ -1219,6 +1261,8 @@ const renderLibrarySearch = () => {
                   item.type === 'movie',
               )}
               onSelect={handleSelect}
+                displayMode={libraryDisplayMode}
+
             />
 
             {movieGenreRows.map(
@@ -1228,6 +1272,8 @@ const renderLibrarySearch = () => {
                   title={row.title}
                   items={row.items}
                   onSelect={handleSelect}
+                    displayMode={libraryDisplayMode}
+
                 />
               ),
             )}
@@ -1244,6 +1290,8 @@ const renderLibrarySearch = () => {
                   item.type === 'game',
               )}
               onSelect={handleSelect}
+                displayMode={libraryDisplayMode}
+
             />
 
             {gameGenreRows.map(
@@ -1253,6 +1301,8 @@ const renderLibrarySearch = () => {
                   title={row.title}
                   items={row.items}
                   onSelect={handleSelect}
+                    displayMode={libraryDisplayMode}
+
                 />
               ),
             )}

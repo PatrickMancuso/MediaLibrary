@@ -4,6 +4,7 @@ import type { MediaItem } from '../data/sampleMedia'
 interface MediaSpineProps {
   media: MediaItem
   onClick: (media: MediaItem) => void
+  displayMode?: 'cover' | 'spine'
 }
 
 const formatClasses: Record<string, string> = {
@@ -28,9 +29,10 @@ const formatLabels: Record<string, string> = {
 function MediaSpine({
   media,
   onClick,
+  displayMode,
 }: MediaSpineProps) {
   const isCover =
-    media.orientation === 'cover'
+    (displayMode ?? media.orientation) === 'cover'
 
   const formatClass =
     formatClasses[media.format] ??
@@ -45,17 +47,23 @@ function MediaSpine({
       ? media.coverImage
       : media.spineImage
 
-  const artworkStyle: CSSProperties =
-    artwork
+ const artworkStyle: CSSProperties =
+  artwork
+    ? {
+        backgroundImage: `
+          linear-gradient(
+            rgba(18, 7, 3, 0.16),
+            rgba(18, 7, 3, 0.28)
+          ),
+          url("${artwork}")
+        `,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+      }
+    : !isCover
       ? {
-          backgroundImage:
-            `linear-gradient(
-              rgba(18, 7, 3, 0.16),
-              rgba(18, 7, 3, 0.28)
-            ),
-            url("${artwork}")`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
+          backgroundColor:
+            media.spineColor ?? '#955536',
         }
       : {}
 

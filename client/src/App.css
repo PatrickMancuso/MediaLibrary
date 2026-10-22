@@ -11390,3 +11390,81 @@
     grid-template-columns: 1fr;
   }
 }
+
+
+
+/* =========================================================
+   LIBRARY DISPLAY TOGGLE
+   ========================================================= */
+
+.library-heading-actions {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.library-display-toggle {
+  display: inline-flex;
+  gap: 3px;
+  padding: 4px;
+
+  border: 1px solid rgba(217, 154, 99, 0.24);
+  border-radius: 6px;
+
+  background: rgba(10, 15, 12, 0.55);
+}
+
+.library-display-toggle button {
+  padding: 8px 14px;
+
+  border: 0;
+  border-radius: 4px;
+
+  background: transparent;
+  color: rgba(235, 228, 216, 0.58);
+
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.library-display-toggle button.active {
+  background: rgba(117, 62, 33, 0.55);
+  color: #f3e8dc;
+
+  box-shadow: inset 0 0 0 1px rgba(217, 154, 99, 0.35);
+}
+
+.library-display-toggle button:hover:not(.active) {
+  color: #f3e8dc;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+@media (max-width: 760px) {
+  .library-heading-actions {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+}
+
+
+/* =========================================================
+   LIBRARY SPINE VIEW
+   ========================================================= */
+
+.media-line-spines {
+  display: flex;
+  align-items: flex-end;
+  gap: 4px;
+
+  min-height: 260px;
+}
+
+.media-line-spines .media-object {
+  flex-shrink: 0;
+}
+
+.media-line-covers {
+  display: flex;
+  align-items: flex-start;
+}

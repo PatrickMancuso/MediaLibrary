@@ -43,6 +43,7 @@ genre: string
 // Multiple genres assigned to this title
 genres?: string[]
 
+
 description: string
 
   favorite: boolean
@@ -50,6 +51,10 @@ description: string
   orientation: MediaOrientation
 
   spineImage?: string
+
+spineColor?: string
+
+
   coverImage?: string
 
   // =====================================================
