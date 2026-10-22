@@ -11702,9 +11702,9 @@ background: linear-gradient(
 .site-header {
   background: linear-gradient(
     90deg,
-    rgba(13, 22, 19, 0.87) 0%,
-    rgba(22, 22, 17, 0.87) 55%,
-    rgba(23, 28, 24, 0.87) 95%
+    rgba(13, 22, 19, 0.95) 0%,
+    rgba(22, 22, 17, 0.95) 55%,
+    rgba(23, 28, 24, 1) 95%
   );
 
 
