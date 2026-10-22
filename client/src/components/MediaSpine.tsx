@@ -17,15 +17,7 @@ const formatClasses: Record<string, string> = {
   xbox360: 'format-xbox360',
 }
 
-const formatLabels: Record<string, string> = {
-  vhs: 'VHS',
-  dvd: 'DVD',
-  bluray: 'Blu-ray',
-  laserdisc: 'LaserDisc',
-  nes: 'NES',
-  ps1: 'PlayStation',
-  xbox360: 'Xbox 360',
-}
+
 function MediaSpine({
   media,
   onClick,
@@ -34,13 +26,21 @@ function MediaSpine({
   const isCover =
     (displayMode ?? media.orientation) === 'cover'
 
+
+    const titleLength = media.title.length
+
+const titleWidthClass =
+  titleLength > 28
+    ? 'spine-title-long'
+    : titleLength > 18
+      ? 'spine-title-medium'
+      : 'spine-title-short'
+
   const formatClass =
     formatClasses[media.format] ??
     'format-custom'
 
-  const formatLabel =
-    formatLabels[media.format] ??
-    media.format
+ 
 
   const artwork =
     isCover
@@ -71,12 +71,15 @@ function MediaSpine({
     <button
       type="button"
       className={[
-        'media-object',
-        formatClass,
-        isCover
-          ? 'orientation-cover'
-          : 'orientation-spine',
-      ].join(' ')}
+  'media-object',
+  formatClass,
+  !isCover && titleWidthClass,
+  isCover
+    ? 'orientation-cover'
+    : 'orientation-spine',
+]
+  .filter(Boolean)
+  .join(' ')}
       onClick={() => onClick(media)}
       aria-label={`Open ${media.title}`}
     >
@@ -85,28 +88,10 @@ function MediaSpine({
         style={artworkStyle}
       >
         {!artwork && (
-          <>
-            <span className="media-logo">
-              {media.type === 'movie'
-                ? 'FILM'
-                : 'GAME'}
-            </span>
-
-            <span className="media-title">
-              {media.title}
-            </span>
-
-            <span className="media-bottom">
-              <span>
-                {formatLabel}
-              </span>
-
-              <span>
-                {media.year}
-              </span>
-            </span>
-          </>
-        )}
+  <span className="media-title">
+    {media.title}
+  </span>
+)}
 
         {artwork && (
           <span className="media-artwork-overlay">
