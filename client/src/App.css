@@ -11,8 +11,8 @@
 .room {
   background:
       linear-gradient(
-    rgba(7, 15, 20, 0.38),
-    rgba(7, 15, 20, 0.38)
+    rgba(7, 15, 20, 0.20),
+    rgba(7, 15, 20, 0.20)
   ),
     url("./assets/Background2.png");
 
@@ -8361,101 +8361,115 @@ box-shadow:
 
 
 /* =========================================================
-   UPDATED HEADER
+   UPDATED HEADER - CHARCOAL & COPPER
    ========================================================= */
 
 .site-header {
-background: linear-gradient(
-  180deg,
-  rgba(39, 47, 40, 0.94) 0%,
-  rgba(29, 37, 31, 0.95) 55%,
-  rgba(22, 30, 25, 0.96) 100%
-);
+  background: linear-gradient(
+    180deg,
+    rgba(39, 47, 40, 0.94) 0%,
+    rgba(29, 37, 31, 0.95) 55%,
+    rgba(22, 30, 25, 0.96) 100%
+  );
 
-border-bottom: 1px solid rgba(169, 185, 155, 0.22);
+  border-bottom: 1px solid rgba(91, 94, 91, 0.42);
 
-box-shadow:
-  0 10px 30px rgba(8, 14, 10, 0.32),
-  inset 0 1px 0 rgba(232, 223, 203, 0.07);
+  box-shadow:
+    0 10px 30px rgba(8, 14, 10, 0.32),
+    inset 0 1px 0 rgba(232, 223, 203, 0.05);
 
-  backdrop-filter:
-    blur(8px);
+  backdrop-filter: blur(8px);
 }
 
 
-/* Keep the header texture extremely subtle */
+/* =========================================================
+   HEADER TEXTURE
+   ========================================================= */
 
 .site-header::before {
-  opacity: 0.12;
+  opacity: 0.08;
 
   background: repeating-linear-gradient(
     90deg,
-    rgba(235, 245, 255, 0.025) 0,
-    rgba(235, 245, 255, 0.025) 1px,
+    rgba(255, 255, 255, 0.018) 0,
+    rgba(255, 255, 255, 0.018) 1px,
     transparent 1px,
     transparent 7px
   );
 }
+
+
+/* Dark gray header edge */
 
 .site-header::after {
   height: 2px;
 
   background: linear-gradient(
     90deg,
-    rgba(103, 145, 171, 0.18) 0%,
-    rgba(148, 187, 211, 0.48) 25%,
-    rgba(205, 226, 240, 0.72) 50%,
-    rgba(148, 187, 211, 0.48) 75%,
-    rgba(103, 145, 171, 0.18) 100%
+    rgba(48, 51, 49, 0.45) 0%,
+    rgba(91, 96, 92, 0.65) 25%,
+    rgba(112, 116, 111, 0.72) 50%,
+    rgba(91, 96, 92, 0.65) 75%,
+    rgba(48, 51, 49, 0.45) 100%
   );
 
-  opacity: 0.85;
+  opacity: 0.75;
 
-  box-shadow: 0 -1px 6px rgba(125, 187, 225, 0.16);
+  box-shadow:
+    0 -1px 5px rgba(0, 0, 0, 0.16);
 }
 
 
 /* =========================================================
-   LOGO
+   LOGO CONTAINER
    ========================================================= */
 
 .brand-console {
   background: linear-gradient(
     180deg,
-    rgba(57, 70, 59, 0.75),
-    rgba(29, 39, 32, 0.82)
+    rgba(52, 55, 53, 0.88),
+    rgba(32, 35, 33, 0.92)
   );
 
-  border-color: rgba(169, 185, 155, 0.28);
+  border-color: rgba(196, 125, 78, 0.38);
+
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.055),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.20),
+    0 4px 12px rgba(0, 0, 0, 0.18);
 }
 
 .brand-console:hover {
   background: linear-gradient(
     180deg,
-    rgba(71, 86, 72, 0.85),
-    rgba(37, 49, 40, 0.88)
+    rgba(65, 67, 64, 0.94),
+    rgba(40, 42, 39, 0.96)
   );
 
-  border-color: rgba(169, 185, 155, 0.46);
+  border-color: rgba(230, 160, 100, 0.58);
 }
 
 
-/* Keep the logo warm orange */
+/* =========================================================
+   LOGO ACCENTS
+   ========================================================= */
+
 .brand-mark span {
-  color: #a9b99b;
+  color: #e6a064;
 }
 
 .brand-light {
-  background: #b5c6a7;
+  background: #e6a064;
 
   box-shadow:
-    0 0 6px rgba(181, 198, 167, 0.75),
-    0 0 14px rgba(181, 198, 167, 0.28);
+    0 0 6px rgba(230, 160, 100, 0.85),
+    0 0 14px rgba(230, 160, 100, 0.32);
 }
 
 .brand-caption {
   color: rgba(232, 223, 203, 0.52);
 }
+
 
 /* =========================================================
    NAVIGATION
@@ -8467,8 +8481,10 @@ box-shadow:
 
 .nav-item:hover {
   color: #f0eee5;
-  background: rgba(169, 185, 155, 0.09);
-  border-color: rgba(169, 185, 155, 0.14);
+
+  background: rgba(75, 78, 75, 0.32);
+
+  border-color: rgba(196, 125, 78, 0.22);
 }
 
 .nav-item.active {
@@ -8476,21 +8492,22 @@ box-shadow:
 
   background: linear-gradient(
     180deg,
-    rgba(70, 86, 72, 0.82),
-    rgba(43, 58, 46, 0.88)
+    rgba(61, 63, 60, 0.94),
+    rgba(38, 40, 38, 0.96)
   );
 
-  border-color: rgba(169, 185, 155, 0.42);
+  border-color: rgba(196, 125, 78, 0.52);
 
   box-shadow:
-    inset 0 1px 0 rgba(240, 245, 230, 0.10),
-    0 3px 12px rgba(5, 15, 9, 0.2);
+    inset 0 1px 0 rgba(255, 255, 255, 0.075),
+    0 3px 12px rgba(0, 0, 0, 0.20);
 }
+
 .nav-indicator {
-  background: #a9b99b;
+  background: #d58e59;
 
   box-shadow:
-    0 0 6px rgba(169, 185, 155, 0.48);
+    0 0 6px rgba(213, 142, 89, 0.48);
 }
 
 
@@ -8501,25 +8518,29 @@ box-shadow:
 .header-add-media {
   background: linear-gradient(
     180deg,
-    rgba(78, 94, 73, 0.85),
-    rgba(49, 66, 50, 0.90)
+    rgba(64, 66, 63, 0.92),
+    rgba(39, 41, 39, 0.96)
   );
 
-  border-color: rgba(169, 185, 155, 0.38);
+  border-color: rgba(196, 125, 78, 0.48);
+
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.065),
+    0 3px 11px rgba(0, 0, 0, 0.18);
 }
 
 .header-add-media:hover {
   background: linear-gradient(
     180deg,
-    rgba(95, 112, 86, 0.92),
-    rgba(62, 81, 60, 0.95)
+    rgba(78, 77, 71, 0.96),
+    rgba(51, 49, 45, 0.98)
   );
 
-  border-color: rgba(190, 205, 175, 0.55);
+  border-color: rgba(230, 160, 100, 0.65);
 }
 
 .header-add-icon {
-  color: #d5c7a9;
+  color: #e6a064;
 }
 
 /* =========================================================
