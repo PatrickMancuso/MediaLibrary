@@ -14,7 +14,7 @@
     rgba(7, 15, 20, 0.25),
     rgba(7, 15, 20, 0.20)
   ),
-    url("./assets/Background8.png");
+    url("./assets/Background10.png");
 
   background-size:
     cover,
@@ -12057,4 +12057,65 @@ box-shadow:
   border: 1px solid rgba(162, 194, 165, 0.28);
 
   color: #a8c2ac;
+}
+
+
+
+/* =========================================================
+   THEME EXPERIMENT - VIBRANT ORANGE & BLACK
+   ========================================================= */
+
+.brand-console,
+.nav-item.active,
+.header-add-media,
+.header-account {
+  background: linear-gradient(
+    180deg,
+    #8f421f 0%,
+    #4b2419 50%,
+    #1b1418 100%
+  );
+
+  border-color: rgba(255, 138, 38, 0.42);
+}
+
+.brand-console:hover,
+.header-add-media:hover,
+.header-account:hover {
+  background: linear-gradient(
+    180deg,
+    #a64d20 0%,
+    #612b1b 50%,
+    #241719 100%
+  );
+
+  border-color: rgba(255, 138, 38, 0.65);
+}
+
+/* Logo and accent colors */
+
+.brand-mark span,
+.header-add-icon,
+.header-account-icon {
+  color: #ff8a26;
+}
+
+.brand-light {
+  background: #ff8a26;
+
+  box-shadow:
+    0 0 6px rgba(255, 138, 38, 0.8),
+    0 0 14px rgba(255, 138, 38, 0.3);
+}
+
+.nav-indicator {
+  background: #ff8a26;
+
+  box-shadow:
+    0 0 6px rgba(255, 138, 38, 0.45);
+}
+
+.header-account-icon {
+  background: rgba(255, 138, 38, 0.15);
+  border-color: rgba(255, 138, 38, 0.25);
 }
