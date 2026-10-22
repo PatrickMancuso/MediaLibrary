@@ -1606,6 +1606,9 @@
 }
 
 
+
+
+
 .media-bottom {
   position:
     relative;
@@ -11467,4 +11470,122 @@
 .media-line-covers {
   display: flex;
   align-items: flex-start;
+}
+
+
+/* =========================================================
+   LIBRARY SPINES - PHYSICAL FORMAT STYLING
+   ========================================================= */
+
+.media-line-spines {
+  display: flex;
+  align-items: flex-end;
+  gap: 3px;
+  min-height: 280px;
+}
+
+.media-line-spines .media-object {
+  flex: 0 0 auto;
+  box-sizing: border-box;
+
+  border-radius: 2px 2px 0 0;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+
+  box-shadow:
+    inset 3px 0 5px rgba(255, 255, 255, 0.07),
+    inset -4px 0 7px rgba(0, 0, 0, 0.35),
+    2px 3px 5px rgba(0, 0, 0, 0.35);
+}
+
+/* VHS - wider, taller */
+
+.media-line-spines .format-vhs {
+  width: 58px;
+  height: 245px;
+}
+
+.media-line-spines .format-vhs .media-surface {
+  background-color: #634332;
+}
+
+/* DVD - thinner */
+
+.media-line-spines .format-dvd {
+  width: 34px;
+  height: 220px;
+}
+
+.media-line-spines .format-dvd .media-surface {
+  background-color: #25292e;
+}
+
+/* Blu-ray - shorter, thinner */
+
+.media-line-spines .format-bluray {
+  width: 32px;
+  height: 205px;
+}
+
+.media-line-spines .format-bluray .media-surface {
+  background-color: #23567b;
+}
+
+/* LaserDisc - tall and wide */
+
+.media-line-spines .format-laserdisc {
+  width: 72px;
+  height: 265px;
+}
+
+.media-line-spines .format-laserdisc .media-surface {
+  background-color: #76634f;
+}
+
+/* NES */
+
+.media-line-spines .format-nes {
+  width: 50px;
+  height: 235px;
+}
+
+.media-line-spines .format-nes .media-surface {
+  background-color: #77756f;
+}
+
+/* PlayStation */
+
+.media-line-spines .format-ps1 {
+  width: 37px;
+  height: 210px;
+}
+
+.media-line-spines .format-ps1 .media-surface {
+  background-color: #4c4d55;
+}
+
+/* Xbox 360 */
+
+.media-line-spines .format-xbox360 {
+  width: 38px;
+  height: 225px;
+}
+
+.media-line-spines .format-xbox360 .media-surface {
+  background-color: #49704a;
+}
+
+/* Custom formats */
+
+.media-line-spines .format-custom {
+  width: 42px;
+  height: 225px;
+}
+
+.media-line-spines .format-custom .media-surface {
+  background-color: #79523e;
+}
+
+
+.media-line-spines .media-title {
+  transform: rotate(0deg);
 }

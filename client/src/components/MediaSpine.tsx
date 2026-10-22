@@ -8,13 +8,13 @@ interface MediaSpineProps {
 }
 
 const formatClasses: Record<string, string> = {
-  vhs: 'format-VHS',
-  dvd: 'format-DVD',
-  bluray: 'format-Blu-Ray',
-  laserdisc: 'format-Laserdisc',
-  nes: 'format-NES',
-  ps1: 'format-PS1',
-  xbox360: 'format-Xbox 360',
+  vhs: 'format-vhs',
+  dvd: 'format-dvd',
+  bluray: 'format-bluray',
+  laserdisc: 'format-laserdisc',
+  nes: 'format-nes',
+  ps1: 'format-ps1',
+  xbox360: 'format-xbox360',
 }
 
 const formatLabels: Record<string, string> = {
