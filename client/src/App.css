@@ -14,7 +14,7 @@
     rgba(7, 15, 20, 0),
     rgba(7, 15, 20, 0)
   ),
-    url("./assets/Background6.png");
+    url("./assets/Background7.png");
 
   background-size:
     cover,
@@ -10629,9 +10629,9 @@ box-shadow:
   background:
     linear-gradient(
       90deg,
-      rgba(17, 27, 21, 0.70),
-      rgba(17, 27, 21, 0.15) 58%,
-      rgba(17, 27, 21, 0.48)
+      rgba(17, 27, 21, 0.55),
+      rgba(17, 27, 21, 0.10) 58%,
+      rgba(17, 27, 21, 0.35)
     ),
     linear-gradient(
       180deg,
@@ -11877,4 +11877,182 @@ box-shadow:
   border: 1px solid rgba(111, 156, 188, 0.25);
 
   color: #85afcb;
+}
+
+
+
+
+/* =========================================================
+   LOGO CONTAINER - FOREST GREEN
+   ========================================================= */
+
+.brand-console {
+  background: linear-gradient(
+    180deg,
+    rgba(53, 77, 62, 0.97) 0%,
+    rgba(38, 57, 46, 0.98) 48%,
+    rgba(20, 30, 24, 0.99) 100%
+  );
+
+  border-color: rgba(130, 164, 137, 0.48);
+
+  box-shadow:
+    inset 0 1px 0 rgba(220, 240, 220, 0.08),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.25),
+    0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.brand-console:hover {
+  background: linear-gradient(
+    180deg,
+    rgba(65, 94, 74, 0.98),
+    rgba(43, 66, 51, 0.98),
+    rgba(24, 37, 29, 0.99)
+  );
+
+  border-color: rgba(162, 194, 165, 0.65);
+}
+
+/* =========================================================
+   LOGO ACCENTS
+   ========================================================= */
+
+.brand-mark span {
+  color: #a8c2ac;
+}
+
+.brand-light {
+  background: #a8c2ac;
+
+  box-shadow:
+    0 0 6px rgba(168, 194, 172, 0.75),
+    0 0 14px rgba(130, 164, 137, 0.3);
+}
+
+.brand-caption {
+  color: rgba(210, 222, 208, 0.52);
+}
+
+/* =========================================================
+   NAVIGATION
+   ========================================================= */
+
+.nav-item {
+  color: rgba(213, 223, 213, 0.7);
+}
+
+.nav-item:hover {
+  color: #f0f4ed;
+
+  background: rgba(53, 77, 62, 0.42);
+
+  border-color: rgba(130, 164, 137, 0.28);
+}
+
+.nav-item.active {
+  color: #f0f4ed;
+
+  background: linear-gradient(
+    180deg,
+    rgba(53, 77, 62, 0.97),
+    rgba(38, 57, 46, 0.98) 48%,
+    rgba(20, 30, 24, 0.99)
+  );
+
+  border-color: rgba(130, 164, 137, 0.55);
+
+  box-shadow:
+    inset 0 1px 0 rgba(220, 240, 220, 0.08),
+    0 3px 12px rgba(0, 0, 0, 0.22);
+}
+
+.nav-indicator {
+  background: #92b09a;
+
+  box-shadow:
+    0 0 6px rgba(146, 176, 154, 0.48);
+}
+
+/* =========================================================
+   ADD MEDIA
+   ========================================================= */
+
+.header-add-media {
+  height: 58px;
+  box-sizing: border-box;
+
+  background: linear-gradient(
+    180deg,
+    rgba(53, 77, 62, 0.97),
+    rgba(38, 57, 46, 0.98) 48%,
+    rgba(20, 30, 24, 0.99)
+  );
+
+  border-color: rgba(130, 164, 137, 0.48);
+
+  box-shadow:
+    inset 0 1px 0 rgba(220, 240, 220, 0.08),
+    0 3px 11px rgba(0, 0, 0, 0.2);
+}
+
+.header-add-media:hover {
+  background: linear-gradient(
+    180deg,
+    rgba(65, 94, 74, 0.98),
+    rgba(43, 66, 51, 0.98),
+    rgba(24, 37, 29, 0.99)
+  );
+
+  border-color: rgba(162, 194, 165, 0.65);
+}
+
+.header-add-icon {
+  color: #a8c2ac;
+}
+
+/* =========================================================
+   ACCOUNT BUTTON
+   ========================================================= */
+
+.header-account {
+  height: 58px;
+  min-height: 58px;
+  box-sizing: border-box;
+
+  background: linear-gradient(
+    180deg,
+    rgba(53, 77, 62, 0.97),
+    rgba(38, 57, 46, 0.98) 48%,
+    rgba(20, 30, 24, 0.99)
+  );
+
+  border: 1px solid rgba(130, 164, 137, 0.48);
+  border-radius: 5px;
+
+  color: #f0f4ed;
+
+  box-shadow:
+    inset 0 1px 0 rgba(220, 240, 220, 0.08),
+    0 3px 11px rgba(0, 0, 0, 0.2);
+}
+
+.header-account:hover {
+  color: #ffffff;
+
+  background: linear-gradient(
+    180deg,
+    rgba(65, 94, 74, 0.98),
+    rgba(43, 66, 51, 0.98),
+    rgba(24, 37, 29, 0.99)
+  );
+
+  border-color: rgba(162, 194, 165, 0.65);
+}
+
+.header-account-icon {
+  background: rgba(130, 164, 137, 0.2);
+
+  border: 1px solid rgba(162, 194, 165, 0.28);
+
+  color: #a8c2ac;
 }
