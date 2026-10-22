@@ -8785,11 +8785,11 @@ background: linear-gradient(
 .dashboard-overview {
   
 
- background: linear-gradient(
+  background: linear-gradient(
     180deg,
-    rgba(53, 77, 62, 0.97),
-    rgba(38, 57, 46, 0.98) 48%,
-    rgba(20, 30, 24, 0.99)
+    #8f421f 0%,
+    #4b2419 50%,
+    #1b1418 100%
   );
 
   border-color: rgba(79, 116, 143, 0.48);
@@ -11702,9 +11702,9 @@ background: linear-gradient(
 .site-header {
   background: linear-gradient(
     90deg,
-    rgba(13, 22, 19, 0.80) 0%,
-    rgba(22, 22, 17, 0.80) 55%,
-    rgba(23, 28, 24, 0.80) 95%
+    rgba(13, 22, 19, 0.87) 0%,
+    rgba(22, 22, 17, 0.87) 55%,
+    rgba(23, 28, 24, 0.87) 95%
   );
 
 
@@ -12134,4 +12134,42 @@ background: linear-gradient(
 .header-account-icon {
   background: rgba(255, 138, 38, 0.15);
   border-color: rgba(255, 138, 38, 0.25);
+}
+
+
+
+/* =========================================================
+   NAVIGATION - ORANGE & BLACK
+   ========================================================= */
+
+.nav-item:hover {
+  color: #fff1e7;
+
+  background: linear-gradient(
+    180deg,
+    rgba(100, 48, 29, 0.75),
+    rgba(35, 22, 24, 0.90)
+  );
+
+  border-color: rgba(255, 138, 38, 0.35);
+}
+
+.nav-item.active {
+  color: #fff1e7;
+
+  background: linear-gradient(
+    180deg,
+    #8f421f 0%,
+    #4b2419 50%,
+    #1b1418 100%
+  );
+
+  border-color: rgba(255, 138, 38, 0.48);
+}
+
+.nav-indicator {
+  background: #ff8a26;
+
+  box-shadow:
+    0 0 6px rgba(255, 138, 38, 0.45);
 }
