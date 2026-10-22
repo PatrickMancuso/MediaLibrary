@@ -11,8 +11,8 @@
 .room {
   background:
       linear-gradient(
-    rgba(7, 15, 20, 0.20),
-    rgba(7, 15, 20, 0.20)
+    rgba(7, 15, 20, 0.15),
+    rgba(7, 15, 20, 0.15)
   ),
     url("./assets/Background2.png");
 
@@ -8367,13 +8367,13 @@ box-shadow:
 
 .site-header {
   background: linear-gradient(
-    180deg,
-    rgba(39, 47, 40, 0.94) 0%,
-    rgba(29, 37, 31, 0.95) 55%,
-    rgba(22, 30, 25, 0.96) 100%
-  );
+  180deg,
+  rgba(112, 65, 38, 0.94) 0%,
+  rgba(83, 47, 31, 0.95) 55%,
+  rgba(53, 34, 27, 0.96) 100%
+);
 
-  border-bottom: 1px solid rgba(65, 67, 65, 0.65);
+  border-bottom: 1px solid rgba(43, 44, 42, 0.65);
 
   box-shadow:
     0 10px 30px rgba(8, 14, 10, 0.32),
