@@ -11699,9 +11699,9 @@ box-shadow:
    background:
      linear-gradient(
       135deg,
-      rgba(25, 26, 24, 0.96),
-      rgba(34, 35, 33, 0.94) 45%,
-      rgba(20, 21, 20, 0.96)
+      rgba(25, 26, 24, 1),
+      rgba(34, 35, 33, 0.96) 45%,
+      rgba(20, 21, 20, 0.98)
     );
 
   border-color:
