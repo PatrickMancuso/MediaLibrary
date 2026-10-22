@@ -11623,7 +11623,9 @@
   max-height: calc(100% - 20px);
 
   margin: 0;
-  padding: 0;
+  padding: 6px 4px;
+    box-sizing: border-box;
+
 
   font-size: 13px;
   font-weight: 700;

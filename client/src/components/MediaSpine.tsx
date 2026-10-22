@@ -42,12 +42,12 @@ const titleWidthClass =
 
  
 
-  const artwork =
-    isCover
-      ? media.coverImage
-      : media.spineImage
+const artwork =
+  isCover
+    ? media.coverImage
+    : media.spineImage
 
- const artworkStyle: CSSProperties =
+const artworkStyle: CSSProperties =
   artwork
     ? {
         backgroundImage: `
@@ -60,10 +60,9 @@ const titleWidthClass =
         backgroundSize: 'cover',
         backgroundPosition: 'center',
       }
-    : !isCover
+    : !isCover && media.spineColor
       ? {
-          backgroundColor:
-            media.spineColor ?? '#955536',
+          backgroundColor: media.spineColor,
         }
       : {}
 
