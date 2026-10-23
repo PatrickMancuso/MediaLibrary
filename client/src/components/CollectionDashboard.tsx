@@ -2,6 +2,8 @@ import { useMemo } from 'react'
 
 import type { MediaItem } from '../data/sampleMedia'
 
+import RecentReviews from './RecentReviews'
+
 interface CollectionDashboardProps {
   recentlyAdded: MediaItem[]
   movies: MediaItem[]
@@ -351,6 +353,16 @@ const favoritePreview = useMemo(
           </div>
         </section>
       )}
+
+{/* =================================================
+    RECENT REVIEWS
+    ================================================= */}
+
+<RecentReviews
+  items={[...movies, ...games]}
+  onSelect={onSelect}
+/>
+      
 
       {/* =================================================
           COLLECTION OVERVIEW
