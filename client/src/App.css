@@ -12254,3 +12254,103 @@ background: rgba(34, 35, 33, 0.88);
   background: rgba(164, 117, 188, 0.20);
   border-color: rgba(196, 148, 222, 0.28);
 }
+
+
+
+
+/* =========================================================
+   HEADER EXPERIMENT - SUNSET LOGO & ORANGE ACCOUNT
+   ========================================================= */
+
+/* MEDIA VAULT - HORIZONTAL SUNSET GRADIENT */
+
+.brand-console {
+  background: linear-gradient(
+    100deg,
+    #42235f 0%,
+    #713a91 30%,
+    #b44691 55%,
+    #e46b60 78%,
+    #ff9b43 100%
+  );
+
+  border-color: rgba(221, 139, 146, 0.58);
+
+  box-shadow:
+    inset 0 1px 0 rgba(255, 240, 230, 0.12),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.22),
+    0 4px 14px rgba(0, 0, 0, 0.22);
+}
+
+.brand-console:hover {
+  background: linear-gradient(
+    100deg,
+    #512c70 0%,
+    #8245a0 30%,
+    #c3549b 55%,
+    #f07a65 78%,
+    #ffad59 100%
+  );
+
+  border-color: rgba(255, 187, 151, 0.72);
+}
+
+/* Logo lettering and glowing dot */
+
+.brand-mark span {
+  color: #ff9b43;
+}
+
+.brand-light {
+  background: #ffe1b5;
+
+  box-shadow:
+    0 0 6px rgba(255, 225, 181, 0.85),
+    0 0 14px rgba(255, 155, 67, 0.4);
+}
+
+.brand-caption {
+  color: rgba(255, 239, 228, 0.72);
+}
+
+/* =========================================================
+   ACCOUNT BUTTON - ORANGE TO BLACK
+   ========================================================= */
+
+.header-account {
+  background: linear-gradient(
+    180deg,
+    #8f421f 0%,
+    #4b2419 50%,
+    #1b1418 100%
+  );
+
+  border-color: rgba(255, 138, 38, 0.48);
+
+  color: #fff0e5;
+
+  box-shadow:
+    inset 0 1px 0 rgba(255, 226, 204, 0.08),
+    0 3px 11px rgba(0, 0, 0, 0.2);
+}
+
+.header-account:hover {
+  background: linear-gradient(
+    180deg,
+    #a64d20 0%,
+    #612b1b 50%,
+    #241719 100%
+  );
+
+  border-color: rgba(255, 155, 67, 0.68);
+}
+
+/* Account avatar */
+
+.header-account-icon {
+  background: rgba(255, 138, 38, 0.16);
+
+  border-color: rgba(255, 155, 67, 0.32);
+
+  color: #ff9b43;
+}
