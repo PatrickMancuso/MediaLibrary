@@ -477,12 +477,11 @@ box-shadow:
   color:
     rgba(255, 239, 224, 0.88);
 
-  background:
-    linear-gradient(
-      180deg,
-      rgba(158, 94, 54, 0.27),
-      rgba(84, 43, 26, 0.24)
-    );
+   background: linear-gradient(
+    135deg,
+    rgba(42, 34, 45, 0.94),
+    rgba(25, 27, 27, 0.96)
+  );
 
   box-shadow:
     inset 0 1px 0
@@ -3318,12 +3317,13 @@ box-shadow:
     1px solid
     rgba(255, 223, 198, 0.08);
 
-  background:
-    linear-gradient(
-      180deg,
-      rgba(111, 55, 29, 0.98),
-      rgba(69, 32, 18, 0.98)
-    );
+ background: 
+ linear-gradient(
+  90deg,
+  #171a19 0%,
+  #222321 55%,
+  #121615 100%
+);
 
   backdrop-filter:
     blur(8px);
@@ -12610,4 +12610,61 @@ background: rgba(34, 35, 33, 0.88);
   .recent-reviews-grid {
     grid-template-columns: 1fr;
   }
+}
+
+
+
+/* =========================================================
+   ADD MEDIA - HORIZONTAL API SEARCH
+   ========================================================= */
+
+.automatic-search {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  gap: 10px;
+  width: 100%;
+}
+
+.automatic-search input {
+  flex: 1 1 auto;
+  min-width: 0;
+  width: auto;
+  height: 48px;
+  box-sizing: border-box;
+}
+
+.automatic-search .automatic-search-button {
+  flex: 0 0 auto;
+  width: auto;
+  min-width: 110px;
+  height: 48px;
+
+  padding: 0 20px;
+
+  border: 1px solid rgba(196, 148, 222, 0.45);
+  border-radius: 5px;
+
+  background: linear-gradient(
+    180deg,
+    #75468e 0%,
+    #452750 55%,
+    #1b1420 100%
+  );
+
+  color: #f4eaf5;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 650;
+
+  cursor: pointer;
+}
+
+.automatic-search .automatic-search-button:hover:not(:disabled) {
+  border-color: #c494de;
+}
+
+.automatic-search .automatic-search-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
