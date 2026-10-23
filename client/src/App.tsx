@@ -64,6 +64,10 @@ description: string
   spine_image: string | null
   cover_image: string | null
 
+  personal_rating: number | null
+personal_review: string | null
+review_updated_at: string | null
+
   source:
     | 'tmdb'
     | 'igdb'
@@ -114,6 +118,10 @@ function rowToMediaItem(
     type: row.type,
 
     format: row.format,
+
+    personalRating: row.personal_rating,
+personalReview: row.personal_review,
+reviewUpdatedAt: row.review_updated_at,
 
 formats:
   row.formats?.length
@@ -217,6 +225,11 @@ function mediaItemToRow(
     title: media.title,
     type: media.type,
     format: media.format,
+
+
+    personal_rating: media.personalRating ?? null,
+personal_review: media.personalReview ?? null,
+review_updated_at: media.reviewUpdatedAt ?? null,
 
 formats:
   media.formats?.length
@@ -958,6 +971,78 @@ const handleSaveEdit = async (
   return true
 }
 
+
+/* =========================================================
+   SAVE PERSONAL REVIEW
+   ========================================================= */
+
+const handleSaveReview = async (
+  mediaToReview: MediaItem,
+  rating: number | null,
+  review: string,
+): Promise<void> => {
+  if (!user) {
+    throw new Error(
+      'You must be signed in to save a review.',
+    )
+  }
+
+  if (
+    rating !== null &&
+    (!Number.isInteger(rating) ||
+      rating < 1 ||
+      rating > 5)
+  ) {
+    throw new Error(
+      'Please select a rating between 1 and 5 stars.',
+    )
+  }
+
+  const reviewText = review.trim()
+
+  const { data, error } = await supabase
+    .from('media_items')
+    .update({
+      personal_rating: rating,
+      personal_review: reviewText || null,
+      review_updated_at: new Date().toISOString(),
+    })
+    .eq('id', mediaToReview.id)
+    .eq('user_id', user.id)
+    .select()
+    .single()
+
+  if (error) {
+    console.error(
+      'Failed to save personal review:',
+      error,
+    )
+
+    throw new Error(
+      'Unable to save your review. Please try again.',
+    )
+  }
+
+  const savedMedia = rowToMediaItem(
+    data as MediaItemRow,
+  )
+
+  setCollection((current) =>
+    current.map((item) =>
+      item.id === savedMedia.id
+        ? savedMedia
+        : item,
+    ),
+  )
+
+  setSelectedMedia((current) =>
+    current?.id === savedMedia.id
+      ? savedMedia
+      : current,
+  )
+}
+
+
 const handleAddCustomGenre = async (
   type: 'movie' | 'game',
   option: CustomOption,
@@ -1409,16 +1494,15 @@ const renderCollectionDashboard = () => (
           MEDIA DETAIL
           ======================================================= */}
 
-      {selectedMedia && (
-       <MediaDetail
-  media={selectedMedia}
-  onClose={() =>
-    setSelectedMedia(null)
-  }
-  onRemove={handleRemoveMedia}
-  onEdit={handleEditMedia}
-/>
-      )}
+  {selectedMedia && (
+  <MediaDetail
+    media={selectedMedia}
+    onClose={() => setSelectedMedia(null)}
+    onRemove={handleRemoveMedia}
+    onEdit={handleEditMedia}
+    onSaveReview={handleSaveReview}
+  />
+)}
 
 
 {isAuthModalOpen && !authLoading && (

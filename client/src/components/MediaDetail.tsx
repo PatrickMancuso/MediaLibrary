@@ -11,6 +11,12 @@ interface MediaDetailProps {
   onClose: () => void
   onRemove: (media: MediaItem) => void
   onEdit: (media: MediaItem) => void
+
+  onSaveReview: (
+    media: MediaItem,
+    rating: number | null,
+    review: string
+  ) => Promise<void>
 }
 
 
@@ -35,25 +41,72 @@ function MediaDetail({
   onClose,
   onRemove,
   onEdit,
+    onSaveReview,
 }: MediaDetailProps) {
   const [showMoreDetails, setShowMoreDetails] =
     useState(false)
 
+    const [personalRating, setPersonalRating] =
+  useState<number | null>(
+    media.personalRating ?? null
+  )
+
+const [personalReview, setPersonalReview] =
+  useState(media.personalReview ?? '')
+
+const [isSavingReview, setIsSavingReview] =
+  useState(false)
+
+const [reviewError, setReviewError] =
+  useState('')
+
   const detailInfoRef =
     useRef<HTMLDivElement>(null)
 
-    useEffect(() => {
+    
+/* =====================================================
+   PREVENT BACKGROUND SCROLLING
+   ===================================================== */
+
+useEffect(() => {
   const previousOverflow =
     document.body.style.overflow
 
-  document.body.style.overflow =
-    'hidden'
+  document.body.style.overflow = 'hidden'
 
   return () => {
     document.body.style.overflow =
       previousOverflow
   }
 }, [])
+
+
+/* =====================================================
+   SAVE PERSONAL REVIEW
+   ===================================================== */
+
+const handleSaveReview = async () => {
+  if (isSavingReview) return
+
+  setIsSavingReview(true)
+  setReviewError('')
+
+  try {
+    await onSaveReview(
+      media,
+      personalRating,
+      personalReview.trim()
+    )
+  } catch (error) {
+    setReviewError(
+      error instanceof Error
+        ? error.message
+        : 'Unable to save review.'
+    )
+  } finally {
+    setIsSavingReview(false)
+  }
+}
 
 
 const displayGenres =
@@ -301,6 +354,98 @@ onWheel={(event) => {
                 </strong>
               </div>
             </div>
+
+
+
+{/* ===================================================
+    PERSONAL REVIEW
+    =================================================== */}
+
+<div className="detail-personal-review">
+
+  <div className="detail-review-heading">
+    <div>
+      <span className="detail-review-eyebrow">
+        PERSONAL COLLECTION
+      </span>
+
+      <h3>My Review</h3>
+    </div>
+  </div>
+
+  <div className="detail-review-rating">
+
+    <span>Your Rating</span>
+
+    <div className="detail-review-stars">
+      {[1, 2, 3, 4, 5].map((star) => (
+        <button
+          key={star}
+          type="button"
+          className={
+            star <= (personalRating ?? 0)
+              ? 'review-star active'
+              : 'review-star'
+          }
+          onClick={() =>
+            setPersonalRating(
+              personalRating === star
+                ? null
+                : star
+            )
+          }
+          aria-label={`Rate ${star} stars`}
+          aria-pressed={personalRating === star}
+        >
+          ★
+        </button>
+      ))}
+
+      <span className="review-rating-value">
+        {personalRating !== null
+          ? `${personalRating} / 5`
+          : 'Not rated'}
+      </span>
+    </div>
+
+  </div>
+
+  <div className="detail-review-text">
+    <label htmlFor="personal-review">
+      Your Thoughts
+    </label>
+
+    <textarea
+      id="personal-review"
+      value={personalReview}
+      onChange={(event) =>
+        setPersonalReview(event.target.value)
+      }
+      placeholder="What did you think of this title?"
+      rows={4}
+    />
+  </div>
+
+  {reviewError && (
+    <p className="detail-review-error">
+      {reviewError}
+    </p>
+  )}
+
+  <div className="detail-review-actions">
+    <button
+      type="button"
+      className="detail-review-save"
+      onClick={handleSaveReview}
+      disabled={isSavingReview}
+    >
+      {isSavingReview
+        ? 'Saving...'
+        : 'Save Review'}
+    </button>
+  </div>
+
+</div>
 
 
                 {/* ===================================================

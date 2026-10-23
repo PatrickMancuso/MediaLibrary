@@ -57,6 +57,10 @@ spineColor?: string
 
   coverImage?: string
 
+  personalRating?: number | null
+personalReview?: string | null
+reviewUpdatedAt?: string | null
+
   // =====================================================
   // API METADATA
   // =====================================================
