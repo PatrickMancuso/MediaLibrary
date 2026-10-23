@@ -323,6 +323,21 @@ const [manualFormats, setManualFormats] =
   const [manualFavorite, setManualFavorite] =
     useState(false)
 
+
+    /* =========================================================
+   PERSONAL REVIEW
+   ========================================================= */
+
+const [personalRating, setPersonalRating] =
+  useState<number | null>(
+    editingMedia?.personalRating ?? null
+  )
+
+const [personalReview, setPersonalReview] =
+  useState(
+    editingMedia?.personalReview ?? ''
+  )
+
 const [
   manualOrientation,
   setManualOrientation,
@@ -525,6 +540,19 @@ setManualFormats(
 )
   setManualDescription(editingMedia.description)
   setManualFavorite(editingMedia.favorite)
+
+setManualFavorite(editingMedia.favorite)
+
+setPersonalRating(
+  editingMedia.personalRating ?? null
+)
+
+setPersonalReview(
+  editingMedia.personalReview ?? ''
+)
+
+setManualOrientation(editingMedia.orientation)
+
   setManualOrientation(editingMedia.orientation)
   setSpineImage(editingMedia.spineImage)
   setCoverImage(editingMedia.coverImage)
@@ -1003,11 +1031,22 @@ genres: finalGenres,
         manualDescription.trim() ||
         'No description has been added yet.',
 
-      favorite:
-  manualFavorite,
+favorite: manualFavorite,
 
-orientation:
-  manualOrientation,
+personalRating,
+personalReview: personalReview.trim() || null,
+
+reviewUpdatedAt:
+  personalRating !== (editingMedia?.personalRating ?? null) ||
+  personalReview.trim() !==
+    (editingMedia?.personalReview ?? '').trim()
+    ? personalRating !== null ||
+      personalReview.trim()
+      ? new Date().toISOString()
+      : null
+    : editingMedia?.reviewUpdatedAt ?? null,
+
+orientation: manualOrientation,
 
 spineImage,
 
@@ -2345,6 +2384,79 @@ onClose()
                 </button>
 
               </section>
+
+
+{/* =================================================
+    PERSONAL REVIEW
+    ================================================= */}
+
+<section className="add-media-section">
+  <div className="add-media-section-heading">
+    <span>05</span>
+    <strong>Personal Review</strong>
+  </div>
+
+  <div className="add-media-review">
+    <p className="add-media-review-description">
+      Optionally rate this title and add your thoughts.
+      You can always update your review later.
+    </p>
+
+    <div className="add-media-review-rating">
+      <label>Your Rating</label>
+
+      <div className="add-media-review-stars">
+        {[1, 2, 3, 4, 5].map((star) => (
+          <button
+            key={star}
+            type="button"
+            className={
+              star <= (personalRating ?? 0)
+                ? 'add-review-star active'
+                : 'add-review-star'
+            }
+            onClick={() =>
+              setPersonalRating(
+                personalRating === star
+                  ? null
+                  : star
+              )
+            }
+            aria-label={`Rate ${star} stars`}
+            aria-pressed={personalRating === star}
+          >
+            ★
+          </button>
+        ))}
+
+        <span className="add-review-rating-value">
+          {personalRating !== null
+            ? `${personalRating} / 5`
+            : 'Not rated'}
+        </span>
+      </div>
+    </div>
+
+    <div className="add-media-review-text">
+      <label htmlFor="add-media-personal-review">
+        Your Thoughts
+      </label>
+
+      <textarea
+        id="add-media-personal-review"
+        value={personalReview}
+        onChange={(event) =>
+          setPersonalReview(event.target.value)
+        }
+        placeholder="What did you think of this title?"
+        rows={4}
+      />
+    </div>
+  </div>
+</section>
+
+
+
             </>
           )}
 
