@@ -12265,15 +12265,14 @@ background: rgba(34, 35, 33, 0.88);
 /* MEDIA VAULT - HORIZONTAL SUNSET GRADIENT */
 
 .brand-console {
-  background: linear-gradient(
-    100deg,
-    #42235f 0%,
-    #713a91 30%,
-    #b44691 55%,
-    #e46b60 78%,
-    #ff9b43 100%
-  );
-
+background: linear-gradient(
+  100deg,
+  #302039 0%,
+  #50345b 30%,
+  #79435f 55%,
+  #965342 78%,
+  #ac6942 100%
+);
   border-color: rgba(221, 139, 146, 0.58);
 
   box-shadow:
@@ -12285,14 +12284,14 @@ background: rgba(34, 35, 33, 0.88);
 .brand-console:hover {
   background: linear-gradient(
     100deg,
-    #512c70 0%,
-    #8245a0 30%,
-    #c3549b 55%,
-    #f07a65 78%,
-    #ffad59 100%
+    #463052 0%,
+    #75507a 30%,
+    #a6607b 55%,
+    #c37765 78%,
+    #d99768 100%
   );
 
-  border-color: rgba(255, 187, 151, 0.72);
+  border-color: rgba(201, 134, 89, 0.55);
 }
 
 /* Logo lettering and glowing dot */
