@@ -10575,6 +10575,19 @@ background: rgba(34, 35, 33, 0.88);
   transform: scale(1.02);
 }
 
+
+/* =========================================================
+   BROWSE THE ARCHIVES - GAMES COLLAGE
+   ========================================================= */
+
+.dashboard-category-games .category-art-item {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  transform: scale(1.02);
+}
+
 /* Poster stacking order */
 
 .dashboard-category-movies .category-art-item:nth-child(1) {
