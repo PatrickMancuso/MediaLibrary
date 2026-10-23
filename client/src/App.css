@@ -12274,3 +12274,25 @@ background: rgba(34, 35, 33, 0.88);
 
 
 
+/* =========================================================
+   LIBRARY SEARCH PANEL - SUNSET BACKGROUND FIX
+   ========================================================= */
+
+.library-search-panel {
+  background: linear-gradient(
+    90deg,
+    rgba(46, 28, 61, 0.94) 0%,
+    rgba(88, 48, 93, 0.94) 23%,
+    rgba(152, 71, 99, 0.94) 46%,
+    rgba(185, 101, 70, 0.94) 67%,
+    rgba(117, 64, 94, 0.94) 84%,
+    rgba(48, 32, 61, 0.96) 100%
+  );
+
+  border: 1px solid rgba(164, 117, 188, 0.25);
+
+  border-radius: 8px;
+
+  box-shadow:
+    0 12px 28px rgba(0, 0, 0, 0.25);
+}
