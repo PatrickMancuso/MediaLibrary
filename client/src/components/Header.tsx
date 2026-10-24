@@ -113,8 +113,11 @@ function Header({
           }
           aria-label="Go to collection"
         >
-          <span className="brand-light" />
-
+<img
+  src="/MediaVaultLogo.png"
+  alt=""
+  className="brand-light brand-disc-logo"
+/>
           <span className="brand-mark">
             MEDIA<span>VAULT</span>
           </span>
