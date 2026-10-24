@@ -7,34 +7,26 @@ interface WelcomePageProps {
 }
 
 function WelcomePage({
-  onSignIn,
   onGetStarted,
 }: WelcomePageProps) {
   return (
-    <div className="welcome-page">
-      <header className="welcome-header">
-        <div className="welcome-brand">
-          <span className="welcome-brand-light" />
-
-          <strong>
-            MEDIA<span>VAULT</span>
-          </strong>
-
-          <small>PERSONAL MEDIA ARCHIVE</small>
-        </div>
-
-        <button
-          type="button"
-          className="welcome-header-signin"
-          onClick={onSignIn}
-        >
-          Sign In
-        </button>
-      </header>
-
+    <div className="welcome-page welcome-page-compact">
       <main className="welcome-main">
+
+        {/* HERO */}
+
         <section className="welcome-hero">
+
           <div className="welcome-hero-content">
+
+            <div className="welcome-brand welcome-hero-brand">
+              <span className="welcome-brand-light" />
+
+              <strong>
+                MEDIA<span>VAULT</span>
+              </strong>
+            </div>
+
             <span className="welcome-eyebrow">
               YOUR PERSONAL MEDIA ARCHIVE
             </span>
@@ -47,9 +39,9 @@ function WelcomePage({
 
             <p>
               Give your movies and games a home.
-              Organize your collection, explore your
-              favorites, and keep track of the media
-              that matters to you.
+              Organize your collection, explore
+              your favorites, and keep track of
+              the media that matters to you.
             </p>
 
             <div className="welcome-hero-actions">
@@ -61,23 +53,18 @@ function WelcomePage({
                 Get Started
                 <span aria-hidden="true">→</span>
               </button>
-
-             <a href="#welcome-features">
-  Explore Features
-</a>
             </div>
           </div>
 
           <div className="welcome-hero-preview">
-  <WelcomeSlideshow />
-</div>
+            <WelcomeSlideshow />
+          </div>
 
         </section>
 
-        
+        {/* FEATURES */}
 
-        <section className="welcome-features"     id="welcome-features"
->
+        <section className="welcome-features">
           <div>
             <span>01</span>
             <h3>Build Your Archive</h3>
@@ -106,13 +93,10 @@ function WelcomePage({
           </div>
         </section>
 
+        {/* COMPACT FINAL CTA */}
+
         <section className="welcome-bottom-cta">
           <h2>Ready to build your vault?</h2>
-
-          <p>
-            Start organizing your personal
-            collection today.
-          </p>
 
           <button
             type="button"
@@ -122,12 +106,8 @@ function WelcomePage({
             Create Your Account →
           </button>
         </section>
-      </main>
 
-      <footer className="welcome-footer">
-        <strong>MEDIAVAULT</strong>
-        <span>Your personal media archive.</span>
-      </footer>
+      </main>
     </div>
   )
 }
