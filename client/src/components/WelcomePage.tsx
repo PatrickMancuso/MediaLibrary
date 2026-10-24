@@ -13,9 +13,9 @@ function WelcomePage({
     <div className="welcome-page welcome-page-compact">
       <main className="welcome-main">
 
-        <section className="welcome-hero">
+        {/* HERO */}
 
-          {/* BRANDING AND INTRODUCTION */}
+        <section className="welcome-hero">
 
           <div className="welcome-hero-content">
 
@@ -31,7 +31,13 @@ function WelcomePage({
               YOUR PERSONAL MEDIA ARCHIVE
             </span>
 
-            <p className="welcome-introduction">
+            <h1>
+              Your collection.
+              <br />
+              Your way.
+            </h1>
+
+            <p>
               Give your movies and games a home.
               Organize your collection, explore your
               favorites, and keep track of the media
@@ -48,7 +54,6 @@ function WelcomePage({
                 <span aria-hidden="true">→</span>
               </button>
             </div>
-
           </div>
 
           {/* SCREENSHOT SLIDESHOW */}
@@ -57,6 +62,37 @@ function WelcomePage({
             <WelcomeSlideshow />
           </div>
 
+        </section>
+
+        {/* FEATURES */}
+
+        <section className="welcome-features">
+          <div>
+            <span>01</span>
+            <h3>Build Your Archive</h3>
+            <p>
+              Add movies and games with automatic
+              metadata or enter your own details.
+            </p>
+          </div>
+
+          <div>
+            <span>02</span>
+            <h3>Explore Your Collection</h3>
+            <p>
+              Browse your media using artwork,
+              categories, search, and filters.
+            </p>
+          </div>
+
+          <div>
+            <span>03</span>
+            <h3>Make It Personal</h3>
+            <p>
+              Save favorites, write reviews, and
+              rate the titles you own.
+            </p>
+          </div>
         </section>
 
       </main>
