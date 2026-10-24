@@ -1,11 +1,11 @@
 
 import { useEffect, useState } from 'react'
 
-import dashboardImage from '/workspaces/MediaLibrary/client/src/assets/welcome/Maindashboard.png'
-import moviesImage from '/workspaces/MediaLibrary/client/src/assets/welcome/gamesearch.png'
-import gamesImage from '/workspaces/MediaLibrary/client/src/assets/welcome/Library.png'
-import reviewsImage from '/workspaces/MediaLibrary/client/src/assets/welcome/Favorites and reviews.png'
-import addMediaImage from '/workspaces/MediaLibrary/client/src/assets/welcome/mediadetail.png'
+import dashboardImage from '../assets/welcome/Maindashboard.png'
+import moviesImage from '../assets/welcome/gamesearch.png'
+import gamesImage from '../assets/welcome/Library.png'
+import reviewsImage from '../assets/welcome/Favorites and reviews.png'
+import addMediaImage from '../assets/welcome/mediadetail.png'
 
 const slides = [
   {
