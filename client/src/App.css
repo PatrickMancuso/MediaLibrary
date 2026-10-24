@@ -13772,3 +13772,142 @@ background: rgba(34, 35, 33, 0.88);
     grid-template-columns: 1fr;
   }
 }
+
+
+
+
+/* =========================================================
+   MEDIAVAULT - PASSWORD RESET PAGE
+   ========================================================= */
+
+.reset-password-page {
+  min-height: 100dvh;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 24px;
+  box-sizing: border-box;
+
+  background:
+    radial-gradient(
+      ellipse at 80% 20%,
+      rgba(113, 58, 145, 0.18),
+      transparent 50%
+    ),
+    #111416;
+}
+
+.reset-password-card {
+  width: min(430px, 100%);
+  padding: 38px;
+
+  border: 1px solid rgba(196, 148, 222, 0.25);
+  border-radius: 9px;
+
+  background: linear-gradient(
+    145deg,
+    #25202b,
+    #17191b
+  );
+
+  box-shadow:
+    0 30px 70px rgba(0, 0, 0, 0.35);
+}
+
+.reset-password-brand {
+  margin-bottom: 30px;
+
+  color: #f2eae5;
+  font-size: 25px;
+  font-weight: 800;
+  letter-spacing: -1px;
+}
+
+.reset-password-brand span {
+  color: #e9a46d;
+}
+
+.reset-password-card h1 {
+  margin: 0 0 12px;
+
+  color: #f3eae6;
+  font-size: 27px;
+}
+
+.reset-password-card > p {
+  margin: 0 0 25px;
+
+  color: #bdb2bb;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.reset-password-card form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.reset-password-card label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  color: #d2c6ce;
+  font-size: 12px;
+  font-weight: 650;
+}
+
+.reset-password-card input {
+  height: 44px;
+  padding: 0 12px;
+
+  border: 1px solid rgba(196, 148, 222, 0.25);
+  border-radius: 5px;
+
+  background: #121016;
+  color: #f3eae6;
+
+  font: inherit;
+}
+
+.reset-password-card input:focus {
+  outline: none;
+  border-color: #a475bc;
+}
+
+.reset-password-submit {
+  min-height: 44px;
+  padding: 12px 20px;
+
+  border: 1px solid rgba(196, 148, 222, 0.5);
+  border-radius: 5px;
+
+  background: linear-gradient(
+    180deg,
+    #75468e,
+    #452750 55%,
+    #1b1420
+  );
+
+  color: #f4eaf5;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 700;
+
+  cursor: pointer;
+}
+
+.reset-password-submit:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.reset-password-error {
+  margin: 0;
+  color: #e6a094;
+  font-size: 12px;
+  line-height: 1.5;
+}

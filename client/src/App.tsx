@@ -15,6 +15,7 @@ import AddMediaModal from './components/AddMediaModal'
 import CollectionDashboard from './components/CollectionDashboard'
 import WelcomePage from './components/WelcomePage'
 import EmptyCollection from './components/EmptyCollection'
+import ResetPassword from './components/ResetPassword'
 
 import {
   gameGenres,
@@ -358,6 +359,11 @@ const [isAuthModalOpen, setIsAuthModalOpen] =
 const [authLoading, setAuthLoading] =
   useState(true)
 
+   const [isPasswordRecovery, setIsPasswordRecovery] =
+  useState(
+    window.location.pathname === '/reset-password'
+  )
+
 const [collection, setCollection] =
   useState<MediaItem[]>([])
 
@@ -379,6 +385,9 @@ const [
       setAuthLoading(false)
     },
   )
+
+
+ 
 
   const {
     data: authListener,
@@ -852,6 +861,16 @@ const clearLibraryFilters = () => {
   setIsAuthModalOpen(false)
 }
 
+const handlePasswordRecoveryComplete = () => {
+  window.history.replaceState(
+    {},
+    '',
+    '/'
+  )
+
+  setIsPasswordRecovery(false)
+}
+
  const handleRemoveMedia = async (
   mediaToRemove: MediaItem,
 ) => {
@@ -869,6 +888,8 @@ const clearLibraryFilters = () => {
   if (!confirmed) {
     return
   }
+
+  
 
   const { data, error } = await supabase
     .from('media_items')
@@ -1457,6 +1478,16 @@ if (authLoading) {
         <p>Loading your archive...</p>
       </div>
     </div>
+  )
+}
+
+if (isPasswordRecovery) {
+  return (
+    <ResetPassword
+      onComplete={
+        handlePasswordRecoveryComplete
+      }
+    />
   )
 }
 
