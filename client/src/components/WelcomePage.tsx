@@ -20,7 +20,6 @@ function WelcomePage({
           <div className="welcome-hero-content">
 
             <div className="welcome-brand welcome-hero-brand">
-              <span className="welcome-brand-light" />
 
               <strong>
                 MEDIA<span>VAULT</span>
@@ -28,7 +27,7 @@ function WelcomePage({
             </div>
 
             <span className="welcome-eyebrow">
-              YOUR PERSONAL MEDIA ARCHIVE
+              PERSONAL MEDIA ARCHIVE
             </span>
 
             <h1>

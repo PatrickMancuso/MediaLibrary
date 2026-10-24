@@ -14,6 +14,7 @@ import { supabase } from './lib/supabase'
 import AddMediaModal from './components/AddMediaModal'
 import CollectionDashboard from './components/CollectionDashboard'
 import WelcomePage from './components/WelcomePage'
+import EmptyCollection from './components/EmptyCollection'
 
 import {
   gameGenres,
@@ -1513,7 +1514,13 @@ if (!user) {
     Loading your collection...
   </div>
 ) : activeView === 'collection' ? (
-  renderCollectionDashboard()
+  collection.length === 0 ? (
+    <EmptyCollection
+      onAddMedia={() => setIsAddMediaOpen(true)}
+    />
+  ) : (
+    renderCollectionDashboard()
+  )
 ) : (
   <div className="library">
       {renderLibrarySearch()}

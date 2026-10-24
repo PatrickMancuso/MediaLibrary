@@ -13443,3 +13443,332 @@ background: rgba(34, 35, 33, 0.88);
     width: calc(100% - 32px);
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* =========================================================
+   WELCOME PAGE - REFINED HERO PROPORTIONS
+   ========================================================= */
+
+/* Larger MediaVault logo */
+
+.welcome-page-compact .welcome-hero .welcome-hero-brand strong {
+  font-size: 54px;
+  font-weight: 800;
+  letter-spacing: -1.8px;
+  line-height: 1.1;
+}
+
+.welcome-page-compact .welcome-hero .welcome-brand-light {
+  width: 14px;
+  height: 14px;
+}
+
+/* Smaller headline */
+
+.welcome-page-compact .welcome-hero h1 {
+  font-size: 38px;
+  line-height: 1.12;
+  letter-spacing: -1px;
+  margin: 20px 0;
+}
+
+/* Wider overall page */
+
+.welcome-page-compact .welcome-main {
+  width: min(1760px, calc(100% - 60px));
+}
+
+/* Give more room to the slideshow */
+
+.welcome-page-compact .welcome-hero {
+  grid-template-columns:
+    minmax(320px, 0.55fr)
+    minmax(0, 1.45fr);
+
+  gap: 30px;
+}
+
+/* Let slideshow occupy its full column */
+
+.welcome-page-compact .welcome-hero-preview {
+  width: 100%;
+  max-width: none;
+  min-width: 0;
+  justify-self: stretch;
+}
+
+.welcome-page-compact .welcome-slideshow {
+  width: 100%;
+  max-width: none;
+  box-sizing: border-box;
+}
+
+/* Keep image proportions */
+
+.welcome-page-compact .welcome-slide-frame {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+}
+
+.welcome-page-compact .welcome-slide-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* Mobile adjustments */
+
+@media (max-width: 900px) {
+  .welcome-page-compact .welcome-hero {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .welcome-page-compact .welcome-hero .welcome-hero-brand strong {
+    font-size: 40px;
+  }
+
+  .welcome-page-compact .welcome-hero h1 {
+    font-size: 34px;
+  }
+}
+
+
+
+
+/* =========================================================
+   EMPTY COLLECTION - FIRST TIME EXPERIENCE
+   ========================================================= */
+
+.empty-collection {
+  width: min(1400px, calc(100% - 48px));
+  margin: 30px auto 70px;
+  padding: 32px;
+  box-sizing: border-box;
+
+  border: 1px solid rgba(196, 148, 222, 0.15);
+  border-radius: 9px;
+
+  background: linear-gradient(
+    135deg,
+    rgba(16, 22, 20, 0.96),
+    rgba(21, 19, 24, 0.97)
+  );
+
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.22);
+}
+
+/* HEADER */
+
+.empty-collection-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+
+  padding-bottom: 22px;
+  border-bottom: 1px solid rgba(220, 220, 220, 0.09);
+}
+
+.empty-collection-header h1 {
+  margin: 0 0 7px;
+  color: #f2eae5;
+  font-size: 30px;
+}
+
+.empty-collection-header p {
+  margin: 0;
+  color: #8e918d;
+  font-size: 13px;
+}
+
+.empty-collection-count {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 3px;
+}
+
+.empty-collection-count strong {
+  color: #e9a46d;
+  font-size: 25px;
+}
+
+.empty-collection-count span {
+  color: #8e918d;
+  font-size: 9px;
+  letter-spacing: 0.5px;
+}
+
+/* WELCOME */
+
+.empty-collection-welcome {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+
+  padding: 65px 20px 55px;
+}
+
+.empty-collection-icon {
+  display: grid;
+  place-items: center;
+
+  width: 70px;
+  height: 70px;
+  margin-bottom: 24px;
+
+  border: 1px solid rgba(196, 148, 222, 0.35);
+  border-radius: 16px;
+
+  background: linear-gradient(
+    145deg,
+    #42284b,
+    #231b29
+  );
+}
+
+.empty-collection-icon span {
+  color: #c494de;
+  font-size: 35px;
+}
+
+.empty-collection-eyebrow {
+  color: #c494de;
+  font-size: 10px;
+  font-weight: 750;
+  letter-spacing: 1.6px;
+}
+
+.empty-collection-welcome h2 {
+  margin: 15px 0 12px;
+  color: #f3eae6;
+  font-size: clamp(28px, 3vw, 40px);
+}
+
+.empty-collection-welcome p {
+  max-width: 500px;
+  margin: 0;
+
+  color: #bdb2bb;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.empty-collection-add {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  margin-top: 28px;
+  padding: 14px 24px;
+
+  border: 1px solid rgba(196, 148, 222, 0.48);
+  border-radius: 5px;
+
+  background: linear-gradient(
+    180deg,
+    #75468e,
+    #452750 55%,
+    #1b1420
+  );
+
+  color: #f4eaf5;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 700;
+
+  cursor: pointer;
+}
+
+.empty-collection-add:hover {
+  border-color: #c494de;
+}
+
+/* GETTING STARTED */
+
+.empty-collection-guide {
+  padding-top: 26px;
+  border-top: 1px solid rgba(220, 220, 220, 0.09);
+}
+
+.empty-collection-guide-heading {
+  margin-bottom: 20px;
+}
+
+.empty-collection-guide-heading h3 {
+  margin: 0 0 6px;
+  color: #f2eae5;
+  font-size: 19px;
+}
+
+.empty-collection-guide-heading p {
+  margin: 0;
+  color: #8e918d;
+  font-size: 12px;
+}
+
+.empty-collection-steps {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.empty-collection-step {
+  padding: 22px;
+
+  border: 1px solid rgba(196, 148, 222, 0.15);
+  border-radius: 6px;
+
+  background: rgba(31, 27, 34, 0.72);
+}
+
+.empty-collection-step > span {
+  color: #e9a46d;
+  font-size: 11px;
+  font-weight: 750;
+}
+
+.empty-collection-step h4 {
+  margin: 13px 0 8px;
+  color: #f2eae5;
+  font-size: 16px;
+}
+
+.empty-collection-step p {
+  margin: 0;
+  color: #aaa0ac;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+@media (max-width: 760px) {
+  .empty-collection {
+    width: calc(100% - 24px);
+    padding: 20px;
+  }
+
+  .empty-collection-welcome {
+    padding: 40px 10px;
+  }
+
+  .empty-collection-steps {
+    grid-template-columns: 1fr;
+  }
+}
