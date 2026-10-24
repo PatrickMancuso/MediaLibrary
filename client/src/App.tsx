@@ -13,6 +13,7 @@ import AuthModal from './components/AuthModal'
 import { supabase } from './lib/supabase'
 import AddMediaModal from './components/AddMediaModal'
 import CollectionDashboard from './components/CollectionDashboard'
+import WelcomePage from './components/WelcomePage'
 
 import {
   gameGenres,
@@ -1437,6 +1438,50 @@ const renderCollectionDashboard = () => (
     onViewChange={setActiveView}
   />
 )
+
+
+
+/* =========================================================
+   AUTHENTICATION / WELCOME PAGE
+   ========================================================= */
+
+if (authLoading) {
+  return (
+    <div className="app-loading-screen">
+      <div className="app-loading-content">
+        <strong>
+          MEDIA<span>VAULT</span>
+        </strong>
+
+        <p>Loading your archive...</p>
+      </div>
+    </div>
+  )
+}
+
+if (!user) {
+  return (
+    <>
+      <WelcomePage
+        onSignIn={() =>
+          setIsAuthModalOpen(true)
+        }
+        onGetStarted={() =>
+          setIsAuthModalOpen(true)
+        }
+      />
+
+      {isAuthModalOpen && (
+        <AuthModal
+          onClose={() =>
+            setIsAuthModalOpen(false)
+          }
+        />
+      )}
+    </>
+  )
+}
+
 
   return (
     <div className="room">

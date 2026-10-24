@@ -12681,7 +12681,7 @@ background: rgba(34, 35, 33, 0.88);
   background-position: center;
   background-repeat: no-repeat;
 
-  transform: scale(1.02);
+  transform: scale(1.0);
 }
 
 
@@ -12786,4 +12786,48 @@ background: rgba(34, 35, 33, 0.88);
 .add-media-review-text textarea:focus {
   outline: none;
   border-color: rgba(196, 148, 222, 0.6);
+}
+
+
+
+/* =========================================================
+   MEDIAVAULT - AUTHENTICATION LOADING SCREEN
+   ========================================================= */
+
+.app-loading-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: linear-gradient(
+    135deg,
+    #101512 0%,
+    #1b1720 55%,
+    #111416 100%
+  );
+}
+
+.app-loading-content {
+  text-align: center;
+}
+
+.app-loading-content strong {
+  color: #f2eae5;
+  font-size: 30px;
+  font-weight: 800;
+  letter-spacing: -1px;
+}
+
+.app-loading-content strong span {
+  color: #e9a46d;
+}
+
+.app-loading-content p {
+  margin-top: 12px;
+  color: rgba(235, 225, 220, 0.55);
+  font-size: 13px;
 }
