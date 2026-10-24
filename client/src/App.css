@@ -13602,3 +13602,187 @@ background: rgba(34, 35, 33, 0.88);
 }
 
 
+/* =========================================================
+   WELCOME - INTRODUCTION
+   ========================================================= */
+
+.welcome-page-compact .welcome-eyebrow {
+  font-size: 12px;
+  letter-spacing: 2px;
+  color: #c494de;
+}
+
+.welcome-page-compact .welcome-introduction {
+  max-width: 480px;
+
+  margin: 24px 0 0;
+
+  color: #d2c6ce;
+  font-size: clamp(17px, 1.3vw, 20px);
+  line-height: 1.75;
+}
+
+.welcome-page-compact .welcome-hero-actions {
+  margin-top: 30px;
+}
+
+.welcome-page-compact .welcome-primary-button {
+  padding: 16px 28px;
+  font-size: 15px;
+}
+
+
+/* =========================================================
+   WELCOME - SLIDESHOW TYPOGRAPHY
+   ========================================================= */
+
+.welcome-page-compact .welcome-slide-footer {
+  padding: 18px 10px 12px;
+  gap: 18px;
+}
+
+.welcome-page-compact .welcome-slide-number {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.welcome-page-compact .welcome-slide-description h3 {
+  margin: 7px 0;
+  font-size: 21px;
+  font-weight: 700;
+}
+
+.welcome-page-compact .welcome-slide-description p {
+  color: #c4b8c5;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.welcome-page-compact .welcome-slide-controls button {
+  width: 40px;
+  height: 40px;
+  font-size: 24px;
+}
+
+.welcome-page-compact .welcome-slide-dots {
+  padding: 12px 0 6px;
+}
+
+
+/* =========================================================
+   WELCOME - SINGLE SCREEN HERO
+   ========================================================= */
+
+.welcome-page-compact {
+  min-height: 100dvh;
+}
+
+.welcome-page-compact .welcome-main {
+  width: min(1640px, calc(100% - 80px));
+
+  min-height: 100dvh;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.welcome-page-compact .welcome-hero {
+  width: 100%;
+  min-height: 0;
+
+  display: grid;
+
+  grid-template-columns:
+    minmax(340px, 0.75fr)
+    minmax(0, 1.25fr);
+
+  gap: clamp(40px, 5vw, 90px);
+
+  align-items: center;
+  padding: 30px 0;
+}
+
+.welcome-page-compact .welcome-hero-preview {
+  width: 100%;
+  min-width: 0;
+}
+
+@media (max-width: 900px) {
+  .welcome-page-compact .welcome-main {
+    min-height: 100dvh;
+    width: calc(100% - 36px);
+  }
+
+  .welcome-page-compact .welcome-hero {
+    grid-template-columns: 1fr;
+    gap: 30px;
+    padding: 35px 0;
+  }
+}
+
+
+
+/* =========================================================
+   WELCOME - REFINED MINIMAL LAYOUT
+   ========================================================= */
+
+.welcome-page-compact .welcome-main {
+  width: min(1380px, calc(100% - 80px));
+  min-height: 100dvh;
+  justify-content: center;
+}
+
+.welcome-page-compact .welcome-hero {
+  grid-template-columns:
+    minmax(350px, 0.9fr)
+    minmax(0, 1.1fr);
+
+  gap: 55px;
+  padding: 24px 0;
+}
+
+.welcome-page-compact .welcome-hero-brand strong {
+  font-size: 42px;
+}
+
+.welcome-page-compact .welcome-hero-preview {
+  max-width: 720px;
+  justify-self: end;
+}
+
+.welcome-page-compact .welcome-introduction {
+  max-width: 420px;
+  margin-top: 22px;
+  font-size: 17px;
+  line-height: 1.7;
+}
+
+.welcome-page-compact .welcome-slide-frame {
+  aspect-ratio: 16 / 9;
+}
+
+.welcome-page-compact .welcome-slide-footer {
+  padding: 14px 8px 8px;
+}
+
+.welcome-page-compact .welcome-slide-description h3 {
+  font-size: 18px;
+}
+
+.welcome-page-compact .welcome-slide-description p {
+  font-size: 12px;
+}
+
+@media (max-width: 900px) {
+  .welcome-page-compact .welcome-hero {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .welcome-page-compact .welcome-hero-preview {
+    max-width: 100%;
+    justify-self: stretch;
+  }
+}
