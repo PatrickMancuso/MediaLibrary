@@ -62,40 +62,22 @@ function WelcomePage({
                 <span aria-hidden="true">→</span>
               </button>
 
-              <a href="#welcome-preview">
-                Explore MediaVault
-              </a>
+             <a href="#welcome-features">
+  Explore Features
+</a>
             </div>
           </div>
 
-          <div className="welcome-hero-decoration">
-            <div className="welcome-hero-orbit" />
-            <div className="welcome-hero-orbit inner" />
-            <div className="welcome-hero-core">
-              MV
-            </div>
-          </div>
+          <div className="welcome-hero-preview">
+  <WelcomeSlideshow />
+</div>
+
         </section>
 
-        <section
-          className="welcome-preview-section"
-          id="welcome-preview"
-        >
-          <div className="welcome-section-heading">
-            <span>EXPLORE THE ARCHIVE</span>
+        
 
-            <h2>Take a look inside.</h2>
-
-            <p>
-              Discover how MediaVault helps you
-              organize and explore your collection.
-            </p>
-          </div>
-
-          <WelcomeSlideshow />
-        </section>
-
-        <section className="welcome-features">
+        <section className="welcome-features"     id="welcome-features"
+>
           <div>
             <span>01</span>
             <h3>Build Your Archive</h3>

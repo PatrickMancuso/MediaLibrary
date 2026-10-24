@@ -13228,3 +13228,171 @@ background: rgba(34, 35, 33, 0.88);
     display: none;
   }
 }
+
+
+
+/* =========================================================
+   WELCOME - COMPACT HERO
+   ========================================================= */
+
+.welcome-hero {
+  min-height: 0;
+
+  grid-template-columns:
+    minmax(0, 0.85fr)
+    minmax(0, 1.15fr);
+
+  gap: 40px;
+
+  padding: 48px 0 36px;
+}
+
+.welcome-hero h1 {
+  font-size: clamp(40px, 4vw, 64px);
+  line-height: 1.06;
+  letter-spacing: -2px;
+}
+
+.welcome-hero-content > p {
+  max-width: 460px;
+  font-size: 15px;
+  line-height: 1.65;
+}
+
+.welcome-hero-actions {
+  margin-top: 24px;
+}
+
+
+/* =========================================================
+   WELCOME - HERO SLIDESHOW
+   ========================================================= */
+
+.welcome-hero-preview {
+  min-width: 0;
+  width: 100%;
+}
+
+.welcome-hero-preview .welcome-slideshow {
+  padding: 10px;
+
+  border: 1px solid rgba(196, 148, 222, 0.24);
+  border-radius: 8px;
+
+  background: rgba(25, 25, 30, 0.92);
+
+  box-shadow:
+    0 18px 45px rgba(0, 0, 0, 0.25);
+}
+
+.welcome-hero-preview .welcome-slide-frame {
+  aspect-ratio: 16 / 9;
+  border-radius: 5px;
+}
+
+.welcome-hero-preview .welcome-slide-image {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+  object-position: center;
+}
+
+.welcome-hero-preview .welcome-slide-footer {
+  padding: 12px 6px 5px;
+  gap: 12px;
+}
+
+.welcome-hero-preview .welcome-slide-description h3 {
+  margin: 4px 0;
+  font-size: 15px;
+}
+
+.welcome-hero-preview .welcome-slide-description p {
+  font-size: 11px;
+  line-height: 1.4;
+}
+
+.welcome-hero-preview .welcome-slide-controls button {
+  width: 30px;
+  height: 30px;
+  font-size: 20px;
+}
+
+.welcome-hero-preview .welcome-slide-dots {
+  padding: 7px 0 3px;
+}
+
+
+
+/* =========================================================
+   WELCOME - COMPACT FEATURES
+   ========================================================= */
+
+.welcome-features {
+  gap: 14px;
+  padding: 18px 0 38px;
+  scroll-margin-top: 30px;
+}
+
+.welcome-features > div {
+  padding: 20px;
+}
+
+.welcome-features h3 {
+  margin: 10px 0 7px;
+  font-size: 16px;
+}
+
+.welcome-features p {
+  font-size: 12px;
+  line-height: 1.55;
+}
+
+
+
+/* =========================================================
+   WELCOME - COMPACT BOTTOM CTA
+   ========================================================= */
+
+.welcome-bottom-cta {
+  padding: 32px 20px 40px;
+}
+
+.welcome-bottom-cta h2 {
+  font-size: 26px;
+  margin-bottom: 8px;
+}
+
+.welcome-bottom-cta p {
+  margin-bottom: 18px;
+  font-size: 13px;
+}
+
+.welcome-footer {
+  padding-top: 18px;
+  padding-bottom: 18px;
+}
+
+
+
+@media (max-width: 800px) {
+  .welcome-hero {
+    grid-template-columns: 1fr;
+    gap: 28px;
+    padding: 40px 0 24px;
+  }
+
+  .welcome-hero h1 {
+    font-size: clamp(38px, 8vw, 52px);
+  }
+
+  .welcome-hero-preview {
+    width: 100%;
+  }
+
+  .welcome-features {
+    grid-template-columns: 1fr;
+    padding-top: 12px;
+  }
+}
