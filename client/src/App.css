@@ -13366,3 +13366,80 @@ background: rgba(34, 35, 33, 0.88);
     grid-template-columns: 1fr;
   }
 }
+
+
+
+
+/* =========================================================
+   WELCOME PAGE - FINAL PROPORTION ADJUSTMENTS
+   ========================================================= */
+
+/* Slightly larger MediaVault branding */
+
+.welcome-page-compact .welcome-hero-brand strong {
+  font-size: clamp(44px, 3.8vw, 58px);
+  font-weight: 800;
+  letter-spacing: -1.8px;
+  line-height: 1.1;
+}
+
+.welcome-page-compact .welcome-brand-light {
+  width: 13px;
+  height: 13px;
+}
+
+/* Smaller main headline */
+
+.welcome-page-compact .welcome-hero h1 {
+  font-size: clamp(34px, 3vw, 48px);
+  line-height: 1.08;
+  letter-spacing: -1.5px;
+  margin: 16px 0;
+}
+
+/* Give more horizontal space to the slideshow */
+
+.welcome-page-compact .welcome-main {
+  width: min(1700px, calc(100% - 64px));
+}
+
+.welcome-page-compact .welcome-hero {
+  grid-template-columns:
+    minmax(310px, 0.65fr)
+    minmax(0, 1.35fr);
+
+  gap: 36px;
+}
+
+/* Allow slideshow to use the full right column */
+
+.welcome-page-compact .welcome-hero-preview {
+  width: 100%;
+  max-width: none;
+  min-width: 0;
+  justify-self: stretch;
+}
+
+.welcome-page-compact .welcome-slideshow {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Keep screenshots fully visible */
+
+.welcome-page-compact .welcome-slide-image {
+  object-fit: contain;
+}
+
+/* Preserve responsive layout */
+
+@media (max-width: 900px) {
+  .welcome-page-compact .welcome-hero {
+    grid-template-columns: 1fr;
+    gap: 26px;
+  }
+
+  .welcome-page-compact .welcome-main {
+    width: calc(100% - 32px);
+  }
+}
